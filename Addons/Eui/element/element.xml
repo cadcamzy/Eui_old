@@ -1,0 +1,15 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="buff.lua"/>
+	<Script file="loot.lua"/>
+	<Script file="minimap.lua"/>
+	<Script file="tooltip.lua"/>
+	<Include file="bag.xml" />
+	<Script file="chat.lua"/>
+	<Script file="nameplate.lua"/>
+	<Script file="compare.lua"/>
+	<Script file="threat.lua"/>
+	<Script file="mirror.lua"/>
+	<Include file="actionbars\actionbars.xml"/>
+	<Script file="fane.lua"/>
+	<Script file="coolline.lua"/>
+</Ui>

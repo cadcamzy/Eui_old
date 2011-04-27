@@ -1,0 +1,13 @@
+## Interface: 30300
+## Title: MSBT [|cffffff80Options|r]
+## Title-zhCN: 战斗指示器设置|cffC495DDMSBTOptions|r
+## Author: Mikord
+## Notes: Load on demand options for Mik's Scrolling Battle Text
+## Dependencies: MikScrollingBattleText
+## LoadOnDemand: 1
+## X-Child-Of: MikScrollingBattleText
+Localization\localization.xml
+MSBTOptionsControls.lua
+MSBTOptionsPopups.lua
+MSBTOptionsMain.lua
+MSBTOptionsTabs.lua

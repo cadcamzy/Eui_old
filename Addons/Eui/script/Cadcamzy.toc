@@ -1,0 +1,63 @@
+﻿## Interface: 30300
+## Title: Cadcamzy
+## Title-zhCN: 增强功能合集|cffC495DDCadcamzy|r  
+## Notes: 一些小的单体插件
+## Notes-zhCN: EUI 的增强补丁
+## Author: cadcamzy@yahoo.com.cn
+## Version: r1.1
+## X-oUF: oUF
+## SavedVariables: RecipientsDB, friendsWhisp, guildWhisp, totallastplayers, entries, teksLootDB, Achieved_Settings
+## SavedVariablesPerCharacter: RankWatchSettings, MBB_Exclude, MBB_Options, Achieved_CharVars
+
+##LOOT框
+teksLoot.lua
+##炼金师巡逻日常助手
+Jhxx.lua
+##收件人列表
+Recipients.lua
+##改变声望显示方式
+SR.lua
+##快捷设焦点(shift+左键)
+Focuser.lua
+
+## 插件管理
+ACP.lua
+ACP-localization-zhCN.lua
+ACP.xml
+
+##等级百分比转换
+Ratings_core.lua
+Ratings_panel.lua
+
+##谁密我的
+WhoWhisperedMe.xml
+WhoWhisperedMe.lua
+
+##只显示自已得的牌子
+OnlyMyBadges.lua
+
+##快捷按键绑定
+##鼠标放在动作条上，直接按键就可以绑定。按ESC键或者右击为取消当前按键的绑定
+ncHoverBind.lua
+
+##游戏内的物品法术查询IDQuery
+Includes\InterfaceOptionPage-1.0.lua
+Includes\VirtualScrollList-1.0.lua
+IDQueryLocalization.lua
+IDQuery.lua
+
+##小地图图标集合MBB
+MBB\localization-zhCN.lua
+MBB\MBB.xml
+
+##在鼠标提示中显示法术BUFF的ID
+SpellID.lua
+
+##防止刷屏
+ChatGuard.lua
+
+##已知配方染色
+AlreadyKnown.lua
+
+##频道转发
+LFGForwarder.lua

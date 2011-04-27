@@ -1,0 +1,11 @@
+﻿## Interface: 30300
+## Title: |cffC495DDEui|r Set
+## Title-zhCN: 界面设置模块|cffC495DDEuiSet|r
+## Author: Ljxx
+## RequiredDeps: Eui
+## Version: 20110422A
+## SavedVariablesPerCharacter: EuiSettings
+
+locales\zhCN.lua
+
+EuiSet.lua
