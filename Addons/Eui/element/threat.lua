@@ -230,6 +230,11 @@ local function OnEvent(self, event, ...)
 		self:UnregisterEvent(event);
 	end
 	if ( event == "UNIT_THREAT_LIST_UPDATE" ) then
+		if UnitIsPlayer("target") and UnitCanAttack("player", "focus") then
+			threatunit = "focus"
+		elseif UnitCanAttack("player", "target") then
+			threatunit = "target"
+		end
 		if ( unit and UnitExists(unit) and UnitGUID(unit) == threatguid and UnitCanAttack("player", threatunit) ) then
 			if ( GetNumRaidMembers() > 0 ) then
 				for i=1, GetNumRaidMembers(), 1 do
@@ -250,6 +255,8 @@ local function OnEvent(self, event, ...)
 	elseif ( event == "PLAYER_TARGET_CHANGED" ) then
 		if ( UnitExists("target") and not UnitIsDead("target") and not UnitIsPlayer("target") ) then
 			threatguid = UnitGUID("target");
+		elseif UnitIsPlayer("target") and UnitCanAttack("player", "focus") then
+			threatguid = UnitGUID("focus"); --如果目标是友方单位,焦点是敌对单位的话,显示焦点仇恨.		
 		else
 			threatguid = "";
 		end

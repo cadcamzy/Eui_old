@@ -88,9 +88,11 @@ f:Hide()
 f.elapsed = 0
 f:SetScript("OnUpdate", function(self, elapsed)
 	f.elapsed = f.elapsed + elapsed
-	if f.elapsed > .5 then
-		setup()
-		f:Hide()
+	if f.elapsed then
+		if f.elapsed > .5 then
+			setup()
+			f:Hide()
+		end
 	end
 end)
 EuiWatchFrame:SetScript("OnEvent", function() if not IsAddOnLoaded("Who Framed Watcher Wabbit") or not IsAddOnLoaded("Fux") then init() f:Show() end end)

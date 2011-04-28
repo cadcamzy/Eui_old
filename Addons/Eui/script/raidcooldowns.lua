@@ -2,7 +2,8 @@
 if C["filter"].raid ~= true then return end
 local spells = {
 	[GetSpellInfo(48477)] = 600, -- XD战复
-	[GetSpellInfo(47883)] = 1800, -- SS灵魂石
+	[GetSpellInfo(29166)] = 180, -- XD激活
+	[GetSpellInfo(47883)] = 900, -- SS灵魂石
 	[GetSpellInfo(19752)] = 600, -- QS干涉
 	[GetSpellInfo(32182)] = 300, -- SM英勇
 	[GetSpellInfo(31224)] = 90, -- DZ暗影斗篷
@@ -13,12 +14,19 @@ local spells = {
 	[GetSpellInfo(45438)] = 300, -- FS寒冰屏障
 	[GetSpellInfo(48792)] = 120, -- DK冰封之韧
 	[GetSpellInfo(49016)] = 180, -- DK狂乱
+	[GetSpellInfo(6940)] = 120, -- QS牺牲之手
+	[GetSpellInfo(64205)] = 120, -- QS神圣牺牲
+	[GetSpellInfo(3411)] = 30, -- ZS援护
 }
 
 local width, height = C["filter"].raidwidth or 144, C["filter"].raidheight or 12
 local num = C["filter"].raidnumber or 10
 local holder = CreateFrame("Frame", "EuiRaidCooldowns", UIParent)
-E.EuiCreatePanel(holder, width, height, "TOP", EuiMinimap, "BOTTOM", 0, -24)
+if C["other"].minimap == true then
+	E.EuiCreatePanel(holder, width, height, "TOP", EuiMinimap, "BOTTOM", 0, -24)
+else
+	E.EuiCreatePanel(holder, width, height, "TOPLEFT", UIParent, "TOPLEFT", 10, -24)
+end
 E.EuiSetTemplate(holder)
 holder:Hide()
 
@@ -58,10 +66,12 @@ end
 
 local OnEnter = function(self)
 	local c = E.RAID_CLASS_COLORS[select(2, UnitClass(self.name))]
-	GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
-	GameTooltip:AddLine(self.name, c.r, c.g, c.b)
-	GameTooltip:AddDoubleLine(self.spellname, self.dur:GetText(), 1, 1, 1, 1, 1, 1)
-	GameTooltip:Show()
+	if c then
+		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT")
+		GameTooltip:AddLine(self.name, c.r, c.g, c.b)
+		GameTooltip:AddDoubleLine(self.spellname, self.dur:GetText(), 1, 1, 1, 1, 1, 1)
+		GameTooltip:Show()
+	end
 end
 
 local OnLeave = function()
@@ -82,6 +92,7 @@ local function OnUpdate(self, elapsed)
 		self.dur:SetFormattedText(SecondsToTime((self.start+self.duration)-time))
 		self:SetStatusBarColor(1 - progress/100, progress/100, 0)
 	end
+--	if GetNumPartyMembers() == 0 then bars = {} end
 end
 
 local function OnMouseDown(self, button)
@@ -102,12 +113,12 @@ local function CreateBar(index)
 	bar:SetHeight(height)
 	bar:SetWidth(width)
 
-	bar.dur = E.EuiSetFontn(bar, E.font, 9, "LEFT")
-	bar.dur:SetPoint("LEFT", bar, "TOPLEFT", 1, 1)
+	bar.dur = E.EuiSetFontn(bar, E.font, 12, "LEFT")
+	bar.dur:SetPoint("LEFT", bar, "TOPLEFT", 1, 0)
 	bar.dur:SetShadowOffset(1, -1)
 	
-	bar.text = E.EuiSetFontn(bar, E.font, 9, "RIGHT")
-	bar.text:SetPoint("RIGHT", bar, "TOPRIGHT", -1, 1)
+	bar.text = E.EuiSetFontn(bar, E.font, 12, "RIGHT")
+	bar.text:SetPoint("RIGHT", bar, "TOPRIGHT", -1, 0)
 	bar.text:SetShadowOffset(1, -1)
 	bar:EnableMouse(true)
 	bar:SetScript("OnEnter", OnEnter)
