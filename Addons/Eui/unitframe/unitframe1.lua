@@ -515,6 +515,7 @@ local Shared = function(self, unit, isSingle)
 	self:SetBackdropColor(.1,.1,.1,1)
 	self:SetBackdropBorderColor(.3,.3,.3,1)	
 	CreateShadow(self)
+	self.colors.smooth = {1,0,0, .7,.41,.44, .3,.3,.3}
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetStatusBarTexture(TEXTURE)
@@ -735,6 +736,8 @@ local Shared = function(self, unit, isSingle)
 				self.Castbar = cb
 			elseif C["unitframe"].bigcastbar == true then
 				--大型施法条
+				local unm = {strsplit("/", C["unitframe"].bigcastbarpos)}
+				if #unm ~= 6 then unm = {0,500,0,168,0,120} end
 				local bcb = CreateFrame("StatusBar", "EuiUnitframeCastbar"..unit, UIParent)
 				bcb:SetStatusBarTexture(TEXTURE)
 				bcb:SetStatusBarColor(1,1,1,.8)
@@ -742,11 +745,11 @@ local Shared = function(self, unit, isSingle)
 				bcb:SetWidth(240*C["unitframe"].bigcastbarscale)
 				bcb:SetFrameStrata("MEDIUM")
 				if unit == 'player' then	
-					bcb:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 120+24*C["unitframe"].bigcastbarscale*2)
+					bcb:SetPoint("BOTTOM", UIParent, "BOTTOM", unm[3], unm[4])
 				elseif unit == 'target' then
-					bcb:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, 120)
+					bcb:SetPoint("BOTTOM", UIParent, "BOTTOM", unm[5], unm[6])
 				elseif unit == 'focus' then
-					bcb:SetPoint("CENTER", 0, 20)
+					bcb:SetPoint("BOTTOM", UIParent, "BOTTOM", unm[1], unm[2])
 					bcb:SetWidth(300*C["unitframe"].bigcastbarscale)
 				end
 				
@@ -994,13 +997,17 @@ local UnitSpecific = {
 		Shared(self, ...)
 		local Health, Power = self.Helth, self.Power
 		local Debuffs = CreateFrame("Frame", nil, self)
-  		Debuffs:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 1, 4)
+		if (E.MyClass == "DEATHKNIGHT" or E.MyClass == "SHAMAN") and C["unitframe"].playerdebuffnum > 0 then
+			Debuffs:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 1, 18)
+		else
+			Debuffs:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 1, 4)
+		end
 		Debuffs.showDebuffType = true
 		Debuffs.initialAnchor = 'BOTTOMLEFT'
 		Debuffs:SetHeight(75)
 		Debuffs:SetWidth(C["unitframe"].playerwidth-4)
 		Debuffs.num = C["unitframe"].playerdebuffnum
-		Debuffs.size = 21
+		Debuffs.size = 25
 		Debuffs.spacing = 4
 		Debuffs['growth-x'] = 'RIGHT'
 		Debuffs['growth-y'] = 'UP'

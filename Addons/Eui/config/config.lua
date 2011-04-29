@@ -44,6 +44,8 @@ C["other"] = {
 	["hb"] = true,
 	["spellid"] = true,
 	["mbb"] = true,
+	["minimap"] = true,
+	["buff"] = true,
 }
 
 C["chat"] = {
@@ -102,6 +104,7 @@ C["unitframe"] = {
 	["playerdebuffnum"] = 0,
 	["bigcastbar"] = false,
 	["bigcastbarscale"] = 1,
+	["bigcastbarpos"] = "0/500/0/168/0/120",
 }
 
 C["raid"] = {

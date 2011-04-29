@@ -60,6 +60,8 @@
 	e_other_hb = "启用/hb 绑定快捷键功能"
 	e_other_spellid = "启用鼠标提示显示技能ID"
 	e_other_mbb = "启用小地图图标合集"
+	e_other_minimap = "启用小地图"
+	e_other_buff = "启用BUFF/DEBUFF美化"
 	
 	-- 聊天
 	e_chat_enable = "启用聊天增强"
@@ -117,6 +119,7 @@
 	e_unitframe_playerdebuffnum = "玩家头像显示DEBUFF数量"
 	e_unitframe_bigcastbar = "启用大型施法条"
 	e_unitframe_bigcastbarscale = "大型施法条缩放比率"
+	e_unitframe_bigcastbarpos = "大型施法条焦点/玩家/目标距底端的位置"
 
 	--团队
 	e_raid_raidDirection = "治疗模式团队逆序排列"

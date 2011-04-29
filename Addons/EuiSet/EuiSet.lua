@@ -74,6 +74,8 @@ local function Local(o)
 	if o == "EuiSetGuiotherhb" then o = e_other_hb end
 	if o == "EuiSetGuiotherspellid" then o = e_other_spellid end
 	if o == "EuiSetGuiothermbb" then o = e_other_mbb end
+	if o == "EuiSetGuiotherminimap" then o = e_other_minimap end
+	if o == "EuiSetGuiotherbuff" then o = e_other_buff end
 	
 	-- 聊天(EuiSetGuichat)
 	if o == "EuiSetGuichatenable" then o = e_chat_enable end
@@ -131,6 +133,7 @@ local function Local(o)
 	if o == "EuiSetGuiunitframeplayerdebuffnum" then o = e_unitframe_playerdebuffnum end
 	if o == "EuiSetGuiunitframebigcastbar" then o = e_unitframe_bigcastbar end
 	if o == "EuiSetGuiunitframebigcastbarscale" then o = e_unitframe_bigcastbarscale end
+	if o == "EuiSetGuiunitframebigcastbarpos" then o = e_unitframe_bigcastbarpos end
 	
 	--团队(EuiSetGuiraid)
 
