@@ -1,0 +1,9 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="color.lua"/>
+	<Script file="unitframe1.lua"/>
+	<Script file="unitframe2.lua"/>
+	<Script file="unitframe3.lua"/>
+	<Script file="aura.lua"/>
+	<Script file="Clicksets.lua"/>
+	<Script file="raid.lua"/>
+</Ui>

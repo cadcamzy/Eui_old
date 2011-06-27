@@ -1,0 +1,9 @@
+﻿## Interface: 40100
+## Title: |cffC495DDEui|r Script
+## Title-zhCN: EUI附加功能模块|cffC495DDEuiScript|r
+## Author: Ljxx
+## RequiredDeps: Eui
+## Version: Beta4
+## SavedVariables: raidtarget, RecipientsDB, oGlowDB
+
+script.xml

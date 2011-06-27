@@ -1,0 +1,53 @@
+## Interface: 40100
+## Title: Skada
+## Title-zhCN: 伤害统计|cffC495DDSkada|r
+## Notes: Modular damage meter.
+## Notes-koKR: 데미지 미터 모듈입니다.
+## Notes-zhTW: 模組化的傷害統計。
+## Notes-deDE: Ein Damage-Meter.
+## Notes-frFR: Un damage meter.
+## Notes-zhCN: 伤害统计
+## Author: Zarnivoop
+## Version: r320
+## SavedVariables: SkadaDB
+## X-Curse-Packaged-Version: r320
+## X-Curse-Project-Name: Skada Damage Meter
+## X-Curse-Project-ID: skada
+## X-Curse-Repository-ID: wow/skada/mainline
+
+## OptionalDeps: Ace3, LibSharedMedia-3.0, LibWindow-1.1, LibDBIcon-1.0, AceGUI-3.0-SharedMediaWidgets, LibBossIDs-1.0
+
+## X-License: MIT/X
+## X-Category: Combat
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+lib\SpecializedLibBars-1.0\SpecializedLibBars-1.0.lua
+
+locale\enUS.lua
+locale\zhCN.lua
+locale\zhTW.lua
+
+Skada.lua
+Options.lua
+BarDisplay.lua
+
+modules.xml
+
+model\Absorbs.lua
+model\CC.lua
+model\Damage.lua
+model\DamageTaken.lua
+model\Deaths.lua
+model\Debuffs.lua
+model\Dispels.lua
+model\Enemies.lua
+model\Healing.lua
+model\Interrupts.lua
+model\Overhealing.lua
+model\Power.lua
+model\Threat.lua
+model\TotalHealing.lua
+model\SkadaWindowsButtons.lua

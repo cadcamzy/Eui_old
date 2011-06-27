@@ -1,0 +1,24 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Include file="actionbars\actionbars.xml"/>
+	<Script file="achieved.lua"/>
+	<Script file="addfilter.lua"/>
+	
+	<Script file="buff.lua"/>
+	<Script file="chat.lua"/>
+	<Script file="compare.lua"/>
+	<Script file="fane.lua"/>
+	<Script file="filter.lua"/>
+	<Script file="font.lua"/>
+	<Script file="JPack.lua"/>
+	<Script file="loot.lua"/>
+	<Script file="minimap.lua"/>
+	<Script file="mirror.lua"/>
+
+	<Script file="nameplate.lua"/>
+	<Script file="omnicc.lua"/>
+	<Script file="threat.lua"/>
+	<Script file="tooltip.lua"/>
+	<Script file="talent.lua"/>
+	<Script file="watchframe.lua"/>
+	<Script file ="coolline.lua"/>
+</Ui>

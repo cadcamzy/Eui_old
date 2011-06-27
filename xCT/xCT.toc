@@ -1,0 +1,10 @@
+## Interface: 40100
+## Title: |cffFF0000x|rCT
+## Title-zhCN: 战斗指示器|cffC495DDxCT|r
+## Notes: X Combat Text
+## Author: Affli @ RU-Howling Fjord & Dandruff @ US-Whisperwind
+## Version: 1.9-beta-2
+## RequiredDeps: Blizzard_CombatText
+
+config.lua
+xCT.lua

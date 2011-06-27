@@ -1,0 +1,12 @@
+﻿## Interface: 40100
+## Title: MinimapButtonBag
+## Title-zhCN: 小地图按钮整合|cffC495DDMBB|r
+## Author: Tunhadil, Fixed by Pericles for WotLK, fixed by yossa for patch 4.0.1
+## X-Category: Map
+## Notes: Cleans up minimap buttons and makes them accessible through a pop out menu!
+## Notes-zhTW: 小地圖按鈕整合。
+## Notes-zhCN: 清除迷你地图周围按钮，整合它们至一个弹出菜单中！
+## SavedVariablesPerCharacter: MBB_Exclude, MBB_Options
+## RequiredDeps: Eui
+
+MBB.xml

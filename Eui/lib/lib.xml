@@ -1,0 +1,20 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file='Eui\Eui.lua' />
+	<Include file="Eui\gui.lua"/>
+	<Script file="Eui\init.lua"/>
+	<Include file="Eui\move.lua"/>
+	<Script file="Eui\anim.lua"/>
+	<Include file="oUF\Ouf.xml"/>
+	<Script file="plugin\oUF_AuraWatch.lua"/>
+	<Script file="plugin\oUF_RaidDebuffs.lua"/>
+	<Script file="plugin\oUF_CombatFeedback.lua"/>
+	<Script file="plugin\oUF_DebuffHighlight.lua"/>
+	<Script file="plugin\oUF_Experience.lua"/>
+	<Script file="plugin\oUF_Reputation.lua"/>
+	<Script file="plugin\oUF_Smooth.lua"/>
+	<Script file="plugin\oUF_TotemBar.lua"/>
+	<Script file="plugin\oUF_Trinkets.lua"/>
+	<Script file="plugin\oUF_Swing.lua"/>
+	<Script file="plugin\oUF_DruidMana.lua"/>
+	<Script file="plugin\oUF_MovableFrames.lua"/>
+</Ui>

@@ -1,0 +1,11 @@
+﻿## Interface: 40100
+## Title: |cffC495DDEui|r Set
+## Title-zhCN: EUI界面设置模块|cffC495DDEuiSet|r
+## Author: Ljxx
+## RequiredDeps: Eui
+## Version: 201100623A
+## SavedVariablesPerCharacter: EuiSettings
+
+locales\zhCN.lua
+
+EuiSet.lua

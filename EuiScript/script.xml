@@ -1,0 +1,34 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="align.lua"/>
+	<Script file="drag.lua"/>
+	<Script file="omnicc.lua"/>
+	<Script file="openall.lua"/>
+	<Script file="tradetabs.lua"/>
+	<Script file="castby.lua"/>
+	<Script file="font.lua"/>
+	<Script file="JPack.lua"/>
+	<Script file="achieved.lua"/>
+	<Script file="watchframe.lua"/>
+	<Script file="movable.lua"/>	
+	<Script file="filter.lua"/>
+	<Script file="raidtargetrw.lua"/>
+	<Script file="addfilter.lua"/>
+	<Script file="raidcooldowns.lua"/>
+	<Script file="teksLoot.lua"/>
+	<Script file="Recipients.lua"/>
+	<Script file="SR.lua"/>
+	<Script file="ACP.lua"/>
+	<Include file="ACP.xml" />
+
+	<Script file="OnlyMyBadges.lua"/>
+	<Script file="ncHoverBind.lua"/>
+	<Script file="SpellID.lua"/>
+
+	<Script file="AlreadyKnown.lua"/>
+	<Script file="LFGForwarder.lua"/>
+	<Script file="RaidCheck.lua"/>
+	
+	<Include file="oGlow\oGlow.xml"/>
+	<Script file="yclasscolors.lua"/>
+	
+</Ui>
