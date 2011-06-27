@@ -328,54 +328,7 @@ if ( Filger_Spells and Filger_Spells[class] ) then
 		if frame.Name == "playercdicon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", "玩家CD图标", nil, E.EuiFilterMove) end
 		
 		if ( C["filter"].configmode ) then
---[[ 			frame:SetFrameStrata("DIALOG");
-			frame:SetBackdrop({ bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", edgeFile = "", insets = { left = 0, right = 0, top = 0, bottom = 0 }});
-			E.EuiSetTemplate(frame)
-			if frame.Name ~= "playerbufficon" and frame.Name ~= "playerbuffbar" and frame.Name ~= "targetdebufficon" and frame.Name ~= "targetdebuffbar" and frame.Name ~= "playercdicon" then frame:Hide() end
 
-			frame:SetMovable(true);
-			frame:EnableMouse(true);
-			frame:RegisterForDrag("LeftButton");
-			frame:SetScript("OnDragStart", function(self)
-				if(IsShiftKeyDown() or IsAltKeyDown()) then
-					self:StartMoving()
-				end
-			end);
-			frame:SetScript("OnDragStop", function(self)
-				self:StopMovingOrSizing();
-				local x, y = self:GetCenter()
-				if (filterdb[self.Name]==nil) then filterdb[self.Name]={}; end
-				filterdb[self.Name]["x"]=floor(x+0.5)
-				filterdb[self.Name]["y"]=floor(y+0.5)
-			end);
-			
-			frame.text = frame:CreateFontString(nil, "OVERLAY");
-			frame.text:SetFont(E.font, 12, "OUTLINE");
-			frame.text:SetPoint("LEFT", frame, "RIGHT", 2, 0);
-			local temptext
-			if data.Name == "playerbufficon" then temptext = "玩家BUFF图标 (Shift+左键拖动)" end
-			if data.Name == "playerbuffbar" then temptext = "玩家BUFF计时条 (Shift+左键拖动)" end
-			if data.Name == "targetdebufficon" then temptext = "目标DEBUFF图标 (Shift+左键拖动)" end
-			if data.Name == "targetdebuffbar" then temptext = "目标DEBUFF计时条 (Shift+左键拖动)" end
-			if data.Name == "playercdicon" then temptext = "玩家技能冷却图标 (Shift+左键拖动)" end
-			frame.text:SetText(data.Name and temptext or "EuiFilter"..i);
-			
-			for j=1, #Filger_Spells[class][i], 1 do
-				data = Filger_Spells[class][i][j];
-				if ( not active[i] ) then
-					active[i] = {};
-				end
-				if ( data.spellID ) then
-					_,_,spellIcon = GetSpellInfo(data.spellID)
-				else
-					slotLink = GetInventoryItemLink("player", data.slotID);
-					if ( slotLink ) then
-						name, _, _, _, _, _, _, _, _, spellIcon = GetItemInfo(slotLink);
-					end
-				end
-				table.insert(active[i], { data = data, icon = spellIcon, count = 9, duration = 0, expirationTime = 0 });
-			end
-		--	Update(frame); ]]
 		else
 			for j=1, #Filger_Spells[class][i], 1 do
 				data = Filger_Spells[class][i][j];
@@ -401,28 +354,6 @@ fff:SetScript("OnEvent", function()
 
 	local playerframe, targetframe, portrait
 	portrait = 0
---[[ 	if C["unitframe"].aaaaunit == 1 or C["unitframe"].aaaaunit == 5 then
-		playerframe = "Ljxx_playerFrame"
-		targetframe = "Ljxx_targetFrame"
-		if C["unitframe"].portrait == true then
-			portrait = C["unitframe"].playerheight + 6
-		end	
-	elseif C["unitframe"].aaaaunit == 2 then
-		playerframe = "oUF_monoPlayerFrame"
-		targetframe = "oUF_monoTargetFrame"
-	elseif C["unitframe"].aaaaunit == 3 then
-		playerframe = "oUF_AftermathhPlayer"
-		targetframe = "oUF_AftermathhTarget"
-		if C["unitframe"].portrait == true then
-			portrait = C["unitframe"].totheight + C["unitframe"].playerheight + 18
-		end
-	elseif C["unitframe"].aaaaunit == 4 then
-		playerframe = "oUF_LjxxB_Player"
-		targetframe = "oUF_LjxxB_Target"	
-	else
-		playerframe = UIParent
-		targetframe = UIParent
-	end ]]
 	if C["unitframe"].aaaaunit > 0 then
 		playerframe = "Ljxx_playerFrame"
 		targetframe = "Ljxx_targetFrame"
@@ -433,12 +364,15 @@ fff:SetScript("OnEvent", function()
 	if C["unitframe"].portrait == true and (C["unitframe"].aaaaunit == 1 or C["unitframe"].aaaaunit == 3) then
 		portrait = C["unitframe"].playerheight + 6
 	end		
-	local playBuffBarHeight = 5
-	if E.MyClass == 'SHAMAN' or E.MyClass == 'DEATHKNIGHT' or E.MyClass == 'DRUID' or E.MyClass == 'PALADIN' then playBuffBarHeight = 14 end
-	if C["unitframe"].aaaaunit == 4 then playBuffBarHeight = 30 end
-	if E.MyClass == 'SHAMAN' or E.MyClass == 'DEATHKNIGHT' and (C["unitframe"].aaaaunit == 1 or C["unitframe"].aaaaunit == 5) then playBuffBarHeight = 18 end
-	local playBuffIconHeight
-	playBuffIconHeight = 235
+	local playBuffBarHeight = 6
+	if E.MyClass == 'SHAMAN' or E.MyClass == 'DEATHKNIGHT' or E.MyClass == 'DRUID' or E.MyClass == 'PALADIN' or E.MyClass == 'WARLOCK' then
+		if C["unitframe"].aaaaunit == 1 or C["unitframe"].aaaaunit == 2 then
+			playBuffBarHeight = 20
+		else
+			playBuffBarHeight = 16
+		end
+	end	
+	local playBuffIconHeight = 235
 	local playCDIconHeight = 190
 	local iconsize
 	if C["filter"].iconsize < 1 then iconsize = 30 else iconsize = C["filter"].iconsize end

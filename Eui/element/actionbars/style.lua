@@ -109,7 +109,7 @@ local function Stylesmallbutton(normal, button, icon, name, pet)
 		panel:SetBackdropColor(.1,.1,.1,.8)
 		panel:SetFrameStrata(button:GetFrameStrata())
 		panel:SetFrameLevel(button:GetFrameLevel() - 1)
-
+		E.EuiSetTemplate(panel)
 		icon:SetTexCoord(.08, .92, .08, .92)
 		icon:ClearAllPoints()
 		if pet then			

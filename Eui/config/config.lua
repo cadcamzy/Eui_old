@@ -50,9 +50,7 @@ C["other"] = {
 	["mbb"] = true,
 	["minimap"] = true,
 	["buff"] = true,
---	["map"] = true,
---	["mapscale"] = 0.8,
---	["mapalpha"] = 1,
+	["xct"] = true,
 	["raidcheck"] = true,
 }
 
@@ -135,9 +133,9 @@ C["raid"] = {
 	["raidgroups"] = 5,--团队里小队数
 	["grouphv"] = true, --小队横排或竖排
 	["groupspace"] = 20, --竖排时小队间隔
-	["gridheight"] = 80, --Grid框架高度位置
+	["gridheight"] = 98, --Grid框架高度位置
 	["nogridheight"] = 180, --单列时框架高度
-	["gridh"] = 32, --Grid单元高度
+	["gridh"] = 28, --Grid单元高度
 	["gridw"] = 76,--Grid单元宽度
 	["nogridh"] = 24,--非Grid样式单元高度
 	["nogridw"] = 140,

@@ -395,16 +395,8 @@ local function Shared(self, unit)
 		self:SetAttribute('initial-width', C["raid"].nogridw)
 	end
 	
-	self:SetBackdrop({
-		  bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-		  edgeFile = [=[Interface\Buttons\WHITE8x8]=], 
-		  tile = false, tileSize = 0, edgeSize = 1, 
-		  insets = { left = -1, right = -1, top = -1, bottom = -1}
-		})
-	self:SetBackdropColor(.1,.1,.1,1)
-	self:SetBackdropBorderColor(.3,.3,.3,1)	
-	
-	
+	self.background = E.CreateBG(self)	
+	self.background:SetBackdropColor(.1,.1,.1,1)
 	if C["raid"].portrait == true then
 		health = E.ReverseBar(self)
 		health.StatusBarColor = {1, 0, 0}
@@ -412,8 +404,8 @@ local function Shared(self, unit)
 		health = CreateFrame("StatusBar", nil, self)
 	end		
 
-	health:SetPoint("TOPLEFT", self, "TOPLEFT", 2, -2)
-	health:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -2, 2)
+	health:SetPoint("TOPLEFT", self, "TOPLEFT", 0, 0)
+	health:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, 0)
 	
 	if C["raid"].astyle == 0 and GridHealthVettical == true then
 		health:SetOrientation('VERTICAL')
@@ -455,20 +447,12 @@ local function Shared(self, unit)
 	health.frequentUpdates = true
 	health.colorTapping = true
 
-	local powerbg = CreateFrame("Frame",nil,self)
-	powerbg:SetBackdrop(self:GetBackdrop())
-	powerbg:SetBackdropColor(.1,.1,.1,1)
-	powerbg:SetBackdropBorderColor(.3,.3,.3,1)
-	powerbg:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 6, 3)
-	powerbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -6, -3)
-	powerbg:SetFrameLevel(health:GetFrameLevel()+1)
-	
-	local power = CreateFrame("StatusBar", nil, powerbg)
+	local power = CreateFrame("StatusBar", nil, self)
 	power:SetStatusBarTexture(BarTexture)
-	power:SetParent(powerbg)
-	power:SetFrameLevel(powerbg:GetFrameLevel()+1)
-	power:SetPoint("TOPLEFT", powerbg, "TOPLEFT", 2, -2)
-	power:SetPoint("BOTTOMRIGHT", powerbg, "BOTTOMRIGHT", -2, 2)
+	power:SetFrameLevel(self.Health:GetFrameLevel()+1)
+	power:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
+	power:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, -12)
+	power.backbg = E.CreateBG(power)
 	self.Power = power
 	
 	power.bg = power:CreateTexture(nil, "BORDER")
@@ -483,12 +467,6 @@ local function Shared(self, unit)
 	power.colorReaction = true
 	power.frequentUpdates = true
 
---[[ 	local pan = CreateFrame("Frame", nil, self)
-	E.EuiSetTemplate(pan)
-	pan:SetPoint("TOPLEFT", self, "TOPLEFT", 1, -1)
-	pan:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -1, 1)
-	pan:SetFrameLevel(self:GetFrameLevel()+1)	 ]]
-		
 	local panel = CreateFrame("Frame", nil, self)
 	panel:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 1)
 	panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -1)
@@ -525,10 +503,8 @@ local function Shared(self, unit)
 
 	if C["raid"].portrait == true then
 		local portrait = CreateFrame('PlayerModel', nil, self)
-	    portrait:SetBackdrop(self:GetBackdrop())
-		portrait:SetBackdropColor(.1,.1,.1,.7)
-		portrait:SetBackdropBorderColor(.3,.3,.3,1)	
-		portrait.PostUpdate = function(self) self:SetAlpha(0) self:SetAlpha(0.75) end
+	    portrait.bg = E.CreateBG(portrait)
+		portrait.PostUpdate = E.PortraitUpdate
 	    portrait:SetAllPoints(health)
 		portrait.type = '3D'
 	    self.Portrait = portrait
@@ -648,7 +624,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showParty", true,
 				"showRaid", true,			
-				"xOffset", 5,
+				"xOffset", 8,
 				"point", "LEFT"
 			)
 			party:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", 0, 0)
@@ -666,10 +642,10 @@ oUF:Factory(function(self)
 					"showPlayer", true, 
 					"showParty", true,
 					"showRaid", true,			
-					"xOffset", 5,
+					"xOffset", 8,
 					"point", "LEFT"
 				)	
-				partytarget:SetPoint("TOP", party, "BOTTOM", 0, -6)		
+				partytarget:SetPoint("TOP", party, "BOTTOM", 0, -20)		
 				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "party",
 					'oUF-initialConfigFunction', [[
 						local header = self:GetParent()
@@ -684,10 +660,10 @@ oUF:Factory(function(self)
 					"showPlayer", true, 
 					"showParty", true,
 					"showRaid", true,			
-					"xOffset", 5,
+					"xOffset", 8,
 					"point", "LEFT"
 				)
-				partypet:SetPoint("TOP", partytarget, "BOTTOM", 0, -6)
+				partypet:SetPoint("TOP", partytarget, "BOTTOM", 0, -20)
 			end
 		else
 			local party = self:SpawnHeader("oUF_Party", nil, "party",
@@ -702,7 +678,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showParty", true,
 				"showRaid", true,	
-				"yOffset", 6,
+				"yOffset", 20,
 				"point", "BOTTOM"
 			)
 			party:SetPoint("LEFT", EuiRaidBackground, 0, 0)
@@ -720,10 +696,10 @@ oUF:Factory(function(self)
 					"showPlayer", true, 
 					"showParty", true,
 					"showRaid", true,			
-					"yOffset", 6,
+					"yOffset", 20,
 					"point", "LEFT"
 				)	
-				partytarget:SetPoint("LEFT", party, "RIGHT", 5, 0)		
+				partytarget:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", 8, 0)		
 				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "party",
 					'oUF-initialConfigFunction', [[
 						local header = self:GetParent()
@@ -738,10 +714,10 @@ oUF:Factory(function(self)
 					"showPlayer", true, 
 					"showParty", true,
 					"showRaid", true,			
-					"yOffset", 6,
+					"yOffset", 20,
 					"point", "LEFT"
 				)
-				partypet:SetPoint("LEFT", partytarget, "RIGHT", 5, 0)
+				partypet:SetPoint("BOTTOMLEFT", partytarget, "BOTTOMRIGHT", 8, 0)
 			end			
 		end
 	end
@@ -756,7 +732,7 @@ oUF:Factory(function(self)
 			'initial-width', C["raid"].gridw+20,
 			'initial-height', C["raid"].gridh-8,		
 			'ShowRaid', true,
-			'yOffset', -5
+			'yOffset', -20
 			)
         if oRA3 then
             tank:SetAttribute("initial-unitWatch", true)
@@ -781,10 +757,10 @@ oUF:Factory(function(self)
 			'initial-width', C["raid"].gridw+20,
 			'initial-height', C["raid"].gridh-8,		
 			'ShowRaid', true,
-			'yOffset', -5,
+			'yOffset', -20,
 			'groupFilter', 'MAINTANK'
 			)
-		tanktarget:SetPoint("LEFT", tank, "RIGHT", 5, 0)
+		tanktarget:SetPoint("TOPLEFT", tank, "TOPRIGHT", 5, 0)
 	end
 
 	if C["raid"].boss == true then
@@ -822,8 +798,8 @@ oUF:Factory(function(self)
 					"showParty", true,
 					"showPlayer", true,
 					"showRaid", true,
-					"xoffset", 5,
-					"yOffset", 6,
+					"xoffset", 8,
+					"yOffset", 20,
 					"point", "LEFT",
 					"groupFilter", tostring(i),
 					"groupingOrder", tostring(i),
@@ -835,11 +811,11 @@ oUF:Factory(function(self)
 			end
 			if C["raid"].raidDirection == true then --1队排在下面
 				for i = 1, NUM_RAID_GROUPS do
-					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (i - 1) + 5*(i - 1))
+					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (i - 1) + 20*(i - 1))
 				end
 			else --5队排在下面.
 				for i = 1, NUM_RAID_GROUPS, 1 do
-					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (NUM_RAID_GROUPS-i) + 5*(NUM_RAID_GROUPS-i))
+					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (NUM_RAID_GROUPS-i) + 20*(NUM_RAID_GROUPS-i))
 				end
 			end
 		else
@@ -856,7 +832,7 @@ oUF:Factory(function(self)
 					"showPlayer", true,
 					"showRaid", true,
 					"xoffset", 0,
-					"yOffset", 6,
+					"yOffset", 20,
 					"point", "BOTTOM",
 					"groupFilter", tostring(i),
 					"groupingOrder", tostring(i),
@@ -866,7 +842,7 @@ oUF:Factory(function(self)
 					"columnSpacing", 3,
 					"columnAnchorPoint", raidDirection
 				)
-				raid[i]:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", (C["raid"].gridw + 5)*(i - 1), 0)
+				raid[i]:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", (C["raid"].gridw + 8)*(i - 1), 0)
 			end
 		end		
 	elseif C["raid"].astyle == 1 then
@@ -883,7 +859,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showRaid", true, 
 				"xoffset", 0,
-				"yOffset", -6,
+				"yOffset", -20,
 				"point", "TOP",
 				"groupFilter", tostring(i),
 				"groupingOrder", tostring(i),
@@ -896,7 +872,7 @@ oUF:Factory(function(self)
 			if i > 5 then --小队超过5队时,第6队排到第5队的右边
 				raid[i]:SetPoint('BOTTOMLEFT', "oUF_EUI_raid"..tostring(i-5), 'BOTTOMRIGHT', 16, 0)
 			else
-				raid[i]:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", 0, -(C["raid"].nogridh * 5 + 24 + C["raid"].groupspace)*(i-1))
+				raid[i]:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", 0, -(C["raid"].nogridh * 5 + 80 + C["raid"].groupspace)*(i-1))
 			end
 		end
 	elseif C["raid"].astyle == 2 then
@@ -913,7 +889,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showRaid", true, 
 				"xoffset", 0,
-				"yOffset", -6,
+				"yOffset", -20,
 				"point", "TOP",
 				"groupFilter", tostring(i),
 				"groupingOrder", tostring(i),
@@ -924,9 +900,9 @@ oUF:Factory(function(self)
 				"columnAnchorPoint", raidDirection		
 			)
 			if i%2 == 1 then
-				raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, (C["raid"].nogridh * 5 + 24 + C["raid"].groupspace) * floor(i / 2))
+				raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, (C["raid"].nogridh * 5 + 80 + C["raid"].groupspace) * floor(i / 2))
 			else
-				raid[i]:SetPoint("BOTTOMRIGHT", EuiRaidBackground, "BOTTOMRIGHT", 0, (C["raid"].nogridh * 5 + 24 + C["raid"].groupspace) * (i / 2 - 1))
+				raid[i]:SetPoint("BOTTOMRIGHT", EuiRaidBackground, "BOTTOMRIGHT", 0, (C["raid"].nogridh * 5 + 80 + C["raid"].groupspace) * (i / 2 - 1))
 			end			
 		end
 	end

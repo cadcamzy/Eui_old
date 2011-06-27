@@ -7,14 +7,73 @@ Thanks ALZA and Shestak for making this mod possible. Thanks Tukz for his wonder
 Maintained by Dandruff for 4.1 and 4.2 PTR
 
 ]]--
-
-
+local E, C = unpack(EUI)
+if C["other"].xct ~= true then return end
 --some init
-local addon, ns = ...
-ct = ns.config
+local ct = {
+    ---------------------------------------------------------------------------------
+    -- use ["option"] = true/false, to set options.
+    -- options
+    -- blizz damage options.
+        ["blizzheadnumbers"] = false, -- use blizzard damage/healing output (above mob/player head)
+        ["damagestyle"]      = true,  -- change default damage/healing font above mobs/player heads. you need to restart WoW to see changes! has no effect if blizzheadnumbers = false
+
+    -- xCT outgoing damage/healing options
+        ["damage"]       = true,  -- show outgoing damage in it's own frame
+        ["healing"]      = true,  -- show outgoing healing in it's own frame
+        ["showhots"]     = true,  -- show periodic healing effects in xCT healing frame.
+        ["damagecolor"]  = true,  -- display damage numbers depending on school of magic, see http://www.wowwiki.com/API_COMBAT_LOG_EVENT
+        ["critprefix"]   = "|cffFF0000*|r", -- symbol that will be added before amount, if you deal critical strike/heal. leave "" for empty. default is red *
+        ["critpostfix"]  = "|cffFF0000*|r", -- postfix symbol, "" for empty.
+        ["icons"]        = true,  -- show outgoing damage icons
+        ["iconsize"]     = 28,    -- icon size of spells in outgoing damage frame, also has effect on dmg font size if it's set to "auto"
+        ["petdamage"]    = true,  -- show your pet damage.
+        ["dotdamage"]    = true,  -- show damage from your dots. someone asked an option to disable lol.
+        ["treshold"]     = 1,     -- minimum damage to show in outgoing damage frame
+        ["healtreshold"] = 1,     -- minimum healing to show in incoming/outgoing healing messages.
+
+    -- appearence
+        ["font"]           = E.font, -- "Fonts\\ARIALN.ttf" is default WoW font.
+        ["fontsize"]       = 16,
+        ["fontstyle"]      = "OUTLINE",                           -- valid options are "OUTLINE", "MONOCHROME", "THICKOUTLINE", "OUTLINE,MONOCHROME", "THICKOUTLINE,MONOCHROME"
+        ["damagefont"]     = E.font, -- "Fonts\\FRIZQT__.ttf" is default WoW damage font
+        ["damagefontsize"] = "auto",                              -- size of xCT damage font. use "auto" to set it automatically depending on icon size, or use own value, 16 for example. if it's set to number value icons will change size.
+        ["timevisible"]    = 3,                                   -- time (seconds) a single message will be visible. 3 is a good value.
+        ["scrollable"]     = false,                               -- allows you to scroll frame lines with mousewheel.
+        ["maxlines"]       = 64,                                  -- max lines to keep in scrollable mode. more lines=more memory. nom nom nom.
+
+    -- justify messages in frames, valid values are "RIGHT" "LEFT" "CENTER"
+        ["justify_1"] = "LEFT",     -- incoming damage justify
+        ["justify_2"] = "RIGHT",    -- incoming healing justify
+        ["justify_3"] = "CENTER",   -- various messages justify (mana, rage, auras, etc)
+        ["justify_4"] = "RIGHT",    -- outgoing damage/healing justify
+
+    -- class modules and goodies
+        ["stopvespam"]       = false, -- automaticly turns off healing spam for priests in shadowform. HIDE THOSE GREEN NUMBERS PLX!
+        ["dkrunes"]          = true,  -- show deatchknight rune recharge
+        ["mergeaoespam"]     = true,  -- merges multiple aoe spam into single message, can be useful for dots too.
+        ["mergeaoespamtime"] = 3,     -- time in seconds aoe spell will be merged into single message. minimum is 1.
+        ["killingblow"]      = true,  -- tells you about your killingblows (works only with ["damage"] = true,)
+        ["dispel"]           = true,  -- tells you about your dispels (works only with ["damage"] = true,)
+        ["interrupt"]        = true,  -- tells you about your interrupts (works only with ["damage"] = true,)
+
+
+    -- display looted items (set both to false to revert changes and go back to the original xCT)
+        ["lootitems"]       = true,  -- show all looted items
+        ["lootmoney"]       = true,  -- Display looted money
+        
+    -- fine tune loot options
+        ["loothideicons"]   = true,   -- show item icons when looted
+        ["looticonsize"]    = 20,    -- Icon size of looted, crafted and quest items
+        ["crafteditems"]    = false, -- always show crafted items (will still show if 'lootitems' = true)
+        ["questitems"]      = false, -- always show quest items (will still show if 'lootitems' = true)
+        ["itemsquality"]    = 0,     -- filter items shown by item quality: 0 = Poor, 1 = Common, 2 = Uncommon, 3 = Rare, 4 = Epic, 5 = Legendary, 6 = Artifact, 7 = Heirloom
+        ["itemstotal"]      = true,  -- show the total amount of items in bag ("[Epic Item Name]x1 (x23)")
+        ["moneycolorblind"] = false, -- shows letters G, S, and C instead of textures
+        ["minmoney"]        = 0,     -- filter money received events, less than this amount (4G 32S 12C = 43212)
+}
 ct.myname = UnitName("player")
 ct.myclass = select(2, UnitClass("player"))
-
 -- outgoing healing filter, hide this spammy shit, plx
 if ct.healing then
     ct.healfilter = { }
@@ -601,14 +660,48 @@ local function OnEvent(self, event, subevent, ...)
         if ct.damage or ct.healing then
             ct.pguid = UnitGUID("player")
         end
-    
+		-- turn off blizz ct
+ 		CombatText:UnregisterAllEvents()
+		CombatText:SetScript("OnLoad", nil)
+		CombatText:SetScript("OnEvent", nil)
+		CombatText:SetScript("OnUpdate", nil)
+
+		function E.XctMove(f)
+			if E.Movers[f:GetName()]["moved"] ~= true then
+				f:ClearAllPoints()
+				if f:GetName() == 'xCT1' then
+					f:SetPoint("CENTER", -192, -32)
+				elseif f:GetName() == 'xCT2' then
+					f:SetPoint("CENTER", 192, -32)
+				elseif f:GetName() == 'xCT3' then
+					f:SetPoint("CENTER", 0, 232)
+				elseif f:GetName() == 'xCT4' then
+					f:SetPoint("CENTER", 320, 0)
+				end
+			end
+		end
+
+		for i = 1, #ct.frames do
+			local f = ct.frames[i]
+			local framename
+			if i == 1 then
+				framename = DAMAGE
+			elseif i == 2 then
+				framename =SHOW_COMBAT_HEALING
+			elseif i == 3 then
+				framename =COMBAT_TEXT_LABEL
+			elseif i == 4 then
+				framename =SCORE_DAMAGE_DONE.." / "..SCORE_HEALING_DONE
+			end
+
+			E.CreateMover(f, f:GetName().."Mover", framename, nil, E.XctMove)
+		end
     elseif event == "CHAT_MSG_LOOT" then
         ChatMsgLoot_Handler(subevent)
         
     elseif event == "CHAT_MSG_MONEY" then
         ChatMsgMoney_Handler(subevent)
-        
-    end
+	end
 end
 
 -- change damage font (if desired)
@@ -642,14 +735,14 @@ for i = 1, numf do
         f:SetPoint("CENTER", -192, -32)
     elseif i == 2 then
         f:SetJustifyH(ct.justify_2)
-        f:SetPoint("CENTER", 192, -32)
+       f:SetPoint("CENTER", 192, -32)
     elseif i == 3 then
         f:SetJustifyH(ct.justify_3)
         f:SetWidth(256)
-        f:SetPoint("CENTER", 0, 192)
+       f:SetPoint("CENTER", 0, 232)
     else
         f:SetJustifyH(ct.justify_4)
-        f:SetPoint("CENTER", 320, 0)
+       f:SetPoint("CENTER", 320, 0)
         local a, _, c = f:GetFont()
         if ct.damagefontsize == "auto" then
             if ct.icons then
@@ -686,12 +779,13 @@ end
 
 xCT:SetScript("OnEvent",OnEvent)
 
+if CombatText then
 -- turn off blizz ct
 CombatText:UnregisterAllEvents()
 CombatText:SetScript("OnLoad", nil)
 CombatText:SetScript("OnEvent", nil)
 CombatText:SetScript("OnUpdate", nil)
-
+end
 -- steal external messages sent by other addons using CombatText_AddMessage
 Blizzard_CombatText_AddMessage = CombatText_AddMessage
 function CombatText_AddMessage(message,scrollFunction, r, g, b, displayType, isStaggered)
@@ -723,211 +817,6 @@ local pr = function(msg)
     print("|cffFF0000x|rCT:", tostring(msg))
 end
 
--- awesome configmode and testmode
-local StartConfigmode = function()
-    if not InCombatLockdown() then
-        for i = 1, #ct.frames do
-            f = ct.frames[i]
-            f:SetBackdrop( { bgFile   = "Interface/Tooltips/UI-Tooltip-Background",
-                             edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
-                             tile     = false,
-                             tileSize = 0,
-                             edgeSize = 2,
-                             insets = { left = 0, right = 0, top = 0, bottom = 0 }
-                           } )
-            f:SetBackdropColor(.1, .1, .1, .8)
-            f:SetBackdropBorderColor(.1, .1, .1, .5)
-
-            f.fs = f:CreateFontString(nil, "OVERLAY")
-            f.fs:SetFont(ct.font, ct.fontsize, ct.fontstyle)
-            f.fs:SetPoint("BOTTOM", f, "TOP", 0, 0)
-            if i == 1 then
-                f.fs:SetText(DAMAGE)
-                f.fs:SetTextColor(1, .1, .1, .9)
-            elseif i == 2 then
-                f.fs:SetText(SHOW_COMBAT_HEALING)
-                f.fs:SetTextColor(.1,1,.1,.9)
-            elseif i == 3 then
-                f.fs:SetText(COMBAT_TEXT_LABEL)
-                f.fs:SetTextColor(.1,.1,1,.9)
-            else
-                f.fs:SetText(SCORE_DAMAGE_DONE.." / "..SCORE_HEALING_DONE)
-                f.fs:SetTextColor(1,1,0,.9)
-            end
-
-            f.t=f:CreateTexture"ARTWORK"
-            f.t:SetPoint("TOPLEFT", f, "TOPLEFT", 1, -1)
-            f.t:SetPoint("TOPRIGHT", f, "TOPRIGHT", -1, -19)
-            f.t:SetHeight(20)
-            f.t:SetTexture(.5, .5, .5)
-            f.t:SetAlpha(.3)
-
-            f.d=f:CreateTexture("ARTWORK")
-            f.d:SetHeight(16)
-            f.d:SetWidth(16)
-            f.d:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -1, 1)
-            f.d:SetTexture(.5, .5, .5)
-            f.d:SetAlpha(.3)
-
-            f.tr=f:CreateTitleRegion()
-            f.tr:SetPoint("TOPLEFT", f, "TOPLEFT", 0, 0)
-            f.tr:SetPoint("TOPRIGHT", f, "TOPRIGHT", 0, 0)
-            f.tr:SetHeight(20)
-
-            f:EnableMouse(true)
-            f:RegisterForDrag("LeftButton")
-            f:SetScript("OnDragStart", f.StartSizing)
-            if not ct.scrollable then
-                f:SetScript("OnSizeChanged", function(self)
-                        self:SetMaxLines(self:GetHeight() / ct.fontsize)
-                        self:Clear()
-                    end)
-            end
-
-            f:SetScript("OnDragStop", f.StopMovingOrSizing)
-            ct.locked = false
-        end
-        pr("unlocked.")
-    else
-        pr("can't be configured in combat.")
-    end
-end
-
-local function EndConfigmode()
-    for i = 1, #ct.frames do
-        f = ct.frames[i]
-        f:SetBackdrop(nil)
-        f.fs:Hide()
-        f.fs = nil
-        f.t:Hide()
-        f.t = nil
-        f.d:Hide()
-        f.d = nil
-        f.tr = nil
-        f:EnableMouse(false)
-        f:SetScript("OnDragStart", nil)
-        f:SetScript("OnDragStop", nil)
-    end
-    ct.locked = true
-    pr("Window positions unsaved, don't forget to reload UI.")
-end
-
-local function StartTestMode()
--- init really random number generator.
-    local random = math.random
-    random(time()); random(); random(time())
-    
-    local TimeSinceLastUpdate = 0
-    local UpdateInterval
-    if ct.damagecolor then
-        ct.dmindex = { }
-        ct.dmindex[1] = 1
-        ct.dmindex[2] = 2
-        ct.dmindex[3] = 4
-        ct.dmindex[4] = 8
-        ct.dmindex[5] = 16
-        ct.dmindex[6] = 32
-        ct.dmindex[7] = 64
-    end
-    
-    for i = 1, #ct.frames do
-        ct.frames[i]:SetScript("OnUpdate", function(self, elapsed)
-                UpdateInterval = random(65, 1000) / 250
-                TimeSinceLastUpdate = TimeSinceLastUpdate + elapsed
-                if TimeSinceLastUpdate > UpdateInterval then
-                    if i == 1 then
-                        ct.frames[i]:AddMessage("-"..random(100000), 1, random(255) / 255, random(255) / 255)
-                    elseif i == 2 then
-                        ct.frames[i]:AddMessage("+"..random(50000), .1, random(128, 255) / 255, .1)
-                    elseif i == 3 then
-                        ct.frames[i]:AddMessage(COMBAT_TEXT_LABEL, random(255) / 255, random(255) / 255, random(255) / 255)
-                    elseif i == 4 then
-                        local msg
-                        local icon
-                        local color = { }
-                        msg = random(40000)
-                        if ct.icons then
-                            _, _, icon = GetSpellInfo(msg)
-                        end
-                        if icon then
-                            msg = msg .. " \124T" .. icon .. ":" .. ct.iconsize .. ":" .. ct.iconsize .. ":0:0:64:64:5:59:5:59\124t"
-                            if ct.damagecolor then
-                                color = ct.dmgcolor[ct.dmindex[random(#ct.dmindex)]]
-                            else
-                                color = { 1, 1, 0 }
-                            end
-                        elseif ct.damagecolor and not ct.icons then
-                            color = ct.dmgcolor[ct.dmindex[random(#ct.dmindex)]]
-                        elseif not ct.damagecolor then
-                            color={ 1, 1, random(0, 1) }
-                        end
-                        ct.frames[i]:AddMessage(msg, unpack(color))
-                    end
-                    TimeSinceLastUpdate = 0
-                end
-            end)        
-        ct.testmode = true
-    end
-end
-
-local function EndTestMode()
-    for i = 1, #ct.frames do
-        ct.frames[i]:SetScript("OnUpdate", nil)
-        ct.frames[i]:Clear()
-    end
-    if ct.damagecolor then
-        ct.dmindex = nil
-    end
-    ct.testmode = false
-end
-
--- /xct lock popup dialog
-StaticPopupDialogs["XCT_LOCK"] = {
-    text         = "To save |cffFF0000x|rCT window positions you need to reload your UI.\n Click "..ACCEPT.." to reload UI.\nClick "..CANCEL.." to do it later.",
-    button1      = ACCEPT,
-    button2      = CANCEL,
-    OnAccept     = function() if not InCombatLockdown() then ReloadUI() else EndConfigmode() end end,
-    OnCancel     = EndConfigmode,
-    timeout      = 0,
-    whileDead    = 1,
-    hideOnEscape = true,
-    showAlert    = true,
-}
-
--- slash commands
-SLASH_XCT1 = "/xct"
-SlashCmdList["XCT"] = function(input)
-    input = string.lower(input)
-    
-    if input == "unlock" then
-        if ct.locked then
-            StartConfigmode()
-        else
-            pr("already unlocked.")
-        end
-        
-    elseif input=="lock" then
-        if ct.locked then
-            pr("already locked.")
-        else
-            StaticPopup_Show("XCT_LOCK")
-        end
-        
-    elseif input == "test" then
-        if (ct.testmode) then
-            EndTestMode()
-            pr("test mode disabled.")
-        else
-            StartTestMode()
-            pr("test mode enabled.")
-        end
-        
-    else
-        pr("use |cffFF0000/xct unlock|r to move and resize frames.")
-        pr("use |cffFF0000/xct lock|r to lock frames.")
-        pr("use |cffFF0000/xct test|r to toggle testmode (sample xCT output).")
-    end
-end
 
 -- awesome shadow priest helper
 if ct.stopvespam and ct.myclass == "PRIEST" then
@@ -1016,7 +905,7 @@ if(ct.damage)then
     end
     
     if ct.icons then
-        ct.blank = "Interface\\Addons\\xCT\\blank"
+        ct.blank = E.blank
     end
 
     local dmg = function(self, event, ...) 
@@ -1181,7 +1070,7 @@ if(ct.healing)then
     local unpack, select, time = unpack, select, time
     local xCTh = CreateFrame("Frame")
     if ct.icons then
-        ct.blank = "Interface\\Addons\\xCT\\blank"
+        ct.blank = E.blank
     end
     local heal = function(self, event, ...)
         local msg, icon
@@ -1246,3 +1135,4 @@ if(ct.healing)then
         xCTh:SetScript("OnEvent", heal)
     end
 end
+

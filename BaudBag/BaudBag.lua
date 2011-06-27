@@ -1547,7 +1547,7 @@ function BaudBagUpdateBagFrames()
   for BagSet = 1, 2 do
     Shown = (BBConfig[BagSet].ShowBags ~= false);
     _G[Prefix.."Container"..BagSet.."_1BagsButton"]:SetChecked(Shown);
-	E.SkinNextPrevButton(_G[Prefix.."Container"..BagSet.."_1BagsButton"])
+	
     BagFrame = _G[Prefix.."Container"..BagSet.."_1BagsFrame"];
 	E.EuiSetTemplateB(BagFrame,0,0,-1.5,0)
     if Shown then
@@ -1671,8 +1671,6 @@ function BaudBagUpdateContainer(Container)
           Texture:SetAlpha(0.8);
           Texture:SetHeight(70);
           Texture:SetWidth(70);
-		  E.StripTextures(Button)
-		  E.SkinButton(Button)
         end
         SubBag.maxSlots = SubBag.size;
       end

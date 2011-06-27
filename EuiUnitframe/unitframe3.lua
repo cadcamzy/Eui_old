@@ -21,14 +21,14 @@ if C["unitframe"].petwidth >0 then petwidth = C["unitframe"].petwidth end
 if C["unitframe"].totwidth >0 then totwidth = C["unitframe"].totwidth end
 if C["unitframe"].focuswidth >0 then focuswidth = C["unitframe"].focuswidth end
 --focuswidth = (playerwidth-8) / 2
-if C["unitframe"].playerheight >0 then playerheight = C["unitframe"].playerheight + 8 end
+if C["unitframe"].playerheight >0 then playerheight = C["unitframe"].playerheight end
 if C["unitframe"].petheight >0 then petheight = C["unitframe"].petheight end
 if C["unitframe"].totheight >0 then totheight = C["unitframe"].totheight end
 if C["unitframe"].focusheight >0 then focusheight = C["unitframe"].focusheight end
 
 if C["raid"].astyle == 0 then
-	ptx = (C["raid"].gridw * 5 + 20) / 2 + 4
-	pty = C["raid"].gridh * 5 + 20 + C["raid"].gridheight
+	ptx = (C["raid"].gridw * 5 + 36) / 2 + 4
+	pty = C["raid"].gridh * 5 + 80 + C["raid"].gridheight
 	
 else
 	ptx = totwidth / 2 + 8
@@ -443,17 +443,6 @@ local function CustomTimeText(self, duration)
 	self.Time:SetFormattedText('%.1f / %.1f', duration, self.max)
 end
 
-local function CreateShadow(f)
-	local shadow = CreateFrame("Frame", nil, f)
-	shadow:SetFrameLevel(1)
-	shadow:SetFrameStrata(f:GetFrameStrata())
-	shadow:SetPoint("TOPLEFT", -4, 4)
-	shadow:SetPoint("BOTTOMRIGHT", 4, -4)
-	shadow:SetBackdrop(SHADOWS)
-	shadow:SetBackdropColor(0, 0, 0, 0)
-	shadow:SetBackdropBorderColor(0, 0, 0, 1)
-end
-
 local function CPointsUpdate(self, event, unit)
 	if unit == "pet" then return end
 	local cp = UnitExists("vehicle") and GetComboPoints("vehicle", "target") or GetComboPoints("player", "target")
@@ -480,15 +469,7 @@ local Shared = function(self, unit, isSingle)
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
 	self:SetScript("OnLeave", UnitFrame_OnLeave)
 	self:RegisterForClicks"AnyDown"
-	self:SetBackdrop({
-		  bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-		  edgeFile = "Interface\\Buttons\\WHITE8x8", 
-		  tile = false, tileSize = 0, edgeSize = 1, 
-		  insets = { left = -1, right = -1, top = -1, bottom = -1}
-		})
-	self:SetBackdropColor(.1,.1,.1,1)
-	self:SetBackdropBorderColor(.3,.3,.3,1)	
-	CreateShadow(self)
+	self.background = E.CreateBG(self)
 	self.colors.smooth = {1,0,0, .7,.41,.44, .3,.3,.3}
 	
 	if C["other"].focuser == true then
@@ -506,9 +487,8 @@ local Shared = function(self, unit, isSingle)
 	
 	local Health = CreateFrame("StatusBar", nil, self)
 	Health:SetStatusBarTexture(TEXTURE)
---	Health:SetStatusBarColor(.4,.4,.4)
-	Health:SetPoint('BOTTOMRIGHT', self, -2, 2)
-	Health:SetPoint('TOPLEFT', self, 2, -2)
+	Health:SetPoint('TOPLEFT', self)
+	Health:SetPoint('BOTTOMRIGHT', self)
 	Health.frequentUpdates = true
 	self.Health = Health
 	self.Health.colorClass = C["unitframe"].colorClass
@@ -520,43 +500,41 @@ local Shared = function(self, unit, isSingle)
 	local HealthBG = Health:CreateTexture(nil, "BORDER")
 	HealthBG:SetAllPoints(self.Health)
 	HealthBG:SetTexture(TEXTURE)
---	HealthBG:SetVertexColor(.4,.4,.4,.25)
 	Health.bg = HealthBG
 	Health.bg.multiplier = 0.25
 
-	local powerbg = CreateFrame("Frame", nil, self)
-	powerbg:SetBackdrop(self:GetBackdrop())
-	powerbg:SetBackdropColor(.1,.1,.1,1)
-	powerbg:SetBackdropBorderColor(.3,.3,.3,1)
-	powerbg:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", -9, 6)
-	powerbg:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 9, -6)
-	powerbg:SetFrameLevel(Health:GetFrameLevel()+1)
-	CreateShadow(powerbg)
-	
     local Power = CreateFrame("StatusBar", nil, self)
-	Power:SetStatusBarTexture(TEXTURE)
-	Power:SetParent(self)
-	Power:SetFrameLevel(powerbg:GetFrameLevel()+1)
-	Power:SetPoint('TOPLEFT', powerbg,'TOPLEFT', 2, -2)
-	Power:SetPoint('BOTTOMRIGHT', powerbg,'BOTTOMRIGHT', -2, 2)
 	self.Power = Power
-	self.Power.powerbg = powerbg
-	
-	Power.bg = Power:CreateTexture(nil, 'BORDER')
-	Power.bg:SetAllPoints(Power)
-	Power.bg:SetTexture(TEXTURE)
-	Power.bg:SetVertexColor(.15,.15,.15)
-	Power.bg.multiplier = 0.5
-		
-	Power.frequentUpdates = true
-	Power.colorTapping = true
-	Power.colorHappiness = true
-	Power.colorClass = false
---	Power.colorReaction = true
-	Power.colorDisconnected = true
+	if unit == 'player' or unit == 'target' or unit == 'pet' then
+		if unit == 'player' or unit == 'pet' then
+			self.Power:SetPoint('BOTTOMRIGHT', self.Health, -10, -4)
+		else
+			self.Power:SetPoint('BOTTOMLEFT', self.Health, 10, -4)
+		end
+		self.Power:SetHeight(5)
+		if unit ~= 'pet' then
+			self.Power:SetWidth(playerwidth*.6)
+		else
+			self.Power:SetWidth(petwidth*.6)
+		end
+		self.Power:SetFrameLevel(self.Health:GetFrameLevel()+2)
+		self.Power.background = E.CreateBG(self.Power)
+	else
+		self.Power:Hide()
+	end
+	self.Power:SetStatusBarTexture(TEXTURE)
+	self.Power.frequentUpdates = true
+	self.Power.PostUpdate = PostUpdatePower
+	self.Power.colorReaction = true
+	self.Power.colorClass = false
+
+	self.Power.bg = self.Power:CreateTexture(nil, 'BACKGROUND')
+	self.Power.bg:SetTexture(texture)
+	self.Power.bg:SetAllPoints()
+	self.Power.bg.multiplier = 0.15
 	
 	Health.PostUpdate = PostUpdateHealth
-	Power.PostUpdate = PostUpdatePower
+--	Power.PostUpdate = PostUpdatePower
 	
 	
 	if unit == "player" or unit == "target" then
@@ -600,19 +578,17 @@ local Shared = function(self, unit, isSingle)
 
 	if C["unitframe"].portrait == true then
 		local portrait = CreateFrame('PlayerModel', nil, self)
-	    portrait:SetBackdrop(self:GetBackdrop())
-		portrait:SetBackdropColor(.1,.1,.1,1)
-		portrait:SetBackdropBorderColor(.3,.3,.3,1)	
-	    portrait:SetWidth(playerheight+16)
-	    portrait:SetHeight(playerheight+16)
+	    portrait:SetWidth(playerheight)
+	    portrait:SetHeight(playerheight)
+		portrait.bg = E.CreateBG(portrait)
+		portrait.bg:SetBackdropColor(.1,.1,.1,1)
 		portrait.PostUpdate = E.PortraitUpdate
 	    self.Portrait = portrait
-		CreateShadow(portrait)
 		
 		if(unit == 'player') then
-			portrait:SetPoint('TOPRIGHT', self, 'TOPLEFT', -4, 0)
+			portrait:SetPoint('TOPRIGHT', self, 'TOPLEFT', -8, 0)
 	    elseif(unit == 'target') then
-			portrait:SetPoint('TOPLEFT', self, 'TOPRIGHT', 4, 0)
+			portrait:SetPoint('TOPLEFT', self, 'TOPRIGHT', 8, 0)
 		end
 	end 
 
@@ -658,7 +634,7 @@ local Shared = function(self, unit, isSingle)
 
      	Health:SetHeight(18)
      	Power:Hide()
-		Power.powerbg:Hide()
+	--	Power.powerbg:Hide()
 		info:SetPoint('LEFT', self.Health, 2, 0)
 		info:SetWidth(98)
     	self:Tag(info, '[shortname]')
@@ -672,7 +648,7 @@ local Shared = function(self, unit, isSingle)
 
      	Health:SetHeight(18)
      	Power:Hide()
-		Power.powerbg:Hide()
+	--	Power.powerbg:Hide()
 		
 		info:SetPoint('LEFT', self.Health, 2, 0)
 		info:SetWidth(98)
@@ -686,7 +662,7 @@ local Shared = function(self, unit, isSingle)
 		self:SetHeight(20)
 		Health:SetHeight(16)
 		Power:Hide()
-		Power.powerbg:Hide()
+	--	Power.powerbg:Hide()
 		
 		info:SetPoint('LEFT', self.Health,2,0)
 		info:SetWidth(50)
@@ -705,8 +681,8 @@ local Shared = function(self, unit, isSingle)
 				if unit == 'focus' then
 					cb:SetAllPoints(Health)
 				else
-					cb:SetPoint("TOPLEFT", self.Power, "BOTTOMLEFT", 0, -8)
-					cb:SetPoint("TOPRIGHT", self.Power, "BOTTOMRIGHT", 0, -8)
+					cb:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -12)
+					cb:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", 0, -12)
 					cb:SetHeight(18)
 				end
 				cb:SetToplevel(true)
@@ -738,13 +714,8 @@ local Shared = function(self, unit, isSingle)
 				i:SetPoint("RIGHT", bcb, "LEFT", -6, 0)
 
 				bg = CreateFrame("Frame", nil, bcb)
-				bg:SetBackdrop(self:GetBackdrop())
-				bg:SetBackdropColor(.1,.1,.1,1)
-				bg:SetBackdropBorderColor(.3,.3,.3,1)	
-				bg:SetFrameLevel(1)
-				CreateShadow(bg)
-				bg:SetPoint("TOPLEFT", i, "TOPLEFT", -2 , 2)
-				bg:SetPoint("BOTTOMRIGHT", i, "BOTTOMRIGHT", 2, -2)
+				bg.bg = E.CreateBG(bg)
+				bg:SetAllPoints(i)
 				
 				self.Castbar = bcb
 				self.Castbar.Icon = i
@@ -757,22 +728,7 @@ local Shared = function(self, unit, isSingle)
 			self.Castbar.bg:SetTexture(TEXTURE)
 			self.Castbar.bg:SetVertexColor(.15,.15,.15)
 				
-			self.FrameBackdrop = CreateFrame("Frame", nil, self)
-			self.FrameBackdrop:SetParent(self.Castbar)
-			self.FrameBackdrop:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", -2, 2)
-			self.FrameBackdrop:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMRIGHT", 2, -2)
-			self.FrameBackdrop:SetFrameStrata("BACKGROUND")
-			self.FrameBackdrop:SetBackdrop {
-				bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
-				edgeFile = "Interface\\Buttons\\WHITE8x8", 
-				tile = false, tileSize = 0, edgeSize = 1, 
-				insets = { left = -1, right = -1, top = -1, bottom = -1}
-			}
-			self.FrameBackdrop:SetFrameLevel(1)
-			self.FrameBackdrop:SetBackdropColor(.1,.1,.1,1)
-			self.FrameBackdrop:SetBackdropBorderColor(.3,.3,.3,1)
-			
-
+			self.Castbar.FrameBackdrop = E.CreateBG(self.Castbar)
 			self.Castbar.Text = self.Castbar:CreateFontString(nil, 'OVERLAY')
 			if unit == 'focus' and C["unitframe"].bigcastbar ~= true then
 				self.Castbar.Text:SetFont(E.font, fontsizesmall, "OUTLINE")
@@ -815,32 +771,25 @@ local Shared = function(self, unit, isSingle)
 	--DZ,XD连击点
 	if(unit == 'target' and (class == 'ROGUE' or class == 'DRUID')) and C["unitframe"].cpoint == true then
 		self.CPoints = CreateFrame('Frame', nil, self)
-		self.CPoints:SetWidth(playerwidth*.7-4)
-		self.CPoints:SetHeight(8)
+		self.CPoints:SetWidth(playerwidth*.6-4)
+		self.CPoints:SetHeight(5)
 		self.CPoints:SetBackdropColor(0,0,0,0)
-		self.CPoints:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 2, 5)		
+		self.CPoints:SetPoint("TOPLEFT", self.Health, 10, 4)		
 				
 		for i = 1,5 do
 			self.CPoints[i] = CreateFrame("StatusBar", self:GetName().."_CPoints"..i, self)
-			self.CPoints[i]:SetHeight(8)
-			self.CPoints[i]:SetWidth((playerwidth*.7-4-16)/5)
+			self.CPoints[i]:SetHeight(5)
+			self.CPoints[i]:SetWidth((playerwidth*.6-28)/5)
 			self.CPoints[i]:SetStatusBarTexture(TEXTURE)
 			self.CPoints[i]:SetBackdrop(BACKDROP)
 			self.CPoints[i]:SetBackdropColor(.1,.1,.1,1)				
 
-			self.CPoints[i].bg = CreateFrame("Frame", nil, self.CPoints[i])
-			self.CPoints[i].bg:SetPoint("TOPLEFT", self.CPoints[i], "TOPLEFT", -2, 2)
-			self.CPoints[i].bg:SetPoint("BOTTOMRIGHT", self.CPoints[i], "BOTTOMRIGHT", 2, -2)
-			self.CPoints[i].bg:SetBackdrop(self:GetBackdrop())
-			self.CPoints[i].bg:SetBackdropColor(.1,.1,.1,1)
-			self.CPoints[i].bg:SetBackdropBorderColor(.3,.3,.3,1)	
-			CreateShadow(self.CPoints[i].bg)
-			self.CPoints[i].bg:SetFrameLevel(self.CPoints[i]:GetFrameLevel()-1)
+			self.CPoints[i].bg = E.CreateBG(self.CPoints[i])
 			
 			if (i == 1) then
 				self.CPoints[i]:SetPoint("BOTTOMLEFT", self.CPoints, "BOTTOMLEFT", 0, 0)
 			else
-				self.CPoints[i]:SetPoint("TOPLEFT", self.CPoints[i-1], "TOPRIGHT", 4, 0)
+				self.CPoints[i]:SetPoint("TOPLEFT", self.CPoints[i-1], "TOPRIGHT", 7, 0)
 			end	
 		end
 		self.CPoints[1]:SetStatusBarColor(152/255, 190/255, 24/255)
@@ -854,14 +803,14 @@ local Shared = function(self, unit, isSingle)
 	
 	if(class == 'DEATHKNIGHT' and unit == 'player') and C["unitframe"].cpoint == true then
 		self.Runes = CreateFrame('Frame', nil, self)
-		self.Runes:SetWidth(playerwidth*.7-4)
-		self.Runes:SetHeight(8)
+		self.Runes:SetWidth(playerwidth*.6-4)
+		self.Runes:SetHeight(5)
 		self.Runes:SetBackdropColor(0,0,0,0)
-		self.Runes:SetPoint("CENTER", self, "TOP", 0, 0)
+		self.Runes:SetPoint("TOPLEFT", self.Health, 10, 4)
 		for i = 1, 6 do
 			self.Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
-			self.Runes[i]:SetHeight(8)
-			self.Runes[i]:SetWidth((playerwidth*.7-4 -20) /6)
+			self.Runes[i]:SetHeight(5)
+			self.Runes[i]:SetWidth((playerwidth*.6-35) /6)
 			self.Runes[i]:SetStatusBarTexture(TEXTURE)
 			self.Runes[i]:SetBackdrop(BACKDROP)
 			self.Runes[i]:SetBackdropColor(.1,.1,.1,1)				
@@ -870,19 +819,12 @@ local Shared = function(self, unit, isSingle)
 			self.Runes[i].bg:SetAllPoints(self.Runes[i])				
 			self.Runes[i].bg:SetTexture(0.3, 0.3, 0.3)
 			
-			self.Runes[i].FrameBackdrop = CreateFrame("Frame", nil, self.Runes[i])
-			self.Runes[i].FrameBackdrop:SetPoint("TOPLEFT", self.Runes[i], "TOPLEFT", -2, 2)
-			self.Runes[i].FrameBackdrop:SetPoint("BOTTOMRIGHT", self.Runes[i], "BOTTOMRIGHT", 2, -2)
-			self.Runes[i].FrameBackdrop:SetBackdrop(self:GetBackdrop())
-			self.Runes[i].FrameBackdrop:SetBackdropColor(.1,.1,.1,1)
-			self.Runes[i].FrameBackdrop:SetBackdropBorderColor(.3,.3,.3,1)	
-			CreateShadow(self.Runes[i].FrameBackdrop)
-			self.Runes[i].FrameBackdrop:SetFrameLevel(self.Runes[i]:GetFrameLevel()-1)			
+			self.Runes[i].FrameBackdrop = E.CreateBG(self.Runes[i])		
 				
 			if (i == 1) then
 				self.Runes[i]:SetPoint("BOTTOMLEFT", self.Runes, "BOTTOMLEFT", 0, 0)
 			else
-				self.Runes[i]:SetPoint("TOPLEFT", self.Runes[i-1], "TOPRIGHT", 4, 0)
+				self.Runes[i]:SetPoint("TOPLEFT", self.Runes[i-1], "TOPRIGHT", 7, 0)
 			end	
 		end
 	end
@@ -890,34 +832,25 @@ local Shared = function(self, unit, isSingle)
 	--Druid Power Bar
 	if unit == 'player' and class == "DRUID" and C["unitframe"].cpoint == true then
 		local eclipseBar = CreateFrame('Frame', nil, self)
-		eclipseBar:SetWidth(playerwidth*.7)
-		eclipseBar:SetHeight(8)
+		eclipseBar:SetWidth(playerwidth*.6)
+		eclipseBar:SetHeight(5)
 		eclipseBar:SetBackdropColor(0, 0, 0)
-		eclipseBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 2, 5)		
+		eclipseBar:SetPoint("TOPLEFT", self.Health, 10, 4)		
 		
-				
-		eclipseBar.FrameBackdrop = CreateFrame("Frame", nil, eclipseBar)
-		eclipseBar.FrameBackdrop:SetPoint("TOPLEFT", eclipseBar, "TOPLEFT", -2, 2)
-		eclipseBar.FrameBackdrop:SetPoint("BOTTOMRIGHT", eclipseBar, "BOTTOMRIGHT", 2, -2)
-		eclipseBar.FrameBackdrop:SetBackdrop(self:GetBackdrop())
-		eclipseBar.FrameBackdrop:SetBackdropColor(.1,.1,.1,1)
-		eclipseBar.FrameBackdrop:SetBackdropBorderColor(.3,.3,.3,1)	
-		CreateShadow(eclipseBar.FrameBackdrop)
-		eclipseBar.FrameBackdrop:SetFrameLevel(eclipseBar:GetFrameLevel()-1)		
-		
+		eclipseBar.FrameBackdrop = E.CreateBG(eclipseBar)		
 		
 		local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
 		lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
-		lunarBar:SetSize(playerwidth*.7, 8)
+		lunarBar:SetSize(playerwidth*.7, 5)
 		lunarBar:SetStatusBarTexture(TEXTURE)
 		lunarBar:SetStatusBarColor(.30, .52, .90)
 		eclipseBar.LunarBar = lunarBar
 
 		local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
 		solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
-		solarBar:SetSize(playerwidth*.7, 8)
+		solarBar:SetSize(playerwidth*.7, 5)
 		solarBar:SetStatusBarTexture(TEXTURE)
-		solarBar:SetStatusBarColor(.80, .82,  .60)
+		solarBar:SetStatusBarColor(.90, .92,  .30)
 		eclipseBar.SolarBar = solarBar
 		
 		self.EclipseBar = eclipseBar
@@ -926,20 +859,13 @@ local Shared = function(self, unit, isSingle)
 	--warlock or PALADIN bar
 	if unit == 'player' and (class == 'WARLOCK' or class == 'PALADIN') and C["unitframe"].cpoint == true then
 		local shards = CreateFrame('StatusBar', nil, self)
-		shards:SetPoint("CENTER", self, "TOP", 0, 0)		
-		shards:SetWidth(playerwidth*.7)
-		shards:SetHeight(8)
+		shards:SetPoint("TOPLEFT", self.Health, 10, 4)		
+		shards:SetWidth(playerwidth*.6)
+		shards:SetHeight(5)
 		shards:SetBackdropColor(0, 0, 0)
 		shards:SetFrameLevel(Health:GetFrameLevel()+2)
 
-		shards.FrameBackdrop = CreateFrame("Frame", nil, shards)
-		shards.FrameBackdrop:SetPoint("TOPLEFT", shards, "TOPLEFT", -2, 2)
-		shards.FrameBackdrop:SetPoint("BOTTOMRIGHT", shards, "BOTTOMRIGHT", 2, -2)
-		shards.FrameBackdrop:SetBackdrop(self:GetBackdrop())
-		shards.FrameBackdrop:SetBackdropColor(.1,.1,.1,1)
-		shards.FrameBackdrop:SetBackdropBorderColor(.3,.3,.3,1)	
-		CreateShadow(shards.FrameBackdrop)
-		shards.FrameBackdrop:SetFrameLevel(shards:GetFrameLevel()-1)		
+		shards.bg = E.CreateBG(shards,1)
 				
 		for id = 1, 3 do
 			local shard = CreateFrame("StatusBar", nil, shards)
@@ -950,10 +876,10 @@ local Shared = function(self, unit, isSingle)
 				shard:SetStatusBarColor(228/255,225/255,16/255)
 			end	
 			if id > 1 then
-				shard:SetSize((playerwidth*.7-4)/3, 8)
+				shard:SetSize((playerwidth*.6-4)/3, 5)
 				shard:SetPoint('BOTTOMLEFT', shards[id-1], 'BOTTOMRIGHT', 2, 0)
 			else
-				shard:SetSize((playerwidth*.7-4)/3, 8)
+				shard:SetSize((playerwidth*.6-4)/3, 5)
 				shard:SetPoint('BOTTOMLEFT', shards, 'BOTTOMLEFT', 0, 0)
 			end
 
@@ -971,19 +897,19 @@ local Shared = function(self, unit, isSingle)
 	--oUF_Tot
 	if(unit == 'player' and class == 'SHAMAN') and C["unitframe"].cpoint == true then
 		self.TotemBar = CreateFrame('Frame', nil, UIParent)
-		self.TotemBar:SetHeight(6)
-		self.TotemBar:SetWidth(playerwidth*.7)
+		self.TotemBar:SetHeight(5)
+		self.TotemBar:SetWidth(playerwidth*.6)
 		self.TotemBar:SetBackdropColor(0,0,0,0)
-		self.TotemBar:SetPoint("CENTER", self, "TOP", 0, 0)
+		self.TotemBar:SetPoint("TOPLEFT", self.Health, 10, 4)
 		for i = 1, 4 do
 			self.TotemBar[i] = CreateFrame("StatusBar", nil, self)
 			self.TotemBar[i]:SetHeight(8)
-			self.TotemBar[i]:SetWidth((playerwidth*.7-4-12)/4)
+			self.TotemBar[i]:SetWidth((playerwidth*.7-21)/4)
 		
 			if (i == 1) then
-				self.TotemBar[i]:SetPoint("BOTTOMLEFT", self.TotemBar, "BOTTOMLEFT", 2, 0)
+				self.TotemBar[i]:SetPoint("BOTTOMLEFT", self.TotemBar, "BOTTOMLEFT", 0, 0)
 			else
-				self.TotemBar[i]:SetPoint("TOPLEFT", self.TotemBar[i-1], "TOPRIGHT", 4, 0)
+				self.TotemBar[i]:SetPoint("TOPLEFT", self.TotemBar[i-1], "TOPRIGHT", 7, 0)
 			end
 
 			self.TotemBar[i]:SetStatusBarTexture(TEXTURE)
@@ -997,14 +923,7 @@ local Shared = function(self, unit, isSingle)
 			self.TotemBar[i].bg:SetTexture(TEXTURE)
 			self.TotemBar[i].bg.multiplier = 0.25
 			
-			self.TotemBar[i].FrameBackdrop = CreateFrame("Frame", nil, self.TotemBar[i])
-			self.TotemBar[i].FrameBackdrop:SetPoint("TOPLEFT", self.TotemBar[i], "TOPLEFT", -2, 2)
-			self.TotemBar[i].FrameBackdrop:SetPoint("BOTTOMRIGHT", self.TotemBar[i], "BOTTOMRIGHT", 2, -2)
-			self.TotemBar[i].FrameBackdrop:SetBackdrop(self:GetBackdrop())
-			self.TotemBar[i].FrameBackdrop:SetBackdropColor(.1,.1,.1,1)
-			self.TotemBar[i].FrameBackdrop:SetBackdropBorderColor(.3,.3,.3,1)	
-			CreateShadow(self.TotemBar[i].FrameBackdrop)
-			self.TotemBar[i].FrameBackdrop:SetFrameLevel(self.TotemBar[i]:GetFrameLevel()-1)
+			self.TotemBar[i].FrameBackdrop = E.CreateBG(self.TotemBar[i],1)
 		end
 	end	
 

@@ -599,99 +599,44 @@ E.EuiAlertRun = function(f,r,g,b)
 	updaterun:Show()
 end
 
-
-local textureNormal = [[Interface\AddOns\Eui\media\textureNormal]]
-local textureShadow = [[Interface\AddOns\Eui\media\textureShadow]]
-
-E.CreateBorder = function(self, borderSize, R, G, B, ...)
-    local uL1, uL2, uR1, uR2, bL1, bL2, bR1, bR2 = ...
-	local Shadow = {}   
-    if (not self.HasBorder) then
-        self.Border = {}
-        for i = 1, 8 do
-            self.Border[i] = self:CreateTexture(nil, 'OVERLAY')
-            self.Border[i]:SetParent(self)
-            self.Border[i]:SetTexture(textureNormal)
-            self.Border[i]:SetWidth(borderSize) 
-            self.Border[i]:SetHeight(borderSize)
-            self.Border[i]:SetVertexColor(R or 1, G or 1, B or 1)
-        end
-        
-        self.Border[1]:SetTexCoord(0, 1/3, 0, 1/3) 
-        self.Border[1]:SetPoint('TOPLEFT', self, -(uL1 or 0), uL2 or 0)
-
-        self.Border[2]:SetTexCoord(2/3, 1, 0, 1/3)
-        self.Border[2]:SetPoint('TOPRIGHT', self, uR1 or 0, uR2 or 0)
-
-        self.Border[3]:SetTexCoord(0, 1/3, 2/3, 1)
-        self.Border[3]:SetPoint('BOTTOMLEFT', self, -(bL1 or 0), -(bL2 or 0))
-
-        self.Border[4]:SetTexCoord(2/3, 1, 2/3, 1)
-        self.Border[4]:SetPoint('BOTTOMRIGHT', self, bR1 or 0, -(bR2 or 0))
-
-        self.Border[5]:SetTexCoord(1/3, 2/3, 0, 1/3)
-        self.Border[5]:SetPoint('TOPLEFT', self.Border[1], 'TOPRIGHT')
-        self.Border[5]:SetPoint('TOPRIGHT', self.Border[2], 'TOPLEFT')
-
-        self.Border[6]:SetTexCoord(1/3, 2/3, 2/3, 1)
-        self.Border[6]:SetPoint('BOTTOMLEFT', self.Border[3], 'BOTTOMRIGHT')
-        self.Border[6]:SetPoint('BOTTOMRIGHT', self.Border[4], 'BOTTOMLEFT')
-
-        self.Border[7]:SetTexCoord(0, 1/3, 1/3, 2/3)
-        self.Border[7]:SetPoint('TOPLEFT', self.Border[1], 'BOTTOMLEFT')
-        self.Border[7]:SetPoint('BOTTOMLEFT', self.Border[3], 'TOPLEFT')
-
-        self.Border[8]:SetTexCoord(2/3, 1, 1/3, 2/3)
-        self.Border[8]:SetPoint('TOPRIGHT', self.Border[2], 'BOTTOMRIGHT')
-        self.Border[8]:SetPoint('BOTTOMRIGHT', self.Border[4], 'TOPRIGHT')
-        
-        local space
-        if (borderSize >= 10) then
-            space = 3
-        else
-            space = borderSize/3.5
-        end
-        
-        for i = 1, 8 do
-            Shadow[i] = self:CreateTexture(nil, 'BORDER')
-            Shadow[i]:SetParent(self)
-            Shadow[i]:SetTexture(textureShadow)
-            Shadow[i]:SetWidth(borderSize) 
-            Shadow[i]:SetHeight(borderSize)
-            Shadow[i]:SetVertexColor(0, 0, 0, 1)
-        end
-        
-        Shadow[1]:SetTexCoord(0, 1/3, 0, 1/3) 
-        Shadow[1]:SetPoint('TOPLEFT', self, -(uL1 or 0)-space, (uL2 or 0)+space)
-
-        Shadow[2]:SetTexCoord(2/3, 1, 0, 1/3)
-        Shadow[2]:SetPoint('TOPRIGHT', self, (uR1 or 0)+space, (uR2 or 0)+space)
-
-        Shadow[3]:SetTexCoord(0, 1/3, 2/3, 1)
-        Shadow[3]:SetPoint('BOTTOMLEFT', self, -(bL1 or 0)-space, -(bL2 or 0)-space)
-
-        Shadow[4]:SetTexCoord(2/3, 1, 2/3, 1)
-        Shadow[4]:SetPoint('BOTTOMRIGHT', self, (bR1 or 0)+space, -(bR2 or 0)-space)
-
-        Shadow[5]:SetTexCoord(1/3, 2/3, 0, 1/3)
-        Shadow[5]:SetPoint('TOPLEFT', Shadow[1], 'TOPRIGHT')
-        Shadow[5]:SetPoint('TOPRIGHT', Shadow[2], 'TOPLEFT')
-
-        Shadow[6]:SetTexCoord(1/3, 2/3, 2/3, 1)
-        Shadow[6]:SetPoint('BOTTOMLEFT', Shadow[3], 'BOTTOMRIGHT')
-        Shadow[6]:SetPoint('BOTTOMRIGHT', Shadow[4], 'BOTTOMLEFT')
-
-        Shadow[7]:SetTexCoord(0, 1/3, 1/3, 2/3)
-        Shadow[7]:SetPoint('TOPLEFT', Shadow[1], 'BOTTOMLEFT')
-        Shadow[7]:SetPoint('BOTTOMLEFT', Shadow[3], 'TOPLEFT')
-
-        Shadow[8]:SetTexCoord(2/3, 1, 1/3, 2/3)
-        Shadow[8]:SetPoint('TOPRIGHT', Shadow[2], 'BOTTOMRIGHT')
-        Shadow[8]:SetPoint('BOTTOMRIGHT', Shadow[4], 'TOPRIGHT')
-        
-        self.HasBorder = true
-    end
+E.CreateBG = function(parent, alpha)
+	local a = alpha or .65
+	local bg = CreateFrame('Frame', nil, parent or UIParent)
+	bg:SetPoint('TOPLEFT', parent, 'TOPLEFT', -2, 2)
+	bg:SetPoint('BOTTOMRIGHT', parent, 'BOTTOMRIGHT', 2, -2)
+	bg:SetFrameLevel(parent:GetFrameLevel()-1 > 0 and parent:GetFrameLevel()-1 or 0)
+	bg:SetBackdrop({
+		bgFile = [=[Interface\ChatFrame\ChatFrameBackground]=],
+		edgeFile = [=[Interface\ChatFrame\ChatFrameBackground]=],
+		edgeSize = 1,
+		insets = { left = 1, right = 1, top = 1, bottom = 1}
+	})
+	bg:SetBackdropColor(0, 0, 0, a) 
+    bg:SetBackdropBorderColor(.35, .3, .3, 1)
+	bg.border = CreateFrame("Frame", nil, bg)
+	bg.border:SetPoint("TOPLEFT", 1, -1)
+	bg.border:SetPoint("BOTTOMRIGHT", -1, 1)
+	bg.border:SetFrameLevel(bg:GetFrameLevel())
+	bg.border:SetBackdrop({
+	  edgeFile = [=[Interface\ChatFrame\ChatFrameBackground]=],
+	  edgeSize = 1,
+	  insets = { left = 1, right = 1, top = 1, bottom = 1}
+	})
+	bg.border:SetBackdropBorderColor(0, 0, 0, 1)
+	bg.border2 = CreateFrame("Frame", nil, bg)
+	bg.border2:SetPoint("TOPLEFT", -1, 1)
+	bg.border2:SetPoint("BOTTOMRIGHT", 1, -1)
+	bg.border2:SetFrameLevel(bg:GetFrameLevel())
+	bg.border2:SetBackdrop({
+	  edgeFile = [=[Interface\ChatFrame\ChatFrameBackground]=],
+	  edgeSize = 1,
+	  insets = { left = 1, right = 1, top = 1, bottom = 1}
+	})
+	bg.border2:SetBackdropBorderColor(0, 0, 0, 0.9)
+	return bg
 end
+
+
 
 function E.StyleButton(b, c) 
     local name = b:GetName()

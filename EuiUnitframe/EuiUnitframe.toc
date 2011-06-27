@@ -3,6 +3,6 @@
 ## Title-zhCN: EUI头像团队模块|cffC495DDEuiScript|r
 ## Author: Ljxx
 ## RequiredDeps: Eui
-## Version: 201100619A
+## Version: 201100627
 
 unitframe.xml

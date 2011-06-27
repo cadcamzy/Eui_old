@@ -87,6 +87,7 @@ local function Local(o)
 	if o == "EuiSetGuiothermapscale" then o = e_other_mapscale end
 	if o == "EuiSetGuiothermapalpha" then o = e_other_mapalpha end
 	if o == "EuiSetGuiotherraidcheck" then o = e_other_raidcheck end
+	if o == "EuiSetGuiotherxct" then o = e_other_xct end
 	
 	-- 聊天(EuiSetGuichat)
 	if o == "EuiSetGuichatenable" then o = e_chat_enable end
@@ -647,16 +648,6 @@ do
 			"\n追踪菜单在小地图按鼠标右键"..
 			"\n时间，背包，日历等可直接点击上面的信息条对应项打开"
 		)
-		local b = CreateFrame("Button", nil, this, "UIPanelButtonTemplate")
-		b:SetWidth(120)
-		b:SetHeight(20)
-		b:SetText("设 置")
-		b:SetScript("OnClick", function()
-			InterfaceOptionsFrameCancel_OnClick()
-			HideUIPanel(GameMenuFrame)	
-			SlashCmdList.CONFIG()
-		end)
-		b:SetPoint("TOPLEFT", title, "TOPRIGHT", 10, 0)
 	end)
 
 	InterfaceOptions_AddCategory(euihelp)
