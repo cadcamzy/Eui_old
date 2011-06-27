@@ -1,6 +1,6 @@
 local E, C = unpack(EUI)
 
-if C["skins"].enable ~= true then return end
+--if C["skins"].enable ~= true then return end
 
 E.SkinFuncs = {}
 E.SkinFuncs["Eui"] = {}
