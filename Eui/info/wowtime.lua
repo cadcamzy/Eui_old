@@ -48,21 +48,20 @@ local clocks_update = function(self,t)
 		
 	int = 1
 	time_sesion = time_sesion + 1
-	
---	local wgtime = GetWintergraspWaitTime() or 9000
+	local wgtime = select(5, GetWorldPVPAreaInfo(2)) or 9000
 	local pendingCalendarInvites = CalendarGetNumPendingInvites() or 0
 	
---	self:SetValue(wgtime)
+--	self.:SetValue(wgtime)
 	atime:SetText(date("%H")..":"..date("%M"))
 	dateval:SetText(date("%a"))
 	
---[[ 	if C["info"].wgtimenoti == true then
+ 	if C["info"].wgtimenoti == true then
 		if wgtime == 60 then 
-			E.EuiAlertRun ("冬握即将在1分钟内开始")
+			E.EuiAlertRun ("巴拉丁即将在1分钟内开始")
 		elseif wgtime == 900 then 
-			E.EuiAlertRun ("冬握即将在15分钟内开始")
+			E.EuiAlertRun ("巴拉丁即将在15分钟内开始")
 		end
-	end ]]
+	end
 end
 
 clocks:SetScript("OnUpdate",clocks_update)
@@ -74,26 +73,37 @@ local form_time = function(target)
 	return ((hour>0 and hour..":" or "")..min..":"..sec)
 end
 
---[[ local switch_wgtime_a = function()
+local switch_wgtime_a = function()
 	if C["info"].wgtimenoti then
 		C["info"].wgtimenoti = false
 		text_f:SetTextColor(1,.1,.1)
-		text_f:SetText("冬握提示关闭")
+		text_f:SetText("巴拉丁提示关闭")
 		FadingFrame_Show(mess_f)
 	else
 		C["info"].wgtimenoti = true
 		text_f:SetTextColor(.1,1,.1)
-		text_f:SetText("冬握提示开启")
+		text_f:SetText("巴拉丁提示开启")
 		FadingFrame_Show(mess_f)
 	end
-end ]]
+end
 
 clocks:SetScript("OnEnter", function(self)
 	GameTooltip:SetOwner(clocks, "ANCHOR_BOTTOMRIGHT");
 	GameTooltip:ClearLines()      
 
---	GameTooltip:AddLine(" ")
-	GameTooltip:AddDoubleLine("游戏时间:",form_time(time_sesion),1,1,1,1,1,1)
+		local _,_,isActive,canQueue,wgtime,canEnter = GetWorldPVPAreaInfo(2)
+		local inInstance, instanceType = IsInInstance()
+		if isActive == true then
+			wgtime = "正在进行"
+		elseif canQueue == true then
+			wgtime = "不可查询"
+		else
+			wgtime = form_time(wgtime)    
+		end
+
+	GameTooltip:AddDoubleLine("巴拉丁开始时间",wgtime,1,1,1,0.3,1,0.3)
+	GameTooltip:AddLine(" ")
+	GameTooltip:AddDoubleLine("游戏时间:",form_time(time_sesion),1,1,1,0.3,1,0.3)
 	local oneraid
 	for i = 1, GetNumSavedInstances() do
 	local name,_,reset,difficulty,locked,extended,_,isRaid,maxPlayers = GetSavedInstanceInfo(i)

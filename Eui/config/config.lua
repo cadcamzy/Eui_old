@@ -207,7 +207,7 @@ C["info"] = {
 	["setting"] = 1,
 	["guild"] = 8,
 	["friend"] = 7,
---	["wgtimenoti"] = true,
+	["wgtimenoti"] = true,
 	["apsp"] = 1,
 	["dps"] = 1,
 }

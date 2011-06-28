@@ -224,7 +224,7 @@
 	e_info_xp = "经验(声望)显示位置"
 	e_info_setting = "设置显示位置"
 	e_info_wowtime = "时间显示位置"
-	e_info_wgtimenoti = "启用冬握湖时间提醒"
+	e_info_wgtimenoti = "启用巴拉丁时间提醒"
 	e_info_friend = "好友信息位置"
 	e_info_guild = "公会信息位置"
 	e_info_apsp = "1显示攻强,2显示法强"

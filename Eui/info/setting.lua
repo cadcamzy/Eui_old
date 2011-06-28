@@ -65,7 +65,8 @@ settingMenuDrop = addDrop({
 				LoggingCombat(1);
 			end
 		end },
-		{ text = "加入冬拥湖 ", func = function() BattlefieldMgrQueueRequest(1) end },
+		{ text = "加入冬握湖 ", func = function() BattlefieldMgrQueueRequest(1) end },
+		{ text = "加入巴拉丁 ", func = function() BattlefieldMgrQueueRequest(21) end },
 		{ text = "重设UI界面 ", func = function()
 			EuiUFpos=nil
 			BaudBag_Cfg=nil
