@@ -809,7 +809,8 @@ eSetUI = function()
 	SetCVar("gxTextureCacheSize", 512)	
 	SetCVar("autoLootDefault", 1)
 	SetCVar("lootUnderMouse", 1)
-
+	SetCVar("ChatBubbles", 0)
+	SetCVar("ChatBubblesParty", 0)
 end
 
 local Boost = function()

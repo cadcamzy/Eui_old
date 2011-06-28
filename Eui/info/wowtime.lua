@@ -48,14 +48,14 @@ local clocks_update = function(self,t)
 		
 	int = 1
 	time_sesion = time_sesion + 1
-	local wgtime = select(5, GetWorldPVPAreaInfo(2)) or 9000
+	local _,_,_,canQueue,wgtime = GetWorldPVPAreaInfo(2)
 	local pendingCalendarInvites = CalendarGetNumPendingInvites() or 0
 	
 --	self.:SetValue(wgtime)
 	atime:SetText(date("%H")..":"..date("%M"))
 	dateval:SetText(date("%a"))
 	
- 	if C["info"].wgtimenoti == true then
+ 	if C["info"].wgtimenoti == true and (canQueue == false) then
 		if wgtime == 60 then 
 			E.EuiAlertRun ("巴拉丁即将在1分钟内开始")
 		elseif wgtime == 900 then 

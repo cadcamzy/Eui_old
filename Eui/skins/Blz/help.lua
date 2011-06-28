@@ -6,7 +6,7 @@ local function LoadSkin()
 		"HelpFrameLeftInset",
 		"HelpFrameMainInset",
 		"HelpFrameKnowledgebase",
-		"HelpFrameHeader",
+	--	"HelpFrameHeader",
 		"HelpFrameKnowledgebaseErrorFrame",
 	}
 	
@@ -34,7 +34,9 @@ local function LoadSkin()
 		E.StripTextures(_G[frames[i]],true)
 		E.EuiCreateBackdrop(_G[frames[i]])
 	end
-	
+	E.StripTextures(_G["HelpFrameHeader"],true)
+	E.EuiCreateBackdrop(_G["HelpFrameHeader"],1)
+		
 	HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel() + 2)
 	HelpFrameKnowledgebaseErrorFrame:SetFrameLevel(HelpFrameKnowledgebaseErrorFrame:GetFrameLevel() + 2)
 	

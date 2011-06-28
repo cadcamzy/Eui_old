@@ -43,6 +43,30 @@ local function addDrop(array)
 	return setting
 end
 
+StaticPopupDialogs["RESET_UI"] = {
+	text = "重置UI - 将还原所有界面元素初始位置.",
+	button1 = ACCEPT,
+	button2 = CANCEL,
+    OnAccept = function() 
+		EuiUFpos=nil
+		BaudBag_Cfg=nil
+		BaudBag_Cache=nil
+		JPackDB=nil
+	--	LjxxuiInstallV401=nil
+		filter=nil
+		tgoldDB=nil
+		raidtarget=nil
+		EuiData[E.myrealm][E.MyName]=nil
+		filterdb=nil
+		SetChat()
+		eSetUI()
+		ReloadUI()
+	end,
+	OnCancel = function() end,
+    timeout = 0,
+    whileDead = 1,
+}
+
 settingMenuDrop = addDrop({
 		{ text = "EUI ", isTitle = 1, notCheckable = 1, keepShownOnClick = 0 },
 		{ text = "切换天赋 ", func = function() 
@@ -67,21 +91,7 @@ settingMenuDrop = addDrop({
 		end },
 		{ text = "加入冬握湖 ", func = function() BattlefieldMgrQueueRequest(1) end },
 		{ text = "加入巴拉丁 ", func = function() BattlefieldMgrQueueRequest(21) end },
-		{ text = "重设UI界面 ", func = function()
-			EuiUFpos=nil
-			BaudBag_Cfg=nil
-			BaudBag_Cache=nil
-			JPackDB=nil
-			LjxxuiInstallV401=nil
-			filter=nil
-			tgoldDB=nil
-			raidtarget=nil
-			EuiData[E.myrealm][E.MyName]=nil
-			filterdb=nil
-			SetChat()
-			eSetUI()
-			ReloadUI()
-		end },
+		{ text = "重设UI界面 ", func = function() StaticPopup_Show("RESET_UI") end },
 		{text = "开/关LFW频道", func=function()
 			if LFW_SHOW then
 				LFW_SHOW = false

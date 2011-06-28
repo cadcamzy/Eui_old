@@ -661,11 +661,12 @@ local function OnEvent(self, event, subevent, ...)
             ct.pguid = UnitGUID("player")
         end
 		-- turn off blizz ct
- 		CombatText:UnregisterAllEvents()
-		CombatText:SetScript("OnLoad", nil)
-		CombatText:SetScript("OnEvent", nil)
-		CombatText:SetScript("OnUpdate", nil)
-
+ 		if CombatText then
+			CombatText:UnregisterAllEvents()
+			CombatText:SetScript("OnLoad", nil)
+			CombatText:SetScript("OnEvent", nil)
+			CombatText:SetScript("OnUpdate", nil)
+		end
 		function E.XctMove(f)
 			if E.Movers[f:GetName()]["moved"] ~= true then
 				f:ClearAllPoints()
