@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+ local E, C = unpack(EUI)
 local L = GetLocale()
 if(L=="zhCN") then
 L_COST = "修理花费: "
@@ -1187,8 +1187,8 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		WARLOCK = {},
 		DEATHKNIGHT = {},
 	}
-	if select(2, GetNumMacros()) == MAX_CHARACTER_MACROS then
-		print("你的宏已经满了，请删除两个宏后才能启用鼠标滚轮解dEBUFF功能！")
+	if select(2, GetNumMacros()) > 34 then
+    print("你的宏已经满了，请留两个空位后才能启用鼠标滚轮解Debuff功能！")
 		return
 	end
 --local index_a = CreateMacro("Debuff_1", _, "/cast [target=mouseover] 清洁术;",1)
