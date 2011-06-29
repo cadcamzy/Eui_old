@@ -183,7 +183,7 @@ local function Local(o)
 	if o == "EuiSetGuiraidraidtarget" then o = e_raid_raidtarget end
 	if o == "EuiSetGuiraidtexture" then o = e_raid_texture end
 	if o == "EuiSetGuiraidportrait" then o = e_raid_portrait end
-
+	if o == "EuiSetGuiraidraidtool" then o == e_raid_raidtool end
 	
 	-- 动作条(EuiSetGuiactionbar)
 	if o == "EuiSetGuiactionbarenable" then o = e_actionbar_enable end

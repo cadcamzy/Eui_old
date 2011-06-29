@@ -165,6 +165,7 @@
 	e_raid_raidtarget = "启用团队目标监视模块"
 	e_raid_texture = "团队材质样式(0,1,2)"
 	e_raid_portrait = "小队/团队启用3D头像"
+	e_raid_raidtool = "启用团队工具"
 	
 	-- 动作条
 	e_actionbar_hideshapeshift = "隐藏姿态栏或图腾栏"
