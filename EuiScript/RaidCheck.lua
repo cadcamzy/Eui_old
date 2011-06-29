@@ -664,13 +664,14 @@ RaidCheckFrameLeft:SetAllPoints(EuiBottomInfoButtonL)
 RaidCheckFrameLeft:SetScript("OnMouseDown", function(self, btn)
 	if InCombatLockdown() then return end
 	if btn == "LeftButton" then
-		CheckPosition()
+	--	CheckPosition()
+		if RaidUtilityPanel then RaidUtilityPanel:Show() else CheckPosition() end
 	elseif btn == "RightButton" then
 		DoReadyCheck()
 	end
 end)
 
-E.EuiSetTooltip(RaidCheckFrameLeft, L.BottomPanelRaidCheck, L.MouseLeftButton, L.RaidCheckTipLeftButtonOnLeftInfo, L.MouseRightButton, L.RaidCheckTipRightButtonOnLeftInfo)
+E.EuiSetTooltip(RaidCheckFrameLeft, L.BottomPanelRaidCheck, L.MouseLeftButton, RaidUtilityPanel and "打开团队工具面板" or L.RaidCheckTipLeftButtonOnLeftInfo, L.MouseRightButton, L.RaidCheckTipRightButtonOnLeftInfo)
 
 local RaidCheckFrameRight = CreateFrame("Button", "RaidCheckFrameRight", UIParent)
 E.EuiSetTemplate(RaidCheckFrameRight)

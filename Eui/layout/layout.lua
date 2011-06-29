@@ -385,19 +385,19 @@ if C["raid"].raid == true then
 		E.EuiCreatePanel(raidbg, 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, C["raid"].gridheight)
 		if C["raid"].grouphv == true then
 			raidbg:SetWidth(C["raid"].gridw * 5 + 32)
-			raidbg:SetHeight(C["raid"].gridh * C["raid"].raidgroups + 20 *(C["raid"].raidgroups - 1))
+			raidbg:SetHeight(C["raid"].gridh * C["raid"].raidgroups + 18 *(C["raid"].raidgroups - 1))
 		else	
-			raidbg:SetWidth(C["raid"].gridw * C["raid"].raidgroups + 20* (C["raid"].raidgroups -1))
+			raidbg:SetWidth(C["raid"].gridw * C["raid"].raidgroups + 18* (C["raid"].raidgroups -1))
 			raidbg:SetHeight(C["raid"].gridh * 5 + 80)
 		end
 	elseif C["raid"].astyle == 1 then
 		E.EuiCreatePanel(raidbg, 1, 1, "TOPLEFT", UIParent, "TOPLEFT", 10, -10)
 		raidbg:SetWidth(C["raid"].nogridw)
-		raidbg:SetHeight(C["raid"].nogridh*C["raid"].raidgroups*20 + 80*C["raid"].raidgroups+ C["raid"].groupspace * (C["raid"].raidgroups - 1))
+		raidbg:SetHeight(C["raid"].nogridh*C["raid"].raidgroups*20 + 72*C["raid"].raidgroups+ C["raid"].groupspace * (C["raid"].raidgroups - 1))
 	elseif C["raid"].astyle == 2 then
 		E.EuiCreatePanel(raidbg, 1, 1, "BOTTOMLEFT", EuiTopChatBackground, "TOPLEFT", 0, 24)
 		raidbg:SetWidth(C["chat"].chatw)
-		raidbg:SetHeight(C["raid"].nogridh* floor(C["raid"].raidgroups/2)*20 + 80* floor(C["raid"].raidgroups/2)+ C["raid"].groupspace * (floor(C["raid"].raidgroups/2) - 1))
+		raidbg:SetHeight(C["raid"].nogridh* floor(C["raid"].raidgroups/2)*20 + 72* floor(C["raid"].raidgroups/2)+ C["raid"].groupspace * (floor(C["raid"].raidgroups/2) - 1))
 	end
 	function E.EuiRaidBackgroundMove(frame)
 		if E.Movers[frame:GetName()]["moved"] ~= true then

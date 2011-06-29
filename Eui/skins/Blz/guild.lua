@@ -210,7 +210,7 @@ local function LoadSkin()
 	backdrop3:SetPoint("TOPLEFT", GuildInfoFrameInfo, "TOPLEFT", 2, -233)
 	backdrop3:SetPoint("BOTTOMRIGHT", GuildInfoFrameInfo, "BOTTOMRIGHT", 0, 3)	
 	
-	GuildRecruitmentCommentInputFrame:SetTemplate("Default")
+	E.EuiSetTemplate(GuildRecruitmentCommentInputFrame)
 	
 	for _, button in next, GuildInfoFrameApplicantsContainer.buttons do
 		E.Kill(button.selectedTex)

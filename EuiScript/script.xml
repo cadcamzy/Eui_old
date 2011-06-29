@@ -26,10 +26,11 @@
 
 	<Script file="AlreadyKnown.lua"/>
 	<Script file="LFGForwarder.lua"/>
-	<Script file="RaidCheck.lua"/>
 	
 	<Include file="oGlow\oGlow.xml"/>
 	<Script file="yclasscolors.lua"/>
 	<Script file="xCT.lua"/>
+	<Script file="raidtool.lua"/>
+	<Script file="RaidCheck.lua"/>
 	
 </Ui>

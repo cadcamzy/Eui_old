@@ -28,7 +28,7 @@ if C["unitframe"].focusheight >0 then focusheight = C["unitframe"].focusheight e
 
 if C["raid"].astyle == 0 then
 	ptx = (C["raid"].gridw * 5 + 36) / 2 + 4
-	pty = C["raid"].gridh * 5 + 80 + C["raid"].gridheight
+	pty = C["raid"].gridh * 5 + 72 + C["raid"].gridheight
 	
 else
 	ptx = totwidth / 2 + 8
@@ -283,7 +283,9 @@ local PostCreateIcon = function(Auras, button)
 	button.overlay:SetParent(button.overlayFrame)
 	button.count:SetParent(button.overlayFrame)
 	
-	button.remaining = E.EuiSetFontn(button, E.font, 12, "LEFT")
+	button.remaining = E.EuiSetFontn(button, E.font, 14, "LEFT","THICKOUTLINE")
+	button.remaining:SetShadowColor(0,0,0,1)
+	button.remaining:SetShadowOffset(1,-1)
 	button.remaining:SetPoint("CENTER", 0 , 2)
 	
 	button.Glow = CreateFrame("Frame", nil, button)

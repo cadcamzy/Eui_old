@@ -152,7 +152,7 @@ local function UpdateThreat(self, event, unit)
 					self.panel:SetPoint("TOPLEFT", self, "TOPLEFT", -3, 3)
 					self.panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 3, -3)
 					self.panel:SetBackdropBorderColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
-					self.panel:SetBackdropColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
+				--	self.panel:SetBackdropColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
 				else
 					self.Name:SetTextColor(1,0.1,0.1)
 				end
@@ -160,7 +160,7 @@ local function UpdateThreat(self, event, unit)
 		else
 			if self.panel then
 				self.panel:SetBackdropBorderColor(.67,.06,.24,1)
-				self.panel:SetBackdropColor(.67,.06,.24,1)
+			--	self.panel:SetBackdropColor(.67,.06,.24,1)
 				self.panel:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 1)
 				self.panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -1)					
 			else
@@ -172,7 +172,7 @@ local function UpdateThreat(self, event, unit)
 			if CanDispel[class][dtype] then
 				if self.panel then
 					self.panel:SetBackdropBorderColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
-					self.panel:SetBackdropColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
+				--	self.panel:SetBackdropColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
 					self.panel:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 1)
 					self.panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -1)
 				else
@@ -182,7 +182,7 @@ local function UpdateThreat(self, event, unit)
 		else
 			if self.panel then
 				self.panel:SetBackdropBorderColor(0,0,0,0.01)
-				self.panel:SetBackdropColor(0,0,0,0.01)
+			--	self.panel:SetBackdropColor(0,0,0,0.01)
 				self.panel:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 1)
 				self.panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -1)
 			else
@@ -451,7 +451,7 @@ local function Shared(self, unit)
 	power:SetStatusBarTexture(BarTexture)
 	power:SetFrameLevel(self.Health:GetFrameLevel()+1)
 	power:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 0, -6)
-	power:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, -12)
+	power:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 0, -10)
 	power.backbg = E.CreateBG(power)
 	self.Power = power
 	
@@ -645,7 +645,7 @@ oUF:Factory(function(self)
 					"xOffset", 8,
 					"point", "LEFT"
 				)	
-				partytarget:SetPoint("TOP", party, "BOTTOM", 0, -20)		
+				partytarget:SetPoint("TOP", party, "BOTTOM", 0, -18)		
 				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "party",
 					'oUF-initialConfigFunction', [[
 						local header = self:GetParent()
@@ -663,7 +663,7 @@ oUF:Factory(function(self)
 					"xOffset", 8,
 					"point", "LEFT"
 				)
-				partypet:SetPoint("TOP", partytarget, "BOTTOM", 0, -20)
+				partypet:SetPoint("TOP", partytarget, "BOTTOM", 0, -18)
 			end
 		else
 			local party = self:SpawnHeader("oUF_Party", nil, "party",
@@ -678,7 +678,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showParty", true,
 				"showRaid", true,	
-				"yOffset", 20,
+				"yOffset", 18,
 				"point", "BOTTOM"
 			)
 			party:SetPoint("LEFT", EuiRaidBackground, 0, 0)
@@ -696,7 +696,7 @@ oUF:Factory(function(self)
 					"showPlayer", true, 
 					"showParty", true,
 					"showRaid", true,			
-					"yOffset", 20,
+					"yOffset", 18,
 					"point", "LEFT"
 				)	
 				partytarget:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", 8, 0)		
@@ -714,7 +714,7 @@ oUF:Factory(function(self)
 					"showPlayer", true, 
 					"showParty", true,
 					"showRaid", true,			
-					"yOffset", 20,
+					"yOffset", 18,
 					"point", "LEFT"
 				)
 				partypet:SetPoint("BOTTOMLEFT", partytarget, "BOTTOMRIGHT", 8, 0)
@@ -799,7 +799,7 @@ oUF:Factory(function(self)
 					"showPlayer", true,
 					"showRaid", true,
 					"xoffset", 8,
-					"yOffset", 20,
+					"yOffset", 18,
 					"point", "LEFT",
 					"groupFilter", tostring(i),
 					"groupingOrder", tostring(i),
@@ -811,11 +811,11 @@ oUF:Factory(function(self)
 			end
 			if C["raid"].raidDirection == true then --1队排在下面
 				for i = 1, NUM_RAID_GROUPS do
-					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (i - 1) + 20*(i - 1))
+					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (i - 1) + 18*(i - 1))
 				end
 			else --5队排在下面.
 				for i = 1, NUM_RAID_GROUPS, 1 do
-					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (NUM_RAID_GROUPS-i) + 20*(NUM_RAID_GROUPS-i))
+					raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, C["raid"].gridh * (NUM_RAID_GROUPS-i) + 18*(NUM_RAID_GROUPS-i))
 				end
 			end
 		else
@@ -832,7 +832,7 @@ oUF:Factory(function(self)
 					"showPlayer", true,
 					"showRaid", true,
 					"xoffset", 0,
-					"yOffset", 20,
+					"yOffset", 18,
 					"point", "BOTTOM",
 					"groupFilter", tostring(i),
 					"groupingOrder", tostring(i),
@@ -859,7 +859,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showRaid", true, 
 				"xoffset", 0,
-				"yOffset", -20,
+				"yOffset", -18,
 				"point", "TOP",
 				"groupFilter", tostring(i),
 				"groupingOrder", tostring(i),
@@ -872,7 +872,7 @@ oUF:Factory(function(self)
 			if i > 5 then --小队超过5队时,第6队排到第5队的右边
 				raid[i]:SetPoint('BOTTOMLEFT', "oUF_EUI_raid"..tostring(i-5), 'BOTTOMRIGHT', 16, 0)
 			else
-				raid[i]:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", 0, -(C["raid"].nogridh * 5 + 80 + C["raid"].groupspace)*(i-1))
+				raid[i]:SetPoint("TOPLEFT", EuiRaidBackground, "TOPLEFT", 0, -(C["raid"].nogridh * 5 + 72 + C["raid"].groupspace)*(i-1))
 			end
 		end
 	elseif C["raid"].astyle == 2 then
@@ -889,7 +889,7 @@ oUF:Factory(function(self)
 				"showPlayer", true, 
 				"showRaid", true, 
 				"xoffset", 0,
-				"yOffset", -20,
+				"yOffset", -18,
 				"point", "TOP",
 				"groupFilter", tostring(i),
 				"groupingOrder", tostring(i),
@@ -900,9 +900,9 @@ oUF:Factory(function(self)
 				"columnAnchorPoint", raidDirection		
 			)
 			if i%2 == 1 then
-				raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, (C["raid"].nogridh * 5 + 80 + C["raid"].groupspace) * floor(i / 2))
+				raid[i]:SetPoint("BOTTOMLEFT", EuiRaidBackground, "BOTTOMLEFT", 0, (C["raid"].nogridh * 5 + 72 + C["raid"].groupspace) * floor(i / 2))
 			else
-				raid[i]:SetPoint("BOTTOMRIGHT", EuiRaidBackground, "BOTTOMRIGHT", 0, (C["raid"].nogridh * 5 + 80 + C["raid"].groupspace) * (i / 2 - 1))
+				raid[i]:SetPoint("BOTTOMRIGHT", EuiRaidBackground, "BOTTOMRIGHT", 0, (C["raid"].nogridh * 5 + 72 + C["raid"].groupspace) * (i / 2 - 1))
 			end			
 		end
 	end

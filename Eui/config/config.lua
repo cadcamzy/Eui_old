@@ -133,7 +133,7 @@ C["raid"] = {
 	["raidgroups"] = 5,--团队里小队数
 	["grouphv"] = true, --小队横排或竖排
 	["groupspace"] = 20, --竖排时小队间隔
-	["gridheight"] = 98, --Grid框架高度位置
+	["gridheight"] = 90, --Grid框架高度位置
 	["nogridheight"] = 180, --单列时框架高度
 	["gridh"] = 28, --Grid单元高度
 	["gridw"] = 76,--Grid单元宽度
@@ -148,6 +148,7 @@ C["raid"] = {
 	["raidtarget"] = false,
 	["hotsize"] = 12,
 	["portrait"] = false,
+	["raidtool"] = true,
 }
 
 C["actionbar"] = {
