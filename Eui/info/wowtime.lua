@@ -96,11 +96,13 @@ clocks:SetScript("OnEnter", function(self)
 		if isActive == true then
 			wgtime = "正在进行"
 		elseif canQueue == true then
-			wgtime = "不可查询"
+			wgtime = form_time(wgtime).."可排"
+		elseif canEnter ~= true then
+			wgtime = "不可用"
 		else
 			wgtime = form_time(wgtime)    
 		end
-
+	if not ( instanceType == "none" ) then wgtime = "不可用" end
 	GameTooltip:AddDoubleLine("巴拉丁开始时间",wgtime,1,1,1,0.3,1,0.3)
 	GameTooltip:AddLine(" ")
 	GameTooltip:AddDoubleLine("游戏时间:",form_time(time_sesion),1,1,1,0.3,1,0.3)

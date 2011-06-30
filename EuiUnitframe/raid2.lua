@@ -430,7 +430,7 @@ local function Shared(self, unit)
 	
  	health.value = health:CreateFontString(nil, "OVERLAY")
 	if C["raid"].astyle == 0 then
-		health.value:SetPoint("BOTTOM", health, 0, 2)
+		health.value:SetPoint("BOTTOM", health, 0, 3)
 	else
 		health.value:SetPoint("RIGHT", health, -2, 0)
 	end
@@ -449,9 +449,9 @@ local function Shared(self, unit)
 
 	local power = CreateFrame("StatusBar", nil, self)
 	power:SetStatusBarTexture(BarTexture)
-	power:SetFrameLevel(self.Health:GetFrameLevel()+1)
-	power:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 6, 3)
-	power:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -6, -3)
+	power:SetFrameLevel(self.Health:GetFrameLevel()+2)
+	power:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 6, 2)
+	power:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -6, -2)
 	power.backbg = E.CreateBG(power)
 	self.Power = power
 	

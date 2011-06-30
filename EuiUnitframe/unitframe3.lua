@@ -28,7 +28,7 @@ if C["unitframe"].focusheight >0 then focusheight = C["unitframe"].focusheight e
 
 if C["raid"].astyle == 0 then
 	ptx = (C["raid"].gridw * 5 + 36) / 2 + 4
-	pty = C["raid"].gridh * 5 + 72 + C["raid"].gridheight
+	pty = C["raid"].gridh * 5 + 32 + C["raid"].gridheight
 	
 else
 	ptx = totwidth / 2 + 8
