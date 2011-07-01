@@ -571,11 +571,25 @@ function CreateEuiSetGui()
 		frame:Hide()
 	end
 
+	StaticPopupDialogs["RESET_SET"] = {
+		text = "还原设置的默认值.",
+		button1 = ACCEPT,
+		button2 = CANCEL,
+		OnAccept = function() 
+			EuiSettings = {}
+			ReloadUI()
+		end,
+		OnCancel = function() end,
+		timeout = 0,
+		whileDead = 1,
+	}
+	
+	
 	local reset = NewButton(DEFAULT, EuiSetGui)
 	reset:SetWidth(E.Scale(100))
 	reset:SetHeight(E.Scale(20))
 	reset:SetPoint("BOTTOMLEFT",-E.Scale(10), -E.Scale(38))
-	reset:SetScript("OnClick", function(self) EuiSettings = {} ReloadUI() end)
+	reset:SetScript("OnClick", function(self) StaticPopup_Show("RESET_SET") end)
 	E.EuiSetTemplate(reset)
 	
 	local close = NewButton(CLOSE, EuiSetGui)
