@@ -457,7 +457,7 @@ local function CPointsUpdate(self, event, unit)
 		end
 	end
 	if self.Auras then
-		self.Auras:SetPoint("BOTTOMLEFT", self.Health, "TOPLEFT", 1, cp > 0 and 18 or 4)
+		self.Auras:SetPoint("BOTTOMLEFT", self.Health, "TOPLEFT", 1, cp > 0 and 10 or 4)
 	end
 end
 
@@ -777,7 +777,6 @@ local Shared = function(self, unit, isSingle)
 		self.CPoints:SetHeight(5)
 		self.CPoints:SetBackdropColor(0,0,0,0)
 		self.CPoints:SetPoint("TOPLEFT", self.Health, 10, 4)		
-				
 		for i = 1,5 do
 			self.CPoints[i] = CreateFrame("StatusBar", self:GetName().."_CPoints"..i, self)
 			self.CPoints[i]:SetHeight(5)
@@ -785,9 +784,9 @@ local Shared = function(self, unit, isSingle)
 			self.CPoints[i]:SetStatusBarTexture(TEXTURE)
 			self.CPoints[i]:SetBackdrop(BACKDROP)
 			self.CPoints[i]:SetBackdropColor(.1,.1,.1,1)				
-
+			self.CPoints[i]:SetFrameLevel(self.Health:GetFrameLevel()+2)
 			self.CPoints[i].bg = E.CreateBG(self.CPoints[i])
-			
+
 			if (i == 1) then
 				self.CPoints[i]:SetPoint("BOTTOMLEFT", self.CPoints, "BOTTOMLEFT", 0, 0)
 			else
@@ -799,7 +798,7 @@ local Shared = function(self, unit, isSingle)
 		self.CPoints[3]:SetStatusBarColor(30/255, 110/255, 220/255)
 		self.CPoints[4]:SetStatusBarColor(30/255, 110/255, 220/255)
 		self.CPoints[5]:SetStatusBarColor(160/255, 24/255, 48/255)
-		self.CPoints.Update = CPointsUpdate
+		self.CPoints.Override = CPointsUpdate
 	end
 	--DK符文条
 	
@@ -816,7 +815,7 @@ local Shared = function(self, unit, isSingle)
 			self.Runes[i]:SetStatusBarTexture(TEXTURE)
 			self.Runes[i]:SetBackdrop(BACKDROP)
 			self.Runes[i]:SetBackdropColor(.1,.1,.1,1)				
-			
+			self.Runes[i]:SetFrameLevel(self.Health:GetFrameLevel()+2)
 			self.Runes[i].bg = self.Runes[i]:CreateTexture(nil, "BORDER")
 			self.Runes[i].bg:SetAllPoints(self.Runes[i])				
 			self.Runes[i].bg:SetTexture(0.3, 0.3, 0.3)
@@ -846,6 +845,7 @@ local Shared = function(self, unit, isSingle)
 		lunarBar:SetSize(playerwidth*.7, 5)
 		lunarBar:SetStatusBarTexture(TEXTURE)
 		lunarBar:SetStatusBarColor(.30, .52, .90)
+		lunarBar:SetFrameLevel(self.Health:GetFrameLevel()+2)
 		eclipseBar.LunarBar = lunarBar
 
 		local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
@@ -853,6 +853,7 @@ local Shared = function(self, unit, isSingle)
 		solarBar:SetSize(playerwidth*.7, 5)
 		solarBar:SetStatusBarTexture(TEXTURE)
 		solarBar:SetStatusBarColor(.90, .92,  .30)
+		solarBar:SetFrameLevel(self.Health:GetFrameLevel()+2)
 		eclipseBar.SolarBar = solarBar
 		
 		self.EclipseBar = eclipseBar
@@ -907,7 +908,7 @@ local Shared = function(self, unit, isSingle)
 			self.TotemBar[i] = CreateFrame("StatusBar", nil, self)
 			self.TotemBar[i]:SetHeight(8)
 			self.TotemBar[i]:SetWidth((playerwidth*.7-21)/4)
-		
+			self.TotemBar[i]:SetFrameLevel(self.Health:GetFrameLevel()+2)
 			if (i == 1) then
 				self.TotemBar[i]:SetPoint("BOTTOMLEFT", self.TotemBar, "BOTTOMLEFT", 0, 0)
 			else

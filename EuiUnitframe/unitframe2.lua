@@ -839,7 +839,7 @@ local Shared = function(self, unit, isSingle)
 		self.CPoints[3]:SetStatusBarColor(30/255, 110/255, 220/255)
 		self.CPoints[4]:SetStatusBarColor(30/255, 110/255, 220/255)
 		self.CPoints[5]:SetStatusBarColor(160/255, 24/255, 48/255)
-		self.CPoints.Update = CPointsUpdate
+		self.CPoints.Override = CPointsUpdate
 	end
 	--DK符文条
 	
