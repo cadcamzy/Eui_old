@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if not C["filter"].enable == true then return end
 		
 local class = select(2, UnitClass("player"));
@@ -321,11 +321,11 @@ if ( Filger_Spells and Filger_Spells[class] ) then
 				end
 			end
 		end
-		if frame.Name == "playerbufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", "玩家BUFF图标", nil, E.EuiFilterMove) end
-		if frame.Name == "playerbuffbar" then E.CreateMover(frame, "EuiFilter"..i.."Mover", "玩家BUFF计时条", nil, E.EuiFilterMove) end
-		if frame.Name == "targetdebufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", "目标DEBUFF图标", nil, E.EuiFilterMove) end
-		if frame.Name == "targetdebuffbar" then E.CreateMover(frame, "EuiFilter"..i.."Mover", "目标DEBUFF计时条", nil, E.EuiFilterMove) end
-		if frame.Name == "playercdicon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", "玩家CD图标", nil, E.EuiFilterMove) end
+		if frame.Name == "playerbufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_1, nil, E.EuiFilterMove) end
+		if frame.Name == "playerbuffbar" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_2, nil, E.EuiFilterMove) end
+		if frame.Name == "targetdebufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_3, nil, E.EuiFilterMove) end
+		if frame.Name == "targetdebuffbar" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_4, nil, E.EuiFilterMove) end
+		if frame.Name == "playercdicon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_5, nil, E.EuiFilterMove) end
 		
 		if ( C["filter"].configmode ) then
 

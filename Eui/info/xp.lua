@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["info"].xp == 0 or C["info"].enable == false then return end
 --if UnitLevel("player") == 80 then return end
 
@@ -14,14 +14,14 @@ name:SetPoint("CENTER")
 --name:SetTextColor(23/255,132/255,209/255)
 
 local FactionInfo = {
-	[1] = {{ 170/255, 70/255,  70/255 }, "仇恨", "FFaa4646"},
-	[2] = {{ 170/255, 70/255,  70/255 }, "敌对", "FFaa4646"},
-	[3] = {{ 170/255, 70/255,  70/255 }, "冷漠", "FFaa4646"},
-	[4] = {{ 200/255, 180/255, 100/255 }, "中立", "FFc8b464"},
-	[5] = {{ 75/255,  175/255, 75/255 }, "友善", "FF4baf4b"},
-	[6] = {{ 75/255,  175/255, 75/255 }, "尊敬", "FF4baf4b"},
-	[7] = {{ 75/255,  175/255, 75/255 }, "崇敬", "FF4baf4b"},
-	[8] = {{ 155/255,  255/255, 155/255 }, "崇拜","FF9bff9b"},
+	[1] = {{ 170/255, 70/255,  70/255 }, L.INFO_XP_FACTION1, "FFaa4646"},
+	[2] = {{ 170/255, 70/255,  70/255 }, L.INFO_XP_FACTION2, "FFaa4646"},
+	[3] = {{ 170/255, 70/255,  70/255 }, L.INFO_XP_FACTION3, "FFaa4646"},
+	[4] = {{ 200/255, 180/255, 100/255 }, L.INFO_XP_FACTION4, "FFc8b464"},
+	[5] = {{ 75/255,  175/255, 75/255 }, L.INFO_XP_FACTION5, "FF4baf4b"},
+	[6] = {{ 75/255,  175/255, 75/255 }, L.INFO_XP_FACTION6, "FF4baf4b"},
+	[7] = {{ 75/255,  175/255, 75/255 }, L.INFO_XP_FACTION7, "FF4baf4b"},
+	[8] = {{ 155/255,  255/255, 155/255 }, L.INFO_XP_FACTION8,"FF9bff9b"},
 }
 
 local ShortValue = function(value)
@@ -71,19 +71,19 @@ function xp.ShowBar()
 		xp:SetScript("OnEnter", function()
 			GameTooltip:SetOwner(xp, "ANCHOR_BOTTOMRIGHT");
 			GameTooltip:ClearLines()
-			GameTooltip:AddLine("经验:")
-			GameTooltip:AddLine(string.format('当前: %s/%s (%d%%)', CommaValue(XP), CommaValue(maxXP), (XP/maxXP)*100))
-			GameTooltip:AddLine(string.format('剩余: %s', CommaValue(maxXP-XP)))	
+			GameTooltip:AddLine(L.INFO_XP_FACTION_TIP1)
+			GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP2, CommaValue(XP), CommaValue(maxXP), (XP/maxXP)*100))
+			GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP3, CommaValue(maxXP-XP)))	
 			if restXP then
-				GameTooltip:AddLine(string.format('|cffb3e1ff休息: %s (%d%%)', CommaValue(restXP), restXP/maxXP*100))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP4, CommaValue(restXP), restXP/maxXP*100))
 			end
 			if GetWatchedFactionInfo() then
 				local name, rank, min, max, value = GetWatchedFactionInfo()
 				GameTooltip:AddLine(" ")
-				GameTooltip:AddLine(string.format('声望: %s', name))
-				GameTooltip:AddLine(string.format('等级: |c'..colorize(rank)..'%s|r', FactionInfo[rank][2]))
-				GameTooltip:AddLine(string.format('数值: %s/%s (%d%%)', CommaValue(value-min), CommaValue(max-min), (value-min)/(max-min)*100))
-				GameTooltip:AddLine(string.format('剩余: %s', CommaValue(max-value)))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP5, name))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP6..colorize(rank)..'%s|r', FactionInfo[rank][2]))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP7, CommaValue(value-min), CommaValue(max-min), (value-min)/(max-min)*100))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP8, CommaValue(max-value)))
 			end
 			GameTooltip:Show()
 		end)
@@ -92,11 +92,11 @@ function xp.ShowBar()
 		--Send experience info in chat
 		xp:SetScript("OnMouseDown", function()
 			if GetNumRaidMembers() > 0 then
-				SendChatMessage("我当前经验为: "..CommaValue(XP).."/"..CommaValue(maxXP).." ("..floor((XP/maxXP)*100).."%) .","RAID")
+				SendChatMessage(L.INFO_XP_FACTION_TIP9..CommaValue(XP).."/"..CommaValue(maxXP).." ("..floor((XP/maxXP)*100).."%) .","RAID")
 			elseif GetNumPartyMembers() > 0 then
-				SendChatMessage("我当前经验为: "..CommaValue(XP).."/"..CommaValue(maxXP).." ("..floor((XP/maxXP)*100).."%) .","PARTY")
+				SendChatMessage(L.INFO_XP_FACTION_TIP9..CommaValue(XP).."/"..CommaValue(maxXP).." ("..floor((XP/maxXP)*100).."%) .","PARTY")
 			else
-				SendChatMessage("我当前经验为: "..CommaValue(XP).."/"..CommaValue(maxXP).." ("..floor((XP/maxXP)*100).."%) .","SAY")
+				SendChatMessage(L.INFO_XP_FACTION_TIP9..CommaValue(XP).."/"..CommaValue(maxXP).." ("..floor((XP/maxXP)*100).."%) .","SAY")
 			end
 		end)
 	else
@@ -115,10 +115,10 @@ function xp.ShowBar()
 				GameTooltip:SetOwner(xp, "ANCHOR_BOTTOMRIGHT");
 			    GameTooltip:ClearLines()
 				GameTooltip:AddLine(" ")
-				GameTooltip:AddLine(string.format('声望: %s', name2))
-				GameTooltip:AddLine(string.format('等级: |c'..colorize(rank)..'%s|r', FactionInfo[rank][2]))
-				GameTooltip:AddLine(string.format('数值: %s/%s (%d%%)', CommaValue(value-min), CommaValue(max-min), (value-min)/(max-min)*100))
-				GameTooltip:AddLine(string.format('剩余: %s', CommaValue(max-value)))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP5, name2))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP6..colorize(rank)..'%s|r', FactionInfo[rank][2]))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP7, CommaValue(value-min), CommaValue(max-min), (value-min)/(max-min)*100))
+				GameTooltip:AddLine(string.format(L.INFO_XP_FACTION_TIP8, CommaValue(max-value)))
     			GameTooltip:Show()
 			end)
 			xp:SetScript("OnLeave", function() GameTooltip:Hide() end)

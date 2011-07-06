@@ -1,6 +1,6 @@
 local grid
 local boxSize = 32
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 E.align = true
 
 function Grid_Show()

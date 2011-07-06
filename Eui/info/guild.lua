@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["info"].guild == 0 or C["info"].enable == false then return end
 --if UnitLevel("player") == 80 then return end
 
@@ -29,9 +29,9 @@ function guild:ShowBar()
 	--	guild:SetStatusBarColor(75/255,  175/255, 75/255)
 	--	guild:SetMinMaxValues(min(0, online), total)
 	--	guild:SetValue(online)
-		name:SetText("公会:"..online)
+		name:SetText(L.INFO_GUILD_TIP1..":"..online)
 	else
-		name:SetText("公会")
+		name:SetText(L.INFO_GUILD_TIP1)
 	--	guild:SetStatusBarColor(0,0,0,0)
 	end
 	
@@ -50,14 +50,14 @@ function guild:ShowBar()
 				GameTooltip:SetOwner(guild, "ANCHOR_BOTTOMRIGHT");				
 				
 				GameTooltip:ClearLines()
-				GameTooltip:AddDoubleLine(GetGuildInfo'player',format("%s: %d/%d","公会",online,total),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+				GameTooltip:AddDoubleLine(GetGuildInfo'player',format("%s: %d/%d",L.INFO_GUILD_TIP1,online,total),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 				GameTooltip:AddLine' '
 				if gmotd ~= "" then GameTooltip:AddLine(format("  %s |cffaaaaaa- |cffffffff%s",GUILD_MOTD,gmotd),ttsubh.r,ttsubh.g,ttsubh.b,1) end
 				if online > 1 then
 					GameTooltip:AddLine' '
 					for i = 1, total do
 						if online <= 1 then
-							if online > 1 then GameTooltip:AddLine(format("+ %d 更多...", online - modules.Guild.maxguild),ttsubh.r,ttsubh.g,ttsubh.b) end
+							if online > 1 then GameTooltip:AddLine(format(L.INFO_GUILD_TIP2, online - modules.Guild.maxguild),ttsubh.r,ttsubh.g,ttsubh.b) end
 							break
 						end
 						-- name, rank, rankIndex, level, class, zone, note, officernote, online, status, classFileName

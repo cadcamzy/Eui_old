@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 local Eui_Frames = {
 	"EuiActionBarBackground",
 	"EuiActionBarBackground",

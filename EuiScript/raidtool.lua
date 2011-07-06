@@ -1,6 +1,6 @@
 --Raid Utility by Elv22
 
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 
 if C["raid"].raidtool ~= true then return end
 E.Kill(CompactRaidFrameManager) --Get rid of old module

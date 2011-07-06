@@ -1,10 +1,10 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["info"].apsp == 0 or C["info"].enable == false then return end
 
 local StatAPSP = CreateFrame("Frame",nil,UIParent)
 StatAPSP:SetAllPoints(EuiLeftStatBackground)
 StatAPSP:EnableMouse(true)
-E.EuiSetTooltip(StatAPSP, nil, "鼠标左键", "切换显示功强/法强")
+E.EuiSetTooltip(StatAPSP, nil, L.INFO_APSP_L1, L.INFO_APSP_R1)
 function E.EuiInfoAPSPShow()
 	if StatAPSP:IsShown() then StatAPSP:Hide() else StatAPSP:Show() end
 end

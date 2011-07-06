@@ -1,6 +1,6 @@
 --Create a Mover frame
 
-local E, C = unpack(EUI) -- Import Functions/Constants, Config, Locales
+Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 E.CreatedMovers = {}
 

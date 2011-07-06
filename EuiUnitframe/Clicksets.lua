@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if not C["raid"].clickset == true then return end
 
 --[[

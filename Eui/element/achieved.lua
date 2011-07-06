@@ -1,5 +1,5 @@
 --Reposition achievement frames
-local E, C = unpack(EUI) -- Import Functions/Constants, Config, Locales
+Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 local AchievementHolder = CreateFrame("Frame", "AchievementHolder", UIParent)
 AchievementHolder:SetWidth(180)
@@ -69,7 +69,7 @@ function E.PostAchievementMove(frame)
 	E.AchievementMove()
 end
 
-E.CreateMover(AchievementHolder, "AchievementMover", "成 就", nil, E.PostAchievementMove)
+E.CreateMover(AchievementHolder, "AchievementMover", L.ACHIEVED, nil, E.PostAchievementMove)
 
 local frame = CreateFrame("Frame")
 frame:RegisterEvent("ACHIEVEMENT_EARNED")

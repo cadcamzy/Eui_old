@@ -134,7 +134,7 @@ function MBB_OnLoad()
 --	hooksecurefunc("SecureHandlerClickTemplate_onclick", MBB_SecureOnClick);
 --	hooksecurefunc("SecureHandlerClickTemplate_OnEnter", MBB_SecureOnEnter);
 --	hooksecurefunc("SecureHandlerClickTemplate_OnLeave", MBB_SecureOnLeave);
-	local E, C = unpack(EUI)
+	Local E, C, L = unpack(EUI)
 	if C["other"].mbb ~= true then
 		return
 	end
@@ -305,7 +305,7 @@ function MBB_TestFrame(name)
 end
 
 function MBB_OnEvent(self, event, ...)
-	local E, C = unpack(EUI)
+	Local E, C, L = unpack(EUI)
 	if C["other"].mbb ~= true then
 		return
 	else

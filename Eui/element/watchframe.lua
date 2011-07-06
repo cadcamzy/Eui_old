@@ -1,6 +1,6 @@
 local EuiWatchFrame = CreateFrame("Frame", "EuiWatchFrame", UIParent)
 
-local E, C = unpack(EUI) -- Import Functions/Constants, Config, Locales
+Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 local wideFrame = GetCVar("watchFrameWidth")
 
 local WatchFrameHolder = CreateFrame("Frame", "WatchFrameHolder", UIParent)
@@ -51,7 +51,7 @@ function E.PositionWatchFrame()
 			WatchFrameHolder:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", E.Scale(-120), E.Scale(-300))
 		end
 		
-		E.CreateMover(WatchFrameHolder, "WatchFrameMover", "任务追踪", true, E.PostWatchMove)
+		E.CreateMover(WatchFrameHolder, "WatchFrameMover", L.WATCHFRAME, true, E.PostWatchMove)
 	end
 end
 

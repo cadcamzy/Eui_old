@@ -6,7 +6,7 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 ]]
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 local cc = {}
 local CUSTOM_CLASS_COLORS = CUSTOM_CLASS_COLORS or E.RAID_CLASS_COLORS
 do
@@ -21,7 +21,7 @@ local function SetCaster(self, unit, index, filter)
 		local uname, urealm = UnitName(unitCaster)
 		local _, uclass = UnitClass(unitCaster)
 		if urealm then uname = uname..'-'..urealm end
-		self:AddLine('\nCast by ' .. (cc[uclass] or '|cffffffff') .. uname .. '|r (' .. unitCaster .. ')')
+		self:AddLine(L.CASTBY .. (cc[uclass] or '|cffffffff') .. uname .. '|r (' .. unitCaster .. ')')
 		self:Show()
 	end
 end

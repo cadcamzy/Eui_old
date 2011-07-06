@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 
 C["main"] = {
 	["autoinvite"] = true,

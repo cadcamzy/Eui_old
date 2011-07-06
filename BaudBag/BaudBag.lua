@@ -5,7 +5,7 @@ Option for disabling fading
 Update offline bank even when it's disabled
 Vertex color for backgrounds
 ]]
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 --[[ defining variables for the events ]]--
 local Localized = BaudBagLocalized;
 

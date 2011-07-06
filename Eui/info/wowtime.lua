@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["info"].wowtime == 0 or C["info"].enable == false then return end
 
 local clocks = CreateFrame ("Frame",nil,UIParent)
@@ -57,9 +57,9 @@ local clocks_update = function(self,t)
 	
  	if C["info"].wgtimenoti == true and (canQueue == false) then
 		if wgtime == 60 then 
-			E.EuiAlertRun ("巴拉丁即将在1分钟内开始")
+			E.EuiAlertRun (L.INFO_WOWTIME_TIP1)
 		elseif wgtime == 900 then 
-			E.EuiAlertRun ("巴拉丁即将在15分钟内开始")
+			E.EuiAlertRun (L.INFO_WOWTIME_TIP2)
 		end
 	end
 end
@@ -77,12 +77,12 @@ local switch_wgtime_a = function()
 	if C["info"].wgtimenoti then
 		C["info"].wgtimenoti = false
 		text_f:SetTextColor(1,.1,.1)
-		text_f:SetText("巴拉丁提示关闭")
+		text_f:SetText(L.INFO_WOWTIME_TIP3)
 		FadingFrame_Show(mess_f)
 	else
 		C["info"].wgtimenoti = true
 		text_f:SetTextColor(.1,1,.1)
-		text_f:SetText("巴拉丁提示开启")
+		text_f:SetText(L.INFO_WOWTIME_TIP4)
 		FadingFrame_Show(mess_f)
 	end
 end
@@ -94,18 +94,18 @@ clocks:SetScript("OnEnter", function(self)
 		local _,_,isActive,canQueue,wgtime,canEnter = GetWorldPVPAreaInfo(2)
 		local inInstance, instanceType = IsInInstance()
 		if isActive == true then
-			wgtime = "正在进行"
+			wgtime = L.INFO_WOWTIME_TIP5
 		elseif canQueue == true then
-			wgtime = form_time(wgtime).."可排"
+			wgtime = form_time(wgtime)..L.INFO_WOWTIME_TIP6
 		elseif canEnter ~= true then
-			wgtime = "不可用"
+			wgtime = L.INFO_WOWTIME_TIP7
 		else
 			wgtime = form_time(wgtime)    
 		end
-	if not ( instanceType == "none" ) then wgtime = "不可用" end
-	GameTooltip:AddDoubleLine("巴拉丁开始时间",wgtime,1,1,1,0.3,1,0.3)
+	if not ( instanceType == "none" ) then wgtime = L.INFO_WOWTIME_TIP7 end
+	GameTooltip:AddDoubleLine(L.INFO_WOWTIME_TIP8,wgtime,1,1,1,0.3,1,0.3)
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddDoubleLine("游戏时间:",form_time(time_sesion),1,1,1,0.3,1,0.3)
+	GameTooltip:AddDoubleLine(L.INFO_WOWTIME_TIP9,form_time(time_sesion),1,1,1,0.3,1,0.3)
 	local oneraid
 	for i = 1, GetNumSavedInstances() do
 	local name,_,reset,difficulty,locked,extended,_,isRaid,maxPlayers = GetSavedInstanceInfo(i)
@@ -129,8 +129,8 @@ clocks:SetScript("OnEnter", function(self)
 		end
 	end
 	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine("点左键显示日历")
-	GameTooltip:AddLine("点右键改变提醒设置")
+	GameTooltip:AddLine(L.INFO_WOWTIME_TIP10)
+	GameTooltip:AddLine(L.INFO_WOWTIME_TIP11)
 	GameTooltip:Show()
 		
 end)

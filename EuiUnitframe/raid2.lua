@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 local oUF = EuiUF or oUF
 if not C["raid"].raid == true or C["unitframe"].aaaaunit == 1 then return end
 

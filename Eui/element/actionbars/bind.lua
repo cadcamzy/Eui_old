@@ -1,4 +1,4 @@
-local E, C = unpack(EUI) -- Import Functions/Constants, Config, Locales
+Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 local bind = CreateFrame("Frame", "EuiHoverBind", UIParent)
 -- SLASH COMMAND

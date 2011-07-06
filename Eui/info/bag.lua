@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["info"].bag == 0 or C["info"].enable == false then return end
 
 local bag = CreateFrame ("Frame", nil,UIParent)
@@ -80,28 +80,28 @@ local function OnEvent(self, event)
 			self.hovered = true 
 			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
 			GameTooltip:ClearLines()
-			GameTooltip:AddDoubleLine("包裹: ",free.."/"..total,1,1,1,1,1,1)
-			GameTooltip:AddLine("会话: ")
-			GameTooltip:AddDoubleLine("挣取:", FormatTooltipMoney(profit), 1, 1, 1, 1, 1, 1)
-			GameTooltip:AddDoubleLine("花费:", FormatTooltipMoney(spent), 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(L.INFO_BAG_TIP1,free.."/"..total,1,1,1,1,1,1)
+			GameTooltip:AddLine(L.INFO_BAG_TIP2)
+			GameTooltip:AddDoubleLine(L.INFO_BAG_TIP3, FormatTooltipMoney(profit), 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddDoubleLine(L.INFO_BAG_TIP4, FormatTooltipMoney(spent), 1, 1, 1, 1, 1, 1)
 			if profit < spent then
-				GameTooltip:AddDoubleLine("赤字:", FormatTooltipMoney(profit-spent), 1, 0, 0, 1, 1, 1)
+				GameTooltip:AddDoubleLine(L.INFO_BAG_TIP5, FormatTooltipMoney(profit-spent), 1, 0, 0, 1, 1, 1)
 			elseif (profit-spent)>0 then
-				GameTooltip:AddDoubleLine("利润:", FormatTooltipMoney(profit-spent), 0, 1, 0, 1, 1, 1)
+				GameTooltip:AddDoubleLine(L.INFO_BAG_TIP6, FormatTooltipMoney(profit-spent), 0, 1, 0, 1, 1, 1)
 			end				
 			GameTooltip:AddLine' '
-			GameTooltip:AddLine("角色: ")				
+			GameTooltip:AddLine(L.INFO_BAG_TIP7)				
 			for k,v in pairs(thisRealmList) do
 				GameTooltip:AddDoubleLine(k, FormatTooltipMoney(v), 1, 1, 1, 1, 1, 1)
 			end
 			GameTooltip:AddLine' '
-			GameTooltip:AddLine("服务器: ")
-			GameTooltip:AddDoubleLine("合计: ", FormatTooltipMoney(totalGold), 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddLine(L.INFO_BAG_TIP8)
+			GameTooltip:AddDoubleLine(L.INFO_BAG_TIP9, FormatTooltipMoney(totalGold), 1, 1, 1, 1, 1, 1)
 						
 			local numWatched = GetNumWatchedTokens()
 			if numWatched > 0 then
 				GameTooltip:AddLine(" ")
-				GameTooltip:AddLine("货币:")
+				GameTooltip:AddLine(L.INFO_BAG_TIP10)
 				
 				for i = 1, numWatched do
 					local name, count, extraCurrencyType, icon, itemID = GetBackpackCurrencyInfo(i)

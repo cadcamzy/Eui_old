@@ -1,7 +1,7 @@
 -- Would like to say thanks to the following authors for their inspiration
 -- tekkub, cael, roth, and luzz 
 -- SPECIAL thanks to caelian, I relied heavly on his code
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["other"].nameplate ~= true then return end
 local shNameplates = {}
 local cfg = {}

@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["info"].setting == 0 or C["info"].enable == false then return end
 
 local setting = CreateFrame ("Button", nil, UIParent)
@@ -11,7 +11,7 @@ name:SetFont(E.fontn,13)
 name:SetJustifyH("RIGHT")
 name:SetShadowOffset(2,-2)
 name:SetPoint("CENTER")
-name:SetText("设 置")
+name:SetText(L.INFO_SETTING_TIP1)
 name:SetTextColor(20/255,122/255,199/25)
 
 setting:SetScript("OnMouseUp", function(self, button)
@@ -44,7 +44,7 @@ local function addDrop(array)
 end
 
 StaticPopupDialogs["RESET_UI"] = {
-	text = "重置UI - 将还原所有界面元素初始位置.",
+	text = L.INFO_SETTING_TIP2,
 	button1 = ACCEPT,
 	button2 = CANCEL,
     OnAccept = function() 
@@ -69,36 +69,36 @@ StaticPopupDialogs["RESET_UI"] = {
 
 settingMenuDrop = addDrop({
 		{ text = "EUI ", isTitle = 1, notCheckable = 1, keepShownOnClick = 0 },
-		{ text = "切换天赋 ", func = function() 
+		{ text = L.INFO_SETTING_MENU1, func = function() 
 			local spec = GetActiveTalentGroup()
 			if spec == 1 then 
 				SetActiveTalentGroup(2)
-				DEFAULT_CHAT_FRAME:AddMessage("已启用副天赋!");
+				DEFAULT_CHAT_FRAME:AddMessage(L.INFO_SETTING_TIP3);
 			elseif spec == 2 then 
 				SetActiveTalentGroup(1)
-				DEFAULT_CHAT_FRAME:AddMessage("已启用主天赋!");
+				DEFAULT_CHAT_FRAME:AddMessage(L.INFO_SETTING_TIP4);
 			end
 		end },
-		{ text = "清除战斗记录 ", func = function() CombatLogClearEntries() end },
-		{ text = "开关战斗日志 ", func = function() 
+		{ text = L.INFO_SETTING_MENU2, func = function() CombatLogClearEntries() end },
+		{ text = L.INFO_SETTING_MENU3, func = function() 
 			if LoggingCombat() then
-				DEFAULT_CHAT_FRAME:AddMessage("战斗记录将关闭!");
+				DEFAULT_CHAT_FRAME:AddMessage(L.INFO_SETTING_TIP5);
 				LoggingCombat(0);
 			else
-				DEFAULT_CHAT_FRAME:AddMessage("战斗记录将开启!");
+				DEFAULT_CHAT_FRAME:AddMessage(L.INFO_SETTING_TIP6);
 				LoggingCombat(1);
 			end
 		end },
-		{ text = "加入冬握湖 ", func = function() BattlefieldMgrQueueRequest(1) end },
-		{ text = "加入巴拉丁 ", func = function() BattlefieldMgrQueueRequest(21) end },
-		{ text = "重设UI界面 ", func = function() StaticPopup_Show("RESET_UI") end },
-		{text = "开/关LFW频道", func=function()
+		{ text = L.INFO_SETTING_MENU4, func = function() BattlefieldMgrQueueRequest(1) end },
+		{ text = L.INFO_SETTING_MENU5, func = function() BattlefieldMgrQueueRequest(21) end },
+		{ text = L.INFO_SETTING_MENU6, func = function() StaticPopup_Show("RESET_UI") end },
+		{text = L.INFO_SETTING_MENU7, func=function()
 			if LFW_SHOW then
 				LFW_SHOW = false
-				DEFAULT_CHAT_FRAME:AddMessage("关闭LFW频道");
+				DEFAULT_CHAT_FRAME:AddMessage(L.INFO_SETTING_TIP7);
 			else
 				LFW_SHOW = true
-				DEFAULT_CHAT_FRAME:AddMessage("打开LFW频道");
+				DEFAULT_CHAT_FRAME:AddMessage(L.INFO_SETTING_TIP8);
 			end;
 		end},
 		{text = "--------", func=function() end},
@@ -124,7 +124,7 @@ settingMenuDrop = addDrop({
 			func = function() ToggleFrame(QuestLogFrame) end},
 		{text = SOCIAL_BUTTON,
 			func = function() ToggleFriendsFrame(1) end},
-		{text = "日历",
+		{text = L.INFO_SETTING_MENU8,
 			func = function() GameTimeFrame:Click() end},
 		{text = PLAYER_V_PLAYER,
 			func = function() ToggleFrame(PVPFrame) end},
@@ -145,30 +145,10 @@ settingMenuDrop = addDrop({
 			func = function() ToggleFrame(LFRParentFrame) end},
 		{text = HELP_BUTTON,
 			func = function() ToggleHelpFrame() end},
-		{text = "游戏选项",
+		{text = L.INFO_SETTING_MENU9,
 			func = function() ToggleFrame(GameMenuFrame) end},	
 	})
 
-----------------
---Setup Exp Tooltip
---[[ setting:SetScript("OnEnter", function()
-	local lg
-	local tltext
-	if LoggingCombat() then
-		lg = "启用"
-	else
-		lg = "禁用"
-	end
-	GameTooltip:SetOwner(setting, "ANCHOR_BOTTOMRIGHT");
-    GameTooltip:ClearLines()
-	GameTooltip:AddLine(" ")
-	GameTooltip:AddLine(string.format('战斗日志: %s', lg))
-	GameTooltip:AddLine("左击打开插件设置界面")
-	GameTooltip:AddLine("右击设置有更多功能!!!")
-    GameTooltip:Show()
-	end)
-setting:SetScript("OnLeave", function() GameTooltip:Hide() end)
- ]]
-E.EuiSetTooltip(setting,"EUI控制台", "鼠标左键", "打开EUI控制台", "鼠标右键", "更多辅助功能")
+E.EuiSetTooltip(setting,L.INFO_SETTING_TIP_TITLE, L.INFO_SETTING_TIP_L1, L.INFO_SETTING_TIP_R1, L.INFO_SETTING_TIP_L2, L.INFO_SETTING_TIP_R2)
 
 E.EuiInfo(C["info"].setting,setting)

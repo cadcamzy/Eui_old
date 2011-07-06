@@ -1,4 +1,4 @@
-local E, C = unpack(EUI) -- Import Functions/Constants, Config, Locales
+Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 if not C["actionbar"].enable == true then return end
 

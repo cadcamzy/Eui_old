@@ -1,4 +1,4 @@
-local E, C = unpack(EUI) -- Import Functions/Constants, Config, Locales
+Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 local _, ns = ...
 local oUF = ns.oUF or oUF
 if C["unitframe"].aaaaunit == 0 then return end

@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if not C["threat"].enable == true then return end
 local direction = "down"
 local threatguid, threatunit, threatlist, threatbars = "", "target", {}, {};
@@ -18,7 +18,7 @@ E.EuiSetTemplate(euithreatframetop,1)
 euithreatframetop.text = euithreatframetop:CreateFontString(nil,"OVERLAY")
 euithreatframetop.text:SetFont(E.fontn,12,"OUTLINE")
 euithreatframetop.text:SetPoint("LEFT", euithreatframetop, "LEFT", 2, 0)
-euithreatframetop.text:SetText("仇 恨")
+euithreatframetop.text:SetText(L.THREAT_TIP1)
 euithreatframetop.text:SetShadowOffset(1,-1)
 --[[ local ebarbg={}
 for i=1,C["threat"].bars do

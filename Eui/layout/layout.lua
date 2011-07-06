@@ -1,5 +1,5 @@
 --定义整个界面的背景板
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 --透明背景
 local alpha
 if C["main"].alpha == true then
@@ -305,7 +305,7 @@ function E.EuiActionBarBackgroundMove(frame)
 		end
 	end
 end
-E.CreateMover(barbg, "EuiActionBarBackgroundMover", "主动作条", nil, E.EuiActionBarBackgroundMove)
+E.CreateMover(barbg, "EuiActionBarBackgroundMover", L.LAYOUT_MAINBAR, nil, E.EuiActionBarBackgroundMove)
 
 if C["actionbar"].enable ~= true then
 	barbg:SetAlpha(0)
@@ -349,7 +349,7 @@ if C["actionbar"].enable == true then
 			end
 		end
 	end
-	E.CreateMover(petbg, "EuiPetActionBarBackgroundMover", "宠物动作条", nil, E.EuiPetActionBarBackgroundMove)
+	E.CreateMover(petbg, "EuiPetActionBarBackgroundMover", L.LAYOUT_PETBAR, nil, E.EuiPetActionBarBackgroundMove)
 	
 	local ltpetbg = CreateFrame("Frame", "EuiLineToPetActionBarBackground", petbg)
 	if C["actionbar"].bottompetbar ~= true then
@@ -411,5 +411,5 @@ if C["raid"].raid == true then
 			end
 		end
 	end
-	E.CreateMover(raidbg, "EuiRaidBackgroundMover", "团队框架", nil, E.EuiRaidBackgroundMove)
+	E.CreateMover(raidbg, "EuiRaidBackgroundMover", L.LAYOUT_RAID, nil, E.EuiRaidBackgroundMove)
 end

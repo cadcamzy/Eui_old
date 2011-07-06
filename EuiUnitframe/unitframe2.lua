@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 local oUF = EuiUF or oUF
 --[[
 	Title: 		oUF_Ljxx

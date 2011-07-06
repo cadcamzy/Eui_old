@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 local _, ns = ...
 local oUF = ns.oUF or oUF
 if not C["tooltip"].enable then return end
@@ -16,7 +16,7 @@ TooltipHolder:SetWidth(130)
 TooltipHolder:SetHeight(22)
 TooltipHolder:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT")
 
-E.CreateMover(TooltipHolder, "TooltipMover", "鼠标提示")
+E.CreateMover(TooltipHolder, "TooltipMover", L.TOOLTIP_TIP1)
 
 local gsub, find, format = string.gsub, string.find, string.format
 
@@ -163,9 +163,9 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 			min, max = UnitHealth(unit), UnitHealthMax(unit)
 			local hp = ShortValue(min).." / "..ShortValue(max)
 			if UnitIsGhost(unit) then
-				self.text:SetText("鬼魂")
+				self.text:SetText(L.TOOLTIP_TIP2)
 			elseif min == 0 or UnitIsDead(unit) or UnitIsGhost(unit) then
-				self.text:SetText("死亡")
+				self.text:SetText(L.TOOLTIP_TIP3)
 			else
 				self.text:SetText(hp)
 			end
@@ -176,7 +176,7 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 			self.text:Show()
 			local hp = ShortValue(min).." / "..ShortValue(max)
 			if min == 0 or min == 1 then
-				self.text:SetText("死亡")
+				self.text:SetText(L.TOOLTIP_TIP3)
 			else
 				self.text:SetText(hp)
 			end
@@ -224,7 +224,7 @@ local function AddTargetedBy()
 			GameTooltip:AddLine(" ",nil,nil,nil,1);
 			local line = _G["GameTooltipTextLeft"..GameTooltip:NumLines()];
 			if not line then return end
-			line:SetFormattedText("被以下玩家选为目标".." (|cffffffff%d|r): %s",(#targetedList + 1) / 3,table.concat(targetedList));
+			line:SetFormattedText(L.TOOLTIP_TIP4.." (|cffffffff%d|r): %s",(#targetedList + 1) / 3,table.concat(targetedList));
 			wipe(targetedList);
 		end
 	end
@@ -318,7 +318,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	if UnitExists(unit.."target") and unit~="player" then
 		local hex, r, g, b = GetColor(unit.."target")
 		if not r and not g and not b then r, g, b = 1, 1, 1 end
-		GameTooltip:AddLine("目标: "..UnitName(unit.."target"), r, g, b)
+		GameTooltip:AddLine(L.TOOLTIP_TIP5..UnitName(unit.."target"), r, g, b)
 	end
 	
 	if C["tooltip"].TargetedBy == true then token = unit AddTargetedBy() end
@@ -613,7 +613,7 @@ GameTooltip:HookScript("OnTooltipSetItem", function(self)
 		end
 		
 		if EuiItemTooltip.count and num > 1 then
-			right = "|cFFCA3C3C".."数量:".."|r "..num
+			right = "|cFFCA3C3C"..L.TOOLTIP_TIP6.."|r "..num
 		end
 				
 		self:AddLine(" ")

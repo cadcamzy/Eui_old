@@ -1,67 +1,4 @@
- local E, C = unpack(EUI)
-local L = GetLocale()
-if(L=="zhCN") then
-L_COST = "修理花费: "
-L_GOLD = "金"
-L_TALENT = "改变"
-L_TALENT_S = "天赋"
-L_INVITE = "接受组队邀请: "
-L_DUEL = "拒绝决斗: "
-L_UI = "使用 |cff00ffff/eset ui|r 载入EUI设置"
-L_BOOST = "使用 |cff00ffff/eset boost|r 优化系统"
-L_MSBT = "使用 |cff00ffff/eset msbt|r 载入MSBT设置"
-L_RECOUNT = "使用 |cff00ffff/eset recount|r 载入Recount设置"
-L_DBM = "使用 |cff00ffff/eset boss|r 载入DBM设置"
-L_ESET = "使用 |cff00ffff/eset all|r 载入所有设置"
-L_RAID = "|cff00ffffEUI:|r 使用 |cff00ffff/ad raid|r 加载RAID插件"
-L_SOLO = "|cff00ffffEUI:|r 使用 |cff00ffff/ad solo|r 加载任务插件"
-L_PVP = "|cff00ffffEUI:|r 使用 |cff00ffff/ad pvp|r 加载PVP插件"
-L_TRADE = "|cff00ffffEUI:|r 使用 |cff00ffff/ad trade|r 加载商业插件"
-L_DISLOOT = "自动拾取关闭"
-L_ENLOOT = "自动拾取开启"
-L_DXE = "使用 |cff00ffff/eset dxe|r 载入DXE设置"
-elseif (L=="zhTW") then
-L_COST = "修理花費: "
-L_GOLD = "金"
-L_TALENT = "改變"
-L_TALENT_S = "天賦"
-L_INVITE = "接受組隊邀請: "
-L_DUEL = "拒絕决鬥: "
-L_UI = "使用 |cff00ffff/eset ui|r 載入EUI配置"
-L_BOOST = "使用 |cff00ffff/eset boost|r 優化系統"
-L_MSBT = "使用 |cff00ffff/eset msbt|r 載入MSBT配置"
-L_RECOUNT = "使用 |cff00ffff/eset recount|r 載入Recount配置"
-L_DBM = "使用 |cff00ffff/eset boss|r 載入DBM配置"
-L_ESET = "使用 |cff00ffff/eset all|r 載入所有配置"
-L_RAID = "|cff00ffffEUI:|r 使用 |cff00ffff/ad raid|r 加載RAID插件"
-L_SOLO = "|cff00ffffEUI:|r 使用 |cff00ffff/ad solo|r 加載任務/solo插件"
-L_PVP = "|cff00ffffEUI:|r 使用 |cff00ffff/ad pvp|r 加載PVP插件"
-L_TRADE = "|cff00ffffEUI:|r 使用 |cff00ffff/ad trade|r 加載交易插件"
-L_DISLOOT = "自動拾取關閉"
-L_ENLOOT = "自動拾取開啟"
-L_DXE = "使用 |cff00ffff/eset dxe|r 載入DXE配置"
-else
-L_COST = "Repair cost: "
-L_GOLD = " gold"
-L_TALENT = "Changed "
-L_TALENT_S = " talents spec."
-L_INVITE = "Accepted invite from: "
-L_DUEL = "Declined duel request from: "
-L_UI = "use |cff00ffff/eset ui|r to upload EUI settings."
-L_BOOST = "use |cff00ffff/eset boost|r to boost your UI."
-L_MSBT = "use |cff00ffff/eset msbt|r to upload MSBT settings."
-L_RECOUNT = "use |cff00ffff/eset recount|r to upload Recount settings."
-L_DBM = "use |cff00ffff/eset boss|r to upload DBM settings."
-L_ESET = "use |cff00ffff/eset all|r to apply all settings at once."
-L_RAID = "|cff00ffffEUI:|r use |cff00ffff/ad raid|r to load raid addons"
-L_SOLO = "|cff00ffffEUI:|r use |cff00ffff/ad solo|r to load solo addons"
-L_PVP = "|cff00ffffEUI:|r use |cff00ffff/ad pvp|r to load pvp addons"
-L_TRADE = "|cff00ffffEUI:|r use |cff00ffff/ad trade|r to load trade addons"
-L_DISLOOT = "AutoLoot deactivated"
-L_ENLOOT = "AutoLoot activated"
-L_DXE = "use |cff00ffff/eset dxe|r to upload DXE settings."
-end
-
+ Local E, C, L = unpack(EUI)
 ---------------------------------------------------- UI Scale
 --VideoOptionsResolutionPanelUIScaleSlider:Hide()
 --VideoOptionsResolutionPanelUseUIScale:Hide()
@@ -172,12 +109,12 @@ if C["main"].autoloot == true then
 function SimpleAutoLoot_OnEvent()
 	if(GetNumRaidMembers() > 0) then
 		if GetCVar("autoLootDefault") == "1" then
-			DEFAULT_CHAT_FRAME:AddMessage(L_DISLOOT, 0, 1, 1 )
+			DEFAULT_CHAT_FRAME:AddMessage(L.L_DISLOOT, 0, 1, 1 )
 			SetCVar("autoLootDefault", "0")
 		end
 	else
 		if GetCVar("autoLootDefault") == "0" then
-			DEFAULT_CHAT_FRAME:AddMessage(L_ENLOOT, 0, 1, 1 )
+			DEFAULT_CHAT_FRAME:AddMessage(L.L_ENLOOT, 0, 1, 1 )
 			SetCVar("autoLootDefault", "1")
 		end
 	end
@@ -224,7 +161,7 @@ local dd = CreateFrame("Frame")
     dd:SetScript("OnEvent", function(self, event, name)
         HideUIPanel(StaticPopup1)
         CancelDuel()
-		E.EuiAlertRun(L_DUEL..name,0,1,1) -- new info text
+		E.EuiAlertRun(L.L_DUEL..name,0,1,1) -- new info text
     end)
 end
 
@@ -283,12 +220,12 @@ local arsc = CreateFrame("Frame")
         local CanGuildRepair = C["main"].autorepairguild == true and IsInGuild() and CanGuildBankRepair() and GetGuildBankWithdrawMoney()>cost and GetGuildBankMoney()>cost
         if(CanGuildRepair) then
             RepairAllItems(1)
-            E.EuiAlertRun(format(L_COST.."%.1f"..L_GOLD, cost * 0.0001),0,1,1)
-			print(format("|cff00ffff"..L_COST.."%.1f"..L_GOLD.."|r", cost * 0.0001))
+            E.EuiAlertRun(format(L.L_COST.."%.1f"..L.L_GOLD, cost * 0.0001),0,1,1)
+			print(format("|cff00ffff"..L.L_COST.."%.1f"..L.L_GOLD.."|r", cost * 0.0001))
         elseif(GetMoney()>cost) then
             RepairAllItems()
-            E.EuiAlertRun(format(L_COST.."%.1f"..L_GOLD, cost * 0.0001),0,1,1)
-			print(format("|cff00ffff"..L_COST.."%.1f"..L_GOLD.."|r", cost * 0.0001))
+            E.EuiAlertRun(format(L.L_COST.."%.1f"..L.L_GOLD, cost * 0.0001),0,1,1)
+			print(format("|cff00ffff"..L.L_COST.."%.1f"..L.L_GOLD.."|r", cost * 0.0001))
         end
     end
 
@@ -316,8 +253,8 @@ if C["main"].acceptinvites == true then
     ai:RegisterEvent("PARTY_INVITE_REQUEST")
     ai:SetScript("OnEvent", function(frame, event, name)
         if(IsFriend(name)) then
-			E.EuiAlertRun(L_INVITE..name,0,1,1)
-			print(format("|cff00ffff"..L_INVITE..name))
+			E.EuiAlertRun(L.L_INVITE..name,0,1,1)
+			print(format("|cff00ffff"..L.L_INVITE..name))
             AcceptGroup()
             for i = 1, 4 do
                 local frame = _G["StaticPopup"..i]
@@ -477,10 +414,10 @@ SlashCmdList["CHANGEADDONS"] = function(s)
         end	
         ReloadUI()
     else
-		print(L_RAID)
-		print(L_SOLO)
-		print(L_PVP)
-		print(L_TRADE)
+		print(L.L_RAID)
+		print(L.L_SOLO)
+		print(L.L_PVP)
+		print(L.L_TRADE)
     end
 end
 SLASH_CHANGEADDONS1 = "/ad"
@@ -552,10 +489,10 @@ HideSpam:SetScript("OnEvent", function( self, event, ...)
 		local activeGroupNum = GetActiveTalentGroup()
 		if specCache[activeGroupNum].totalPointsSpent > 1 then
 			local s = specCache[activeGroupNum];
-			print(L_TALENT.."|cff6adb54".. s.specName .." ("..
+			print(L.L_TALENT.."|cff6adb54".. s.specName .." ("..
 			s[1].pointsSpent .."/"..
 			s[2].pointsSpent .."/"..
-			s[3].pointsSpent ..")|r"..L_TALENT_S)
+			s[3].pointsSpent ..")|r"..L.L_TALENT_S)
 		end
 		
 		ChatFrame_RemoveMessageEventFilter("CHAT_MSG_SYSTEM", self.filter)
@@ -1093,13 +1030,13 @@ SlashCmdList["eset"] = function(msg)
 		dxe()
         ReloadUI()
     else
-		pr(L_UI)
-		pr(L_BOOST)
-		pr(L_RECOUNT)
-		pr(L_MSBT)
-		pr(L_DBM)
-        pr(L_ESET)
-        pr(L_DXE)
+		pr(L.L_UI)
+		pr(L.L_BOOST)
+		pr(L.L_RECOUNT)
+		pr(L.L_MSBT)
+		pr(L.L_DBM)
+        pr(L.L_ESET)
+        pr(L.L_DXE)
     end
 end
 
@@ -1191,7 +1128,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		DEATHKNIGHT = {},
 	}
 	if select(2, GetNumMacros()) > 34 then
-    print("你的宏已经满了，请留两个空位后才能启用鼠标滚轮解Debuff功能！")
+    print(L.CLICKSET_MOUSE_ERR)
 		return
 	end
 --local index_a = CreateMacro("Debuff_1", _, "/cast [target=mouseover] 清洁术;",1)
@@ -1206,9 +1143,9 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		local b=SetBinding("ALT-MOUSEWHEELDOWN", "CAMERAZOOMOUT")
 		if a and b then
 			SaveBindings(2)
-			print("鼠标滚轮上下被绑定到鼠标指向解DEBUFF上")
-			print("原视野放大缩小变更为Alt+鼠标滚轮")
-			print("不需此功能请至点击施法设置中关闭")
+			print(L.CLICKSET_TIP1)
+			print(L.CLICKSET_TIP2)
+			print(L.CLICKSET_TIP3)
 		end
 	end
 	if CanDispel[class][2] and IsSpellKnown(CanDispel[class][2]) then
@@ -1221,7 +1158,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 end)
 
 StaticPopupDialogs["INSTALL_UI"] = {
-	text = "本角色首次使用此EUI，将进行初始化设置并重置界面!",
+	text = L.INSTALLUI_TEXT,
 	button1 = ACCEPT,
 	button2 = CANCEL,
     OnAccept = function() 

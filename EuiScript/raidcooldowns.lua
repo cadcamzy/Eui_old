@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["filter"].raid ~= true then return end
 local spells = {
 	[48477] = 600, -- XD战复
@@ -179,7 +179,7 @@ function E.RaidCooldownPoint(frame)
 	end
 end
 
-E.CreateMover(EuiRaidCooldowns, "RaidCooldownMover", "团队技能冷却", false, E.RaidCooldownPoint)
+E.CreateMover(EuiRaidCooldowns, "RaidCooldownMover", L.RAIDCOOLDOWN, false, E.RaidCooldownPoint)
 
 function E.RaidCooldownShow()
 	if EuiRaidCooldowns:IsShown() then EuiRaidCooldowns:Hide() else EuiRaidCooldowns:Show() end

@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+local E, C, L = unpack(EUI)
 if not C["filter"].enable == true then return end
 --[[
 参数格式:
@@ -19,15 +19,15 @@ SlashCmdList["ADDFILTER"] = function(input)
 	local input = string.lower(input) --转换为小写
 	local unm = {strsplit(",", input)}
 	if #unm ~= 4 then
-		print("参数格式不对!")
-		print("/af 类型,样式,法术ID,施法者")
-		print("/af 类型,样式,法术ID,delete")
-		print("类型: 玩家BUFF: playerbuff(pb),目标DEBUFF: targetdebuff(td), 玩家技能冷却: cd")
-		print("样式: 图标: icon, 计时条: bar")
-		print("法术ID: 一组数字如:65532,由鼠标提示中获得")
-		print("施法者: 玩家: player, 目标: target, 任何人: all")
-		print("/af pb,icon,1243,player 示范代码添加坚韧的图标监视")
-		print("/af cd,icon,59752,player 示范代码添加自利的冷却监视")
+		print(L.ADDFILTER_ERR)
+		print(L.ADDFILTER_TIP1)
+		print(L.ADDFILTER_TIP2)
+		print(L.ADDFILTER_TIP3)
+		print(L.ADDFILTER_TIP4)
+		print(L.ADDFILTER_TIP5)
+		print(L.ADDFILTER_TIP6)
+		print(L.ADDFILTER_TIP7)
+		print(L.ADDFILTER_TIP8)
 		return
 	end
 	if unm[1] == "playerbuff" or unm[1] == "pb" then
@@ -37,19 +37,19 @@ SlashCmdList["ADDFILTER"] = function(input)
 	elseif unm[1] == "playercdicon" or unm[1] == "cd" then
 		unm[1] = "cd"
 	else
-		print("参数1错误!")
+		print(format(L.ADDFILTER_ERR2, 1))
 		return
 	end
 	if unm[2] ~= "icon" and unm[2] ~= "bar" then
 		print(unm[2])
-		print("参数2错误")
+		print(format(L.ADDFILTER_ERR2, 2))
 		return
 	end
 
 	if unm[1] == "cd" and unm[2] == "bar" then unm[2] = "icon" end	
 	
 	if not GetSpellInfo(unm[3]) then
-		print("参数3错误")
+		print(format(L.ADDFILTER_ERR2, 3))
 		return
 	end
 	if unm[4] == "delete" or unm[4] == "d" or unm[4] == "del" then
@@ -59,7 +59,7 @@ SlashCmdList["ADDFILTER"] = function(input)
 			for k,v in pairs(filter) do
 				if filter[k].spellID == tonumber(unm[3]) and filter[k].mode == unm[2] then
 					filter[k] = nil
-					print(select(1, GetSpellInfo(unm[3])).." 删除成功,重载后生效!")
+					print(select(1, GetSpellInfo(unm[3]))..L.ADDFILTER_DEL)
 					delok =1
 					break;					
 				end
@@ -67,27 +67,27 @@ SlashCmdList["ADDFILTER"] = function(input)
 			if delok == 1 then return end
 		end
 	elseif unm[4] ~= "player" and unm[4] ~= "target" and unm[4] ~= "all" then
-		print("参数4错误")
+		print(format(L.ADDFILTER_ERR2, 4))
 		return
 	end
 	if unm[1]=='playerbuff' and unm[2] == "icon" and C["filter"].pbufficon ~= true then
-		print("玩家BUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关")
+		print(L.ADDFILTER_PB_ICON)
 		return
 	end
 	if unm[1]=='playerbuff' and unm[2] == "bar" and C["filter"].pbuffbar ~= true then
-		print("玩家BUFF计时条提示已被禁用,无法添加,请先到设置中打开对应开关")
+		print(L.ADDFILTER_PB_BAR)
 		return
 	end
 	if unm[1]=='targetdebuff' and unm[2] == "icon" and C["filter"].tdebufficon ~= true then
-		print("目标DEBUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关")
+		print(L.ADDFILTER_TD_ICON)
 		return
 	end
 	if unm[1]=='targetdebuff' and unm[2] == "bar" and C["filter"].tdebuffbar ~= true then
-		print("目标DEBUFF计时条提示已被禁用,无法添加,请先到设置中打开对应开关")
+		print(L.ADDFILTER_TD_BAR)
 		return
 	end
 	if unm[1]=='cd' and C["filter"].pcdicon ~= true then
-		print("玩家CD图标提示已被禁用,无法添加,请选到设置中打开对应开关")
+		print(L.ADDFILTER_CD_ICON)
 		return
 	end	
 	for i = 1, #Filger_Spells[E.MyClass] do
@@ -100,7 +100,7 @@ SlashCmdList["ADDFILTER"] = function(input)
 					caster = unm[4],
 					filter = "BUFF"
 				})
-				print(select(1, GetSpellInfo(unm[3])).." 添加成功")
+				print(select(1, GetSpellInfo(unm[3]))..L.ADDFILTER_ADD)
 				if filter == nil then filter = {} end
 				table.insert(filter,{
 					spellID = tonumber(unm[3]),
@@ -124,7 +124,7 @@ SlashCmdList["ADDFILTER"] = function(input)
 					caster = unm[4],
 					filter = "BUFF"
 				})
-				print(select(1, GetSpellInfo(unm[3])).." 添加成功")
+				print(select(1, GetSpellInfo(unm[3]))..L.ADDFILTER_ADD)
 				if filter == nil then filter = {} end
 				table.insert(filter,{
 					spellID = tonumber(unm[3]),
@@ -148,7 +148,7 @@ SlashCmdList["ADDFILTER"] = function(input)
 					caster = unm[4],
 					filter = "DEBUFF"
 				})
-				print(select(1, GetSpellInfo(unm[3])).." 添加成功")
+				print(select(1, GetSpellInfo(unm[3]))..L.ADDFILTER_ADD)
 				if filter == nil then filter = {} end
 				table.insert(filter,{
 					spellID = tonumber(unm[3]),
@@ -172,7 +172,7 @@ SlashCmdList["ADDFILTER"] = function(input)
 					caster = unm[4],
 					filter = "DEBUFF"
 				})
-				print(select(1, GetSpellInfo(unm[3])).." 添加成功")
+				print(select(1, GetSpellInfo(unm[3]))..L.ADDFILTER_ADD)
 				if filter == nil then filter = {} end
 				table.insert(filter,{
 					spellID = tonumber(unm[3]),
@@ -194,7 +194,7 @@ SlashCmdList["ADDFILTER"] = function(input)
 					size = C["filter"].cdsize,
 					filter = "CD"
 				})
-				print(select(1, GetSpellInfo(unm[3])).."添加成功")
+				print(select(1, GetSpellInfo(unm[3]))..L.ADDFILTER_ADD)
 				if filter == nil then filter = {} end
 				table.insert(filter,{
 					spellID = tonumber(unm[3]),

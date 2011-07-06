@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["other"].buff ~= true then return end
 
 local BUFFS_PER_ROW = 14
@@ -339,6 +339,6 @@ function E.AurasPostion(frame)
 	end		
 	
 end
-E.CreateMover(EuiDebuffFrame, "EuiDebuffFrameMover", "玩家DEBUFF", false, E.AurasPostion)
-E.CreateMover(EuiTempEnchantFrame, "EuiTempEnchantFrameMover", "临时附魔", false, E.AurasPostion)
-E.CreateMover(EuiBuffFrame, "EuiBuffFrameMover", "玩家BUFF", false, E.AurasPostion)
+E.CreateMover(EuiDebuffFrame, "EuiDebuffFrameMover", L.DEBUFF, false, E.AurasPostion)
+E.CreateMover(EuiTempEnchantFrame, "EuiTempEnchantFrameMover", L.TEMPENCHANT, false, E.AurasPostion)
+E.CreateMover(EuiBuffFrame, "EuiBuffFrameMover", L.BUFF, false, E.AurasPostion)

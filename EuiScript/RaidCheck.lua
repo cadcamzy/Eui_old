@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["other"].raidcheck ~= true then return end
 local join = string.join
 local find = string.find
@@ -6,84 +6,7 @@ local format = string.format
 local sort = table.sort
 local floor = math.floor
 local MaxGroup = 5
-local L = {}
-L.RaidCheckDRUID = "德鲁伊"
-L.RaidCheckHUNTER = "猎人"
-L.RaidCheckMAGE = "法师"
-L.RaidCheckPRIEST = "牧师"
-L.RaidCheckROGUE = "潜行者"
-L.RaidCheckWARLOCK = "术士"
-L.RaidCheckWARRIOR = "战士"
-L.RaidCheckSHAMAN = "萨满祭司"
-L.RaidCheckPALADIN = "圣骑士"
-L.RaidCheckDEATHKNIGHT = "死亡骑士"
 
-L.RaidCheckBuffBearForm = "巨熊形态"
-L.RaidCheckBuffCatForm = "猎豹形态"
-L.RaidCheckBuffGiftOfWild = "野性赐福"
-L.RaidCheckBuffMarkOfWild = "野性印记"
-
-L.RaidCheckBuffFortitude1 = "坚韧祷言"
-L.RaidCheckBuffFortitude2 = "真言术：韧"
-L.RaidCheckBuffSpirit1 = "精神祷言"
-L.RaidCheckBuffSpirit2 = "神圣之灵"
-
-L.RaidCheckBuffBrilliance1 = "奥术光辉"
-L.RaidCheckBuffBrilliance2 = "奥术智慧"
-L.RaidCheckBuffBrilliance3 = "达拉然光辉"
-
-L.RaidCheckBuffKings1 = "王者祝福"
-L.RaidCheckBuffKings2 = "强效王者祝福"
-L.RaidCheckBuffKings3 = "遗忘王者祝福"
-L.RaidCheckBuffMight1 = "力量祝福"
-L.RaidCheckBuffMight2 = "强效力量祝福"
-L.RaidCheckBuffMight3 = "战斗怒吼"
-L.RaidCheckBuff1Wisdom1 = "智慧祝福"
-L.RaidCheckBuff1Wisdom2 = "强效智慧祝福"
-L.RaidCheckBuff1Wisdom3 = "法力之泉"
-L.RaidCheckBuffRighteousFury = "正义之怒"
-
-L.RaidCheckMsgOUTRAID = "你不在一个团队中"
-L.RaidCheckMsgRighteousFury = "你可能需要启用“正义之怒”"
-L.RaidCheckMsgNoRighteousFury = "无正义之怒"
-L.RaidCheckMsgFullBuff = "Buff检查：常规Buff已齐全！"
-L.RaidCheckMsgNoBuff = "Buff检查：%s缺少！"
-L.RaidCheckMsgNoBuffAll = "*全无*"
-L.RaidCheckMsgFortitude = "耐力"
-L.RaidCheckMsgSpirit = "精神"
-L.RaidCheckMsgBrilliance = "智力"
-L.RaidCheckMsgWild = "野性印记"
-L.RaidCheckMsgKings = "王者祝福"
-L.RaidCheckMsgWisdom = "智慧祝福"
-L.RaidCheckMsgMight = "力量祝福"
-L.RaidCheckMsgGroup = "%s队(%s)"
-	
-L.RaidCheckMsgPosition = "到位检查"
-L.RaidCheckMsgAllInPlace = "%s人全部到位"
-L.RaidCheckMsgInPlace = "已到位%s人"
-L.RaidCheckMsgDead = "%s人死亡"
-L.RaidCheckMsgOffline = "%s人离线"
-L.RaidCheckMsgUnVisible = "%s人过远"
-L.RaidCheckMsgETC = "等."
-
-L.RaidCheckFlaskData = {
-		"合剂",
-	}
-L.RaidCheckMsgFlask = "合剂检查"
-L.RaidCheckMsgAllNoFlask = "所有人均无合剂效果"
-L.RaidCheckMsgAllHasFlask = "所有人均已有合剂效果"
-L.RaidCheckMsgNoFlask = "%s人无合剂效果"
-L.RaidCheckMsgHasFlask = "%s人已有合剂效果"
-
-L.RaidCheckTipLeftButtonOnLeftInfo = "检查团队成员到位情况"
-L.RaidCheckTipRightButtonOnLeftInfo = "发起团队就位确认"
-L.RaidCheckTipLeftButtonOnRightInfo = "检查团队BUFF"
-L.RaidCheckTipRightButtonOnRightInfo = "检查合剂效果"
-
-L.MouseLeftButton = "鼠标左键"
-L.MouseRightButton = "鼠标右键"
-L.MouseClick = "鼠标点击"
-L.BottomPanelRaidCheck = "EUI团队检查工具"
 -------------------------------------------------------------------------------------------------------------------
 --	团队Buff检查
 -------------------------------------------------------------------------------------------------------------------
@@ -671,7 +594,7 @@ RaidCheckFrameLeft:SetScript("OnMouseDown", function(self, btn)
 	end
 end)
 
-E.EuiSetTooltip(RaidCheckFrameLeft, L.BottomPanelRaidCheck, L.MouseLeftButton, RaidUtilityPanel and "打开团队工具面板" or L.RaidCheckTipLeftButtonOnLeftInfo, L.MouseRightButton, L.RaidCheckTipRightButtonOnLeftInfo)
+E.EuiSetTooltip(RaidCheckFrameLeft, L.BottomPanelRaidCheck, L.MouseLeftButton, RaidUtilityPanel and L.RAIDCHECK_RAIDTOOL or L.RaidCheckTipLeftButtonOnLeftInfo, L.MouseRightButton, L.RaidCheckTipRightButtonOnLeftInfo)
 
 local RaidCheckFrameRight = CreateFrame("Button", "RaidCheckFrameRight", UIParent)
 E.EuiSetTemplate(RaidCheckFrameRight)

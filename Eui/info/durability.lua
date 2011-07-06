@@ -1,63 +1,63 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["info"].durability == 0 or C["info"].enable == false then return end
 
 --状态报告
 local MyData = {};
 function StatReport_GetSpellText()
 	local text = "";
-	text = text..MyData.SSP.."法伤";
+	text = text..MyData.SSP..L.INFO_DURABILITY_STAT1;
 	text = text..", ";
-	text = text..MyData.SHIT.."命中";
+	text = text..MyData.SHIT..L.INFO_DURABILITY_STAT2;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.SCRIT).."爆击";
+	text = text..format("%.1f%%", MyData.SCRIT)..L.INFO_DURABILITY_STAT3;
 	text = text..", ";
-	text = text..MyData.SHASTE.."急速";
+	text = text..MyData.SHASTE..L.INFO_DURABILITY_STAT4;
 	text = text..", ";
-	text = text..MyData.MP.."法力";
+	text = text..MyData.MP..L.INFO_DURABILITY_STAT5;
 	return text;
 end
 
 function StatReport_GetHealText()
 	local text = "";
-	text = text..MyData.SHP.."治疗";
+	text = text..MyData.SHP..L.INFO_DURABILITY_STAT6;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.SCRIT).."爆击";
+	text = text..format("%.1f%%", MyData.SCRIT)..L.INFO_DURABILITY_STAT3;
 	text = text..", ";
-	text = text..MyData.SHASTE.."急速";
+	text = text..MyData.SHASTE..L.INFO_DURABILITY_STAT4;
 	text = text..", ";
-	text = text..MyData.MP.."法力";
+	text = text..MyData.MP..L.INFO_DURABILITY_STAT5;
 	text = text..", ";
-	text = text..MyData.SMR.."/".."5秒法力回复";
+	text = text..MyData.SMR.."/"..L.INFO_DURABILITY_STAT7;
 	return text;
 end
 
 function StatReport_GetSpellAndHealText()
 	local text = "";
-	text = text..MyData.SSP.."法伤";
+	text = text..MyData.SSP..L.INFO_DURABILITY_STAT1;
 	text = text..", ";
-	text = text..MyData.SHP.."治疗";
+	text = text..MyData.SHP..L.INFO_DURABILITY_STAT6;
 	text = text..", ";
-	text = text..MyData.SHIT.."命中";
+	text = text..MyData.SHIT..L.INFO_DURABILITY_STAT2;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.SCRIT).."爆击";
+	text = text..format("%.1f%%", MyData.SCRIT).."L.INFO_DURABILITY_STAT3;
 	text = text..", ";
-	text = text..MyData.SHASTE.."急速";
+	text = text..MyData.SHASTE..L.INFO_DURABILITY_STAT4;
 	text = text..", ";
-	text = text..MyData.MP.."法力";
+	text = text..MyData.MP..L.INFO_DURABILITY_STAT5;
 	text = text..", ";
-	text = text..MyData.SMR.."/".."5秒法力回复";
+	text = text..MyData.SMR.."/"..L.INFO_DURABILITY_STAT7;
 	return text;
 end
 
 function StatReport_GetMeleeText()
 	local text = "";
-	text = text..MyData.MAP.."强度";
+	text = text..MyData.MAP..L.INFO_DURABILITY_STAT8;
 	text = text..", ";
-	text = text..MyData.MHIT.."命中";
+	text = text..MyData.MHIT..L.INFO_DURABILITY_STAT2;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.MCRIT).."爆击";
+	text = text..format("%.1f%%", MyData.MCRIT)..L.INFO_DURABILITY_STAT3;
 	text = text..", ";
-	text = text..MyData.MEXPER.."精准";
+	text = text..MyData.MEXPER..L.INFO_DURABILITY_STAT9;
 --	text = text..", ";
 --	text = text..MyData.Penetr.."%破甲"
 	return text;
@@ -65,11 +65,11 @@ end
 
 function StatReport_GetRangedText()
 	local text = "";
-	text = text..MyData.RAP.."强度";
+	text = text..MyData.RAP..L.INFO_DURABILITY_STAT8;
 	text = text..", ";
-	text = text..MyData.RHIT.."命中";
+	text = text..MyData.RHIT..L.INFO_DURABILITY_STAT2;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.RCRIT).."爆击";
+	text = text..format("%.1f%%", MyData.RCRIT)..L.INFO_DURABILITY_STAT3;
 --	text = text..", ";
 --	text = text..MyData.Penetr.."%破甲"	
 	return text;
@@ -77,17 +77,17 @@ end
 
 function StatReport_GetTankText()
 	local text = "";
-	text = text..MyData.HP.."生命";
+	text = text..MyData.HP..L.INFO_DURABILITY_STAT10;
+--	text = text..", ";
+--	text = text..MyData.DEF.."防御";
 	text = text..", ";
-	text = text..MyData.DEF.."防御";
+	text = text..format("%.1f%%", MyData.DODGE)..L.INFO_DURABILITY_STAT11;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.DODGE).."躲闪";
+	text = text..format("%.1f%%", MyData.PARRY)..L.INFO_DURABILITY_STAT12;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.PARRY).."招架";
+	text = text..format("%.1f%%", MyData.BLOCK)..L.INFO_DURABILITY_STAT13;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.BLOCK).."格挡";
-	text = text..", ";
-	text = text..MyData.ARMOR.."护甲";
+	text = text..MyData.ARMOR..L.INFO_DURABILITY_STAT14;
 	return text;
 end
 
@@ -120,24 +120,8 @@ function StatReport_TalentData()
 	elseif (talentFormat == 3) then
 		current.format = current[1].."/"..current[2].."/"..current[3];
 	end
-	return current.tree or "无", current.format
+	return current.tree or L.INFO_DURABILITY_NO, current.format
 
---[[ 	local name1,_,pointsSpent1 = GetTalentTabInfo(1);
-	local name2,_,pointsSpent2 = GetTalentTabInfo(2);
-	local name3,_,pointsSpent3 = GetTalentTabInfo(3);
-	local nameKey = "无";
-	local TalentStat = "";
-	if not(pointsSpent1 == 0 and pointsSpent2 == 0 and pointsSpent3 == 0) then
-		local tmpname, temppointsSpent;
-		tmpname = ((pointsSpent1 > pointsSpent2) and name1) or name2;
-		temppointsSpent = ((pointsSpent1 > pointsSpent2) and pointsSpent1) or pointsSpent2;
-		tmpname = ((temppointsSpent > pointsSpent3) and tmpname) or name3;
-		nameKey = tmpname;
-	end
-	if nameKey ~= "无" then
-		TalentStat = ("(%s/%s/%s)"):format(pointsSpent1, pointsSpent2, pointsSpent3);
-	end
-	return nameKey, TalentStat; ]]
 end
 
 function StatReport_UnitAttackPower()
@@ -322,17 +306,17 @@ local name = durability:CreateFontString (nil,"OVERLAY")
 --	name:SetTextColor(23/255,132/255,209/255)
 		
 local Slots = {
-	[1] = {1, "头", 1000},
-	[2] = {3, "肩", 1000},
-	[3] = {5, "胸", 1000},
-	[4] = {6, "腰", 1000},
-	[5] = {9, "腕", 1000},
-	[6] = {10, "手", 1000},
-	[7] = {7, "腿", 1000},
-	[8] = {8, "脚", 1000},
-	[9] = {16, "主手", 1000},
-	[10] = {17, "副手", 1000},
-	[11] = {18, "远程武器", 1000}
+	[1] = {1, L.INFO_DURABILITY_SLOTS1, 1000},
+	[2] = {3, L.INFO_DURABILITY_SLOTS2, 1000},
+	[3] = {5, L.INFO_DURABILITY_SLOTS3, 1000},
+	[4] = {6, L.INFO_DURABILITY_SLOTS4, 1000},
+	[5] = {9, L.INFO_DURABILITY_SLOTS5, 1000},
+	[6] = {10, L.INFO_DURABILITY_SLOTS6, 1000},
+	[7] = {7, L.INFO_DURABILITY_SLOTS7, 1000},
+	[8] = {8, L.INFO_DURABILITY_SLOTS8, 1000},
+	[9] = {16, L.INFO_DURABILITY_SLOTS9, 1000},
+	[10] = {17, L.INFO_DURABILITY_SLOTS10, 1000},
+	[11] = {18, L.INFO_DURABILITY_SLOTS11, 1000}
 }
 
 local Total = 0
@@ -365,7 +349,7 @@ local function OnEvent(self)
 	self:SetScript("OnEnter", function()
 		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
 		GameTooltip:ClearLines()
-		GameTooltip:AddDoubleLine("耐久度",floor(Slots[1][3]*100).." %",1,1,1,r,g,b)
+		GameTooltip:AddDoubleLine(L.INFO_DURABILITY_TIP1,floor(Slots[1][3]*100).." %",1,1,1,r,g,b)
 		GameTooltip:AddDoubleLine(" ")
 		for i = 1, 11 do
 			if Slots[i][3] ~= 1000 then
@@ -375,7 +359,7 @@ local function OnEvent(self)
 			end
 		end
 		GameTooltip:AddDoubleLine(" ")
-		GameTooltip:AddDoubleLine("--==右击发送角色数据到聊天框==--","",0.92, 0.94, 0.15,1,1,1)
+		GameTooltip:AddDoubleLine(L.INFO_DURABILITY_TIP2,"",0.92, 0.94, 0.15,1,1,1)
 		GameTooltip:Show()	
 	end)
 	self:SetScript("OnLeave", function() GameTooltip:Hide() end)
@@ -391,15 +375,15 @@ durability:SetScript("OnMouseDown", function(self,arg1)
 		ToggleCharacter("PaperDollFrame")
 	else
 		--发送状态报告
-		local msg = "EUI角色数据报告: "
+		local msg = "EUI"..L.INFO_DURABILITY_TIP3
 		StatReport_UpdateMyData()
 		msg = msg..MyData.CLASS;
 		msg = msg..", ";
-		msg = msg..MyData.TKEY.."天赋"..MyData.TDATA;
+		msg = msg..MyData.TKEY..L.INFO_DURABILITY_TIP4..MyData.TDATA;
 		msg = msg..", ";
-		msg = msg.."装备等级"..MyData.ILVL;
+		msg = msg..L.INFO_DURABILITY_TIP5..MyData.ILVL;
 		msg = msg..", ";
-		msg = msg.."精通点数"..MyData.Mastery;
+		msg = msg..L.INFO_DURABILITY_TIP6..MyData.Mastery;
 
 		msg = msg..", ";
 		if MyData.CLASS_EN == "MAGE" or MyData.CLASS_EN == "WARLOCK" then
@@ -480,7 +464,7 @@ durability:SetScript("OnMouseDown", function(self,arg1)
 
 		if MyData.CRDEF > (200*(MyData.LV/70)) then
 			msg = msg..", ";
-			msg = msg..MyData.CRDEF.."韧性";
+			msg = msg..MyData.CRDEF..L.INFO_DURABILITY_TIP7;
 		end	
 		
 		if IsAddOnLoaded("GearScoreLite") then

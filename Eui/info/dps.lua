@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["info"].dps == 0 or C["info"].enable == false then return end
 
 local StatDPS = CreateFrame("Frame",nil,UIParent)

@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["other"].mail ~= true then return end
 local deletedelay, t = 0.5, 0
 local takingOnlyCash = false

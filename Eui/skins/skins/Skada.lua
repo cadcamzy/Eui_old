@@ -1,4 +1,4 @@
-﻿local E, C = unpack(EUI)
+﻿Local E, C, L = unpack(EUI)
 if C["skins"].skada ~= true then return end
 
 local SkadaSkin = CreateFrame("Frame")

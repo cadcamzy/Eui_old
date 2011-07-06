@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["info"].friend == 0 or C["info"].enable == false then return end
 --if UnitLevel("player") == 80 then return end
 
@@ -42,7 +42,7 @@ function friend:ShowBar()
 			if online > 0 then
 				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
 				GameTooltip:ClearLines()
-				GameTooltip:AddDoubleLine("好友列表:", format("在线: " .. "%s/%s",online,total),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+				GameTooltip:AddDoubleLine(L.INFO_FRIEND_TIP1, format(L.INFO_FRIEND_TIP2 .. "%s/%s",online,total),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 				GameTooltip:AddLine' '
 				-- name, level, class, area, connected, status, note
 				for i = 1, total do

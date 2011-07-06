@@ -1,4 +1,4 @@
-local E, C = unpack(EUI)
+local E, C, L = unpack(EUI)
 
 _G.JPackLocale = {}
 local L = JPackLocale
@@ -22,7 +22,7 @@ L["Unknown command"] = "未知命令"
 
 -- Help info
 L["Slash command"] = "命令"
-L["Pack"] = "整理"
+L["Pack"] = L.JPACK_PACK
 L["Set sequence to ascend"] = "正序整理"
 L["Set sequence to descend"] = "逆序整理"
 L["Save to the bank"] = "保存到银行"

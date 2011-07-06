@@ -3,7 +3,7 @@
 		all credits of this mod goes to tekhub
 --]]
 
-local E, C = unpack(EUI)
+Local E, C, L = unpack(EUI)
 if C["other"].loot ~= true then return end
 
 local pos = "TOP"
@@ -372,7 +372,7 @@ anchor:SetScript("OnEvent", function(frame, event, addon)
 	anchorholder:SetWidth(anchor:GetWidth())
 	anchorholder:SetHeight(anchor:GetHeight())
 	
-	E.CreateMover(AnchorHolder, "LootRollMover", "物品ROLL框", nil, E.PostMoveLootRoll)
+	E.CreateMover(AnchorHolder, "LootRollMover", L.TEKSLOOT, nil, E.PostMoveLootRoll)
 	
 	anchor:SetPoint("TOP", anchorholder, "TOP", 0, 0)
 	
