@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["filter"].raid ~= true then return end
 local spells = {
 	[48477] = 600, -- XD战复

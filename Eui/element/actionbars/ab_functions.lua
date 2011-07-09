@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------
 --	ActionBar Functions
 ------------------------------------------------------------------------
-Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 E.TotemBarOrientation = function(revert)
 	local position = ShapeShiftMover:GetPoint()

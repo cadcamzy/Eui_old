@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["other"].sr ~= true then return end
 
 local SR_REP_MSG = "%s: %+d (%d/%d)";

@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 
 if C["actionbar"].enable ~= true or C["actionbar"].microbar ~= true then return end

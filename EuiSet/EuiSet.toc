@@ -3,7 +3,7 @@
 ## Title-zhCN: EUI界面设置模块|cffC495DDEuiSet|r
 ## Author: Ljxx
 ## RequiredDeps: Eui
-## Version: Beta6
+## Version: 20110709N
 ## SavedVariablesPerCharacter: EuiSettings
 
 locales\zhCN.lua

@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 CURRENTLY_EQUIPPED = LIGHTYELLOW_FONT_COLOR_CODE.."["..CURRENTLY_EQUIPPED.."]".. FONT_COLOR_CODE_CLOSE
 
 local orig1 = GameTooltip:GetScript("OnTooltipSetItem")

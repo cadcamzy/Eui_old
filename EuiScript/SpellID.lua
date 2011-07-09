@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["other"].spellid ~= true then return end
 
 hooksecurefunc(GameTooltip, "SetUnitBuff", function(self,...)

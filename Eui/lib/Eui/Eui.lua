@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 
 E.MyClass = select(2, UnitClass("player"))
 E.MyName = UnitName("player")

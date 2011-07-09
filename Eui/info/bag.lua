@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["info"].bag == 0 or C["info"].enable == false then return end
 
 local bag = CreateFrame ("Frame", nil,UIParent)

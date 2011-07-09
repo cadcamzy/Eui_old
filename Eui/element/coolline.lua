@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if not C["filter"].coolline == true then return end
 
 local CoolLine = CreateFrame("Frame", "EuiCoolLine", UIParent)

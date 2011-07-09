@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if not C["threat"].enable == true then return end
 local direction = "down"
 local threatguid, threatunit, threatlist, threatbars = "", "target", {}, {};

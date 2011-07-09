@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 return
 if C["chat"].chatguard ~= true then return end
 

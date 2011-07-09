@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["skins"].dbm ~= true then return end
 
 local forcebosshealthclasscolor = false		-- Forces BossHealth to be classcolored. Not recommended.

@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["info"].guild == 0 or C["info"].enable == false then return end
 --if UnitLevel("player") == 80 then return end
 

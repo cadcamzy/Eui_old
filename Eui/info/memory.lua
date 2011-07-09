@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["info"].memory == 0 or C["info"].enable == false then return end
 
 local memory = CreateFrame ("Frame", nil,UIParent)

@@ -1,4 +1,4 @@
- Local E, C, L = unpack(EUI)
+ local E, C, L = unpack(EUI)
 ---------------------------------------------------- UI Scale
 --VideoOptionsResolutionPanelUIScaleSlider:Hide()
 --VideoOptionsResolutionPanelUseUIScale:Hide()
@@ -726,6 +726,7 @@ eSetUI = function()
 	SetCVar("chatMouseScroll", 1)
 	SetCVar("chatStyle", "classic")
 	SetCVar("buffDurations", 1)
+	SetCVar("ConsolidateBuffs", 0)
 	SetCVar("mapQuestDifficulty", 1)
 	SetCVar("scriptErrors", 0)
 	SetCVar("ShowClassColorInNameplate", 1)

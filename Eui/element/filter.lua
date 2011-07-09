@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if not C["filter"].enable == true then return end
 		
 local class = select(2, UnitClass("player"));

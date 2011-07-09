@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["info"].durability == 0 or C["info"].enable == false then return end
 
 --状态报告
@@ -39,7 +39,7 @@ function StatReport_GetSpellAndHealText()
 	text = text..", ";
 	text = text..MyData.SHIT..L.INFO_DURABILITY_STAT2;
 	text = text..", ";
-	text = text..format("%.1f%%", MyData.SCRIT).."L.INFO_DURABILITY_STAT3;
+	text = text..format("%.1f%%", MyData.SCRIT)..L.INFO_DURABILITY_STAT3;
 	text = text..", ";
 	text = text..MyData.SHASTE..L.INFO_DURABILITY_STAT4;
 	text = text..", ";

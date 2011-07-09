@@ -7,7 +7,7 @@ Thanks ALZA and Shestak for making this mod possible. Thanks Tukz for his wonder
 Maintained by Dandruff for 4.1 and 4.2 PTR
 
 ]]--
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["other"].xct ~= true then return end
 --some init
 local ct = {

@@ -3,7 +3,7 @@
                 A featureless, 'pure' version of OmniCC.
                 This version should work on absolutely everything, but I've removed pretty much all of the options
 --]]
-Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 if C["cooldown"].enable ~= true or IsAddOnLoaded("OmniCC") or IsAddOnLoaded("ncCooldown") then return end
 

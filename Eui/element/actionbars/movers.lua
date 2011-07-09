@@ -1,5 +1,5 @@
 --Create interactable actionbars
-Local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 if not C["actionbar"].enable == true then return end
 

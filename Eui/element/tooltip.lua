@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 local _, ns = ...
 local oUF = ns.oUF or oUF
 if not C["tooltip"].enable then return end

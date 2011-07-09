@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["other"].minimap ~= true then return end
 local mP = E.EuiCreateFrame(Minimap, 0, "BACKGROUND")
 mP:SetPoint("TOPLEFT",-3,3)

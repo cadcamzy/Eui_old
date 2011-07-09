@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["other"].recipients ~= true then return end
 
 	RECIPIENTS_LOCALE = {

@@ -16,7 +16,7 @@
 }
 
 local function Local(o)
-	Local E, C, L = unpack(EUI)
+	local E, C, L = unpack(EUI)
 	-- 主菜单
 	if o == "EuiSetGuimain" then o = e_main_label end
 	if o == "EuiSetGuifilter" then o = e_filter_label end
@@ -312,7 +312,7 @@ end
 local VISIBLE_GROUP = nil
 local lastbutton = nil
 local function ShowGroup(group, button)
-	Local E, C, L = unpack(EUI)
+	local E, C, L = unpack(EUI)
 	if (lastbutton) then
 		lastbutton:SetText(lastbutton:GetText().sub(lastbutton:GetText(), 11, -3))
 	end
@@ -635,7 +635,7 @@ do
 
 	euihelp.name = "EUI"
 	euihelp:SetScript("OnShow", function(self)
-		Local E, C, L = unpack(EUI)
+		local E, C, L = unpack(EUI)
 		local title = self:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 		title:SetPoint("TOPLEFT", E.Scale(16), -E.Scale(16))
 		title:SetText("EUI 相关命令")

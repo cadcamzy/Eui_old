@@ -1,7 +1,7 @@
 -- we just use default totem bar for shaman
 -- we parent it to our shapeshift bar.
 -- This is approx the same script as it was in WOTLK Eui version.
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 
 local EUICF = C
 local EUIDB = E

@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["info"].setting == 0 or C["info"].enable == false then return end
 
 local setting = CreateFrame ("Button", nil, UIParent)

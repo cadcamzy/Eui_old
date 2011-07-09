@@ -6,7 +6,7 @@
 
   0. You just DO WHAT THE FUCK YOU WANT TO.
 ]]
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 local cc = {}
 local CUSTOM_CLASS_COLORS = CUSTOM_CLASS_COLORS or E.RAID_CLASS_COLORS
 do

@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["skins"].enable ~= true then return end
 
 local function LoadSkin()

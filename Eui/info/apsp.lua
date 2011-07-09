@@ -1,4 +1,4 @@
-﻿Local E, C, L = unpack(EUI)
+﻿local E, C, L = unpack(EUI)
 if C["info"].apsp == 0 or C["info"].enable == false then return end
 
 local StatAPSP = CreateFrame("Frame",nil,UIParent)

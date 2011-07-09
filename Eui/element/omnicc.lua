@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["other"].cooldown ~= true then return end
 --[[
 	OmniCC Basic

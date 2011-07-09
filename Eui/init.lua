@@ -6,7 +6,7 @@ EUI = engine
 
 --[[
 
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 
 other addons
 

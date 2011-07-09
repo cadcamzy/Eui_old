@@ -1,4 +1,4 @@
-Local E, C, L = unpack(EUI)
+local E, C, L = unpack(EUI)
 if C["other"].buff ~= true then return end
 
 local BUFFS_PER_ROW = 14
