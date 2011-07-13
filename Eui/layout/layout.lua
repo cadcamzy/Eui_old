@@ -393,7 +393,7 @@ if C["raid"].raid == true then
 	elseif C["raid"].astyle == 1 then
 		E.EuiCreatePanel(raidbg, 1, 1, "TOPLEFT", UIParent, "TOPLEFT", 10, -10)
 		raidbg:SetWidth(C["raid"].nogridw)
-		raidbg:SetHeight(C["raid"].nogridh*C["raid"].raidgroups*20 + 72*C["raid"].raidgroups+ C["raid"].groupspace * (C["raid"].raidgroups - 1))
+		raidbg:SetHeight(C["raid"].nogridh*C["raid"].raidgroups*5)
 	elseif C["raid"].astyle == 2 then
 		E.EuiCreatePanel(raidbg, 1, 1, "BOTTOMLEFT", EuiTopChatBackground, "TOPLEFT", 0, 24)
 		raidbg:SetWidth(C["chat"].chatw)

@@ -155,7 +155,7 @@ local function LoadSkin()
 		E.StripTextures(_G["GuildRosterColumnButton"..i],true)
 	end
 	
-	E.SkinDropDownBox(GuildRosterViewDropdown, 200)
+	E.SkinDropDownBox(GuildRosterViewDropdown, 220)
 	
 	for i=1, 14 do
 		E.SkinButton(_G["GuildRosterContainerButton"..i.."HeaderButton"], true)

@@ -697,7 +697,7 @@ oUF:Factory(function(self)
 					"showParty", true,
 					"showRaid", true,			
 					"yOffset", 8,
-					"point", "LEFT"
+					"point", "BOTTOM"
 				)	
 				partytarget:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", 8, 0)		
 				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "party",
@@ -715,7 +715,7 @@ oUF:Factory(function(self)
 					"showParty", true,
 					"showRaid", true,			
 					"yOffset", 8,
-					"point", "LEFT"
+					"point", "BOTTOM"
 				)
 				partypet:SetPoint("BOTTOMLEFT", partytarget, "BOTTOMRIGHT", 8, 0)
 			end			

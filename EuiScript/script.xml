@@ -2,7 +2,6 @@
 	<Script file="align.lua"/>
 	<Script file="drag.lua"/>
 	<Script file="omnicc.lua"/>
-	<Script file="openall.lua"/>
 	<Script file="tradetabs.lua"/>
 	<Script file="castby.lua"/>
 	<Script file="font.lua"/>

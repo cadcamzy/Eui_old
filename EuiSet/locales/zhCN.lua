@@ -155,7 +155,7 @@
 	e_raid_gridw = "治疗模式单元宽度"
 	e_raid_nogridh = "DPS模式单元高度"
 	e_raid_nogridw = "DPS模式单元宽度"
-	e_raid_clickset = "启用点击施法,预设技能详见Eui/unitframe/ClickSets.lua"
+	e_raid_clickset = "启用点击施法,预设技能详见EuiUnitframe/ClickSets.lua"
 	e_raid_hottime = "启用四角HOT计时数字"
 	e_raid_hotsize = "四角HOT尺寸"
 	e_raid_showPartyTarget = "显示队伍目标和宠物"

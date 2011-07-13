@@ -1,8 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file='Eui\Eui.lua' />
-	<Include file="Eui\gui.lua"/>
+	<Script file="Eui\gui.lua"/>
 	<Script file="Eui\init.lua"/>
-	<Include file="Eui\move.lua"/>
+	<Script file="Eui\move.lua"/>
 	<Script file="Eui\anim.lua"/>
 	<Include file="oUF\Ouf.xml"/>
 	<Script file="plugin\oUF_AuraWatch.lua"/>
