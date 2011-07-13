@@ -271,8 +271,8 @@ local PostCreateIcon = function(Auras, button)
 	
 	button.count:SetPoint("BOTTOMRIGHT", 1, 0)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(E.fontn, 10, "THICKOUTLINE")
-	button.count:SetTextColor(0.84, 0.75, 0.65)
+	button.count:SetFont(E.fontn, 10)
+	button.count:SetShadowOffset(2,-2)
 			
 	button.overlayFrame = CreateFrame("frame", nil, button, nil)
 	button.cd:SetFrameLevel(button:GetFrameLevel() + 1)
@@ -283,9 +283,8 @@ local PostCreateIcon = function(Auras, button)
 	button.overlay:SetParent(button.overlayFrame)
 	button.count:SetParent(button.overlayFrame)
 	
-	button.remaining = E.EuiSetFontn(button, E.font, 14, "LEFT","THICKOUTLINE")
-	button.remaining:SetShadowColor(0,0,0,1)
-	button.remaining:SetShadowOffset(1,-1)
+	button.remaining = button:CreateFontString(nil, "ARTWORK");
+	button.remaining:SetFont(E.fontn, 13, "OUTLINE");	
 	button.remaining:SetPoint("CENTER", 0 , 2)
 	
 	button.Glow = CreateFrame("Frame", nil, button)
@@ -331,7 +330,7 @@ local CreateAuraTimer = function(self,elapsed)
 				if self.timeLeft < 5 then
 					self.remaining:SetTextColor(1, 0, 0)
 				else
-					self.remaining:SetTextColor(1, 0.9, 0)
+					self.remaining:SetTextColor(1, .9, 0)
 				end
 			else
 				self.remaining:Hide()

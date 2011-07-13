@@ -102,8 +102,8 @@ barloader:SetScript("OnEvent", function(self)
 	
 	--Default settings
 	if E["actionbar"].splitbar == nil then E["actionbar"].splitbar = true end
-	if E["actionbar"].bottomrows == nil then E["actionbar"].bottomrows = 1 end
-	if E["actionbar"].rightbars == nil then E["actionbar"].rightbars = 0 end
+	if E["actionbar"].bottomrows == nil then E["actionbar"].bottomrows = 2 end
+	if E["actionbar"].rightbars == nil then E["actionbar"].rightbars = 2 end
 	
 	if E["actionbar"].splitbar == true then
 		LeftSplit:SetPoint("TOPRIGHT", EuiSplitActionBarLeftBackground, "TOPLEFT", E.Scale(-4), 0)

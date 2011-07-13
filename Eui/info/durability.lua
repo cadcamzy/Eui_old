@@ -155,96 +155,6 @@ function StatReport_UnitDefense()
 	return floor(baseDEF + posDEF);
 end
 
-function StatReport_UnitItem_ilvl_AVG(unit)
-	local _, uc = UnitClass(unit);
-	local ul = UnitLevel(unit);
-	--品质折算系数
-	local qualitypara = {
-		[0]		= 0.0,			--0：灰色
-		[1]		= 0.1,			--1：白色
-		[2]		= 0.6,			--2：绿色
-		[3]		= 0.8,			--3：蓝色
-		[4]		= 1.0,			--4：紫色
-		[5]		= 1.05,			--5：橙色
-		[6]		= 1.15,			--6：红色
-		[7]		= 1.0,			--7：金色
-	};
-	--装备级别加权系数默认值：法系
-	local slotpara = {
-		[1]		= 3.5,			--1：头
-		[2]		= 2,			--2：颈
-		[3]		= 2.5,			--3：肩
-		[4]		= 0,			--4：衬衣
-		[5]		= 3.7,			--5：胸
-		[6]		= 2.3,			--6：腰带
-		[7]		= 3.5,			--7：腿
-		[8]		= 2.4,			--8：脚
-		[9]		= 1.6,			--9：手腕
-		[10]	= 2.5,			--10：手套
-		[11]	= 2.1,			--11：手指1
-		[12]	= 2.1,			--12：手指2
-		[13]	= 2,			--13：饰品1
-		[14]	= 2,			--14：饰品2
-		[15]	= 1.8,			--15：背
-		[16]	= 6,			--16：主手
-		[17]	= 2,			--17：副手
-		[18]	= 1,			--18：远程武器
-		[19]	= 0,			--19：战袍
-	};
-	if uc == "HUNTER" then
-		slotpara[16] = 3;
-		slotpara[17] = 1;
-		slotpara[18] = 5;
-	elseif uc == "WARRIOR" then
-		if MyData.TKEY == GetTalentTabInfo(3) then
-			slotpara[16] = 3.5;
-			slotpara[17] = 4.5;
-			slotpara[18] = 1;
-		else
-			slotpara[16] = 5;
-			slotpara[17] = 3;
-			slotpara[18] = 1;
-		end
-	elseif uc == "ROGUE" or uc == "DEATHKNIGHT" then
-		slotpara[16] = 5;
-		slotpara[17] = 3;
-		slotpara[18] = 1;
-	elseif uc == "SHAMAN" then
-		if MyData.TKEY == GetTalentTabInfo(2) then
-			slotpara[16] = 5;
-			slotpara[17] = 3;
-			slotpara[18] = 1;
-		end
-	elseif uc == "PALADIN" then
-		if MyData.TKEY == GetTalentTabInfo(2) then
-			slotpara[16] = 3.5;
-			slotpara[17] = 4.5;
-			slotpara[18] = 1;
-		end
-	end
-	local quality, iLevel;
-	local itemcount = 0;
-	local levelcount = 0;
-	local paracount = 0;
-	for i=1, 18 ,1 do
-		if i~=4 then
-			local link = GetInventoryItemLink(unit, i);
-			if (link) then
-				_, _, quality, iLevel = GetItemInfo(link);
-				if(quality >=1 and quality <=7) then
-					if (quality == 7) and (iLevel < ul*2) then
-						iLevel = (ul*ul*ul)/2400;
-					end
-					itemcount = itemcount + 1;
-					levelcount = levelcount + iLevel*qualitypara[quality]*slotpara[i];
-					paracount = paracount + slotpara[i];
-				end
-			end
-		end
-	end
-	return floor((levelcount/paracount) + 0.5);
-end
-
 function StatReport_UpdateMyData()
 	MyData.Name = UnitName("player");							--名称
 	MyData.LV = UnitLevel("player");							--等级
@@ -252,7 +162,7 @@ function StatReport_UpdateMyData()
 	MyData.HP = UnitHealthMax("player");						--生命值
 	MyData.MP = UnitManaMax("player");							--法力值
 	MyData.TKEY, MyData.TDATA = StatReport_TalentData();		--天赋
-	MyData.ILVL = StatReport_UnitItem_ilvl_AVG("player");		--综合装备等级
+	MyData.ILVL = GetAverageItemLevel();						--平均装备等级
 	MyData.Mastery = format("%.2f", GetMastery());								--精通点数
 	--基础属性
 	MyData.STR = UnitStat("player", 1);							--力量

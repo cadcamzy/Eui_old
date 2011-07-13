@@ -826,7 +826,10 @@ function QuestHelperLite:GetWorld(map, floor)
 	local system, world, width, height, xOffset, yOffset = QHL.Astrolabe:GetMapInfo(map, floor);
 	
 	-- Maps With Floors Start At Floor 1 Instead of 0
-	local world_floor = 0; if QHL.Astrolabe:GetNumFloors(world) > 0 then world_floor = 1; end
+	local world_floor = 0; 
+	if QHL.Astrolabe:GetNumFloors(world) then
+		if QHL.Astrolabe:GetNumFloors(world) > 0 then world_floor = 1; end
+	end
 	
 	if world then return world, world_floor;
 	else return -1, -1; end

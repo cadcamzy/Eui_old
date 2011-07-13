@@ -22,8 +22,9 @@ local function LoadSkin()
 		"QuestLogFramePushQuestButton",
 		"QuestLogFrameTrackButton",
 		"QuestLogFrameCancelButton",
+		"QuestLogFrameCompleteButton",
 	}
-	
+	E.StripTextures(QuestLogFrameCompleteButton)
 	for _, button in pairs(buttons) do
 		E.SkinButton(_G[button])
 	end

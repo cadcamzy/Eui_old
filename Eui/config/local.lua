@@ -253,6 +253,10 @@ if(GetLocale()=="zhCN") then
 	L.INFO_XP_FACTION_TIP8 = "剩余: %s"
 	L.INFO_XP_FACTION_TIP9 = "我当前经验为: "
 	
+	L.INFO_PING_TIP_TITLE = "帧数: "
+	L.INFO_PING_TIP_L1 = "本地:"
+	L.INFO_PING_TIP_L2 = "世界:"
+	
 	L.LAYOUT_RAID = "团队框架"
 	L.LAYOUT_PETBAR = "宠物动作条"
 	L.LAYOUT_MAINBAR = "主动作条"
@@ -514,6 +518,10 @@ else
 	L.INFO_XP_FACTION_TIP7 = "數值: %s/%s (%d%%)"
 	L.INFO_XP_FACTION_TIP8 = "剩余: %s"
 	L.INFO_XP_FACTION_TIP9 = "我當前經驗為: "
+	
+	L.INFO_PING_TIP_TITLE = "幀數: "
+	L.INFO_PING_TIP_L1 = "本地:"
+	L.INFO_PING_TIP_L2 = "世界:"
 	
 	L.LAYOUT_RAID = "團隊框架"
 	L.LAYOUT_PETBAR = "寵物動作條"

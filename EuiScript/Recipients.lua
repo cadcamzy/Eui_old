@@ -126,7 +126,11 @@ RecipientsDropDownButton:SetPoint("LEFT", SendMailNameEditBox, "RIGHT", -6, 0);
 RecipientsDropDownButton:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up");
 RecipientsDropDownButton:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down");
 RecipientsDropDownButton:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD");
-
+if C["skins"].enable == true then
+	E.EuiSetTemplate(RecipientsDropDownButton)
+	RecipientsDropDownButton:ClearAllPoints()
+	RecipientsDropDownButton:SetPoint("LEFT", SendMailNameEditBox, "RIGHT", 4, 0);
+end
 RecipientsDropDownButton:SetScript("OnShow", function(self)
 	if not self._menu then -- The menu won't be created until you open SendmailFrame, for resource saving...
 		self._menu = CreateFrame("Button", "Recipients_3FEF5056_BCA4_4B80_8D93_8FD3A0B70913", self, "UIDropDownMenuTemplate");

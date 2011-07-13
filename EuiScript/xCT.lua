@@ -803,6 +803,7 @@ if not ct.blizzheadnumbers then
     SetCVar("PetMeleeDamage", 0)
     SetCVar("CombatDamage", 0)
     SetCVar("CombatHealing", 0)
+	SetCVar("enableCombatText", 1)
 end
 
 -- hook blizz float mode selector. blizz sucks, because changing  cVar combatTextFloatMode doesn't fire CVAR_UPDATE

@@ -28,10 +28,11 @@ latency:SetScript("OnUpdate", function(self,t)
 	int = int - t
 	if int <0 then
 	fps:SetText(floor(GetFramerate()).."f")
-	ping:SetText(select(3, GetNetStats()).."ms")
+	ping:SetText((select(3, GetNetStats())+select(4,GetNetStats())).."ms")
 	int = 2
+	E.EuiSetTooltip(latency,L.INFO_PING_TIP_TITLE..floor(GetFramerate()).."f", L.INFO_PING_TIP_L1, select(3, GetNetStats()).."ms", L.INFO_PING_TIP_L2, select(4, GetNetStats()).."ms")
 	
-		pg = select(3, GetNetStats())
+		pg = select(3, GetNetStats()) + select(4,GetNetStats())
 	--	self:SetValue(pg)
 		if pg < 150 then 
 			r,g,b = (pg/150),1,0 
@@ -49,5 +50,8 @@ latency:SetScript("OnUpdate", function(self,t)
 			
 	end
 end)
+
+
+
 
 E.EuiInfo(C["info"].latency,latency)
