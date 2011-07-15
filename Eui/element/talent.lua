@@ -1,3 +1,4 @@
+local E, C , L = unpack(EUI)
 local gtt = GameTooltip;
 local GetTalentTabInfo = GetTalentTabInfo;
 
@@ -160,6 +161,7 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 				break;
 			end
 		end
+		
 		-- Queue an inspect request
 		local isInspectOpen = (InspectFrame and InspectFrame:IsShown()) or (Examiner and Examiner:IsShown());
 		if (CanInspect(unit)) and (not isInspectOpen) then

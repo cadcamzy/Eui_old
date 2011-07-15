@@ -8,7 +8,7 @@
 ## OptionalDeps: EuiSet
 ## URL: http://code.google.com/p/cadcamzy/
 ## X-oUF: EuiUF
-## SavedVariablesPerCharacter: EuiUFpos, BaudBag_Cfg, BaudBag_Cache, JPackDB, LjxxuiInstallV401, filter, friendsWhisp, guildWhisp, totallastplayers, entries
+## SavedVariablesPerCharacter: EuiUFpos, JPackDB, LjxxuiInstallV401, filter, friendsWhisp, guildWhisp, totallastplayers, entries
 ## SavedVariables: tgoldDB, EuiData, RankWatchSettings, EuiInfobar
 
 init.lua

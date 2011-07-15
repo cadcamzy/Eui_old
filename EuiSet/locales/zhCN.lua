@@ -260,6 +260,7 @@
 	e_skins_askins = "启用系统对话框美化"
 	e_skins_dbm = "启用DBM皮肤"
 	e_skins_skada = "启用Skada皮肤"
+	e_skins_recount = "启用recount皮肤"
 	e_skins_texture = "头像小队团队材质选择( 0 ~ 9 )"
 	e_skins_enable = "启用系统框体美化"
 end

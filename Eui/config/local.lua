@@ -265,6 +265,10 @@ if(GetLocale()=="zhCN") then
 	L.SPELLID = "技能ID:"
 	L.CASTBY = "\n施法者 "
 	
+	L.TOOLTIP_LV1 = "装备等级: "
+	L.TOOLTIP_LV2 = "读取目标装备平均等级."
+	L.TOOLTIP_LV3 = "重新移动鼠标将能看到装备等级."
+	
 else
 	L.L_COST = "修理花費: "
 	L.L_GOLD = "金"
@@ -530,4 +534,8 @@ else
 	L.RAIDCOOLDOWN = "團隊技能冷卻"
 	L.SPELLID = "技能ID:"
 	L.CASTBY = "\n施法者 "
+	
+	L.TOOLTIP_LV1 = "裝備等級: "
+	L.TOOLTIP_LV2 = "讀取目標裝備平均等級."
+	L.TOOLTIP_LV3 = "重新移動鼠標將能看到裝備等級."	
 end

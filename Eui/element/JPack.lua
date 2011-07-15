@@ -857,8 +857,8 @@ JPack.OnLoad = {}
 JPack.OnLoad_GB = {}
 
 function JPack:ADDON_LOADED(event, addon)
-	if addon ~= 'JPack' then return end
-	debug'JPack loaded'
+--	if addon ~= 'JPack' then return end
+--	debug'JPack loaded'
 	self:UnregisterEvent("ADDON_LOADED")
 	self.ADDON_LOADED = nil
 	

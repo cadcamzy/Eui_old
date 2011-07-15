@@ -243,6 +243,7 @@ C["skins"] = {
 	["askins"] = true,
 	["dbm"] = true,
 	["skada"] = true,
+	["recount"] = true,
 --	["font"] = true,
 	["texture"] = 0,
 	["enable"] = true,

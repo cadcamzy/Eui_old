@@ -271,7 +271,7 @@ local function createAuraWatch(self,unit)
 	
 	if (buffs) then
 		for key, spell in pairs(buffs) do
-			if IsSpellKnown(spell[1]) then
+			if IsSpellKnown(spell[1]) or spell[1] == 6788 then
 				local icon = CreateFrame("Frame", nil, auras)
 				icon.spellID = spell[1]
 				icon.anyUnit = spell[4]

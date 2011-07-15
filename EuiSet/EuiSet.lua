@@ -282,6 +282,7 @@ local function Local(o)
 	if o == "EuiSetGuiskinsskada" then o = e_skins_skada end
 	if o == "EuiSetGuiskinstexture" then o = e_skins_texture end
 	if o == "EuiSetGuiskinsenable" then o = e_skins_enable end
+	if o == "EuiSetGuiskinsrecount" then o = e_skins_recount end
 
 	E.option = o
 end
