@@ -162,7 +162,7 @@ function StatReport_UpdateMyData()
 	MyData.HP = UnitHealthMax("player");						--生命值
 	MyData.MP = UnitManaMax("player");							--法力值
 	MyData.TKEY, MyData.TDATA = StatReport_TalentData();		--天赋
-	MyData.ILVL = GetAverageItemLevel();						--平均装备等级
+	MyData.ILVL = floor(GetAverageItemLevel());						--平均装备等级
 	MyData.Mastery = format("%.2f", GetMastery());								--精通点数
 	--基础属性
 	MyData.STR = UnitStat("player", 1);							--力量

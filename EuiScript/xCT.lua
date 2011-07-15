@@ -587,15 +587,17 @@ local function OnEvent(self, event, subevent, ...)
 
     elseif event == "UNIT_HEALTH" and COMBAT_TEXT_SHOW_LOW_HEALTH_MANA == "1" then
         if subevent == ct.unit then
-            if UnitHealth(ct.unit) / UnitHealthMax(ct.unit) <= COMBAT_TEXT_LOW_HEALTH_THRESHOLD then
-                if not lowHealth then
-                    xCT3:AddMessage(HEALTH_LOW, 1, .1, .1)
-                    lowHealth = true
-                end
-            else
-                lowHealth = nil
-            end
-        end
+			if COMBAT_TEXT_LOW_HEALTH_THRESHOLD then --20110715 fix error
+			  if UnitHealth(ct.unit) / UnitHealthMax(ct.unit) <= COMBAT_TEXT_LOW_HEALTH_THRESHOLD then
+					if not lowHealth then
+						xCT3:AddMessage(HEALTH_LOW, 1, .1, .1)
+						lowHealth = true
+					end
+				else
+					lowHealth = nil
+				end
+			end
+		end
 
     elseif event == "UNIT_MANA" and COMBAT_TEXT_SHOW_LOW_HEALTH_MANA == "1" then
         if subevent == ct.unit then
