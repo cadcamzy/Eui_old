@@ -16,6 +16,10 @@
 	e_skins_label = "界面美化"
 	e_other_label = "其它"
 	e_ui_label = "UI显示设置"
+	e_class_label = "职业模块"
+	
+	--Class设置
+	e_class_dk = "DK鲜血护盾模块(需开启3D头像)"
 	
 	--UI设置
 	e_ui_autoscale = "启用UI自动缩放"

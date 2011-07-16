@@ -589,6 +589,7 @@ local Shared = function(self, unit, isSingle)
 		
 		if(unit == 'player') then
 			portrait:SetPoint('TOPRIGHT', self, 'TOPLEFT', -8, 0)
+			E.portrait = portrait.bg
 	    elseif(unit == 'target') then
 			portrait:SetPoint('TOPLEFT', self, 'TOPRIGHT', 8, 0)
 		end

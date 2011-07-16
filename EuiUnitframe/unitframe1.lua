@@ -582,6 +582,7 @@ local Shared = function(self, unit, isSingle)
 				
 		if(unit == 'player') then
 			portrait:SetPoint('TOPRIGHT', self, 'TOPLEFT', -8, 0)
+			E.portrait = portrait.bg
 	    elseif(unit == 'target') then
 			portrait:SetPoint('TOPLEFT', self, 'TOPRIGHT', 8, 0)
 		end
@@ -835,14 +836,14 @@ local Shared = function(self, unit, isSingle)
 		
 		local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
 		lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
-		lunarBar:SetSize(playerwidth-4, 8)
+		lunarBar:SetSize(playerwidth, 8)
 		lunarBar:SetStatusBarTexture(TEXTURE)
 		lunarBar:SetStatusBarColor(.30, .52, .90)
 		eclipseBar.LunarBar = lunarBar
 
 		local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
 		solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
-		solarBar:SetSize(playerwidth-4, 8)
+		solarBar:SetSize(playerwidth, 8)
 		solarBar:SetStatusBarTexture(TEXTURE)
 		solarBar:SetStatusBarColor(.80, .82,  .60)
 		eclipseBar.SolarBar = solarBar

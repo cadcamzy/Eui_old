@@ -31,5 +31,4 @@
 	<Script file="xCT.lua"/>
 	<Script file="raidtool.lua"/>
 	<Script file="RaidCheck.lua"/>
-	
 </Ui>

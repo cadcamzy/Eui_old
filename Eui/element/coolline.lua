@@ -164,8 +164,8 @@ function CoolLine:ADDON_LOADED(a1)
 		self.overlay = self.overlay or CreateFrame("Frame", nil, self.border)
 		self.overlay:SetFrameLevel(24)
 
-		section = (db.vertical and db.h or db.w) / 6
-		iconsize = db.vertical and db.w or db.h
+		section = (db.vertical and C["filter"].coollineh or C["filter"].coollinew) / 6
+		iconsize = db.vertical and C["filter"].coollinew or C["filter"].coollineh
 		SetValue = (db.vertical and (db.reverse and SetValueVR or SetValueV)) or (db.reverse and SetValueHR or SetValueH)
 		
 		tick0 = createfs(tick0, "0", 0, "LEFT")

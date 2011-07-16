@@ -632,7 +632,7 @@ local function OnEvent(self, event, subevent, ...)
 
     elseif event == "RUNE_POWER_UPDATE" then
         local arg1, arg2 = subevent, ...
-        if arg2 then
+        if arg2 and COMBAT_TEXT_RUNE then --fix at 20110716 (COMBAT_TEXT_RUNE is nil?)
             local rune = GetRuneType(arg1);
             local msg = COMBAT_TEXT_RUNE[rune];
             if rune == 1 then 

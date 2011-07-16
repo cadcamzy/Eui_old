@@ -13,6 +13,7 @@
 	["skins"] = 1,
 	["other"] = 1,
 	["ui"] = 1,
+	["class"] = 1,
 }
 
 local function Local(o)
@@ -32,6 +33,10 @@ local function Local(o)
 	if o == "EuiSetGuiskins" then o = e_skins_label end
 	if o == "EuiSetGuiother" then o = e_other_label end
 	if o == "EuiSetGuiui" then o = e_ui_label end
+	if o == "EuiSetGuiclass" then o = e_class_label end
+	
+	--class模块(EuiSetGuiclass)
+	if o == "EuiSetGuiclassdk" then o = e_class_dk end
 	
 	-- UI设置(EuiSetGuiui)
 	if o == "EuiSetGuiuiautoscale" then o = e_ui_autoscale end

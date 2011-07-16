@@ -26,3 +26,6 @@ info\info.xml
 
 ##界面美化
 skins\skins.xml
+
+##职业专用模块
+class\class.xml

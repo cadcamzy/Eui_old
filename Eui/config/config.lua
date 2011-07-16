@@ -248,3 +248,7 @@ C["skins"] = {
 	["texture"] = 0,
 	["enable"] = true,
 }
+
+C["class"] = {
+	["dk"] = true,
+}
