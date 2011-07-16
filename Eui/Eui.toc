@@ -4,7 +4,7 @@
 ## Notes: |cffC495DDEui|r
 ## Notes-zhCN: EUI 源自eP's UI
 ## Author: Ljxx.net
-## Version: r3
+## Version: R3
 ## OptionalDeps: EuiSet
 ## URL: http://code.google.com/p/cadcamzy/
 ## X-oUF: EuiUF

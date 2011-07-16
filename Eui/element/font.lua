@@ -84,7 +84,7 @@ f:SetScript("OnEvent", function()
 	SetFont(SystemFont_Shadow_Med1,             Normal, 13)
 	SetFont(SystemFont_Shadow_Med3,             Normal, 15)
 	SetFont(SystemFont_Shadow_Outline_Huge2,    Normal, 22, "OUTLINE")
-	SetFont(SystemFont_Shadow_Small,            Normal, 12)		-- 人物面板属性字体
+	SetFont(SystemFont_Shadow_Small,            Normal, 11)		-- 人物面板属性字体
 	SetFont(SystemFont_Small,                   Normal, 12)
 	SetFont(SystemFont_Tiny,                    Normal, 11)
 	SetFont(GameTooltipHeader,                  Normal, 13, "OUTLINE")
