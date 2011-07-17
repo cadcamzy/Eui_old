@@ -78,20 +78,6 @@ DebuffTypeColor["Curse"] = { r = 0.60, g = 0.00, b = 1.00 };
 DebuffTypeColor["Disease"] = { r = 0.60, g = 0.40, b = 0 };
 DebuffTypeColor["Poison"] = { r = 0.00, g = 0.60, b = 0 }; 	
 
-local CanDispel = {
-	PRIEST = { Magic = true, Disease = true, },
-	SHAMAN = { Magic = false, Curse = true, },
-	PALADIN = { Magic = false, Poison = true, Disease = true, },
-	MAGE = { Curse = true, },
-	DRUID = { Magic = false, Curse = true, Poison = true, },
-	ROGUE = {},
-	HUNTER = {},
-	WARRIOR = {},
-	WARLOCK = {},
-	DEATHKNIGHT = {},	
-}	
-	
-	
 local ClickSets_Setsopt = {}
 local classopt
 if C["clickset"].aadefault == true then
@@ -112,7 +98,7 @@ local function UpdateThreat(self, event, unit)
 	if UnitIsPlayer(self.unit) then
 		while (true) do
 			dtype = select(5, UnitDebuff(self.unit, i))
-			if CanDispel[class][dtype] then candel = i end
+			if E.CanDispel[class][dtype] then candel = i end
 			if (not select(3, UnitDebuff(self.unit, i))) then
 				if i > 1 then dtype = select(5, UnitDebuff(self.unit, candel)) end
 				break;
@@ -120,34 +106,12 @@ local function UpdateThreat(self, event, unit)
 			i = i +1
 		end
 	end
-	if event == 'CHARACTER_POINTS_CHANGED' then
-		if class == "PALADIN" then
-		--Check to see if we have the 'Sacred Cleansing' talent.
-			if E.CheckForKnownTalent(53551) then
-				CanDispel[class].Magic = true
-			else
-				CanDispel[class].Magic = false	
-			end
-		elseif class == "SHAMAN" then
-			--Check to see if we have the 'Improved Cleanse Spirit' talent.
-			if E.CheckForKnownTalent(77130) then
-				CanDispel[class].Magic = true
-			else
-				CanDispel[class].Magic = false	
-			end
-		elseif class == "DRUID" then
-			--Check to see if we have the 'Nature's Cure' talent.
-			if E.CheckForKnownTalent(88423) then
-				CanDispel[class].Magic = true
-			else
-				CanDispel[class].Magic = false	
-			end
-		end
-	end
+	
+	if event == 'CHARACTER_POINTS_CHANGED' then E.ChangeCanDispel() end;
 	
 	if (threat == 3) then
 		if dtype then
-			if CanDispel[class][dtype] then
+			if E.CanDispel[class][dtype] then
 				if self.panel then
 					self.panel:SetPoint("TOPLEFT", self, "TOPLEFT", -3, 3)
 					self.panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 3, -3)
@@ -169,7 +133,7 @@ local function UpdateThreat(self, event, unit)
 		end
 	else
 		if dtype then
-			if CanDispel[class][dtype] then
+			if E.CanDispel[class][dtype] then
 				if self.panel then
 					self.panel:SetBackdropBorderColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)
 				--	self.panel:SetBackdropColor(DebuffTypeColor[dtype].r, DebuffTypeColor[dtype].g, DebuffTypeColor[dtype].b,1)

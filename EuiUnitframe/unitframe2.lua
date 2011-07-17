@@ -28,7 +28,7 @@ if C["unitframe"].focusheight >0 then focusheight = C["unitframe"].focusheight e
 
 if C["raid"].astyle == 0 then
 	ptx = (C["raid"].gridw * 5 + 36) / 2 + 4
-	pty = C["raid"].gridh * 5 + 32 + C["raid"].gridheight
+	pty = C["raid"].gridh * 5 + 72 + C["raid"].gridheight
 	
 else
 	ptx = totwidth / 2 + 8
@@ -1149,7 +1149,9 @@ oUF:Factory(function(self)
 	spawnHelper(self, 'focustarget', 'TOPRIGHT', UIParent, 'BOTTOM', -ptx, pty-34-playerheight-16)	
 end)
 
-oUF:DisableBlizzard'party'
+if C["raid"].raid == true then
+	oUF:DisableBlizzard'party'
+end
 
 do
 	UnitPopupMenus["SELF"] = { "PVP_FLAG", "LOOT_METHOD", "LOOT_THRESHOLD", "OPT_OUT_LOOT_TITLE", "LOOT_PROMOTE", "DUNGEON_DIFFICULTY", "RAID_DIFFICULTY", "RESET_INSTANCES", "RAID_TARGET_ICON", "SELECT_ROLE", "CONVERT_TO_PARTY", "CONVERT_TO_RAID", "LEAVE", "CANCEL" };

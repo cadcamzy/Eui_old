@@ -1112,8 +1112,8 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		CompactRaidFrameContainer:Hide()	
 	end
 	if C["clickset"].aamouse ~= true then
-		if GetMacroInfo("epDebuffa") then DeleteMacro("epDebuffa") end
-		if GetMacroInfo("epDebuffb") then DeleteMacro("epDebuffb") end
+		if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
+		if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
 		return
 	end
 	local _, class = UnitClass("player")
@@ -1130,7 +1130,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		DEATHKNIGHT = {},
 	}
 	if select(2, GetNumMacros()) > 34 then
-    print(L.CLICKSET_MOUSE_ERR)
+		print(L.CLICKSET_MOUSE_ERR)
 		return
 	end
 --local index_a = CreateMacro("Debuff_1", _, "/cast [target=mouseover] 清洁术;",1)
@@ -1140,7 +1140,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 	local indexa, indexb
 	if CanDispel[class][1] and IsSpellKnown(CanDispel[class][1]) then
 		macroa = GetSpellInfo(CanDispel[class][1]) or ""
-		index_a = CreateMacro("EuiDebuffa", 1, "/cast [target=mouseover] "..macroa..";", 1)
+		index_a = CreateMacro("EuiDebuffa", 1, "/cast [@mouseover] "..macroa..";", 1)
 		local a=SetBinding("ALT-MOUSEWHEELUP", "CAMERAZOOMIN")
 		local b=SetBinding("ALT-MOUSEWHEELDOWN", "CAMERAZOOMOUT")
 		if a and b then
@@ -1152,7 +1152,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 	end
 	if CanDispel[class][2] and IsSpellKnown(CanDispel[class][2]) then
 		macrob = GetSpellInfo(CanDispel[class][2]) or ""
-		index_b = CreateMacro("EuiDebuffb", 1, "/cast [target=mouseover] "..macrob..";", 1)
+		index_b = CreateMacro("EuiDebuffb", 1, "/cast [@mouseover] "..macrob..";", 1)
 	end
 	if index_a then SetBindingMacro("MOUSEWHEELUP", index_a) end
 	if index_b then SetBindingMacro("MOUSEWHEELDOWN", index_b) end
@@ -1187,6 +1187,7 @@ LjxxuiOnLogon:SetScript("OnEvent", function(self, event)
 	if LjxxuiInstallV401 ~= true then
 		E.EuiSetTemplate(StaticPopup_Show("INSTALL_UI"))
 	end
+	E.ChangeCanDispel() --初始化能驱散的DEBUFF类别.
 end)
 
 

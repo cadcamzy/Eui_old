@@ -328,7 +328,7 @@ function QuestHelperLite:ShowUpdateNotice()
 	if not QHL.updatemessage then
 		QHL.updatemessage = true;
 		local msg = QHL:Concat(QHL_LOCALE_UPDATENOTICE, string.char(13,13), QHL_LOCALE_UPDATEINSTRUCT);
-		QHL:ShowNotice(350, 115, msg, QHL_LOCALE_SUPPORTLINK);
+	--	QHL:ShowNotice(350, 115, msg, QHL_LOCALE_SUPPORTLINK);
 	end
 end
 

@@ -1102,7 +1102,9 @@ oUF:Factory(function(self)
 	
 end)
 
-oUF:DisableBlizzard'party'
+if C["raid"].raid == true then
+	oUF:DisableBlizzard'party'
+end
 
 do
 	UnitPopupMenus["SELF"] = { "PVP_FLAG", "LOOT_METHOD", "LOOT_THRESHOLD", "OPT_OUT_LOOT_TITLE", "LOOT_PROMOTE", "DUNGEON_DIFFICULTY", "RAID_DIFFICULTY", "RESET_INSTANCES", "RAID_TARGET_ICON", "SELECT_ROLE", "CONVERT_TO_PARTY", "CONVERT_TO_RAID", "LEAVE", "CANCEL" };

@@ -95,10 +95,10 @@ function newGuildRoster_Update()
 	local unitGUID = GetGUIDByName(name)
 
 	if unitGUID and UnitItemLevelDB[unitGUID] then
-		GuildMemberItemLevelFrameText:SetText("Item Level: |cffffffff"..(UnitItemLevelDB[unitGUID].equipped or "???").." ("..(UnitItemLevelDB[unitGUID].average or "???")..")", 1, 1, 1)
+		GuildMemberItemLevelFrameText:SetText(L.TOOLTIP_LV1.."|cffffffff"..(UnitItemLevelDB[unitGUID].equipped or "???").." ("..(UnitItemLevelDB[unitGUID].average or "???")..")", .1, .1, .1)
 		GuildMemberItemLevelFrame:Show()
 	else
-		GuildMemberItemLevelFrameText:SetText("Item Level: ??? (???)", 1, 1, 1)
+		GuildMemberItemLevelFrameText:SetText(L.TOOLTIP_LV1.."??? (???)", .1, .1, 1)
 		GuildMemberItemLevelFrame:Hide()
 	end
 end
@@ -192,6 +192,7 @@ local function OnEvent(self, event, ...)
 		iframe:SetSize(GuildMemberDetailFrame:GetWidth(), 50)
 		iframe:SetPoint("TOP", GuildMemberDetailFrame, "BOTTOM", 0, -5)
 		iframe:Show()
+		E.EuiSetTemplate(iframe)
 
 		local txt = iframe:CreateFontString("GuildMemberItemLevelFrameText", "OVERLAY", "GameFontNormalSmall")
 

@@ -910,3 +910,41 @@ function E.Delay(delay, func, ...)
 	tinsert(waitTable,{delay,func,{...}})
 	return true
 end
+
+E.CanDispel = {
+	PRIEST = { Magic = true, Disease = true, },
+	SHAMAN = { Magic = false, Curse = true, },
+	PALADIN = { Magic = false, Poison = true, Disease = true, },
+	MAGE = { Curse = true, },
+	DRUID = { Magic = false, Curse = true, Poison = true, },
+	ROGUE = {},
+	HUNTER = {},
+	WARRIOR = {},
+	WARLOCK = {},
+	DEATHKNIGHT = {},	
+}
+
+function E.ChangeCanDispel()
+	if E.MyClass == "PALADIN" then
+	--Check to see if we have the 'Sacred Cleansing' talent.
+		if E.CheckForKnownTalent(53551) then
+			E.CanDispel[E.MyClass].Magic = true
+		else
+			E.CanDispel[E.MyClass].Magic = false	
+		end
+	elseif E.MyClass == "SHAMAN" then
+		--Check to see if we have the 'Improved Cleanse Spirit' talent.
+		if E.CheckForKnownTalent(77130) then
+			E.CanDispel[E.MyClass].Magic = true
+		else
+			E.CanDispel[E.MyClass].Magic = false	
+		end
+	elseif E.MyClass == "DRUID" then
+		--Check to see if we have the 'Nature's Cure' talent.
+		if E.CheckForKnownTalent(88423) then
+			E.CanDispel[E.MyClass].Magic = true
+		else
+			E.CanDispel[E.MyClass].Magic = false	
+		end
+	end
+end	
