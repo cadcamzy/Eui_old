@@ -135,6 +135,7 @@ local function LoadSkin()
 	
 	for i=1, 3 do
 		E.SkinTab(_G["AuctionFrameTab"..i])
+		E.EuiSetTemplate(_G["AuctionFrameTab"..i],1)
 	end
 	
 	for i=1, NUM_FILTERS_TO_DISPLAY do

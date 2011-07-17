@@ -37,6 +37,7 @@ C["other"] = {
 	["nameplate"] = true, --启用姓名版 
 	["nameplateauto"] = true, --姓名版自动隐藏
 	["nameplatevalue"] = true, --显示血量
+	["nameplatetank"] = false, -- Tank模式.
 --	["mail"] = true,--邮件增强
 	["cooldown"] = true,--内置计时插件
 	["tab"] = true, --专业标签

@@ -93,6 +93,7 @@ local function Local(o)
 	if o == "EuiSetGuiothermapalpha" then o = e_other_mapalpha end
 	if o == "EuiSetGuiotherraidcheck" then o = e_other_raidcheck end
 	if o == "EuiSetGuiotherxct" then o = e_other_xct end
+	if o == "EuiSetGuiothernameplatetank" then o = e_other_nameplatetank end
 	
 	-- 聊天(EuiSetGuichat)
 	if o == "EuiSetGuichatenable" then o = e_chat_enable end

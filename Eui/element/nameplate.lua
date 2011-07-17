@@ -16,7 +16,7 @@ local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C[
 --	cfg.autoshow = true		--> automatically show nameplates when IN COMBAT only
 	cfg.overlap = 0			--> 0: nameplates overlap and 1: nameplates do NOT overlap
 	cfg.threatbloat = 0		--> 0: keeps nameplates consistant size and 1: makes nameplates larger depending on threat percentage
-	cfg.tankmode = false 	--> true: will show custom color overlay/statusbar if you HAVE aggro and false: will show RED overlay if you HAVE aggro
+	cfg.tankmode = C["other"].nameplatetank 	--> true: will show custom color overlay/statusbar if you HAVE aggro and false: will show RED overlay if you HAVE aggro
 	cfg.namecolor = true	--> true: will show unit names in color of their hostility/pvp or false: will show static color given below
 	
 --> COLOR options (any RGB percent color of your choosing)

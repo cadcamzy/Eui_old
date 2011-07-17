@@ -149,7 +149,7 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	Blitz		= "将目光注射|cFFFF0000(%S+)"
+	Blitz		= "盯住了|cFFFF0000(%S+)"
 }
 
 --------------------------
@@ -172,7 +172,7 @@ L:SetGeneralLocalization({
 
 L:SetMiscLocalization{
 	ValionaYell	= "巨龙，听从我的命令！接住我！",	-- translate -- Yell when Valiona is incoming
-	Add		= "%s进行",
+	Add		= "%s开始施放",
 	Valiona		= "瓦里昂娜"
 }
 
@@ -206,7 +206,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetMiscLocalization{
-	Kill		= "塔赫……不复……存在了……"
+	Kill		= "塔赫……不复存在了……"
 }
 
 --------------
@@ -223,7 +223,7 @@ L:SetTimerLocalization({
 })
 
 L:SetMiscLocalization({
-	Brann				= "好了，我们走！只需要在门禁系统中输入最终登录序列……然后……"
+	Brann				= "好啊，我们走！只需要在门禁系统中输入最终登录序列……然后……"
 })
 
 ------------
@@ -317,8 +317,8 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	BlazeHeavens		= "天之燃炎",	-- translate
-	HarbringerDarkness	= "黑暗先驱者"	-- translate
+	BlazeHeavens		= "天堂炽焰",	-- translate
+	HarbringerDarkness	= "黑暗先驱"	-- translate
 }
 
 --------------
@@ -340,7 +340,7 @@ L:SetOptionLocalization{
 L = DBM:GetModLocalization("Augh")
 
 L:SetGeneralLocalization({
-	name = "奥各"		-- translate
+	name = "奥弗"		-- translate
 })
 
 -----------------------
@@ -381,7 +381,7 @@ L:SetOptionLocalization{
 }
 
 L:SetMiscLocalization{
-	YellAdds		= "赶走入侵者！"
+	YellAdds		= "击退入侵者！"
 }
 
 -----------------
@@ -505,7 +505,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetMiscLocalization{
-	Retract		= "%s收起了他的飓风之盾!"
+	Retract		= "%s收回了他的旋风之盾！"
 }
 
 --------------
