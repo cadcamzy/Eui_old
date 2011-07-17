@@ -1,5 +1,7 @@
 ﻿local E, C, L = unpack(EUI)
 if C["other"].mail ~= true then return end
+
+
 local deletedelay, t = 0.5, 0
 local takingOnlyCash = false
 local button, button2, waitForMail, doNothing, openAll, openAllCash, openMail, lastopened, stopOpening, onEvent, needsToWait, copper_to_pretty_money, total_cash
@@ -24,35 +26,42 @@ function openMail(index)
 	if not InboxFrame:IsVisible() then return stopOpening("Need a mailbox.") end
 	if index == 0 then return stopOpening("Reached the end.") end
 	local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(index)
-	if money > 0 then
+	if not takingOnlyCash then
+		if money > 0 or (numItems and numItems > 0) and COD <= 0 then
+			AutoLootMailItem(index)
+			needsToWait = true
+		end
+	elseif money > 0 then
 		TakeInboxMoney(index)
 		needsToWait = true
 		if total_cash then total_cash = total_cash - money end
-	elseif (not takingOnlyCash) and numItems and (numItems > 0) and COD <= 0 then
-		TakeInboxItem(index)
-		needsToWait = true
+
+
+
 	end
 	local items = GetInboxNumItems()
-	if (numItems and numItems > 1) or (items > 1 and index <= items) then
+	if items > 1 and index <= items then
 		lastopened = index
-		t = 0
+
 		button:SetScript("OnUpdate", waitForMail)
 	else
 		stopOpening("All done.")
 	end
 end
-function waitForMail()
+function waitForMail(this, arg1)
 	t = t + arg1
 	if (not needsToWait) or (t > deletedelay) then
+		if not InboxFrame:IsVisible() then return stopOpening("Need a mailbox.") end
+		t = 0
 		needsToWait = false
 		button:SetScript("OnUpdate", nil)
-		local _, _, _, _, money, COD, _, numItems = GetInboxHeaderInfo(lastopened)
-		if money > 0 or ((not takingOnlyCash) and COD <= 0 and numItems and (numItems > 0)) then
-			--The lastopened index inbox item still contains stuff we want
-			openMail(lastopened)
-		else
-			openMail(lastopened - 1)
-		end
+
+
+
+
+
+		openMail(lastopened - 1)
+
 	end
 end
 function stopOpening(msg, ...)
@@ -65,12 +74,14 @@ function stopOpening(msg, ...)
 	button:UnregisterEvent("UI_ERROR_MESSAGE")
 	takingOnlyCash = false
 	total_cash = nil
+	needsToWait = false
 	if msg then DEFAULT_CHAT_FRAME:AddMessage("OpenAll: "..msg, ...) end
 end
 function onEvent(frame, event, arg1, arg2, arg3, arg4)
 	if event == "UI_ERROR_MESSAGE" then
 		if arg1 == ERR_INV_FULL then
-			stopOpening("停止，背包已满")
+
+			stopOpening("停止，背包已满.")
 		end
 	end
 end
@@ -87,6 +98,8 @@ button:SetScript("OnClick", openAll)
 button:SetScript("OnEvent", onEvent)
 button2 = makeButton("OpenAllButton2", "Cash", 60, 25, 20, -410)
 button2:SetScript("OnClick", openAllCash)
+E.SkinButton(button)
+E.SkinButton(button2)
 
 button:SetScript("OnEnter", function()
 	GameTooltip:SetOwner(button, "ANCHOR_RIGHT")

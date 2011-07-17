@@ -25,7 +25,7 @@
 
 	<Script file="AlreadyKnown.lua"/>
 	<Script file="LFGForwarder.lua"/>
-	
+	<Script file="openall.lua"/>
 	<Include file="oGlow\oGlow.xml"/>
 	<Script file="yclasscolors.lua"/>
 	<Script file="xCT.lua"/>

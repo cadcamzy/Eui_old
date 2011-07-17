@@ -118,7 +118,7 @@
 	e_unitframe_Fdebuffs = "焦点DEBUFF数量"
 	e_unitframe_portrait = "启用3D头像"
 	e_unitframe_showPvP = "显示PvP图标"
-	e_unitframe_onlyplayer = "只显示玩家施放的DEBUFF"
+	e_unitframe_onlyplayer = "只显示玩家施放的DEBUFF和BUFF"
 	e_unitframe_powerspark = "显示五秒回蓝"
 	e_unitframe_playerx = "玩家与目标头像间的间隔"
 	e_unitframe_playery = "头像距屏幕底距离"
