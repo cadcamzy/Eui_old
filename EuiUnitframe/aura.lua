@@ -15,7 +15,7 @@ E.buffids = {
 	DRUID = {
 		{774, "TOPRIGHT", {0.8, 0.4, 0.8}},				-- Rejuvenation
 		{8936, "BOTTOMLEFT", {0.2, 0.8, 0.2}},			-- Regrowth
-		{94447, "TOPLEFT", {0.4, 0.8, 0.2}},			-- Lifebloom
+		{33763, "TOPLEFT", {0.4, 0.8, 0.2}},			-- Lifebloom
 		{48438, "BOTTOMRIGHT", {0.8, 0.4, 0}},			-- Wild Growth
 	},
 	PALADIN = {
