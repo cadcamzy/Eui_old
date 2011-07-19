@@ -200,21 +200,25 @@ addon.LOOT_OPENED = function(self, event, autoloot)
 			if(LootSlotIsCoin(i)) then
 				item = item:gsub("\n", ", ")
 			end
-
-			if(quantity > 1) then
-				slot.count:SetText(quantity)
-				slot.count:Show()
-			else
-				slot.count:Hide()
+			
+			if quantity then
+				if(quantity > 1) then
+					slot.count:SetText(quantity)
+					slot.count:Show()
+				else
+					slot.count:Hide()
+				end
 			end
-
-			if(quality > 1) then
-				slot.drop:SetVertexColor(color.r, color.g, color.b)
-				slot.drop:Show()
-			else
-				slot.drop:Hide()
+			
+			if quality then
+				if(quality > 1) then
+					slot.drop:SetVertexColor(color.r, color.g, color.b)
+					slot.drop:Show()
+				else
+					slot.drop:Hide()
+				end
 			end
-
+			
 			slot.quality = quality
 			slot.name:SetText(item)
 			slot.name:SetTextColor(color.r, color.g, color.b)
