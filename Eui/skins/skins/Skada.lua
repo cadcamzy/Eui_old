@@ -5,7 +5,7 @@ local SkadaSkin = CreateFrame("Frame")
 SkadaSkin:RegisterEvent("PLAYER_LOGIN")
 SkadaSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skada") then
-		local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+
 		local function StripOptions(options)
 			options.baroptions.args.bartexture = options.windowoptions.args.height
 			options.baroptions.args.bartexture.order = 12
@@ -39,7 +39,7 @@ SkadaSkin:SetScript("OnEvent", function(self, event, addon)
 		barmod.ApplySettings_ = barmod.ApplySettings
 		barmod.ApplySettings = function(self, win)
 			barmod:ApplySettings_(win)
-			win.bargroup:SetTexture(TEXTURE)
+			win.bargroup:SetTexture(E.statusbar)
 			-- SettingsDB.CreateTemplate_Broder(win.bargroup)
 			E.EuiSetTemplate(win.bargroup)
 			win.bargroup:SortBars()
@@ -57,7 +57,7 @@ SkadaSkin:SetScript("OnEvent", function(self, event, addon)
 				local bar = win.bargroup:GetBar(barid)
 					if bar then
 						E.EuiSetTemplate(bar)
-						bar:SetTexture(TEXTURE)
+						bar:SetTexture(E.statusbar)
 					end
 				end
 			end

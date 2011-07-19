@@ -37,7 +37,7 @@ E.highlightTex = [[Interface\AddOns\Eui\media\highlightTex]]
 E.borderTex = [[Interface\AddOns\Eui\media\border]]
 E.blank = [[Interface\AddOns\Eui\media\blank]]
 E.gray = [[Interface\AddOns\Eui\media\gray]]
-
+E.statusbar = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
 E.backdrop = {
 	bgFile = E.normTex,
 	insets = {top = -1, left = -1, bottom = -1, right = -1},

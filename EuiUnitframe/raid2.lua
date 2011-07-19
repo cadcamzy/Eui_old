@@ -4,7 +4,7 @@ if not C["raid"].raid == true or C["unitframe"].aaaaunit == 1 then return end
 
 if C["skins"].texture < 0 or C["skins"].texture > 9 then C["skins"].texture = 0 end
 
-local BarTexture = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+local BarTexture = E.statusbar
 	
 updateAllElements = function(frame)
 	for _, v in ipairs(frame.__elements) do

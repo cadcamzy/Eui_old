@@ -306,66 +306,66 @@ durability:SetScript("OnMouseDown", function(self,arg1)
 			msg = msg..StatReport_GetRangedText();
 		end
 		if MyData.CLASS_EN == "DRUID" then
-			if MyData.TKEY == GetTalentTabInfo(1) then
+			if MyData.TKEY == select(2,GetTalentTabInfo(1)) then
 				msg = msg..StatReport_GetSpellText();
-			elseif MyData.TKEY == GetTalentTabInfo(2) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(2)) then
 				if MyData.DODGE > 30 then
 					msg = msg..StatReport_GetTankText();
 				else
 					msg = msg..StatReport_GetMeleeText();
 				end
-			elseif MyData.TKEY == GetTalentTabInfo(3) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(3)) then
 				msg = msg..StatReport_GetHealText();
 			else
 				msg = msg..StatReport_GetMeleeText();
 			end
 		end
 		if MyData.CLASS_EN == "SHAMAN" then
-			if MyData.TKEY == GetTalentTabInfo(1) then
+			if MyData.TKEY == select(2,GetTalentTabInfo(1)) then
 				msg = msg..StatReport_GetSpellText();
-			elseif MyData.TKEY == GetTalentTabInfo(2) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(2)) then
 				msg = msg..StatReport_GetMeleeText();
-			elseif MyData.TKEY == GetTalentTabInfo(3) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(3)) then
 				msg = msg..StatReport_GetHealText();
 			else
 				msg = msg..StatReport_GetMeleeText();
 			end
 		end
 		if MyData.CLASS_EN == "PALADIN" then
-			if MyData.TKEY == GetTalentTabInfo(1) then
+			if MyData.TKEY == select(2,GetTalentTabInfo(1)) then
 				msg = msg..StatReport_GetHealText();
-			elseif MyData.TKEY == GetTalentTabInfo(2) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(2)) then
 				msg = msg..StatReport_GetTankText();
-			elseif MyData.TKEY == GetTalentTabInfo(3) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(3)) then
 				msg = msg..StatReport_GetMeleeText();
 			else
 				msg = msg..StatReport_GetMeleeText();
 			end
 		end
 		if MyData.CLASS_EN == "PRIEST" then
-			if MyData.TKEY == GetTalentTabInfo(1) then
+			if MyData.TKEY == select(2,GetTalentTabInfo(1)) then
 				msg = msg..StatReport_GetSpellAndHealText();
-			elseif MyData.TKEY == GetTalentTabInfo(2) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(2)) then
 				msg = msg..StatReport_GetHealText();
-			elseif MyData.TKEY == GetTalentTabInfo(3) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(3)) then
 				msg = msg..StatReport_GetSpellText();
 			else
 				msg = msg..StatReport_GetSpellText();
 			end
 		end
 		if MyData.CLASS_EN == "WARRIOR" then
-			if MyData.TKEY == GetTalentTabInfo(1) then
+			if MyData.TKEY == select(2,GetTalentTabInfo(1)) then
 				msg = msg..StatReport_GetMeleeText();
-			elseif MyData.TKEY == GetTalentTabInfo(2) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(2)) then
 				msg = msg..StatReport_GetMeleeText();
-			elseif MyData.TKEY == GetTalentTabInfo(3) then
+			elseif MyData.TKEY == select(2,GetTalentTabInfo(3)) then
 				msg = msg..StatReport_GetTankText();
 			else
 				msg = msg..StatReport_GetMeleeText();
 			end
 		end
 		if MyData.CLASS_EN == "DEATHKNIGHT" then
-			if (MyData.DODGE + MyData.PARRY) > 35 then
+			if MyData.TKEY == select(2,GetTalentTabInfo(1)) then
 				msg = msg..StatReport_GetTankText();
 			else
 				msg = msg..StatReport_GetMeleeText();

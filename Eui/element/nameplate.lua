@@ -6,9 +6,9 @@ if C["other"].nameplate ~= true then return end
 local shNameplates = {}
 local cfg = {}
 local mediapath = [=[Interface\AddOns\Eui\media\]=]
-local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+
 --> TEXTURE options (add your own textures here)
-	cfg.bartex = 	TEXTURE
+	cfg.bartex = 	E.statusbar
 	cfg.icontex = 	mediapath.."iconborder"
 
 --> BEHAVIOR options
