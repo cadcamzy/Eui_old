@@ -76,7 +76,9 @@ C["filter"] = {
 	["coolline"] = false,
 	["coollinew"] = 412,
 	["coollineh"] = 18,
-	["iconsize"] = 30,
+	["piconsize"] = 30,
+	["ticonsize"] = 36,
+	["ficonsize"] = 24,
 	["pbufficon"] = true,
 	["tdebufficon"] = true,
 	["float"] = false,
@@ -86,6 +88,10 @@ C["filter"] = {
 	["raidnumber"] = 10,
 	["pcdicon"] = true,
 	["cdsize"] = 30,
+	["pdebufficon"] = true,
+	["tbufficon"] = true,
+	["fbufficon"] = true,
+	["fdebufficon"] = true,
 }
 
 C["unitframe"] = {
@@ -246,7 +252,7 @@ C["skins"] = {
 	["skada"] = true,
 	["recount"] = true,
 --	["font"] = true,
-	["texture"] = 0,
+	["texture"] = 1,
 	["enable"] = true,
 }
 

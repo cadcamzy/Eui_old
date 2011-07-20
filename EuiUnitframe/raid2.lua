@@ -4,7 +4,7 @@ if not C["raid"].raid == true or C["unitframe"].aaaaunit == 1 then return end
 
 if C["skins"].texture < 0 or C["skins"].texture > 9 then C["skins"].texture = 0 end
 
-local BarTexture = E.statusbar
+local BarTexture = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
 	
 updateAllElements = function(frame)
 	for _, v in ipairs(frame.__elements) do
@@ -630,7 +630,7 @@ oUF:Factory(function(self)
 				)
 				partypet:SetPoint("TOP", partytarget, "BOTTOM", 0, -18)
 			end
-		else
+		elseif C["raid"].astyle == 1 then
 			local party = self:SpawnHeader("oUF_Party", nil, "party",
 				'oUF-initialConfigFunction', [[
 					local header = self:GetParent()
@@ -646,7 +646,7 @@ oUF:Factory(function(self)
 				"yOffset", 8,
 				"point", "BOTTOM"
 			)
-			party:SetPoint("LEFT", EuiRaidBackground, 0, 0)
+			party:SetPoint("TOPLEFT", EuiRaidBackground, 0, 0)
 			if C["raid"].showPartyTarget == true then
 				local partytarget = self:SpawnHeader("oUF_PartyTarget", nil, "party",
 					'oUF-initialConfigFunction', [[
@@ -664,7 +664,7 @@ oUF:Factory(function(self)
 					"yOffset", 8,
 					"point", "BOTTOM"
 				)	
-				partytarget:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", 8, 0)		
+				partytarget:SetPoint("TOPLEFT", party, "TOPRIGHT", 8, 0)		
 				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "party",
 					'oUF-initialConfigFunction', [[
 						local header = self:GetParent()
@@ -681,6 +681,60 @@ oUF:Factory(function(self)
 					"showRaid", true,			
 					"yOffset", 8,
 					"point", "BOTTOM"
+				)
+				partypet:SetPoint("TOPLEFT", partytarget, "TOPRIGHT", 8, 0)
+			end			
+		elseif C["raid"].astyle == 2 then
+			local party = self:SpawnHeader("oUF_Party", nil, "party",
+				'oUF-initialConfigFunction', [[
+					local header = self:GetParent()
+					self:SetWidth(header:GetAttribute('initial-width'))
+					self:SetHeight(header:GetAttribute('initial-height'))
+				]],	
+				'initial-width', C["raid"].nogridw,
+				'initial-height', C["raid"].nogridh,		
+				"showSolo", false,
+				"showPlayer", true, 
+				"showParty", true,
+				"showRaid", true,	
+				"yOffset", -8,
+				"point", "TOP"
+			)
+			party:SetPoint("BOTTOMLEFT", EuiRaidBackground, 0, 0)
+			if C["raid"].showPartyTarget == true then
+				local partytarget = self:SpawnHeader("oUF_PartyTarget", nil, "party",
+					'oUF-initialConfigFunction', [[
+						local header = self:GetParent()
+						self:SetWidth(header:GetAttribute('initial-width'))
+						self:SetHeight(header:GetAttribute('initial-height'))
+						self:SetAttribute("unitsuffix", "target")
+					]],
+					'initial-width', C["raid"].nogridw*.7,
+					'initial-height', C["raid"].nogridh,		
+					"showSolo", false,
+					"showPlayer", true, 
+					"showParty", true,
+					"showRaid", true,			
+					"yOffset", -8,
+					"point", "TOP"
+				)	
+				partytarget:SetPoint("BOTTOMLEFT", party, "BOTTOMRIGHT", 8, 0)		
+				local partypet = self:SpawnHeader("oUF_PartyPet", nil, "party",
+					'oUF-initialConfigFunction', [[
+						local header = self:GetParent()
+						self:SetWidth(header:GetAttribute('initial-width'))
+						self:SetHeight(header:GetAttribute('initial-height'))
+						self:SetAttribute("useOwnerUnit", "true")
+						self:SetAttribute("unitsuffix", "pet")
+					]],
+					'initial-width', C["raid"].nogridw*.7,
+					'initial-height', C["raid"].nogridh,		
+					"showSolo", false,
+					"showPlayer", true, 
+					"showParty", true,
+					"showRaid", true,			
+					"yOffset", -8,
+					"point", "TOP"
 				)
 				partypet:SetPoint("BOTTOMLEFT", partytarget, "BOTTOMRIGHT", 8, 0)
 			end			

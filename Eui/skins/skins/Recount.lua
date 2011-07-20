@@ -5,7 +5,7 @@ RecountSkin:RegisterEvent("PLAYER_LOGIN")
 RecountSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Recount") and C["skins"].recount == true then
 		local Recount = _G.Recount
-		
+		local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
 		local function SkinFrame(frame)
 			frame.bgMain = CreateFrame("Frame", nil, frame)
 			E.EuiSetTemplate(frame.bgMain)
@@ -20,7 +20,7 @@ RecountSkin:SetScript("OnEvent", function(self, event, addon)
 		-- Override bar textures
 		Recount.UpdateBarTextures = function(self)
 			for k, v in pairs(Recount.MainWindow.Rows) do
-				v.StatusBar:SetStatusBarTexture(E.statusbar)
+				v.StatusBar:SetStatusBarTexture(TEXTURE)
 				v.StatusBar:GetStatusBarTexture():SetHorizTile(false)
 				v.StatusBar:GetStatusBarTexture():SetVertTile(false)
 			end
@@ -32,7 +32,7 @@ RecountSkin:SetScript("OnEvent", function(self, event, addon)
 		Recount.SetupBar_ = Recount.SetupBar
 		Recount.SetupBar = function(self, bar)
 			self:SetupBar_(bar)
-			bar.StatusBar:SetStatusBarTexture(E.statusbar)
+			bar.StatusBar:SetStatusBarTexture(TEXTURE)
 		end
 
 		-- Skin frames when they're created

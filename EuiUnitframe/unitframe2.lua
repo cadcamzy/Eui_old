@@ -42,7 +42,7 @@ local fontsizesmall = 9
 
 if C["skins"].texture < 0 or C["skins"].texture > 9 then C["skins"].texture = 0 end
 
-local TEXTURE = E.statusbar
+local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
 
 local BACKDROP = {
 	bgFile = [=[Interface\ChatFrame\ChatFrameBackground]=],

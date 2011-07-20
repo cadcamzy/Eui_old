@@ -95,7 +95,9 @@
 	e_filter_tdebuffbar = "目标DEBUFF计时条"
 	e_filter_barheight = "计时条高度（宽度同玩家和目标血条)"
 	e_filter_coolline = "启用流线型冷却计时条"
-	e_filter_iconsize = "提示图标大小"
+	e_filter_piconsize = "玩家提示图标大小"
+	e_filter_ticonsize = "目标提示图标大小"
+	e_filter_ficonsize = "焦点提示图标大小"
 	e_filter_pbufficon = "启用玩家BUFF图标提示"
 	e_filter_tdebufficon = "启用目标DEBUFF图标提示"
 	e_filter_float = "冷却时间显示小数"
@@ -107,6 +109,10 @@
 	e_filter_cdsize = "CD图标大小"
 	e_filter_coollinew = "流线型冷却条宽度"
 	e_filter_coollineh = "流线型冷却条高度"
+	e_filter_pdebufficon = "启用玩家DEBUFF图标提示"
+	e_filter_tbufficon = "启用目标BUFF图标提示"
+	e_filter_fbufficon = "启用焦点BUFF图标提示"
+	e_filter_fdebufficon = "启用焦点DEBUFF图标提示"
 	
 	-- 头像
 	e_unitframe_totalhpmp = "头像显示详细值"

@@ -346,7 +346,7 @@ local function CheckRaidBuff()
 			end
 
 			-- 通报精神BUFF缺失情况
-			msg = ""
+--[[ 			msg = ""
 			for i = 1, MaxGroup do
 				if Group_NoBuff_Name[L.RaidCheckBuffSpirit1][i]["name"] ~= "" then
 					if Group_NoBuff_Name[L.RaidCheckBuffSpirit1][i]["count"] >= GROUP_COUNT[i] then
@@ -359,7 +359,7 @@ local function CheckRaidBuff()
 				msg = L.RaidCheckMsgSpirit..": "..msg
 				SendChatMessage(msg, "RAID")
 				--SendChatMessage(msg, "GUILD")
-			end
+			end ]]
 		end
 
 		-- 通报法师BUFF缺失情况

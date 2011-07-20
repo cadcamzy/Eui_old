@@ -285,6 +285,8 @@ local function EuiUploadDBM()
 	DBM_SavedOptions.SpecialWarningFontSize = 50
 	DBM_SavedOptions.SpecialWarningX = 0
 	DBM_SavedOptions.SpecialWarningY = 75
+	DBM_SavedOptions.VictorySound = false
+	DBM_SavedOptions.ShowFakedRaidWarnings = true
 
 	DBT_SavedOptions["DBM"].StartColorR = r
 	DBT_SavedOptions["DBM"].StartColorG = g

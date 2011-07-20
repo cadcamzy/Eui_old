@@ -30,7 +30,7 @@ if(GetLocale()=="zhCN") then
 	L.ADDFILTER_ERR2 = "参数%s格式不对!"
 	L.ADDFILTER_TIP1 = "/af 类型,样式,法术ID,施法者"
 	L.ADDFILTER_TIP2 = "/af 类型,样式,法术ID,delete"
-	L.ADDFILTER_TIP3 = "类型: 玩家BUFF: playerbuff(pb),目标DEBUFF: targetdebuff(td), 玩家技能冷却: cd"
+	L.ADDFILTER_TIP3 = "类型: 玩家BUFF: pb,目标DEBUFF: td,玩家DEBUFF: pd,目标BUFF: tb, 焦点BUFF: fb, 焦点DEBUFF: fd, 玩家技能冷却: cd"
 	L.ADDFILTER_TIP4 = "样式: 图标: icon, 计时条: bar"
 	L.ADDFILTER_TIP5 = "法术ID: 一组数字如:65532,由鼠标提示中获得"
 	L.ADDFILTER_TIP6 = "施法者: 玩家: player, 目标: target, 任何人: all"
@@ -42,7 +42,11 @@ if(GetLocale()=="zhCN") then
 	L.ADDFILTER_PB_BAR = "玩家BUFF计时条提示已被禁用,无法添加,请先到设置中打开对应开关"
 	L.ADDFILTER_TD_ICON = "目标DEBUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关"
 	L.ADDFILTER_TD_BAR = "目标DEBUFF计时条提示已被禁用,无法添加,请先到设置中打开对应开关"
-	L.ADDFILTER_CD_ICON = "玩家CD图标提示已被禁用,无法添加,请选到设置中打开对应开关"
+	L.ADDFILTER_CD_ICON = "玩家CD图标提示已被禁用,无法添加,请先到设置中打开对应开关"
+	L.ADDFILTER_PD_ICON = "玩家DEBUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关"
+	L.ADDFILTER_TB_ICON = "目标BUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关"
+	L.ADDFILTER_FB_ICON = "焦点BUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关"
+	L.ADDFILTER_FD_ICON = "焦点DEBUFF图标提示已被禁用,无法添加,请先到设置中打开对应开关"
 	
 	L.JPACK_PACK = "整理"
 	
@@ -55,6 +59,11 @@ if(GetLocale()=="zhCN") then
 	L.FILTER_3 = "目标DEBUFF图标"
 	L.FILTER_4 = "目标DEBUFF计时条"
 	L.FILTER_5 = "玩家CD图标"
+	L.FILTER_6 = "玩家DEBUFF图标"
+	L.FILTER_7 = "目标BUFF图标"
+	L.FILTER_8 = "焦点BUFF图标"
+	L.FILTER_9 = "焦点DEBUFF图标"
+	
 	L.TOOLTIP_TIP1 = "鼠标提示"
 	L.TOOLTIP_TIP2 = "鬼魂"
 	L.TOOLTIP_TIP3 = "死亡"

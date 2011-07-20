@@ -335,7 +335,7 @@ if C["actionbar"].enable == true then
 	
 	local petbg = CreateFrame("Frame", "EuiPetActionBarBackground", UIParent)
 	if C["actionbar"].bottompetbar ~= true then
-		E.EuiCreatePanel(petbg, E.petbuttonsize + (E.buttonspacing * 2), (E.petbuttonsize * 10) + (E.buttonspacing * 11), "RIGHT", UIParent, "RIGHT", E.Scale(-6), E.Scale(-13.5))
+		E.EuiCreatePanel(petbg, E.petbuttonsize + (E.buttonspacing * 2), (E.petbuttonsize * 10) + (E.buttonspacing * 11), "RIGHT", UIParent, "RIGHT", E.Scale(-6-E.buttonsize*2-E.buttonspacing*3), E.Scale(-13.5))
 	else
 		E.EuiCreatePanel(petbg, (E.petbuttonsize * 10) + (E.buttonspacing * 11), E.petbuttonsize + (E.buttonspacing * 2), "BOTTOM", UIParent, "BOTTOM", 0, E.Scale(4))
 	end
@@ -343,7 +343,7 @@ if C["actionbar"].enable == true then
 		if E.Movers[frame:GetName()]["moved"] ~= true then
 			frame:ClearAllPoints()
 			if C["actionbar"].bottompetbar ~= true then
-				frame:SetPoint("RIGHT", UIParent, "RIGHT", E.Scale(-6), E.Scale(-13.5))
+				frame:SetPoint("RIGHT", UIParent, "RIGHT", E.Scale(-6-E.buttonsize*2-E.buttonspacing*3), E.Scale(-13.5))
 			else
 				frame:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, E.Scale(4))
 			end

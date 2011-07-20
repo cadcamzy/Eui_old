@@ -113,7 +113,9 @@ local function Local(o)
 	if o == "EuiSetGuifiltertdebuffbar" then o = e_filter_tdebuffbar end
 	if o == "EuiSetGuifilterbarheight" then o = e_filter_barheight end
 	if o == "EuiSetGuifiltercoolline" then o = e_filter_coolline end
-	if o == "EuiSetGuifiltericonsize" then o = e_filter_iconsize end
+	if o == "EuiSetGuifilterpiconsize" then o = e_filter_piconsize end
+	if o == "EuiSetGuifilterticonsize" then o = e_filter_ticonsize end
+	if o == "EuiSetGuifilterficonsize" then o = e_filter_ficonsize end
 	if o == "EuiSetGuifilterpbufficon" then o = e_filter_pbufficon end
 	if o == "EuiSetGuifiltertdebufficon" then o = e_filter_tdebufficon end
 	if o == "EuiSetGuifilterfloat" then o = e_filter_float end
@@ -125,6 +127,11 @@ local function Local(o)
 	if o == "EuiSetGuifiltercdsize" then o = e_filter_cdsize end
 	if o == "EuiSetGuifiltercoollinew" then o = e_filter_coollinew end
 	if o == "EuiSetGuifiltercoollineh" then o = e_filter_coollineh end
+	if o == "EuiSetGuifilterpdebufficon" then o = e_filter_pdebufficon end
+	if o == "EuiSetGuifiltertbufficon" then o = e_filter_tbufficon end
+	if o == "EuiSetGuifilterfbufficon" then o = e_filter_fbufficon end
+	if o == "EuiSetGuifilterfdebufficon" then o = e_filter_fdebufficon end
+	
 	
 	-- 头像(EuiSetGuiunitframe)
 	if o == "EuiSetGuiunitframeaaaaunit" then o = e_unitframe_aaaaunit end

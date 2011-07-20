@@ -219,7 +219,7 @@ local function OnEvent(self, event, ...)
 					end
 				end
 				if findspell == false then
-					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, shouldConsolidate, spellId = UnitBuff(data.unitId or "Player", spn or "33763");
+					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, shouldConsolidate, spellId = UnitBuff(data.unitId or "Player", spn or "6603");
 
 				end
 			elseif ( data.filter == "DEBUFF" ) then
@@ -232,7 +232,7 @@ local function OnEvent(self, event, ...)
 					end
 				end
 				if findspell == false then
-					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, shouldConsolidate, spellId = UnitDebuff(data.unitId or "Player", spn or "33763");
+					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, shouldConsolidate, spellId = UnitDebuff(data.unitId or "Player", spn or "6603");
 				end
 			else
 				if ( data.spellID ) then
@@ -326,6 +326,10 @@ if ( Filger_Spells and Filger_Spells[class] ) then
 		if frame.Name == "targetdebufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_3, nil, E.EuiFilterMove) end
 		if frame.Name == "targetdebuffbar" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_4, nil, E.EuiFilterMove) end
 		if frame.Name == "playercdicon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_5, nil, E.EuiFilterMove) end
+		if frame.Name == "playerdebufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_6, nil, E.EuiFilterMove) end
+		if frame.Name == "targetbufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_7, nil, E.EuiFilterMove) end
+		if frame.Name == "focusbufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_8, nil, E.EuiFilterMove) end
+		if frame.Name == "focusdebufficon" then E.CreateMover(frame, "EuiFilter"..i.."Mover", L.FILTER_9, nil, E.EuiFilterMove) end
 		
 		if ( C["filter"].configmode ) then
 
@@ -351,12 +355,13 @@ local fff=CreateFrame("Frame",nil)
 fff:RegisterEvent("PLAYER_ENTERING_WORLD");
 fff:SetScript("OnEvent", function()
 	fff:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
-	local playerframe, targetframe, portrait
+	local class = select(2, UnitClass("player"))
+	local playerframe, targetframe, focusframe, portrait
 	portrait = 0
 	if C["unitframe"].aaaaunit > 0 then
 		playerframe = "Ljxx_playerFrame"
 		targetframe = "Ljxx_targetFrame"
+		focusframe = "Ljxx_focusFrame"
 	else
 		playerframe = UIParent
 		targetframe = UIParent
@@ -373,425 +378,26 @@ fff:SetScript("OnEvent", function()
 		end
 	end	
 	local playBuffIconHeight = 235
-	local playCDIconHeight = 190
-	local iconsize
-	if C["filter"].iconsize < 1 then iconsize = 30 else iconsize = C["filter"].iconsize end
+	local playCDIconHeight = 150
 	local cdsize
 	if C["filter"].cdsize < 1 then cdsize = 30 else cdsize = C["filter"].cdsize end
 		
 	Filger_Spells = {
-	["ROGUE"] = {		-- 盗贼
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-	},
-	["DRUID"] = {		-- 德鲁伊
-		{
-			Name = "目标BUFF",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 23920, size = 30, unitId = "target", caster = "all", filter = "BUFF" },			-- 法术反射
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		
-		{
-			Name = "焦点DEBUFF",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "TOPRIGHT", 5, 28 },
-			
-			{ spellID = 53308, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },	-- 纠缠根须
-			{ spellID = 33786, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },	-- 旋风
-		},
-	},
-	["HUNTER"] = {		-- 猎人
-		{
-			Name = "目标BUFF",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 34074, size = 30, unitId = "player", caster = "player", filter = "BUFF" }, --蝰蛇守护
-			
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		
-		{
-			Name = "焦点DEBUFF",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "TOPRIGHT", 5, 28 },
-			
-			{ spellID = 49012, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--翼龙钉刺
-			{ spellID = 34490, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--沉默射击
-		},
-	},
-	["MAGE"] = {		--法师
-		{
-			Name = "目标BUFF",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 23920, size = 72, unitId = "target", caster = "all", filter = "BUFF" }, 			-- 法术反射
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		
-		{
-			Name = "焦点DEBUFF",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "TOPRIGHT", 5, 28 },
-			
-			{ spellID = 118, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },	-- 变形术
-		},
-	},
-	["WARRIOR"] = {		--战士
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-	},
-	["SHAMAN"] = {		-- 萨满
-		{
-			Name = "目标BUFF",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 23920, size = 30, unitId = "target", caster = "all", filter = "BUFF" },			-- 法术反射
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		
-		{
-			Name = "焦点DEBUFF",
-			Direction = "UP",
-			Interval = 7,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "TOPRIGHT", 5, 28 },
-			
-			{ spellID = 51514, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--妖术
-		},
-	},
-	["PALADIN"] = {		-- 圣骑士
-		{
-			Name = "目标BUFF",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 23920, size = 60, unitId = "target", caster = "all", filter = "BUFF" }, --法术反射
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-	},
-	["PRIEST"] = {		-- 牧师
-		{
-			Name = "目标BUFF",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 23920, size = 60, unitId = "target", caster = "all", filter = "BUFF" },--法术反射
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		
-		{
-			Name = "焦点DEBUFF",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "TOPRIGHT", 5, 28 },
-			
-			{ spellID = 10955, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--束缚亡灵
-			{ spellID = 10890, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--心灵尖啸
-			{ spellID = 15487, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--沉默
-		},
-	},
-	["WARLOCK"] = {		-- 术士
-		{
-			Name = "目标BUFF",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = {  "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 235 },
-			
-			{ spellID = 23920, size = 60, unitId = "target", caster = "all", filter = "BUFF" },--法术反射
-		},
-
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		
-		{
-			Name = "焦点DEBUFF",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "TOPRIGHT", 5, 28 },
-			
-			{ spellID = 5782, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--恐惧
-			{ spellID = 710, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--放逐术
-			{ spellID = 11719, size = 16, barWidth = 181, scale = 1, unitId = "focus", caster = "player", filter = "DEBUFF" },--语言诅咒
-		},
-	},
-	["DEATHKNIGHT"] = {		-- 死亡骑士
-		{
-			Name = "自身DEBUFF",
-			Direction = "UP",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", playerframe, "TOPRIGHT", 0, 320 },
-			
-			{ spellID = 6770, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },		-- 闷棍
-         --變羊
-            { spellID = 118, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --制裁之錘
-            { spellID = 853, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --腎擊
-            { spellID = 408, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --啃食
-            { spellID = 47481, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --沉默
-            { spellID = 55021, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --傷殘術
-            { spellID = 22570, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --斷筋
-           { spellID = 1715, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-         --致殘毒藥
-           { spellID = 3775, size = 60, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-	},
-}
+		["ROGUE"] = {},
+		["DRUID"] = {},
+		["HUNTER"] = {},
+		["MAGE"] = {},
+		["WARRIOR"] = {},
+		["SHAMAN"] = {},
+		["PALADIN"] = {},
+		["PRIEST"] = {},
+		["WARLOCK"] = {},
+		["DEATHKNIGHT"] = {},
+	}
 
 --启用玩家冷却图标提示
 	if C["filter"].pcdicon == true then
-		table.insert(Filger_Spells["ROGUE"],
+		table.insert(Filger_Spells[class],
 		{
 			Name = "playercdicon",
 			Direction = "RIGHT",
@@ -803,129 +409,11 @@ fff:SetScript("OnEvent", function()
 			{ slotID = 14, size = cdsize, filter = "CD" },
 			{ slotID = 10, size = cdsize, filter = "CD" },
 		})
-
-		table.insert(Filger_Spells["DRUID"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 10, size = cdsize, filter = "CD" },
-			{ slotID = 13, size = cdsize, filter = "CD" },			-- 饰品1
-			{ slotID = 14, size = cdsize, filter = "CD" },			-- 饰品2		
-		})
-		
-		table.insert(Filger_Spells["HUNTER"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})		
-		
-		table.insert(Filger_Spells["MAGE"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})		
-		
-		table.insert(Filger_Spells["WARRIOR"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})	
-
-		table.insert(Filger_Spells["SHAMAN"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})
-		
-		table.insert(Filger_Spells["PALADIN"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})		
-		
-		table.insert(Filger_Spells["PRIEST"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})		
-		
-		table.insert(Filger_Spells["WARLOCK"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})
-
-		table.insert(Filger_Spells["DEATHKNIGHT"],
-		{
-			Name = "playercdicon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playCDIconHeight },
-			
-			{ slotID = 13, size = cdsize, filter = "CD" },
-			{ slotID = 14, size = cdsize, filter = "CD" },
-			{ slotID = 10, size = cdsize, filter = "CD" },
-		})
-		
 	end
 
 --启用玩家BUFF图标提示
 	if C["filter"].pbufficon == true then
-	table.insert(Filger_Spells["ROGUE"],
+	table.insert(Filger_Spells[class],
 		{
 			Name = "playerbufficon",
 			Direction = "RIGHT",
@@ -933,120 +421,28 @@ fff:SetScript("OnEvent", function()
 			Mode = "ICON",
 			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight },
 			
-			{ spellID = 13750, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },		-- 冲动
+			{ spellID = 6603, size = C["filter"].piconsize, unitId = "player", caster = "player", filter = "BUFF" },
 		})
-		
-	table.insert(Filger_Spells["DRUID"],	
+	end
+	
+--启用玩家BUFF计时条
+	if C["filter"].pbuffbar == true then
+	table.insert(Filger_Spells[class],
 		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight },
+			Name = "playerbuffbar",
+			Direction = "UP",
+			Interval = 5,
+			Mode = "BAR",
+			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },
 
-			{ spellID = 22812, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },		-- 树皮术
+
+			{ spellID = 6603, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },
 		})
-		
-	table.insert(Filger_Spells["HUNTER"],
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 56453, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },--荷枪实弹
-
-		})
-
-	table.insert(Filger_Spells["MAGE"],	
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 44544, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" }, 			-- 寒冰指
-			{ spellID = 36032, size = iconsize, unitId = "player", caster = "player", filter = "DEBUFF" },       -- 奥术冲击
-		})
-		
-	table.insert(Filger_Spells["WARRIOR"],
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 52437, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },--猝死
-
-		})
-		
-	table.insert(Filger_Spells["SHAMAN"],
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 12536, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },--节能施法
-
-		})
-		
-	table.insert(Filger_Spells["PALADIN"],
-		{
-			Name = "playerbufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 54428, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },		-- 神圣恳求
-
-		})
-		
-	table.insert(Filger_Spells["PRIEST"],
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 586, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },--渐隐术
-
-		})
-		
-	table.insert(Filger_Spells["WARLOCK"],
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 63321, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" }, --生命分流雕文
-		})
-		
-	table.insert(Filger_Spells["DEATHKNIGHT"],
-		{
-			Name = "playerbufficon",
-			Direction = "RIGHT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffIconHeight},
-
-			{ spellID = 50880, size = iconsize, unitId = "player", caster = "player", filter = "BUFF" },--冰冷之抓
-
-		})
-
 	end
 
 --启用目标DEBUFF图标
 	if C["filter"].tdebufficon == true then
-	table.insert(Filger_Spells["ROGUE"],
+	table.insert(Filger_Spells[class],
 		{
 			Name = "targetdebufficon",
 			Direction = "LEFT",
@@ -1054,240 +450,14 @@ fff:SetScript("OnEvent", function()
 			Mode = "ICON",
 			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
 
-			{ spellID = 2094, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },			-- 致盲
+			{ spellID = 6603, size = C["filter"].ticonsize, unitId = "target", caster = "player", filter = "DEBUFF" },
 
 		})
-		
-	table.insert(Filger_Spells["DRUID"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 770, size = iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },			-- 精灵之火
-		
-		})		
-
-	table.insert(Filger_Spells["HUNTER"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 1130, size = iconsize, unitId = "target", caster = "all", filter = "DEBUFF" }, --猎人印记
-				
-		})
-	table.insert(Filger_Spells["PALADIN"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 54499, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },--十字军之心
-
-		})		
-	table.insert(Filger_Spells["MAGE"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 31589, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },       -- 减速
-	
-		})
-		
-	table.insert(Filger_Spells["WARRIOR"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 47486, size = iconsize, unitId = "target", caster = "all", filter = "DEBUFF" },--致死打击
-		})
-		
-	table.insert(Filger_Spells["SHAMAN"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 49233, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },--烈焰震击
-		})		
-
-	table.insert(Filger_Spells["PRIEST"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 48125, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" }, --痛
-
-		})		
-		
-	table.insert(Filger_Spells["WARLOCK"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-
-			{ spellID = 11719, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },--语言诅咒
-
-		})		
-
-	table.insert(Filger_Spells["DEATHKNIGHT"],
-		{
-			Name = "targetdebufficon",
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 202 },
-			{ spellID = 59879, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },--血之疫病
-			{ spellID = 59921, size = iconsize, unitId = "target", caster = "player", filter = "DEBUFF" },--冰霜疫病
-
-		})	
 	end		
-		
---启用玩家BUFF计时条
-	if C["filter"].pbuffbar == true then
-	table.insert(Filger_Spells["ROGUE"],
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },
-
-
-			{ spellID = 13750, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },	-- 冲动
-		})
-			
-	table.insert(Filger_Spells["DRUID"],
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },
-			
-			{ spellID = 50334, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },	-- 狂暴
-		
-		})
-		
-	table.insert(Filger_Spells["HUNTER"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },
-
-			{ spellID = 34503, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },--破甲虚弱
-		})
-		
-	table.insert(Filger_Spells["MAGE"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },		
-
-			{ spellID = 44544, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" }, 			-- 寒冰指
-
-		})
-		
-	table.insert(Filger_Spells["WARRIOR"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },		
-
-			{ spellID = 52437, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },--猝死
-
-		})
-
-	table.insert(Filger_Spells["SHAMAN"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },		
-
-			{ spellID = 12536, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },--节能施法
-
-		})
-	
-	table.insert(Filger_Spells["PALADIN"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },
-
-			{ spellID = 54428, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },		-- 神圣恳求
-
-			
-		})
-	
-	table.insert(Filger_Spells["PRIEST"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },	
-
-			{ spellID = 33151, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "all", filter = "BUFF" },--圣光涌动
-
-		})	
-	
-	table.insert(Filger_Spells["WARLOCK"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },	
-
-			{ spellID = 63321, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" }, --生命分流雕文
-		})
-		
-	table.insert(Filger_Spells["DEATHKNIGHT"],	
-		{
-			Name = "playerbuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, playBuffBarHeight },		
-
-			{ spellID = 50880, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "player", caster = "player", filter = "BUFF" },--冰冷之抓
-		})
-	
-	end
 
 --启用目标DEBUFF计时条
 	if C["filter"].tdebuffbar == true then
-	table.insert(Filger_Spells["ROGUE"],
+	table.insert(Filger_Spells[class],
 		{
 			Name = "targetdebuffbar",
 			Direction = "UP",
@@ -1295,123 +465,73 @@ fff:SetScript("OnEvent", function()
 			Mode = "BAR",
 			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
 			
-			{ spellID = 2094, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },			-- 致盲
+			{ spellID = 6603, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },
 
-		})
+		})	
+	end
 	
-	table.insert(Filger_Spells["DRUID"],
+--启用玩家DEBUFF图标提示
+	if C["filter"].pdebufficon == true then
+	table.insert(Filger_Spells[class],
 		{
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
+			Name = "playerdebufficon",
+			Direction = "RIGHT",
+			Interval = 3,
+			Mode = "ICON",
+			setPoint = { "BOTTOMLEFT", playerframe, "TOPLEFT", 0, 190 },
 			
-			{ spellID = 770, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "all", filter = "DEBUFF" },			-- 精灵之火
-		
-		})
-		
-	table.insert(Filger_Spells["HUNTER"],
-		{		
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
-			
-			{ spellID = 1130, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "all", filter = "DEBUFF" }, --猎人印记
-			
-
-		})
-
-	table.insert(Filger_Spells["MAGE"],
-		{		
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },	
-
-			{ spellID = 31589, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },       -- 减速
-
-		})
-		
-	table.insert(Filger_Spells["WARRIOR"],
-		{		
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },		
-
-			{ spellID = 47486, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "all", filter = "DEBUFF" },--致死打击
-		})
-
-	table.insert(Filger_Spells["SHAMAN"],
-		{		
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },		
-
-			{ spellID = 49233, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },--烈焰震击
-		})
-		
-	table.insert(Filger_Spells["PRIEST"],
-		{
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
-			
-			{ spellID = 48068, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "BUFF" },--恢复
-
-			
-		})
-		
-	table.insert(Filger_Spells["WARLOCK"],
-		{
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
-			
-			{ spellID = 172, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },--腐蚀术
-
-		})
-		
-	table.insert(Filger_Spells["DEATHKNIGHT"],	
-		{
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
-			
-			{ spellID = 59879, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },--血之疫病
-
-		})
-
-	table.insert(Filger_Spells["PALADIN"],	
-		{
-			Name = "targetdebuffbar",
-			Direction = "UP",
-			Interval = 5,
-			Mode = "BAR",
-			setPoint = { "BOTTOMLEFT", targetframe, "BOTTOMRIGHT", 5, 0+portrait },
-			
-			{ spellID = 59879, size = C["filter"].barheight, barWidth = C["unitframe"].playerwidth, unitId = "target", caster = "player", filter = "DEBUFF" },--血之疫病
-
+			{ spellID = 6603, size = C["filter"].piconsize, unitId = "player", caster = "player", filter = "DEBUFF" },
 		})
 	end
+	
+--启用目标BUFF图标
+	if C["filter"].tbufficon == true then
+	table.insert(Filger_Spells[class],
+		{
+			Name = "targetbufficon",
+			Direction = "LEFT",
+			Interval = 2,
+			Mode = "ICON",
+			setPoint = { "BOTTOMRIGHT", targetframe, "TOPRIGHT", 0, 162 },
+
+			{ spellID = 6603, size = C["filter"].ticonsize, unitId = "target", caster = "player", filter = "BUFF" },
+
+		})
+	end	
+	
+--启用焦点BUFF图标提示
+	if C["filter"].fbufficon == true then
+	table.insert(Filger_Spells[class],
+		{
+			Name = "focusbufficon",
+			Direction = "RIGHT",
+			Interval = 3,
+			Mode = "ICON",
+			setPoint = { "TOPLEFT", focusframe, "BOTTOMLEFT", 0, -10 },
+			
+			{ spellID = 6603, size = C["filter"].ficonsize, unitId = "focus", caster = "player", filter = "BUFF" },
+		})
+	end
+
+--启用焦点DEBUFF图标提示
+	if C["filter"].fdebufficon == true then
+	table.insert(Filger_Spells[class],
+		{
+			Name = "focusdebufficon",
+			Direction = "RIGHT",
+			Interval = 3,
+			Mode = "ICON",
+			setPoint = { "BOTTOMLEFT", focusframe, "BOTTOMLEFT", -70, 0 },
+			
+			{ spellID = 6603, size = C["filter"].ficonsize, unitId = "focus", caster = "player", filter = "DEBUFF" },
+		})
+	end	
+	
 	
 	if filter then
 		for n,v in pairs(filter) do
 			if filter[n].barWidth then
-				table.insert(Filger_Spells[E.MyClass][tonumber(filter[n].k)],{
+				table.insert(Filger_Spells[class][tonumber(filter[n].k)],{
 					spellID = filter[n].spellID,
 					size = C["filter"].barheight,
 					unitId = filter[n].unitId,
@@ -1420,15 +540,23 @@ fff:SetScript("OnEvent", function()
 					filter = filter[n].filter
 				})
 			elseif filter[n].filter == "CD" then
-				table.insert(Filger_Spells[E.MyClass][tonumber(filter[n].k)],{
+				table.insert(Filger_Spells[class][tonumber(filter[n].k)],{
 					spellID = filter[n].spellID,
 					size = C["filter"].cdsize,
 					filter = "CD"
 				})
-			else	
-				table.insert(Filger_Spells[E.MyClass][tonumber(filter[n].k)],{
+			else
+				local iconsize
+				if filter[n].unitId == "player" then
+					iconsize = C["filter"].piconsize
+				elseif filter[n].unitId == "target" then
+					iconsize = C["filter"].ticonsize
+				elseif filter[n].unitId == "focus" then
+					iconsize = C["filter"].ficonsize
+				end
+				table.insert(Filger_Spells[class][tonumber(filter[n].k)],{
 					spellID = filter[n].spellID,
-					size = C["filter"].iconsize,
+					size = iconsize,
 					unitId = filter[n].unitId,
 					caster = filter[n].caster,
 					filter = filter[n].filter
