@@ -197,9 +197,9 @@ local function LoadSkin()
 	ReadyCheckFrameText:SetPoint("TOP", 0, -12)
 	
 	-- others
-	ReadyCheckListenerFrame:SetAlpha(0)
-	ReadyCheckFrame:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
-	StackSplitFrame:GetRegions():Hide()
+--	ReadyCheckListenerFrame:SetAlpha(0)
+--	ReadyCheckFrame:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
+--	StackSplitFrame:GetRegions():Hide()
 
 	E.SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
 	E.SkinButton(LFDDungeonReadyDialogLeaveQueueButton)
