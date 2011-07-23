@@ -3,7 +3,8 @@ local gtt = GameTooltip;
 local GetTalentTabInfo = GetTalentTabInfo;
 
 -- Constants
-local TALENTS_PREFIX = TALENTS..":|cffffffff ";
+local TALENTS_PREFIX = "主天赋:|cffffffff ";
+local TALENTS_PREFIX2 = "副天赋:|cffffffff ";
 local CACHE_SIZE = 25;		-- Change cache size here (Default 25)
 local INSPECT_DELAY = 0.2;
 local INSPECT_FREQ = 2;
@@ -11,14 +12,18 @@ local INSPECT_FREQ = 2;
 -- Variables
 local ttt = CreateFrame("Frame","TipTacTalents");
 local cache = {};
+local seccache = {};
 local current = {};
+local sec = {};
 
 -- Time of the last inspect reuqest. Init this to zero, just to make sure. This is a global so other addons could use this variable as well
 lastInspectRequest = 0;
 
 -- Allow these to be accessed through other addons
 ttt.cache = cache;
+ttt.seccache = seccache;
 ttt.current = current;
+ttt.sec = sec;
 
 ttt:Hide();
 
@@ -31,47 +36,70 @@ local function GatherTalents(isInspect)
 	local group = GetActiveTalentGroup(isInspect);
 	-- Get points per tree, and set "primaryTree" to the tree with most points
 	local primaryTree = 1;
+	local secTree = 1;
 	for i = 1, 3 do
-		local _, _, _, _, pointsSpent = GetTalentTabInfo(i,isInspect,nil,group);
+		local _, _, _, _, pointsSpent = GetTalentTabInfo(i,isInspect,nil,1);
 		current[i] = pointsSpent;
 		if (current[i] > current[primaryTree]) then
 			primaryTree = i;
 		end
 	end
-	local _, tabName = GetTalentTabInfo(primaryTree,isInspect,nil,group);
+	local _, tabName = GetTalentTabInfo(primaryTree,isInspect,nil,1);
 	current.tree = tabName;
+	for i = 1, 3 do
+		local _, _, _, _, secpointsSpent = GetTalentTabInfo(i,isInspect,nil,2);
+		sec[i] = secpointsSpent;
+		if (sec[i] > sec[secTree]) then
+			secTree = i;
+		end
+	end
+	local _, sectabName = GetTalentTabInfo(secTree,isInspect,nil,2);
+	sec.tree = sectabName;	
+	
 	-- Az: Clear Inspect, as we are done using it
 	if (isInspect) then
 		ClearInspectPlayer();
 	end
 	-- Customise output. Use TipTac setting if it exists, otherwise just use formatting style one.
-	local talentFormat = (TipTac_Config and TipTac_Config.talentFormat or 1);
+	local talentFormat = 1;
 	if (current[primaryTree] == 0) then
-		current.format = "No Talents";
+		current.format = "无天赋";
 	elseif (talentFormat == 1) then
 		current.format = current.tree.." ("..current[1].."/"..current[2].."/"..current[3]..")";
-	elseif (talentFormat == 2) then
-		current.format = current.tree;
-	elseif (talentFormat == 3) then
-		current.format = current[1].."/"..current[2].."/"..current[3];
 	end
+	if (sec[secTree] == 0) then
+		sec.format = "无天赋";
+	elseif (talentFormat == 1) then
+		sec.format = sec.tree.." ("..sec[1].."/"..sec[2].."/"..sec[3]..")";
+	end	
+	
 	-- Set the tips line output, for inspect, only update if the tip is still showing a unit!
 	if (not isInspect) then
-		gtt:AddLine(TALENTS_PREFIX..current.format);
+		gtt:AddLine(TALENTS_PREFIX..current.format..(group==1 and "*" or ""));
+		gtt:AddLine(TALENTS_PREFIX2..sec.format..(group==2 and "*" or ""));
 	elseif (gtt:GetUnit()) then
 		for i = 2, gtt:NumLines() do
 			if ((_G["GameTooltipTextLeft"..i]:GetText() or ""):match("^"..TALENTS_PREFIX)) then
-				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX,current.format);
+				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX,current.format..(group==1 and " |c000fffff*" or ""));
+
 				-- Do not call Show() if the tip is fading out, this only works with TipTac, if TipTacTalents are used alone, it might still bug the fadeout
 				if (not gtt.fadeOut) then
 					gtt:Show();
 				end
-				break;
+			--	break;
 			end
+			if ((_G["GameTooltipTextLeft"..i]:GetText() or ""):match("^"..TALENTS_PREFIX2)) then
+				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX2,sec.format..(group==2 and " |c000fffff*" or ""));
+				-- Do not call Show() if the tip is fading out, this only works with TipTac, if TipTacTalents are used alone, it might still bug the fadeout
+				if (not gtt.fadeOut) then
+					gtt:Show();
+				end
+			--	break;
+			end			
 		end
 	end
 	-- Organise Cache
-	local cacheSize = (TipTac_Config and TipTac_Config.talentCacheSize or CACHE_SIZE);
+	local cacheSize = CACHE_SIZE;
 	for i = #cache, 1, -1 do
 		if (current.name == cache[i].name) then
 			tremove(cache,i);
@@ -85,6 +113,20 @@ local function GatherTalents(isInspect)
 	if (cacheSize > 0) then
 		cache[#cache + 1] = CopyTable(current);
 	end
+	
+	for i = #seccache, 1, -1 do
+		if (sec.name == seccache[i].name) then
+			tremove(seccache,i);
+			break;
+		end
+	end
+	if (#seccache > cacheSize) then
+		tremove(seccache,1);
+	end
+	-- Cache the new entry
+	if (cacheSize > 0) then
+		seccache[#seccache + 1] = CopyTable(sec);
+	end	
 end
 
 --------------------------------------------------------------------------------------------------------
@@ -94,7 +136,7 @@ end
 -- OnEvent
 ttt:SetScript("OnEvent",function(self,event,guid)
 	self:UnregisterEvent(event);
-	if (guid == current.guid) then
+	if (guid == current.guid or guid == sec.guid) then
 		GatherTalents(1);
 	end
 end);
@@ -119,7 +161,7 @@ end);
 
 -- HOOK: OnTooltipSetUnit
 gtt:HookScript("OnTooltipSetUnit",function(self,...)
-	if (TipTac_Config) and (TipTac_Config.showTalents == false) then
+	if C["tooltip"].ShowTalent ~= true) then
 		return;
 	end
 	-- Abort any delayed inspect in progress
@@ -143,7 +185,12 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 		wipe(current);
 		current.unit = unit;
 		current.name = UnitName(unit);
-		current.guid = UnitGUID(unit)
+		current.guid = UnitGUID(unit);
+		wipe(sec);
+		sec.unit = unit;
+		sec.name = UnitName(unit);
+		sec.guid = UnitGUID(unit);
+		
 		-- No need for inspection on the player
 		if (UnitIsUnit(unit,"player")) then
 			GatherTalents();
@@ -161,7 +208,16 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 				break;
 			end
 		end
-		
+		for _, secentry in ipairs(seccache) do
+			if (sec.name == secentry.name) then
+				self:AddLine(TALENTS_PREFIX2..secentry.format);
+				sec.tree = secentry.tree;
+				sec.format = secentry.format;
+				sec[1], sec[2], sec[3] = secentry[1], secentry[2], secentry[3];
+				cacheLoaded = true;
+				break;
+			end
+		end
 		-- Queue an inspect request
 		local isInspectOpen = (InspectFrame and InspectFrame:IsShown()) or (Examiner and Examiner:IsShown());
 		if (CanInspect(unit)) and (not isInspectOpen) then
@@ -170,6 +226,7 @@ gtt:HookScript("OnTooltipSetUnit",function(self,...)
 			ttt:Show();
 			if (not cacheLoaded) then
 				self:AddLine(TALENTS_PREFIX.."Loading...");
+				self:AddLine(TALENTS_PREFIX2.."Loading...");
 			end
 		end
 	end
