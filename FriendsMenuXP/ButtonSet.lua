@@ -389,7 +389,8 @@ FriendsMenuXP_Buttons["ARMORY"] = {
 		if GetLocale()=="zhTW" then
 			host = "http://tw.battle.net/wow/zh/character/"
 		elseif GetLocale()=="zhCN" then
-			host = "http://cn.wowarmory.com/"
+		--	host = "http://cn.wowarmory.com/"
+			host = "http://www.battlenet.com.cn/wow/zh/character/"
 		elseif GetLocale()=="koKR" then
 			host = "http://kr.wowarmory.com/"
 		elseif GetLocale()=="enUS" then
