@@ -1,10 +1,11 @@
+--modify by ljxx.net 
 local E, C , L = unpack(EUI)
 local gtt = GameTooltip;
 local GetTalentTabInfo = GetTalentTabInfo;
 
 -- Constants
-local TALENTS_PREFIX = "主天赋:|cffffffff ";
-local TALENTS_PREFIX2 = "副天赋:|cffffffff ";
+local TALENTS_PREFIX = L.TOOLTIP_TALENT1;
+local TALENTS_PREFIX2 = L.TOOLTIP_TALENT2;
 local CACHE_SIZE = 25;		-- Change cache size here (Default 25)
 local INSPECT_DELAY = 0.2;
 local INSPECT_FREQ = 2;
@@ -37,6 +38,8 @@ local function GatherTalents(isInspect)
 	-- Get points per tree, and set "primaryTree" to the tree with most points
 	local primaryTree = 1;
 	local secTree = 1;
+	local temp1 = "|c000EEE00 ";	--当前激活的天赋文字颜色
+	local temp2 = "|c88888888 ";	--未激活天赋文字颜色
 	for i = 1, 3 do
 		local _, _, _, _, pointsSpent = GetTalentTabInfo(i,isInspect,nil,1);
 		current[i] = pointsSpent;
@@ -63,24 +66,24 @@ local function GatherTalents(isInspect)
 	-- Customise output. Use TipTac setting if it exists, otherwise just use formatting style one.
 	local talentFormat = 1;
 	if (current[primaryTree] == 0) then
-		current.format = "无天赋";
+		current.format = temp2..L.TOOLTIP_NOTALENT;
 	elseif (talentFormat == 1) then
 		current.format = current.tree.." ("..current[1].."/"..current[2].."/"..current[3]..")";
 	end
 	if (sec[secTree] == 0) then
-		sec.format = "无天赋";
+		sec.format = temp2..L.TOOLTIP_NOTALENT;
 	elseif (talentFormat == 1) then
 		sec.format = sec.tree.." ("..sec[1].."/"..sec[2].."/"..sec[3]..")";
 	end	
 	
 	-- Set the tips line output, for inspect, only update if the tip is still showing a unit!
 	if (not isInspect) then
-		gtt:AddLine(TALENTS_PREFIX..current.format..(group==1 and "*" or ""));
-		gtt:AddLine(TALENTS_PREFIX2..sec.format..(group==2 and "*" or ""));
+		gtt:AddLine(TALENTS_PREFIX..(group==1 and temp1 or temp2)..current.format);
+		gtt:AddLine(TALENTS_PREFIX2..(group==2 and temp1 or temp2)..sec.format);
 	elseif (gtt:GetUnit()) then
 		for i = 2, gtt:NumLines() do
 			if ((_G["GameTooltipTextLeft"..i]:GetText() or ""):match("^"..TALENTS_PREFIX)) then
-				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX,current.format..(group==1 and " |c000fffff*" or ""));
+				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX,(group==1 and temp1 or temp2)..current.format);
 
 				-- Do not call Show() if the tip is fading out, this only works with TipTac, if TipTacTalents are used alone, it might still bug the fadeout
 				if (not gtt.fadeOut) then
@@ -89,7 +92,7 @@ local function GatherTalents(isInspect)
 			--	break;
 			end
 			if ((_G["GameTooltipTextLeft"..i]:GetText() or ""):match("^"..TALENTS_PREFIX2)) then
-				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX2,sec.format..(group==2 and " |c000fffff*" or ""));
+				_G["GameTooltipTextLeft"..i]:SetFormattedText("%s%s",TALENTS_PREFIX2,(group==2 and temp1 or temp2)..sec.format);
 				-- Do not call Show() if the tip is fading out, this only works with TipTac, if TipTacTalents are used alone, it might still bug the fadeout
 				if (not gtt.fadeOut) then
 					gtt:Show();
@@ -161,7 +164,7 @@ end);
 
 -- HOOK: OnTooltipSetUnit
 gtt:HookScript("OnTooltipSetUnit",function(self,...)
-	if C["tooltip"].ShowTalent ~= true) then
+	if C["tooltip"].ShowTalent ~= true then
 		return;
 	end
 	-- Abort any delayed inspect in progress

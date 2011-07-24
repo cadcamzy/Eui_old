@@ -275,8 +275,12 @@ if(GetLocale()=="zhCN") then
 	L.CASTBY = "\n施法者 "
 	
 	L.TOOLTIP_LV1 = "装备等级: "
-	L.TOOLTIP_LV2 = "读取目标装备平均等级."
-	L.TOOLTIP_LV3 = "重新移动鼠标将能看到装备等级."
+	L.TOOLTIP_TALENT1 = "主天赋: "
+	L.TOOLTIP_TALENT2 = "副天赋: "
+	L.TOOLTIP_NOTALENT = "无天赋"
+	
+	L.CHAT_TIP1 = "EUI提醒: 你起码要达到 %d 级才能和我讲话"
+	L.CHAT_TIP2 = "你的好友列表满了，此插件模块需要你腾出2个好友空位!"
 	
 else
 	L.L_COST = "修理花費: "
@@ -545,6 +549,10 @@ else
 	L.CASTBY = "\n施法者 "
 	
 	L.TOOLTIP_LV1 = "裝備等級: "
-	L.TOOLTIP_LV2 = "讀取目標裝備平均等級."
-	L.TOOLTIP_LV3 = "重新移動鼠標將能看到裝備等級."	
+	L.TOOLTIP_TALENT1 = "主天賦: "
+	L.TOOLTIP_TALENT2 = "副天賦: "
+	L.TOOLTIP_NOTALENT = "無天賦"
+	
+	L.CHAT_TIP1 = "Eui提醒: 你起碼要達到 %d 級才能密我。"
+	L.CHAT_TIP2 = "你的好友列表滿了，此插件需要你騰出2個好友空位!"
 end

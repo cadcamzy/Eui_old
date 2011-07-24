@@ -13,9 +13,7 @@ local backdrop_tab = {
 		  tile = false, tileSize = 0, edgeSize = E.Scale(1), 
 		  insets = { left = -E.Scale(1), right = -E.Scale(1), top = -E.Scale(1), bottom = -E.Scale(1)}
 		}
---local eb_point = {"BOTTOM", -200, 180}
---local eb_width = 400
-local tscol = "64C2F5"
+
 local LinkHover = {}; LinkHover.show = {
 	["achievement"] = true,
 	["enchant"]     = true,
@@ -55,29 +53,10 @@ ChatTypeInfo['BATTLEGROUND'].sticky = 1
 ChatTypeInfo['WHISPER'].sticky = 0
 ChatTypeInfo['CHANNEL'].sticky = 1
 
----------------- > Custom timestamps color
-TIMESTAMP_FORMAT_HHMM = "|cff"..tscol.."[%I:%M]|r "
-TIMESTAMP_FORMAT_HHMMSS = "|cff"..tscol.."[%I:%M:%S]|r "
-TIMESTAMP_FORMAT_HHMMSS_24HR = "|cff"..tscol.."[%H:%M:%S]|r "
-TIMESTAMP_FORMAT_HHMMSS_AMPM = "|cff"..tscol.."[%I:%M:%S %p]|r "
-TIMESTAMP_FORMAT_HHMM_24HR = "|cff"..tscol.."[%H:%M]|r "
-TIMESTAMP_FORMAT_HHMM_AMPM = "|cff"..tscol.."[%I:%M %p]|r "
 
 ---------------- > Fading alpha
 CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 1
 CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = 1
-
---[[ FirstFrameChat = EuiCreateFrame(UIParent,2,"BACKGROUND",true)
-EuiSetTemplate(FirstFrameChat)
---FirstFrameChat:SetBackdrop(backdrop_tab)
-FirstFrameChat:SetBackdropColor(.1,.1,.1,.7)
---FirstFrameChat:SetBackdropBorderColor(.3,.3,.3,1)
-FirstFrameChat:SetPoint("BOTTOMLEFT",E.Scale(6),E.Scale(4))
-FirstFrameChat:SetPoint("BOTTOMRIGHT",UIParent,"BOTTOMLEFT", chat_width,E.Scale(4))
-FirstFrameChat:SetAlpha(1)
-FirstFrameChat:SetFrameLevel(0)
-FirstFrameChat:SetHeight(chat_height) ]]
-
 
 ---------------- > Function to move and scale chatframes 
 SetChat = function()
@@ -86,10 +65,8 @@ SetChat = function()
 		FCF_SetChatWindowFontSize(self, ChatFrame1, fontsize) 
 	end
     ChatFrame1:ClearAllPoints()
---    ChatFrame1:SetPoint(unpack(def_position))
 	ChatFrame1:SetPoint("TOPLEFT", EuiLeftChatBackground, "TOPLEFT", E.Scale(2),-E.Scale(2))
 	ChatFrame1:SetPoint("BOTTOMRIGHT", EuiLeftChatBackground, "BOTTOMRIGHT", -E.Scale(2), E.Scale(2))
---	ChatFrame1:SetAllPoints(EuiLeftChatBackground)
     ChatFrame1:SetWidth(chat_width-E.Scale(19))
     ChatFrame1:SetHeight(chat_height-E.Scale(7))
     ChatFrame1:SetFrameLevel(8)
@@ -138,8 +115,6 @@ do
 		local cf = _G[format("%s%d", "ChatFrame", i)]
 	--fix fading
 		local tab = _G["ChatFrame"..i.."Tab"]
-	--	tab:SetAlpha(0)
-	--	tab.noMouseAlpha = 0
 		cf:SetFading(false)
 	_G["ChatFrame"..i.."TabLeft"]:SetTexture(nil)
 	_G["ChatFrame"..i.."TabMiddle"]:SetTexture(nil)
@@ -178,10 +153,7 @@ do
 		eb:SetAltArrowKeyMode(false)
 		eb:ClearAllPoints()
 		eb:SetPoint("BOTTOMLEFT", cf, "TOPLEFT",  -E.Scale(14), 0)
-		--eb:SetPoint("BOTTOMLEFT", UIParent, eb_point[1], eb_point[2], eb_point[3])
 		eb:SetPoint("BOTTOMRIGHT", cf, "TOPRIGHT", E.Scale(12), 0)
-		--eb:SetPoint("BOTTOMRIGHT", UIParent, eb_point[1], eb_point[2]+eb_width, eb_point[3])
-	--	eb:EnableMouse(true)
 	
 	--Remove scroll buttons
 		local bf = _G['ChatFrame'..i..'ButtonFrame']
@@ -201,7 +173,6 @@ do
 		bb:SetAlpha(0.4)
 		bb:RegisterForClicks("AnyDown")
 		bb.SetPoint = function() end
-	--	bb:SetScript("OnClick", BottomButtonClick)
 		bb:SetScript("OnClick", function(self, button)
 			if button == "LeftButton" then
 				BottomButtonClick(bb)
@@ -226,8 +197,6 @@ editbox:SetBackdrop{
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
---editbox:SetPoint('TOPLEFT', 'ChatFrame1EditBoxLeft', 'TOPLEFT', 12, -6)
---editbox:SetPoint('BOTTOMRIGHT', 'ChatFrame1EditBoxRight', 'BOTTOMRIGHT', -8, 6)
 editbox:SetAllPoints(EuiTopChatBackground)
 editbox:SetFrameLevel(ChatFrame1EditBox:GetFrameLevel()-1)
 editbox:Hide()
@@ -402,23 +371,6 @@ do
 		end
 	end
 end
-
----------------- > Enable/Disable mouse for editbox
---[[ eb_mouseon = function()
-	for i =1, 10 do
-		local eb = _G['ChatFrame'..i..'EditBox']
-		eb:EnableMouse(true)
-	end
-end
-eb_mouseoff = function()
-	for i =1, 10 do
-		local eb = _G['ChatFrame'..i..'EditBox']
-		eb:EnableMouse(false)
-	end
-end
-hooksecurefunc("ChatFrame_OpenChat",eb_mouseon)
-hooksecurefunc("ChatEdit_SendText",eb_mouseoff)
- ]]
 
 ---------------- > ChatCopy Module
 local lines = {}
@@ -726,19 +678,8 @@ end
 if C["chat"].bodylevel > 0 then
 	--good players(guildies/friends), maybe(for processing)
 	local good, maybe, badboy, filterTable, login = {}, {}, CreateFrame("Frame", "BadBoy_Levels"), {}, nil
-	local whisp = "Eui: You need to be level %d to whisper me."
-	local err = "You have reached the maximum amount of friends, remove 2 for this addon to function properly!"
-
-	do
-		local L = GetLocale()
-		if L == "zhTW" then
-			whisp = "Eui提醒: 你起碼要達到 %d 級才能密我。"
-			err = "你的好友列表滿了，此插件需要你騰出2個好友空位!"
-		elseif L == "zhCN" then
-			whisp = "EUI提醒: 你起码要达到 %d 级才能和我讲话"
-			err = "你的好友列表满了，此插件模块需要你腾出2个好友空位!"
-		end
-	end
+	local whisp = L.CHAT_TIP1
+	local err = L.CHAT_TIP2
 
 	ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", function(_,_,msg)
 		if msg == ERR_FRIEND_LIST_FULL then

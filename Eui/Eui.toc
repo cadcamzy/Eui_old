@@ -2,11 +2,11 @@
 ## Title: |cffC495DDEui|r
 ## Title-zhCN: EUI界面核心包|cffC495DDEui|r
 ## Notes: |cffC495DDEui|r
-## Notes-zhCN: EUI 源自eP's UI
 ## Author: Ljxx.net
+## X-Category: EUI
 ## Version: R3
 ## OptionalDeps: EuiSet
-## URL: http://code.google.com/p/cadcamzy/
+## URL: http://www.ljxx.net
 ## X-oUF: EuiUF
 ## SavedVariablesPerCharacter: EuiUFpos, JPackDB, LjxxuiInstallV401, filter, friendsWhisp, guildWhisp, totallastplayers, entries
 ## SavedVariables: tgoldDB, EuiData, RankWatchSettings, EuiInfobar

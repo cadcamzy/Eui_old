@@ -1,8 +1,9 @@
 ﻿## Interface: 40100
 ## Title: |cffC495DDEui|r Unitframe
-## Title-zhCN: EUI头像团队模块|cffC495DDEuiScript|r
-## Author: Ljxx
+## Title-zhCN: EUI头像团队模块|cffC495DDEuiUnitframe|r
+## Author: Ljxx.net
+## X-Category: EUI
 ## RequiredDeps: Eui
-## Version: 201100627
+## Version: 20110723
 
 unitframe.xml

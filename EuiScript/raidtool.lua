@@ -3,7 +3,7 @@
 local E, C, L = unpack(EUI)
 
 if C["raid"].raidtool ~= true then return end
-E.Kill(CompactRaidFrameManager) --Get rid of old module
+--E.Kill(CompactRaidFrameManager) --Get rid of old module
 
 local panel_height = ((E.Scale(5)*5) + (E.Scale(20)*5))
 

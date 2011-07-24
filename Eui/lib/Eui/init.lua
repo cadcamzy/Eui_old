@@ -288,7 +288,7 @@ end
 
 ---------------------------------------------------- Some slash commands
 SlashCmdList["FRAME"] = function() print(GetMouseFocus():GetName()) end
-SLASH_FRAME1 = "/gn"
+SLASH_FRAME1 = "/gn" --4.2取消了...换为 /fstack 
 
 SlashCmdList["GETPARENT"] = function() print(GetMouseFocus():GetParent():GetName()) end
 SLASH_GETPARENT1 = "/gp"
