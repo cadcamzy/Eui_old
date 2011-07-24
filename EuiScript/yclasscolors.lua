@@ -243,7 +243,7 @@ local function tradeupdate()
     for i, button in ipairs(GuildRosterContainer.buttons) do
         if(button:IsShown() and button.online and button.guildIndex) then
 			local skillID, isCollapsed, iconTexture, headerName, numOnline, numPlayers, playerName, class, online, zone, skill, classFileName = GetGuildTradeSkillInfo(button.guildIndex)
-            if(not headerName) then
+            if(not headerName) and playerName then
                 button.string1:SetText(ns.classColor[classFileName] .. playerName)
                 if(zone == myZone) then
                     button.string2:SetText('|cff00ff00' .. zone)

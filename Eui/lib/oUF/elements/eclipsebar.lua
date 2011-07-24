@@ -12,18 +12,20 @@ local UNIT_POWER = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (event == 'UNIT_POWER' and powerType ~= 'ECLIPSE')) then return end
 
 	local eb = self.EclipseBar
-
+	
 	local power = UnitPower('player', SPELL_POWER_ECLIPSE)
 	local maxPower = UnitPowerMax('player', SPELL_POWER_ECLIPSE)
 
 	if(eb.LunarBar) then
 		eb.LunarBar:SetMinMaxValues(-maxPower, maxPower)
 		eb.LunarBar:SetValue(power)
+		eb.value:SetText(abs(power))
 	end
 
 	if(eb.SolarBar) then
 		eb.SolarBar:SetMinMaxValues(-maxPower, maxPower)
 		eb.SolarBar:SetValue(power * -1)
+		eb.value:SetText(abs(power))
 	end
 
 	if(eb.PostUpdatePower) then
@@ -116,6 +118,11 @@ local function Enable(self)
 			eb.SolarBar:SetStatusBarTexture([[Interface\TargetingFrame\UI-StatusBar]])
 		end
 
+		eb.value = eb.LunarBar:CreateFontString(nil, "OVERLAY")
+		eb.value:SetFont(STANDARD_TEXT_FONT, 9, "OUTLINE")
+		eb.value:SetJustifyH("CENTER")
+		eb.value:SetPoint("CENTER",eb, "CENTER",0, 0)
+						
 		self:RegisterEvent('ECLIPSE_DIRECTION_CHANGE', ECLIPSE_DIRECTION_CHANGE)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', UPDATE_VISIBILITY)
 		self:RegisterEvent('UNIT_AURA', UNIT_AURA)

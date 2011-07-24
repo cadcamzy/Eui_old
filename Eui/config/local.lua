@@ -282,6 +282,8 @@ if(GetLocale()=="zhCN") then
 	L.CHAT_TIP1 = "EUI提醒: 你起码要达到 %d 级才能和我讲话"
 	L.CHAT_TIP2 = "你的好友列表满了，此插件模块需要你腾出2个好友空位!"
 	
+	L.RAIDREMINDER = "团队BUFF提醒"
+	
 else
 	L.L_COST = "修理花費: "
 	L.L_GOLD = "金"
@@ -555,4 +557,6 @@ else
 	
 	L.CHAT_TIP1 = "Eui提醒: 你起碼要達到 %d 級才能密我。"
 	L.CHAT_TIP2 = "你的好友列表滿了，此插件需要你騰出2個好友空位!"
+	
+	L.RAIDREMINDER = "團隊BUFF提醒"
 end

@@ -53,6 +53,7 @@ C["other"] = {
 	["buff"] = true,
 	["xct"] = true,
 	["raidcheck"] = true,
+	["raidbuffreminder"] = true,
 }
 
 C["chat"] = {

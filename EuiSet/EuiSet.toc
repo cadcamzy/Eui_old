@@ -4,7 +4,7 @@
 ## Author: Ljxx.net
 ## X-Category: EUI
 ## RequiredDeps: Eui
-## Version: 20110724A
+## Version: 20110724B
 ## SavedVariablesPerCharacter: EuiSettings
 
 locales\zhCN.lua

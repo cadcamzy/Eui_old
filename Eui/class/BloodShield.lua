@@ -35,7 +35,8 @@ function bs:COMBAT_LOG_EVENT_UNFILTERED(...)
         destGUID, destName, destFlags, 
         param9, param10, param11, param12, param13, param14, 
         param15, param16, param17, param18, param19, param20 = ...
-		
+	
+	if E.Role ~= 'Tank' then return end
 	if eventtype == "SPELL_AURA_APPLIED" and destName == E.MyName then
 		if param10 and param13 then
 			if param10 == BS_SPELL then

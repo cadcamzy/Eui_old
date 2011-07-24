@@ -19,7 +19,7 @@ E.EuiCreateShadow(EuiMinimap)
 
 if C["info"].apsp ~= 0 then
 	local leftstat = CreateFrame("Frame", "EuiLeftStatBackground", UIParent)
-	E.EuiCreatePanel(leftstat, E.Scale(1), E.Scale(1), "TOPLEFT", EuiMinimap, "BOTTOMLEFT", 0, - E.Scale(4))
+	E.EuiCreatePanel(leftstat, E.Scale(1), E.Scale(1), "TOPLEFT", EuiMinimap, "BOTTOMLEFT", 0, C["other"].raidbuffreminder and -E.Scale(30) or -E.Scale(4))
 	E.EuiSetTemplate(leftstat,alpha)
 	E.EuiCreateShadow(leftstat)
 	leftstat:SetHeight(18)
@@ -31,7 +31,7 @@ if C["info"].apsp ~= 0 then
 	function E.InfoapspPostion(frame)
 		if E.Movers["Infoapsp"]["moved"] ~= true then
 			Infoapsp:ClearAllPoints()
-			Infoapsp:SetPoint("TOPLEFT", EuiMinimap, "BOTTOMLEFT", 0, - E.Scale(4))
+			Infoapsp:SetPoint("TOPLEFT", EuiMinimap, "BOTTOMLEFT", 0, C["other"].raidbuffreminder and -E.Scale(30) or -E.Scale(4))
 		end	
 	end
 	E.CreateMover(EuiLeftStatBackground, "Infoapsp", "AP/SP", false, E.InfoapspPostion)	
@@ -39,7 +39,7 @@ if C["info"].apsp ~= 0 then
 end
 if C["info"].dps ~= 0 then
 	local rightstat = CreateFrame("Frame", "EuiRightStatBackground", UIParent)
-	E.EuiCreatePanel(rightstat, E.Scale(1), E.Scale(1), "TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 0, - E.Scale(4))
+	E.EuiCreatePanel(rightstat, E.Scale(1), E.Scale(1), "TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 0, C["other"].raidbuffreminder and -E.Scale(30) or -E.Scale(4))
 	E.EuiSetTemplate(rightstat,alpha)
 	E.EuiCreateShadow(rightstat)
 	rightstat:SetHeight(18)
@@ -51,7 +51,7 @@ if C["info"].dps ~= 0 then
 	function E.InfodpsPostion(frame)
 		if E.Movers["Infodps"]["moved"] ~= true then
 			Infodps:ClearAllPoints()
-			Infodps:SetPoint("TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 0, - E.Scale(4))
+			Infodps:SetPoint("TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 0, C["other"].raidbuffreminder and -E.Scale(30) or -E.Scale(4))
 		end	
 	end
 	E.CreateMover(EuiRightStatBackground, "Infodps", "DPS/HPS", false, E.InfodpsPostion)

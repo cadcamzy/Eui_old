@@ -76,6 +76,7 @@
 	e_other_raidcheck = "启用团队检查工具"
 	e_other_xct = "启用内置xCT战斗信息显示"
 	e_other_nameplatetank = "姓名版启用坦克模式"
+	e_other_raidbuffreminder = "团队BUFF提醒"
 	
 	-- 聊天
 	e_chat_enable = "启用聊天增强"
