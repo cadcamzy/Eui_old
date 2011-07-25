@@ -22,11 +22,7 @@ local spells = {
 local width, height = C["filter"].raidwidth or 144, C["filter"].raidheight or 12
 local num = C["filter"].raidnumber or 10
 local holder = CreateFrame("Frame", "EuiRaidCooldowns", UIParent)
-if C["other"].minimap == true then
-	E.EuiCreatePanel(holder, width, height, "TOP", EuiMinimap, "BOTTOM", 0, -24)
-else
-	E.EuiCreatePanel(holder, width, height, "TOPLEFT", UIParent, "TOPLEFT", 10, -24)
-end
+E.EuiCreatePanel(holder, width, height, "BOTTOMLEFT", EuiBottomInfoButtonR, "BOTTOMRIGHT", 5, 0)
 E.EuiSetTemplate(holder)
 holder:Hide()
 
@@ -54,9 +50,9 @@ local function UpdateBars()
         if(v:IsShown()) then
             v:ClearAllPoints()
            	if(i==1 or firsthidden) then
-               	v:SetPoint("TOP", holder, "BOTTOM")
+               	v:SetPoint("BOTTOM", holder, "TOP")
            	else
-               	v:SetPoint("TOP", bars[lastvisible], "BOTTOM", 0, -8)
+               	v:SetPoint("BOTTOM", bars[lastvisible], "TOP", 0, 8)
            	end
 			firsthidden = false
             lastvisible = i
@@ -114,7 +110,7 @@ local function CreateBar(index)
 	bar:SetWidth(width)
 
 	bar.dur = E.EuiSetFontn(bar, E.font, 12, "LEFT")
-	bar.dur:SetPoint("LEFT", bar, "TOPLEFT", 1, 0)
+	bar.dur:SetPoint("LEFT", bar, "LEFT", 1, 0)
 	bar.dur:SetShadowOffset(1, -1)
 	
 	bar.text = E.EuiSetFontn(bar, E.font, 12, "RIGHT")
@@ -157,7 +153,7 @@ local function StartBar(unit, spellname, duration)
 	local bar = bars[index]
 	bar.spellname = spellname
 	bar.name = UnitName(unit)
-	bar.text:SetText(spellname)
+	bar.text:SetText(E.utf8sub(bar.name,4,false)..spellname)
 	bar.text:SetTextColor(c.r, c.g, c.b)
 	bar.duration = duration
 	bar.start = GetTime()
@@ -175,7 +171,7 @@ end)
 function E.RaidCooldownPoint(frame)
 	if E.Movers["RaidCooldownMover"]["moved"] ~= true then
 		EuiRaidCooldowns:ClearAllPoints()
-		EuiRaidCooldowns:SetPoint("TOP", EuiMinimap, "BOTTOM", 0, -20)
+		EuiRaidCooldowns:SetPoint("BOTTOMLEFT", EuiBottomInfoButtonR, "BOTTOMRIGHT", 5, 0)
 	end
 end
 

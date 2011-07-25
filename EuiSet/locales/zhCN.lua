@@ -77,6 +77,7 @@
 	e_other_xct = "启用内置xCT战斗信息显示"
 	e_other_nameplatetank = "姓名版启用坦克模式"
 	e_other_raidbuffreminder = "团队BUFF提醒"
+	e_other_bossnotes = "启用BOSS一句话攻略"
 	
 	-- 聊天
 	e_chat_enable = "启用聊天增强"

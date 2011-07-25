@@ -1130,7 +1130,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		DEATHKNIGHT = {},
 	}
 	if select(2, GetNumMacros()) > 34 then
-		print(L.CLICKSET_MOUSE_ERR)
+		DEFAULT_CHAT_FRAME:AddMessage(L.CLICKSET_MOUSE_ERR,1,0,0)
 		return
 	end
 --local index_a = CreateMacro("Debuff_1", _, "/cast [target=mouseover] 清洁术;",1)
@@ -1145,9 +1145,9 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		local b=SetBinding("ALT-MOUSEWHEELDOWN", "CAMERAZOOMOUT")
 		if a and b then
 			SaveBindings(2)
-			print(L.CLICKSET_TIP1)
-			print(L.CLICKSET_TIP2)
-			print(L.CLICKSET_TIP3)
+			DEFAULT_CHAT_FRAME:AddMessage(L.CLICKSET_TIP1,1,0,0)
+			DEFAULT_CHAT_FRAME:AddMessage(L.CLICKSET_TIP2,1,0,0)
+			DEFAULT_CHAT_FRAME:AddMessage(L.CLICKSET_TIP3,1,0,0)
 		end
 	end
 	if CanDispel[class][2] and IsSpellKnown(CanDispel[class][2]) then

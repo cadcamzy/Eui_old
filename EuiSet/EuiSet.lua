@@ -95,6 +95,7 @@ local function Local(o)
 	if o == "EuiSetGuiotherxct" then o = e_other_xct end
 	if o == "EuiSetGuiothernameplatetank" then o = e_other_nameplatetank end
 	if o == "EuiSetGuiotherraidbuffreminder" then o = e_other_raidbuffreminder end
+	if o == "EuiSetGuiotherbossnotes" then o = e_other_bossnotes end
 	
 	-- 聊天(EuiSetGuichat)
 	if o == "EuiSetGuichatenable" then o = e_chat_enable end
@@ -672,6 +673,7 @@ do
 			"\n技能监视添加 /af /addfilter"..
 			"\n聊天框重设 /setchat"..
 			"\n整合包包设置 /baudbag"..
+			"\nBOSS一句话攻略 /boss"..
 			"\n框体解锁/锁定, 点聊天框右下角UnLock键"..
 			"\n系统菜单栏在小地图中按鼠标中键,或右击右上角设置"..
 			"\n追踪菜单在小地图按鼠标右键"..

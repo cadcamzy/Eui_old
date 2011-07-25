@@ -198,7 +198,7 @@ local function CheckRaidBuff()
 			local HasMAGEBrilliance = false
 			local HasDRUIDWild = false
 			local HasPALADINBuffKings = false
-			local HasPALADINBuffWisdom = false
+		--	local HasPALADINBuffWisdom = false
 			local HasPALADINBuffMight = false
 			local IsFQ = false
 			local HasFQBuff = false
@@ -209,7 +209,7 @@ local function CheckRaidBuff()
 				HasMAGEBrilliance = true
 				HasDRUIDWild = true
 				HasPALADINBuffKings = true
-				HasPALADINBuffWisdom = true
+			--	HasPALADINBuffWisdom = true
 				HasPALADINBuffMight = true
 				IsFQ = true
 				HasFQBuff = true
@@ -226,16 +226,11 @@ local function CheckRaidBuff()
 				if find(BuffTEXT, L.RaidCheckBuffBrilliance1) or find(BuffTEXT, L.RaidCheckBuffBrilliance2) or find(BuffTEXT, L.RaidCheckBuffBrilliance3) then
 					HasMAGEBrilliance = true
 				end
-				if find(BuffTEXT, L.RaidCheckBuffGiftOfWild) or find(BuffTEXT, L.RaidCheckBuffMarkOfWild) then
+				if find(BuffTEXT, L.RaidCheckBuffGiftOfWild) or find(BuffTEXT, L.RaidCheckBuffMarkOfWild) or find(BuffTEXT, L.RaidCheckBuffKings1) or find(BuffTEXT, L.RaidCheckBuffKings2) or find(BuffTEXT, L.RaidCheckBuffKings3) then
 					HasDRUIDWild = true
-				end
-				if find(BuffTEXT, L.RaidCheckBuffKings1) or find(BuffTEXT, L.RaidCheckBuffKings2) or find(BuffTEXT, L.RaidCheckBuffKings3) then
 					HasPALADINBuffKings = true
 				end
-				if find(BuffTEXT, L.RaidCheckBuff1Wisdom1) or find(BuffTEXT, L.RaidCheckBuff1Wisdom2) or find(BuffTEXT, L.RaidCheckBuff1Wisdom3) then
-					HasPALADINBuffWisdom = true
-				end
-				if find(BuffTEXT, L.RaidCheckBuffMight1) or find(BuffTEXT, L.RaidCheckBuffMight2) or find(BuffTEXT, L.RaidCheckBuffMight3) then
+				if find(BuffTEXT, L.RaidCheckBuffMight1) or find(BuffTEXT, L.RaidCheckBuffMight2) then
 					HasPALADINBuffMight = true
 				end
 				if UnitPowerType(unit) ~= 0 then		--忽略无蓝条职业的精神
@@ -243,15 +238,10 @@ local function CheckRaidBuff()
 				end
 				if class == L.RaidCheckDRUID then
 				--忽略野德的智力和智慧（猎豹和熊状态/HP>MP则判定为野德）
-					if find(BuffTEXT, L.RaidCheckBuffBearForm) or find(BuffTEXT, L.RaidCheckBuffCatForm) or (UnitHealthMax(unit) > (UnitManaMax(unit) * 1.15)) then
+				--	if find(BuffTEXT, L.RaidCheckBuffBearForm) or find(BuffTEXT, L.RaidCheckBuffCatForm) or (UnitHealthMax(unit) > (UnitManaMax(unit) * 1.15)) then
+					if find(BuffTEXT, L.RaidCheckBuffBearForm) or find(BuffTEXT, L.RaidCheckBuffCatForm) or (GetActiveTalentGroup(unit) == 2) then
 						HasMAGEBrilliance = true
-						HasPALADINBuffWisdom = true
-					end
-				end
-				if class == L.RaidCheckSHAMAN then
-				--忽略增强萨满的智慧（HP>>MP）
-					if UnitHealthMax(unit) > (UnitManaMax(unit) * 1.2) then
-						HasPALADINBuffWisdom = true
+					--	HasPALADINBuffWisdom = true
 					end
 				end
 				if class == L.RaidCheckROGUE or class == L.RaidCheckWARRIOR or class == L.RaidCheckDEATHKNIGHT then
@@ -260,7 +250,8 @@ local function CheckRaidBuff()
 				end
 				if class == L.RaidCheckPALADIN then
 				--检查FQ坦的正义之怒
-					if UnitHealthMax(unit) > (UnitHealthMax("player") * 1.4) then
+				--	if UnitHealthMax(unit) > (UnitHealthMax("player") * 1.4) then
+					if GetActiveTalentGroup(unit) == 2 then
 						IsFQ = true
 						if find(BuffTEXT, L.RaidCheckBuffRighteousFury) then
 							HasFQBuff = true
@@ -290,21 +281,14 @@ local function CheckRaidBuff()
 				NoBuffCount = NoBuffCount + 1
 			end
 			if HasPALADINBuffKings == false and HasPALADINKings == true then
-				Group_NoBuff_Name[L.RaidCheckBuffKings1][class]["name"] = Group_NoBuff_Name[L.RaidCheckBuffKings1][class]["name"]..name.."."
-				Group_NoBuff_Name[L.RaidCheckBuffKings1][class]["count"] = Group_NoBuff_Name[L.RaidCheckBuffKings1][class]["count"] + 1
+				Group_NoBuff_Name[L.RaidCheckBuffKings1][subgroup]["name"] = Group_NoBuff_Name[L.RaidCheckBuffKings1][subgroup]["name"]..name.."."
+				Group_NoBuff_Name[L.RaidCheckBuffKings1][subgroup]["count"] = Group_NoBuff_Name[L.RaidCheckBuffKings1][subgroup]["count"] + 1
 				NoBuffCount = NoBuffCount + 1
-			end
-			if HasPALADINBuffWisdom == false and HasPALADINWisdom == true then
-				if (class == L.RaidCheckDRUID) or (class == L.RaidCheckMAGE) or (class == L.RaidCheckPRIEST) or (class == L.RaidCheckWARLOCK) or (class == L.RaidCheckSHAMAN) or (class == L.RaidCheckPALADIN) then
-					Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][class]["name"] = Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][class]["name"]..name.."."
-					Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][class]["count"] = Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][class]["count"] + 1
-					NoBuffCount = NoBuffCount + 1
-				end
 			end
 			if HasPALADINBuffMight == false and HasPALADINMight == true then
 				if (class == L.RaidCheckROGUE) or (class == L.RaidCheckWARRIOR) or (class == L.RaidCheckDEATHKNIGHT) or (class == L.RaidCheckHUNTER) then
-					Group_NoBuff_Name[L.RaidCheckBuffMight1][class]["name"] = Group_NoBuff_Name[L.RaidCheckBuffMight1][class]["name"]..name.."."
-					Group_NoBuff_Name[L.RaidCheckBuffMight1][class]["count"] = Group_NoBuff_Name[L.RaidCheckBuffMight1][class]["count"] + 1
+					Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["name"] = Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["name"]..name.."."
+					Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["count"] = Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["count"] + 1
 					NoBuffCount = NoBuffCount + 1
 				end
 			end
@@ -344,22 +328,6 @@ local function CheckRaidBuff()
 				SendChatMessage(msg, "RAID")
 				--SendChatMessage(msg, "GUILD")
 			end
-
-			-- 通报精神BUFF缺失情况
---[[ 			msg = ""
-			for i = 1, MaxGroup do
-				if Group_NoBuff_Name[L.RaidCheckBuffSpirit1][i]["name"] ~= "" then
-					if Group_NoBuff_Name[L.RaidCheckBuffSpirit1][i]["count"] >= GROUP_COUNT[i] then
-						Group_NoBuff_Name[L.RaidCheckBuffSpirit1][i]["name"] = L.RaidCheckMsgNoBuffAll
-					end
-					msg = msg..format(L.RaidCheckMsgGroup, i, Group_NoBuff_Name[L.RaidCheckBuffSpirit1][i]["name"]).." "
-				end
-			end
-			if msg ~= "" then
-				msg = L.RaidCheckMsgSpirit..": "..msg
-				SendChatMessage(msg, "RAID")
-				--SendChatMessage(msg, "GUILD")
-			end ]]
 		end
 
 		-- 通报法师BUFF缺失情况
@@ -404,35 +372,18 @@ local function CheckRaidBuff()
 		if HasPALADINKings == true then
 			msg = ""
 			for i = 1, 10 do
-				if Group_NoBuff_Name[L.RaidCheckBuffKings1][CLASS_INDEX[i]]["name"] ~= "" then
-					if Group_NoBuff_Name[L.RaidCheckBuffKings1][CLASS_INDEX[i]]["count"] >= CLASS_COUNT[i] then
-						Group_NoBuff_Name[L.RaidCheckBuffKings1][CLASS_INDEX[i]]["name"] = L.RaidCheckMsgNoBuffAll
+				if Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["name"] ~= "" then
+					if Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["count"] >= CLASS_COUNT[i] then
+						Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["name"] = L.RaidCheckMsgNoBuffAll
 					end
-					msg = msg..format("%s(%s)", CLASS_INDEX[i], Group_NoBuff_Name[L.RaidCheckBuffKings1][CLASS_INDEX[i]]["name"]).." "
+					msg = msg..format(L.RaidCheckBuffKings1, i, Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["name"]).." "
 				end
 			end
 			if msg ~= "" then
 				msg = L.RaidCheckMsgKings..": "..msg
 				SendChatMessage(msg, "RAID")
 				--SendChatMessage(msg, "GUILD")
-			end
-		end
-
-		-- 通报骑士智慧祝福缺失情况
-		if HasPALADINWisdom == true then
-			msg = ""
-			for i = 1, 10 do
-				if Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][CLASS_INDEX[i]]["name"] ~= "" then
-					if Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][CLASS_INDEX[i]]["count"] >= CLASS_COUNT[i] then
-						Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][CLASS_INDEX[i]]["name"] = L.RaidCheckMsgNoBuffAll
-					end
-					msg = msg..format("%s(%s)", CLASS_INDEX[i], Group_NoBuff_Name[L.RaidCheckBuff1Wisdom1][CLASS_INDEX[i]]["name"]).." "
-				end
-			end
-			if msg ~= "" then
-				msg = L.RaidCheckMsgWisdom..": "..msg
-				SendChatMessage(msg, "RAID")
-				--SendChatMessage(msg, "GUILD")
+				
 			end
 		end
 
@@ -440,11 +391,11 @@ local function CheckRaidBuff()
 		if HasPALADINMight == true then
 			msg = ""
 			for i = 1, 10 do
-				if Group_NoBuff_Name[L.RaidCheckBuffMight1][CLASS_INDEX[i]]["name"] ~= "" then
-					if Group_NoBuff_Name[L.RaidCheckBuffMight1][CLASS_INDEX[i]]["count"] >= CLASS_COUNT[i] then
-						Group_NoBuff_Name[L.RaidCheckBuffMight1][CLASS_INDEX[i]]["name"] = L.RaidCheckMsgNoBuffAll
+				if Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["name"] ~= "" then
+					if Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["count"] >= CLASS_COUNT[i] then
+						Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["name"] = L.RaidCheckMsgNoBuffAll
 					end
-					msg = msg..format("%s(%s)", CLASS_INDEX[i], Group_NoBuff_Name[L.RaidCheckBuffMight1][CLASS_INDEX[i]]["name"]).." "
+					msg = msg..format(L.RaidCheckBuffMight1, i, Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["name"]).." "
 				end
 			end
 			if msg ~= "" then

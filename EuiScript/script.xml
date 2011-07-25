@@ -32,4 +32,5 @@
 	<Script file="raidtool.lua"/>
 	<Script file="RaidCheck.lua"/>
 	<Script file="raid_reminder.lua"/>
+	<Script file="bossnotes.lua"/>
 </Ui>
