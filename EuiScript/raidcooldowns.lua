@@ -50,7 +50,7 @@ local function UpdateBars()
         if(v:IsShown()) then
             v:ClearAllPoints()
            	if(i==1 or firsthidden) then
-               	v:SetPoint("BOTTOM", holder, "TOP")
+               	v:SetPoint("BOTTOM", holder, "BOTTOM")
            	else
                	v:SetPoint("BOTTOM", bars[lastvisible], "TOP", 0, 8)
            	end

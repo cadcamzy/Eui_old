@@ -251,11 +251,11 @@ local function OnAuraChange(self, event, arg1, unit)
 	end	
 end
 
-local bsize = floor((EuiMinimap:GetWidth()+8 - 5) / 6)
+local bsize = floor((EuiMinimap:GetWidth()+8 - 9) / 6)
 
 --Create the Main bar
 local raidbuff_reminder = CreateFrame("Frame", "RaidBuffReminder", EuiMinimap)
-E.EuiCreatePanel(raidbuff_reminder, floor(Minimap:GetWidth()+8), bsize + 4, "TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 0, 0)
+E.EuiCreatePanel(raidbuff_reminder, floor(Minimap:GetWidth()+8), bsize + 4, "TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 2, 0)
 --E.EuiSetTemplate(raidbuff_reminder)
 --E.EuiCreateShadow(raidbuff_reminder)
 raidbuff_reminder:SetFrameLevel(EuiMinimap:GetFrameLevel() + 2)
@@ -276,7 +276,7 @@ function E.RaidBuffReminderMove(frame)
 
 	if E.Movers[frame:GetName()]["moved"] ~= true then
 		frame:ClearAllPoints()
-		frame:SetPoint("TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 0, 0)
+		frame:SetPoint("TOPRIGHT", EuiMinimap, "BOTTOMRIGHT", 2, 0)
 	end
 end
 
