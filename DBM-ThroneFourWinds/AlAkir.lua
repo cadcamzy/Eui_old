@@ -28,8 +28,9 @@ local warnPhase2			= mod:NewPhaseAnnounce(2)
 local warnAcidRain			= mod:NewCountAnnounce(93281, 2, nil, false)
 local warnFeedback			= mod:NewStackAnnounce(87904, 2)
 local warnPhase3			= mod:NewPhaseAnnounce(3)
-local warnCloud				= mod:NewSpellAnnounce(89588, 3)
+--local warnCloud				= mod:NewSpellAnnounce(89588, 3)
 local warnLightningRod		= mod:NewTargetAnnounce(89668, 4)
+local warnMovingPosition   = mod:NewAnnounce("warnMovingPosition", 3, 89588)
 
 local specWarnWindBurst		= mod:NewSpecialWarningSpell(87770, nil, nil, nil, true)
 local specWarnIceStorm		= mod:NewSpecialWarningMove(91020)
@@ -64,17 +65,47 @@ local phase2Started = false
 local strikeStarted = false
 local spamIce = 0
 local spamCloud = 0
+local cloudcount = 0
 
 function mod:CloudRepeat()
 	self:UnscheduleMethod("CloudRepeat")
-	warnCloud:Show()
+--	warnCloud:Show()
+	cloudcount = cloudcount + 1
 	if self:IsInCombat() then--Don't schedule if not in combat, prevent an infinite loop from happening if for some reason one got scheduled exactly on boss death.
 		if mod:IsDifficulty("heroic10", "heroic25") then
+			if cloudcount == 7 then
+				cloudcount = 1
+			end
+			if cloudcount == 2 then
+				warnMovingPosition:Show(L.Cloudtwo)
+			elseif cloudcount == 3 then
+				warnMovingPosition:Show(L.Cloudthree)
+			elseif cloudcount == 4 then
+				warnMovingPosition:Show(L.Cloudsix)
+			elseif cloudcount == 5 then
+				warnMovingPosition:Show(L.Cloudfive)
+			elseif cloudcount == 6 then
+				warnMovingPosition:Show(L.Cloudfour)
+			elseif cloudcount == 1 then
+				warnMovingPosition:Show(L.Cloudone)
+			end
 			timerLightningCloudCD:Start(10)
 			CloudsCountown:Start(10)
 			sndWOP:Schedule(10, "Interface\\AddOns\\DBM-Core\\extrasounds\\awaycloud.mp3")
 			self:ScheduleMethod(10, "CloudRepeat")
 		else
+			if cloudcount == 5 then
+				cloudcount = 1
+			end
+			if cloudcount == 2 then
+				warnMovingPosition:Show(L.Cloudthree)
+			elseif cloudcount == 3 then
+				warnMovingPosition:Show(L.Cloudsix)
+			elseif cloudcount == 4 then
+				warnMovingPosition:Show(L.Cloudfour)
+			elseif cloudcount == 1 then
+				warnMovingPosition:Show(L.Cloudone)
+			end
 			timerLightningCloudCD:Start()
 			CloudsCountown:Start(15)
 			sndWOP:Schedule(15, "Interface\\AddOns\\DBM-Core\\extrasounds\\awaycloud.mp3")
@@ -100,6 +131,7 @@ function mod:OnCombatStart(delay)
 	spamIce = 0
 	spamCloud = 0
 	spamStrike = 0
+	cloudcount = 0
 	berserkTimer:Start(-delay)
 	timerLightningStrikeCD:Start(-delay)
 end
@@ -251,6 +283,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		sndWOP:Cancel("Interface\\AddOns\\DBM-Core\\extrasounds\\counttwo.mp3")
 		sndWOP:Cancel("Interface\\AddOns\\DBM-Core\\extrasounds\\countone.mp3")
 		warnPhase3:Show()
+		cloudcount = cloudcount + 1
+		warnMovingPosition:Show(L.Cloudone)
 		phase3Started = true
 		timerLightningCloudCD:Start(15.5)
 		sndWOP:Schedule(15.5, "Interface\\AddOns\\DBM-Core\\extrasounds\\awaycloud.mp3")

@@ -93,14 +93,14 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Quake			= "你脚下的地面开始不祥地震动起来....",
-	Thundershock		= "四周的空气爆出能量霹啪作响声音....",
+	Quake			= "你脚下的地面发出不祥的“隆隆”声……",
+	Thundershock		= "周围的空气因为充斥着强大的能量而发出“噼啪”声……",
 	Switch			= "停止你的愚行！",
 	Phase3			= "令人印象深刻……",
-	Ignacious		= "伊格纳修斯",
-	Feludius		= "费鲁迪厄斯",
-	Arion			= "艾理奥",
-	Terrastra		= "特拉斯特拉",
+	Ignacious		= "伊格纳休斯",
+	Feludius		= "费伦迪乌斯",
+	Arion			= "艾里昂",
+	Terrastra		= "泰拉斯卓",
 	Monstrosity		= "源质畸体",
 	Kill			= "这不可能……",
 	blizzHatesMe	= "我同时中了道标和闪电魔棒! 躲开躲开!",--You're probably fucked, and gonna kill half your raid if this happens, but worth a try anyways :).
@@ -129,11 +129,11 @@ L:SetOptionLocalization({
 	RangeFrame		= "为$spell:82235显示距离框 (5码)",
 	SetIconOnWorship	= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(91317),
 	SetIconOnCrash		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(93179),
-	SetIconOnCreature	= "设定标记到暗色触须"
+	SetIconOnCreature	= "设定标记到黑暗的造物"
 })
 
 L:SetMiscLocalization({
-	Bloodlevel		= "堕落之血"
+	Bloodlevel		= "腐蚀"
 })
 
 ----------------

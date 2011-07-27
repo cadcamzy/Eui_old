@@ -12,7 +12,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetWarningLocalization({
-	SpecWarnInferno			= "炽光地狱火 即将到来 (~4秒)"
+	SpecWarnInferno			= "炽焰白骨结构体 即将到来 (~4秒)"
 })
 
 L:SetTimerLocalization({
@@ -25,8 +25,8 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Slump				= "%s往前扑倒，露出他的钳子!",
-	HeadExposed			= "%s被钉在尖刺上，露出了他的头!",
+	Slump				= "%s向前倒下，暴露出他的钳子！",
+	HeadExposed			= "%s将自己钉在刺上，露出了他的头！",
 	YellPhase2			= "难以置信！你们竟然真要击败我的熔岩巨虫吗！也许我可以帮你们……扭转局势。"
 })
 
@@ -57,19 +57,19 @@ L:SetOptionLocalization({
 	timerArcaneBlowbackCast		= "为$spell:91879的施放显示计时条",
 	timerArcaneLockout		= "为$spell:91542法术锁定显示计时条",
 	timerNefAblity			= "为困难模式奈法技能冷却显示计时条",
-	SpecWarnActivated		= "当新傀儡启动时显示特别警告",
-	specWarnGenerator		= "当首领获得$spell:91557时显示特别警告",
+	SpecWarnActivated		= "当新金刚启动时显示特别警告",
+	specWarnGenerator		= "当金刚获得$spell:91557时显示特别警告",
 	AcquiringTargetIcon		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(79501),
 	ConductorIcon			= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(79888),
 	ShadowConductorIcon		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(92053),
-	SetIconOnActivated			= "为最新激活的傀儡设定标记"
+	SetIconOnActivated			= "为最新激活的金刚设定标记"
 })
 
 L:SetMiscLocalization({
-	Magmatron			= "熔岩号",
-	Electron			= "雷电号",
-	Toxitron			= "烈毒号",
-	Arcanotron			= "秘法号",
+	Magmatron			= "熔岩金刚",
+	Electron			= "电荷金刚",
+	Toxitron			= "剧毒金刚",
+	Arcanotron			= "奥能金刚",
 	YellTargetLock			= "暗影包围! 远离我!"
 })
 
@@ -97,21 +97,21 @@ L:SetOptionLocalization({
 	WarnRemainingAdds		= "显示剩余多少畸变怪的警告",
 	TimerPhase			= "为下一阶段显示计时条",
 	RangeFrame			= "蓝色阶段时显示距离框 (6码)",
-	SetTextures			= "自动在黑暗阶段停用投影材质\n(离开黑暗阶段后再次启用)",
+	SetTextures			= "自动在黑暗阶段停用材质投射\n(离开黑暗阶段后再次启用)",
 	FlashFreezeIcon			= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(92979),
 	BitingChillIcon			= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(77760),
 	ConsumingFlamesIcon		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(77786)
 })
 
 L:SetMiscLocalization({
-	YellRed				= "红色|r瓶子到锅子里!",
-	YellBlue			= "蓝色|r瓶子到锅子里!",
-	YellGreen			= "绿色|r瓶子到锅子里!",
-	YellDark			= "黑暗|r魔法到熔炉中!",
-	Red				= "红色",
-	Blue				= "蓝色",
-	Green				= "绿色",
-	Dark				= "黑暗"
+	YellRed				= "红瓶|r扔进了大锅里！",
+	YellBlue			= "蓝瓶|r扔进了大锅里！",
+	YellGreen			= "绿瓶|r扔进了大锅里！",
+	YellDark			= "黑瓶|r扔进了大锅里！",
+	Red				= "红瓶",
+	Blue				= "蓝瓶",
+	Green				= "绿瓶",
+	Dark				= "黑瓶"
 })
 
 -----------------
@@ -182,9 +182,9 @@ L:SetOptionLocalization({
 L:SetMiscLocalization({
 	AncientDwarvenShield		= "远古矮人护盾",
 	Soundlevel			= "音量",
-	YellPestered			= "喧闹恶鬼在我这里!",--npc 49740
+	YellPestered			= "喧闹恶鬼在我这里！",--npc 49740
 	NefAdd				= "艾卓曼德斯，那些英雄就在那边！",
-	Airphase			= "对，跑吧！每跑一步你的心跳都会加快。这心跳声轰亮如雷……震耳欲聋。你逃不掉的！"
+	Airphase			= "对，跑吧！每跑一步你的心跳都会加快。这心跳声，洪亮如雷，震耳欲聋。你逃不掉的！"
 })
 
 ----------------
@@ -231,14 +231,14 @@ L:SetOptionLocalization({
 	OnyBreathTimer			= "为奥妮克希亚的$spell:94124的冷却时间显示计时条",
 	NefBreathTimer			= "为奈法利安的$spell:94124的冷却时间显示计时条",
 	InfoFrame			= "在信息框显示奥妮克希亚的电流充能",
-	SetWater			= "进入战斗后自动关闭水体碰撞效果(离开战斗后再启用)",
-	TankArrow			= "为风筝白骨战士的玩家显示DBM箭头\n(仅适用于一个风筝坦克)",--npc 41918
+	SetWater			= "进入战斗后自动关闭液体细节效果(离开战斗后再启用)",
+	TankArrow			= "为风筝坚骨战士的玩家显示DBM箭头\n(仅适用于一个风筝坦克)",--npc 41918
 	SetIconOnCinder			= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(79339),
 	RangeFrame			= "为$spell:79339显示距离框 (10码)(智能区别显示)"
 })
 
 L:SetMiscLocalization({
-	NefAoe				= "响起了电流霹啪作响的声音!",
+	NefAoe				= "空气中激荡的电流噼啪作响！",
 	YellPhase2 			= "诅咒你们，凡人！你们丝毫不尊重他人财产的行为必须受到严厉处罚！",
 	YellPhase3			= "我一直在尝试扮演好客的主人，可你们就是不肯受死！该卸下伪装了……杀光你们！",
 	YellShadowBlaze			= "血肉化为灰烬！",

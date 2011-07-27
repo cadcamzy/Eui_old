@@ -49,6 +49,7 @@ L:SetGeneralLocalization({
 })
 
 L:SetWarningLocalization({
+	warnMovingPosition		= "Move To: %s",
 	WarnAdd			= "Stormling add incoming"
 })
 
@@ -59,6 +60,7 @@ L:SetTimerLocalization({
 
 L:SetOptionLocalization({
 	SoundWOP = "Play Extra Warning Sound",
+	warnMovingPosition	= "Show anti-cloud moving position during phase 3",
 	LightningRodIcon= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(89668),
 	TimerFeedback	= "Show timer for $spell:87904 duration",
 	WarnAdd			= "Show warning when Stormling add spawns",
@@ -67,6 +69,12 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
+	Cloudone      = "Top Head",
+	Cloudtwo			= "Neck Shoulder",
+	Cloudthree		= "Above Orb",
+	Cloudfour		= "Under Orb",
+	Cloudfive		= "Above Bottom Dark Cloud",
+	Cloudsix		= "Center Bottom Dark Cloud",
 	summonAdd		=	"Storms! I summon you to my side!",
 	phase3			=	"Enough! I will no longer be contained!"
 })

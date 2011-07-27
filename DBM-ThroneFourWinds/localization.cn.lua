@@ -35,10 +35,10 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	gatherstrength			= "开始从剩下的风领主那里取得力量!",
-	Anshal				= "西风领主安萧尔",
-	Nezir				= "北风领主涅兹尔",
-	Rohash				= "东风领主洛哈许"
+	gatherstrength			= "开始从剩下的风领主身上获得力量！",
+	Anshal				= "西风领主安舍尔",
+	Nezir				= "北风领主尼希尔",
+	Rohash				= "东风领主洛哈西"
 })
 
 ---------------
@@ -51,24 +51,32 @@ L:SetGeneralLocalization({
 })
 
 L:SetWarningLocalization({
-	WarnAdd				= "小风暴 即将到来"
+	warnMovingPosition		= "快速集合至：%s",
+	WarnAdd				= "风暴火花 即将到来"
 })
 
 L:SetTimerLocalization({
 	TimerFeedback 			= "回馈 (%d)",
-	TimerAddCD		= "下一个小风暴"
+	TimerAddCD		= "下一个风暴火花"
 })
 
 L:SetOptionLocalization({
 	SoundWOP = "为重要技能播放额外的警告语音",
+	warnMovingPosition	= "当三阶段云层出现时提醒玩家应该移动的对应首领身体的位置",
 	LightningRodIcon		= DBM_CORE_AUTO_ICONS_OPTION_TEXT:format(89668),
 	TimerFeedback			= "为$spell:87904的持续时间显示计时条",
-	WarnAdd			= "当小风暴出现时显示警告",
-	TimerAddCD		= "为下一个小风暴出现显示计时条",
+	WarnAdd			= "当风暴火花出现时显示警告",
+	TimerAddCD		= "为下一个风暴火花出现显示计时条",
 	RangeFrame		= "当中了$spell:89668时显示距离框(20码)"
 })
 
 L:SetMiscLocalization({
-	summonAdd		=	"风暴啊!我召唤你们来我身边!",
-	phase3			=	"够了!我不要再被束缚住了!"
+	Cloudone      = "头部顶端",
+	Cloudtwo			= "脖子双肩",
+	Cloudthree		= "胸部宝珠上方",
+	Cloudfour		= "胸部宝珠下方",
+	Cloudfive		= "底部深色云层上方",
+	Cloudsix		= "底部深色云层中间",
+	summonAdd		=	"暴风啊！到我的身边来！",
+	phase3			=	"够了！我不会再容忍下去了！"
 })
