@@ -81,6 +81,7 @@ local lodFrames = {
   Blizzard_GlyphUI = { ["GlyphFrame"] = "PlayerTalentFrame" },
   Blizzard_BarbershopUI = { ["BarberShopFrame"] = false },
   Blizzard_Calendar = { ["CalendarFrame"] = false, ["CalendarCreateEventFrame"] = true },
+  Blizzard_GuildUI = { ["GuildFrame"] = false, },
 }
 
 local parentFrame = {}
