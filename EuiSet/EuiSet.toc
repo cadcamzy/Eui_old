@@ -2,9 +2,9 @@
 ## Title: |cffC495DDEui|r Set
 ## Title-zhCN: EUI界面设置模块|cffC495DDEuiSet|r
 ## Author: Ljxx.net
-## X-Category: EUI
 ## RequiredDeps: Eui
-## Version: 20110726A
+## Version: 20110729A
+## X-Category: EUI
 ## SavedVariablesPerCharacter: EuiSettings
 
 locales\zhCN.lua

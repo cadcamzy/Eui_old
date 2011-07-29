@@ -1,7 +1,8 @@
 local E, C, L = unpack(EUI)
 if C["other"].cooldown ~= true then return end
 --[[
-	OmniCC Basic
+
+		OmniCC Basic
 		A featureless, 'pure' version of OmniCC.
 		This version should work on absolutely everything, but I've removed pretty much all of the options
 --]]

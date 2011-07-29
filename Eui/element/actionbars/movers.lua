@@ -1,3 +1,4 @@
+-- Base code by Elv22, rewritten by ljxx.net
 --Create interactable actionbars
 local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 

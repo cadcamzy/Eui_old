@@ -1,5 +1,5 @@
 local E, C, L = unpack(EUI)
-
+-- Base code by yleaf, spiralofhope, rewritten by ljxx.net
 _G.JPackLocale = {}
 local L = JPackLocale
 

@@ -1,7 +1,7 @@
 local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 if not C["actionbar"].enable == true then return end
-
+-- Base code by Elv22, rewritten by ljxx.net
 ---------------------------------------------------------------------------
 -- Setup Main Action Bar.
 -- Now used for stances, Bonus at the same time.
@@ -102,7 +102,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		RegisterStateDriver(self, "vehicleupdate", "[vehicleui] s2;s1")
 	elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
 		-- attempt to fix blocked glyph change after switching spec.
-	--	LoadAddOn("Blizzard_GlyphUI")
+		LoadAddOn("Blizzard_GlyphUI")
 	else
 		MainMenuBar_OnEvent(self, event, ...)
 	end

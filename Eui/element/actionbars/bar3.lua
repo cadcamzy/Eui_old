@@ -1,8 +1,7 @@
 local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
 
 if not C["actionbar"].enable == true then return end
-
-
+-- Base code by Elv22, rewritten by ljxx.net
 ---------------------------------------------------------------------------
 -- setup MultiBarLeft as bar #3
 ---------------------------------------------------------------------------

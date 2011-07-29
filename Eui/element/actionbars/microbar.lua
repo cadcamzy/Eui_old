@@ -1,5 +1,5 @@
 local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
-
+-- Base code by Elv22, rewritten by ljxx.net
 
 if C["actionbar"].enable ~= true or C["actionbar"].microbar ~= true then return end
 

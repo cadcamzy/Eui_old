@@ -1,6 +1,6 @@
 local E, C, L = unpack(EUI)
 if C["skins"].enable ~= true then return end
-
+-- Base code by Elv22, rewritten by ljxx.net
 --Tab Regions
 local tabs = {
 	"LeftDisabled",

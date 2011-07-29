@@ -1,3 +1,4 @@
+-- Base code by TipTacTalents
 --modify by ljxx.net 
 local E, C , L = unpack(EUI)
 local gtt = GameTooltip;

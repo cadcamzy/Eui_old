@@ -1,5 +1,5 @@
 local E, C, L = unpack(EUI)
-
+-- Base code by Elv22, rewritten by ljxx.net
 local EUICF = C
 local EUIDB = E
 local EUIL = L

@@ -1,6 +1,6 @@
 local E, C, L = unpack(EUI)
 if C["skins"].enable ~= true then return end
-
+-- Base code by Elv22, rewritten by ljxx.net
 local function LoadSkin()
 	-- Blizzard frame we want to reskin
 	local skins = {

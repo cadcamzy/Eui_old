@@ -1,3 +1,4 @@
+-- Base code by Elv22, rewritten by ljxx.net
 local E, C, L = unpack(EUI)
 local _, ns = ...
 local oUF = ns.oUF or oUF

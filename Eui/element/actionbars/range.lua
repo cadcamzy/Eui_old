@@ -1,3 +1,4 @@
+-- Base code by Elv22, rewritten by ljxx.net
 hooksecurefunc("ActionButton_OnUpdate", function(self, elapsed)
 	if ( self.rangeTimer == TOOLTIP_UPDATE_TIME ) then
 		local range = false

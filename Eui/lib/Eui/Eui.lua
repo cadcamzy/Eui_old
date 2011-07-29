@@ -8,6 +8,11 @@ E.dummy = function() return end
 --_, class = UnitClass("player")
 local kill = function() end
 function E.Kill(object)
+	if object.IsProtected then 
+		if object:IsProtected() then
+			return
+		end
+	end
 	if object.UnregisterAllEvents then
 		object:UnregisterAllEvents()
 	end

@@ -1,3 +1,4 @@
+-- Base code by Elv22, rewritten by ljxx.net
 --[[
         An edited lightweight OmniCC for Eui
                 A featureless, 'pure' version of OmniCC.

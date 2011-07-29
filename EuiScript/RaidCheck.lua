@@ -365,7 +365,7 @@ local function CheckRaidBuff()
 		-- 通报骑士王者祝福缺失情况
 		if HasPALADINKings == true then
 			msg = ""
-			for i = 1, 10 do
+			for i = 1, MaxGroup do
 				if Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["name"] ~= "" then
 					if Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["count"] >= CLASS_COUNT[i] then
 						Group_NoBuff_Name[L.RaidCheckBuffKings1][i]["name"] = L.RaidCheckMsgNoBuffAll
@@ -384,7 +384,7 @@ local function CheckRaidBuff()
 		-- 通报骑士力量祝福缺失情况
 		if HasPALADINMight == true then
 			msg = ""
-			for i = 1, 10 do
+			for i = 1, MaxGroup do
 				if Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["name"] ~= "" then
 					if Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["count"] >= CLASS_COUNT[i] then
 						Group_NoBuff_Name[L.RaidCheckBuffMight1][i]["name"] = L.RaidCheckMsgNoBuffAll

@@ -1,3 +1,4 @@
+-- Base code by Nils Ruesch, rewritten by ljxx.net
 local E, C, L = unpack(EUI)
 if not C["filter"].enable == true then return end
 		

@@ -1,6 +1,6 @@
 local E, C, L = unpack(EUI)
 if not C["filter"].coolline == true then return end
-
+-- Base code by totalpackage, rewritten by ljxx.net
 local CoolLine = CreateFrame("Frame", "EuiCoolLine", UIParent)
 local self = CoolLine
 self:SetScript("OnEvent", function(this, event, ...)

@@ -1,6 +1,6 @@
 local E, C, L = unpack(EUI)
 if C["skins"].enable22 ~= true then return end
-
+-- Base code by Elv22, rewritten by ljxx.net
 local function LoadSkin()
 	E.EuiCreateBackdrop(WorldMapFrame,.7)
 	WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)

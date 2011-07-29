@@ -1,5 +1,5 @@
 local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
-
+-- Base code by Elv22, rewritten by ljxx.net
 local bind = CreateFrame("Frame", "EuiHoverBind", UIParent)
 -- SLASH COMMAND
 SlashCmdList.MOUSEOVERBIND = function()

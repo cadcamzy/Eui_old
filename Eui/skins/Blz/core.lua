@@ -1,5 +1,5 @@
 local E, C, L = unpack(EUI)
-
+-- Base code by Elv22, rewritten by ljxx.net
 --if C["skins"].enable ~= true then return end
 
 E.SkinFuncs = {}
