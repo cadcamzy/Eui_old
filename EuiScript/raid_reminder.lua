@@ -85,6 +85,7 @@ local function SetCasterOnlyBuffs()
 	Spell5Buff = { --Total Mana
 		61316, --"Dalaran Brilliance"
 		1459, --"Arcane Brilliance"
+		79058,--"∞¬ ı÷«ª€"
 	}
 	Spell6Buff = { --Mana Regen
 		5675, --"Mana Spring Totem"

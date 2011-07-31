@@ -33,4 +33,5 @@
 	<Script file="RaidCheck.lua"/>
 	<Script file="raid_reminder.lua"/>
 	<Script file="bossnotes.lua"/>
+	<Script file="CombatAlert.lua"/>
 </Ui>

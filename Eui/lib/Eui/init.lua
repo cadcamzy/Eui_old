@@ -1112,8 +1112,8 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		CompactRaidFrameContainer:Hide()	
 	end
 	if C["clickset"].aamouse ~= true then
-		if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
-		if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
+--		if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
+--		if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
 		return
 	end
 	local _, class = UnitClass("player")
@@ -1134,8 +1134,8 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		return
 	end
 --local index_a = CreateMacro("Debuff_1", _, "/cast [target=mouseover] 清洁术;",1)
-	if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
-	if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
+--	if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
+--	if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
 	local macroa, macrob
 	local indexa, indexb
 	if CanDispel[class][1] and IsSpellKnown(CanDispel[class][1]) then

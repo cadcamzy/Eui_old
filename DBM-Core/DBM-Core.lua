@@ -1280,6 +1280,13 @@ do
 	local function setRaidWarningPositon()
 		RaidWarningFrame:ClearAllPoints()
 		RaidWarningFrame:SetPoint(DBM.Options.RaidWarningPosition.Point, UIParent, DBM.Options.RaidWarningPosition.Point, DBM.Options.RaidWarningPosition.X, DBM.Options.RaidWarningPosition.Y)
+		if EUI then
+			local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+			if E.imsg then
+				E.imsg:ClearAllPoints()
+				E.imsg:SetPoint(DBM.Options.RaidWarningPosition.Point, UIParent, DBM.Options.RaidWarningPosition.Point, DBM.Options.RaidWarningPosition.X, DBM.Options.RaidWarningPosition.Y)
+			end
+		end		
 	end
 	
 	function loadOptions()
@@ -3524,7 +3531,16 @@ do
 
 	function specialWarningPrototype:Show(...)
 		if DBM.Options.ShowSpecialWarnings and (not self.option or self.mod.Options[self.option]) and not moving and frame then	
-			font:SetText(pformat(self.text, ...))
+			if EUI then
+				local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+				if E.imsg then
+					E.imsg.text:SetText(pformat(self.text, ...))
+					E.imsg:Show()
+				else
+					font:SetText(pformat(self.text, ...))
+				end
+			end
+			
 			if DBM.Options.ShowLHFrame and not UnitIsDeadOrGhost("player") then
 				LowHealthFrame:Show()
 				LowHealthFrame:SetAlpha(1)
