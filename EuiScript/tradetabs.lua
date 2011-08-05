@@ -69,7 +69,7 @@ function TradeTabs:Initialize()
 		local tab = self:CreateTab(spell,spellid,parent)
 		local point,relPoint,x,y = "TOPLEFT","BOTTOMLEFT",0,-17
 		if not prev then
-				prev,relPoint,x,y = parent,"TOPRIGHT",0,-44
+				prev,relPoint,x,y = parent,"TOPRIGHT",2,-44
 			if (parent == SkilletFrame) or Skinner then x = 0 end -- Special case. ew
 			end
 			tab:SetPoint(point,prev,relPoint,x,y)
@@ -119,7 +119,12 @@ function TradeTabs:CreateTab(spell,spellID,parent)
     button:SetAttribute("type","spell")
     button:SetAttribute("spell",spell)
     button.spellID = spellID
+	
+	E.SkinButton(button,true)
     button:SetNormalTexture(GetSpellTexture(spellID, "spell"))
+	button:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
+	button:GetNormalTexture():SetPoint("TOPLEFT", button, 2, -2)
+	button:GetNormalTexture():SetPoint("BOTTOMRIGHT", button, -2, 2)
 	
 	button:SetScript("OnEvent",updateSelection)
 	button:RegisterEvent("TRADE_SKILL_SHOW")

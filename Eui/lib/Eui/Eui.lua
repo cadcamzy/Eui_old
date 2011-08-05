@@ -87,6 +87,7 @@ E.EuiGradient = {.26,.26,.26,.14,.21,.21,.21,.5}
 E.font = STANDARD_TEXT_FONT
 --fontc = [[Interface\AddOns\Eui\media\fontc.ttf]]
 --fontn = [[Interface\AddOns\Eui\media\fontn.ttf]]
+E.dmgfont = [[Fonts\\ZYKai_C.ttf]]
 E.fontc = STANDARD_TEXT_FONT
 E.fontn = STANDARD_TEXT_FONT
 E.fontp = "Interface\\Addons\\Eui\\media\\ROADWAY.ttf"

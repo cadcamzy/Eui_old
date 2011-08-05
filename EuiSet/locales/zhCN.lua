@@ -173,7 +173,7 @@
 	e_raid_hotsize = "四角HOT尺寸"
 	e_raid_showPartyTarget = "显示队伍目标和宠物"
 	e_raid_showParty = "显示小队框体"
-	e_raid_boss = "显示BOSS"
+	e_raid_boss = "显示BOSS框体"
 	e_raid_mt = "显示MT"
 	e_raid_raidtarget = "启用团队目标监视模块"
 	e_raid_texture = "团队材质样式(0,1,2)"
