@@ -268,18 +268,6 @@ FriendsMenuXP_Buttons["SPELL_PRIEST_FORTITUDE"] = {
 	isSecure = 1,
 	icon = "Interface\\Icons\\Spell_Holy_WordFortitude",
 	attributes = "type:macro;macrotext:/targetexact $name$\n/cast "..FMXP_SPELL_PRIEST_FORTITUDE.."\n/targetlasttarget",
-
-
-
-
-
-
-
-
-
-
-
-
 	show = function() local _, class = UnitClass("player"); if(class == "PRIEST") then return 1 end end ,
 };
 
@@ -307,29 +295,6 @@ FriendsMenuXP_Buttons["SPELL_DRUID_MILD"] = {
 	show = function() local _, class = UnitClass("player"); if(class == "DRUID") then return 1 end end ,
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 FriendsMenuXP_Buttons["SPELL_PAL_MIGHT"] = {
 	text = FMXP_SPELL_PAL_MIGHT,
 	textHeight = 12,
@@ -352,16 +317,6 @@ FriendsMenuXP_Buttons["SPELL_PAL_KINGS"] = {
 	show = function() local _, class = UnitClass("player"); if(class == "PALADIN") then return 1 end end ,
 };
 
-FriendsMenuXP_Buttons["SPELL_PAL_SANCT"] = {
-	text = FMXP_SPELL_PAL_SANCT,
-	textHeight = 12,
-
-	justifyH = "CENTER",
-	isSecure = 1,
-	icon = "Interface\\Icons\\Spell_Holy_GreaterBlessingofSanctuary",
-	attributes = "type:macro;macrotext:/targetexact $name$\n/cast "..FMXP_SPELL_PAL_SANCT.."\n/targetlasttarget",
-	show = function() local _, class = UnitClass("player"); if(class == "PALADIN") then return 1 end end ,
-};
 
 local function urlencode(obj)
 	local currentIndex = 1;

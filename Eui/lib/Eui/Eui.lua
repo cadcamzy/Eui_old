@@ -992,3 +992,27 @@ RoleUpdater:RegisterEvent("UNIT_INVENTORY_CHANGED")
 RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 RoleUpdater:SetScript("OnEvent", CheckRole)
 CheckRole()
+
+
+function E.AltPowerBarPostUpdate(self, min, cur, max)
+	local perc = math.floor((cur/max)*100)
+		
+	if perc < 35 then
+		self:SetStatusBarColor(0, 1, 0)
+	elseif perc < 70 then
+		self:SetStatusBarColor(1, 1, 0)
+	else
+		self:SetStatusBarColor(1, 0, 0)
+	end
+		
+	local unit = self:GetParent().unit or self:GetParent():GetParent().unit
+		
+	if unit and unit:find("boss%d") and self.text then
+		self.text:SetTextColor(self:GetStatusBarColor())
+		if perc > 0 then
+			self.text:SetText("|cffD7BEA5[|r"..format("%d%%", perc).."|cffD7BEA5]|r")
+		else
+			self.text:SetText(nil)
+		end
+	end
+end

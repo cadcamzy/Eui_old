@@ -432,6 +432,27 @@ local function Shared(self, unit)
 	power.colorReaction = true
 	power.frequentUpdates = true
 
+	if unit:find("boss%d") then
+		--Alternative Power Bar
+		local altpower = CreateFrame("StatusBar", nil, health)
+		altpower:SetStatusBarTexture(BarTexture)
+		altpower:GetStatusBarTexture():SetHorizTile(false)
+		altpower:EnableMouse(true)
+		altpower:SetFrameStrata("MEDIUM")
+		altpower.PostUpdate = E.AltPowerBarPostUpdate
+		altpower.bg = altpower:CreateTexture(nil, "BORDER")
+		altpower.bg:SetAllPoints(altpower)
+		altpower.bg:SetTexture(0.3,0.3,.3)
+		altpower.bg.multiplier = 0.4
+		altpower:SetPoint("TOPLEFT", power, "BOTTOMLEFT", 0, -2)
+		altpower:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", 0, -6)
+		altpower.text = altpower:CreateFontString(nil, "OVERLAY"
+		altpower.text:SetFont(E.font, 11, "THINOUTLINE")
+		altpower.text:SetPoint("CENTER")
+		altpower.text:SetJustifyH("CENTER")		
+		self.AltPowerBar = altpower	
+	end	
+	
 	local panel = CreateFrame("Frame", nil, self)
 	panel:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 1)
 	panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -1)
