@@ -446,7 +446,7 @@ local function Shared(self, unit)
 		altpower.bg.multiplier = 0.4
 		altpower:SetPoint("TOPLEFT", power, "BOTTOMLEFT", 0, -2)
 		altpower:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", 0, -6)
-		altpower.text = altpower:CreateFontString(nil, "OVERLAY"
+		altpower.text = altpower:CreateFontString(nil, "OVERLAY")
 		altpower.text:SetFont(E.font, 11, "THINOUTLINE")
 		altpower.text:SetPoint("CENTER")
 		altpower.text:SetJustifyH("CENTER")		
