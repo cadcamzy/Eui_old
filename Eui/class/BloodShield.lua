@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if E.MyClass ~= "DEATHKNIGHT" or C["class"].dk ~= true then return end
 
 local BS_SPELL = (GetSpellInfo(77535))

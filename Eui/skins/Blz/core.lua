@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 -- Base code by Elv22, rewritten by ljxx.net
 --if C["skins"].enable ~= true then return end
 

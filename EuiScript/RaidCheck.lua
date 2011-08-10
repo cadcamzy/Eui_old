@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["other"].raidcheck ~= true then return end
 local join = string.join
 local find = string.find

@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 if C["info"].bag == 0 or C["info"].enable == false then return end
 
 local bag = CreateFrame ("Frame", nil,UIParent)
@@ -105,9 +105,9 @@ local function OnEvent(self, event)
 				
 				for i = 1, numWatched do
 					local name, count, extraCurrencyType, icon, itemID = GetBackpackCurrencyInfo(i)
-				--	local r, g, b, hex = GetItemQualityColor(select(3, GetItemInfo(itemID)))
+					local r, g, b, hex = GetItemQualityColor(select(3, GetItemInfo(itemID)))
 
-					GameTooltip:AddDoubleLine(name, count, 1, 1, 1)
+					GameTooltip:AddDoubleLine(name, count, r, g, b, 1, 1, 1)
 				end					
 			end
 			GameTooltip:Show()

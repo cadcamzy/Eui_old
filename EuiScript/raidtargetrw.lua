@@ -1,5 +1,5 @@
 --团队目标检测通告
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["raid"].raidtarget ~= true then return end
 --位置初始化
 if not raidtarget then

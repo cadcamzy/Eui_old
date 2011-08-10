@@ -3,7 +3,7 @@
 		all credits of this mod goes to tekhub
 --]]
 
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["other"].loot ~= true then return end
 
 local pos = "TOP"

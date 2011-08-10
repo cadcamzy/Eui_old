@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 if not C["chat"].enable == true then return end
 
 local AutoApply = true
@@ -111,7 +111,7 @@ do
 	FriendsMicroButton:Hide()
 	FriendsMicroButton:SetScript("OnShow", kill)
 
-	for i=1, NUM_CHAT_WINDOWS do
+	for i=1, 10 do
 		local cf = _G[format("%s%d", "ChatFrame", i)]
 	--fix fading
 		local tab = _G["ChatFrame"..i.."Tab"]
@@ -125,7 +125,6 @@ do
 	_G["ChatFrame"..i.."TabHighlightLeft"]:SetTexture(nil)
 	_G["ChatFrame"..i.."TabHighlightRight"]:SetTexture(nil)
 	_G["ChatFrame"..i.."TabHighlightMiddle"]:SetTexture(nil)
-	
 	
 		local f = _G["ChatFrame"..i.."ButtonFrame"]
 		f.Show = f.Hide 
@@ -1010,18 +1009,6 @@ if C["chat"].chatbar == true then
 
 	function cbar:ADDON_LOADED(event, name)
 		self:Style()
-		if name == "Blizzard_CombatLog" then
-			self:UnregisterEvent("ADDON_LOADED")
-			for i = 1, NUM_CHAT_WINDOWS do
-				local chat = format("ChatFrame%s",i)
-				_G[chat.."EditBoxLanguage"]:ClearAllPoints()
-				_G[chat.."EditBoxLanguage"]:SetPoint("LEFT", _G[chat.."EditBox"], "RIGHT", -4, 0)
-				_G[chat.."EditBoxLanguage"].SetPoint = E.dummy
-				_G[chat.."EditBoxLanguage"]:SetSize(_G[chat.."EditBox"]:GetHeight(), _G[chat.."EditBox"]:GetHeight())
-				E.StripTextures(_G[chat.."EditBoxLanguage"])
-				E.EuiSetTemplateB(_G[chat.."EditBoxLanguage"],4,-4,-4,4)
-			end
-		end		
 	end
 	
 end

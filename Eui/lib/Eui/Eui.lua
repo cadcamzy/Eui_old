@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 
 E.MyClass = select(2, UnitClass("player"))
 E.MyName = UnitName("player")
@@ -87,7 +87,6 @@ E.EuiGradient = {.26,.26,.26,.14,.21,.21,.21,.5}
 E.font = STANDARD_TEXT_FONT
 --fontc = [[Interface\AddOns\Eui\media\fontc.ttf]]
 --fontn = [[Interface\AddOns\Eui\media\fontn.ttf]]
-E.dmgfont = [[Fonts\\ZYKai_C.ttf]]
 E.fontc = STANDARD_TEXT_FONT
 E.fontn = STANDARD_TEXT_FONT
 E.fontp = "Interface\\Addons\\Eui\\media\\ROADWAY.ttf"
@@ -137,21 +136,11 @@ E.EuiStyleInnerBorder = function(f)
 		edgeSize = E.mult, 
 		insets = { left = E.mult, right = E.mult, top = E.mult, bottom = E.mult }
 	})
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end		
+
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		f.iborder:SetBackdropBorderColor(r, g, b,1)
 	else	
@@ -178,21 +167,11 @@ E.EuiStyleOuterBorder = function(f)
 		edgeSize = E.mult, 
 		insets = { left = E.mult, right = E.mult, top = E.mult, bottom = E.mult }
 	})
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end		
+	
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		f.oborder:SetBackdropBorderColor(r, g, b,1)
 	else	
@@ -205,21 +184,11 @@ E.EuiSkinFadedPanel = function(f,alpha)
 	alpha = alpha or .7
 	f:SetBackdrop(E.backdrop)
 	f:SetBackdropColor(0.1,0.1,0.1,alpha)
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end		
+		
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		f:SetBackdropBorderColor(r, g, b,alpha)
 	else	
@@ -254,21 +223,11 @@ end
 E.EuiSkinPanel = function(f)
 	f:SetBackdrop(E.backdrop)
 	f:SetBackdropColor(0.1,0.1,0.1,0.7)
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end		
+		
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		f:SetBackdropBorderColor(r, g, b,1)
 	else	
@@ -303,21 +262,11 @@ E.EuiSetTransparentTemplate = function(f)
       tile = false, tileSize = 0, edgeSize = E.mult,
       insets = { left = -E.mult, right = -E.mult, top = -E.mult, bottom = -E.mult}
     })
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end		
+	
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		f:SetBackdropColor(0.1,0.1,0.1,1)
 		f:SetBackdropBorderColor(r, g, b,1)
@@ -336,21 +285,11 @@ E.EuiSetTemplate = function(f,a)
 	  tile = false, tileSize = 0, edgeSize = E.mult, 
 	  insets = { left = -E.mult, right = -E.mult, top = -E.mult, bottom = -E.mult}
 	})
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end	
+	
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		f:SetBackdropColor(0.1,0.1,0.1,alpha)
 		f:SetBackdropBorderColor(r, g, b,1)
@@ -392,21 +331,11 @@ E.EuiSetTemplateB = function(f,x1,y1,x2,y2)
 	  tile = false, tileSize = 0, edgeSize = E.mult, 
 	  insets = { left = -E.mult, right = -E.mult, top = -E.mult, bottom = -E.mult}
 	})
-	if C["main"].classcolorcustom ~= "0" and C["main"].classcolorcustom:find(",") > 1 then
-		local color = { strsplit(",", C["main"].classcolorcustom) }
-		if #color == 3 then
-			if tonumber(color[1]) >= 0 and tonumber(color[1]) <= 255 and tonumber(color[2]) >=0 and tonumber(color[2]) <= 255 and tonumber(color[3]) >=0 and tonumber(color[3]) <= 255 then
-				E.RAID_CLASS_COLORS[E.MyClass].r = tonumber(color[1])/255
-				E.RAID_CLASS_COLORS[E.MyClass].g = tonumber(color[2])/255
-				E.RAID_CLASS_COLORS[E.MyClass].b = tonumber(color[3])/255
-			else
-				C["main"].classcolorcustom = "0"
-			end
-		else
-			C["main"].classcolorcustom = "0"
-		end
-	end	
+
 	if C["main"].classcolortheme == true then
+		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
+		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
+		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
 		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
 		skinFrame:SetBackdropColor(0.1,0.1,0.1,.7)
 		skinFrame:SetBackdropBorderColor(r, g, b,1)

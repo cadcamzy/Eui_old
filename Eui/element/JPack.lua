@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 -- Base code by yleaf, spiralofhope, rewritten by ljxx.net
 _G.JPackLocale = {}
 local L = JPackLocale

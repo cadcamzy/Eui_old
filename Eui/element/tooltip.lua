@@ -1,5 +1,5 @@
 -- Base code by Elv22, rewritten by ljxx.net
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 local _, ns = ...
 local oUF = ns.oUF or oUF
 if not C["tooltip"].enable then return end

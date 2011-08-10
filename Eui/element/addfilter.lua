@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if not C["filter"].enable == true then return end
 --[[
 参数格式:

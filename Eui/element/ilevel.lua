@@ -1,5 +1,5 @@
 ﻿-- 物品等级
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 local Quality = {
 	[500] = {
 		["Red"] = { ["A"] = 0.94, ["B"] = 400, ["C"] = 0.0006, ["D"] = 1 },

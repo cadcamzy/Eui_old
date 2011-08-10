@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 
 local RecountSkin = CreateFrame("Frame")
 RecountSkin:RegisterEvent("PLAYER_LOGIN")

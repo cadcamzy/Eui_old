@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["chat"].LFW ~= true then return end
 
 LFW_LOCALE = {}

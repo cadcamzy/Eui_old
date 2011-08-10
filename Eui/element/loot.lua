@@ -1,7 +1,7 @@
 -----------------------------------
 -- Credit : Haste
 -----------------------------------
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 local L = {
 	fish = "Fishy loot",
 	empty = "Empty slot",

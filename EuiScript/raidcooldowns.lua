@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 if C["filter"].raid ~= true then return end
 local spells = {
 	[48477] = 600, -- XD战复
@@ -50,7 +50,7 @@ local function UpdateBars()
         if(v:IsShown()) then
             v:ClearAllPoints()
            	if(i==1 or firsthidden) then
-               	v:SetPoint("BOTTOM", holder, "TOP")
+               	v:SetPoint("BOTTOM", holder, "BOTTOM")
            	else
                	v:SetPoint("BOTTOM", bars[lastvisible], "TOP", 0, 8)
            	end

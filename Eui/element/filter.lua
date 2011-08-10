@@ -1,5 +1,5 @@
 -- Base code by Nils Ruesch, rewritten by ljxx.net
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if not C["filter"].enable == true then return end
 		
 local class = select(2, UnitClass("player"));

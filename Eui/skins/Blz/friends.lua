@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["skins"].enable ~= true then return end
 -- Base code by Elv22, rewritten by ljxx.net
 --Tab Regions

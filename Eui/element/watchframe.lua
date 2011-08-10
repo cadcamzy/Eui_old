@@ -1,6 +1,6 @@
 local EuiWatchFrame = CreateFrame("Frame", "EuiWatchFrame", UIParent)
 -- Base code by Elv22, rewritten by ljxx.net
-local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+local E, C, L, DB = unpack(EUI) -- Import Functions/Constants, Config, Locales
 local wideFrame = GetCVar("watchFrameWidth")
 
 local WatchFrameHolder = CreateFrame("Frame", "WatchFrameHolder", UIParent)

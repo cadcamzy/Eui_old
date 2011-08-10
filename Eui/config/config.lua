@@ -1,6 +1,6 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 
-C["main"] = {
+DB["main"] = {
 	["autoinvite"] = true,
 	["invitetext"] = "222",
 	["noerrors"] = false,
@@ -14,7 +14,7 @@ C["main"] = {
 	["autorepairguild"] = true,
 	["sellgreycrap"] = true,
 	["acceptinvites"] = true,
-	["bugstack"] = true,
+	["buystack"] = true,
 	["alttotrade"] = true,
 	["talentspam"] = true,
 	["questauto"] = false,
@@ -25,15 +25,15 @@ C["main"] = {
 --	["minimapsize"] = 168,
 	["alpha"] = false,
 	["classcolortheme"] = false,
-	["classcolorcustom"] = "0",
+	["classcolorcustom"] = { r = .23,g = .23,b = .23 },
 }
 
-C["ui"] = {
+DB["ui"] = {
 	["autoscale"] = true,
 	["uiscale"] = 0.71,	
 }
 
-C["other"] = {
+DB["other"] = {
 	["nameplate"] = true, --启用姓名版 
 	["nameplateauto"] = true, --姓名版自动隐藏
 	["nameplatevalue"] = true, --显示血量
@@ -57,7 +57,7 @@ C["other"] = {
 	["bossnotes"] = true,
 }
 
-C["chat"] = {
+DB["chat"] = {
 	["enable"] = true,
 	["hidejunk"] = true,
 	["chatw"] = 343,
@@ -68,7 +68,7 @@ C["chat"] = {
 	["bodylevel"] = 1,
 }
 
-C["filter"] = {
+DB["filter"] = {
 	["enable"] = true,
 --	["configmode"] = false,
 	["classcolor"] = true,
@@ -96,7 +96,7 @@ C["filter"] = {
 	["fdebufficon"] = true,
 }
 
-C["unitframe"] = {
+DB["unitframe"] = {
 	["aaaaunit"] = 1,
 	["castbar"] = true,
 	["swing"] = false,
@@ -108,8 +108,8 @@ C["unitframe"] = {
 	["showPvP"] = false,
 	["onlyplayer"] = false,
 	["powerspark"] = true,
-	["playerx"] = 250,
-	["playery"] = 300,
+--	["playerx"] = 250,
+--	["playery"] = 300,
 	["playerwidth"] = 230,
 	["playerheight"] = 36,
 	["petwidth"] = 130,
@@ -130,7 +130,7 @@ C["unitframe"] = {
 	["targetdebuffs"] = 20,
 }
 
-C["raid"] = {
+DB["raid"] = {
 	["raid"] = true,
 	["raidthreat"] = true,
 	["raidaurawatch"] = true,
@@ -148,7 +148,7 @@ C["raid"] = {
 	["gridw"] = 76,--Grid单元宽度
 	["nogridh"] = 24,--非Grid样式单元高度
 	["nogridw"] = 140,
-	["clickset"] = false,
+	["clickset"] = true,
 	["hottime"] = true,
 	["showParty"] = true,
 	["showPartyTarget"] = true,	
@@ -160,7 +160,7 @@ C["raid"] = {
 	["raidtool"] = true,
 }
 
-C["actionbar"] = {
+DB["actionbar"] = {
 	["enable"] = true,                     -- enable elvui action bars
 	["hotkey"] = true,                     -- enable hotkey display because it was a lot requested
 	["rightbarmouseover"] = false,         -- enable right bars on mouse over
@@ -180,7 +180,7 @@ C["actionbar"] = {
 --	["rankwatch"] = true,
 }
 
-C["tooltip"] = {
+DB["tooltip"] = {
 	["enable"] = true,
 	["cursor"] = false,
 	["hideincombat"] = false,
@@ -192,11 +192,11 @@ C["tooltip"] = {
 	["y"] = 42,
 }
 
---C["bag"] = {
+--DB["bag"] = {
 --	["enable"] = true,
 --}
 
-C["threat"] = {
+DB["threat"] = {
 	["enable"] = true,
 	["width"] = 200,
 	["height"] = 16,
@@ -206,7 +206,7 @@ C["threat"] = {
 	["test"] = false,
 }
 
-C["info"] = {
+DB["info"] = {
 	["enable"] = true,
 	["wowtime"] = 9,
 	["latency"] = 3,
@@ -222,33 +222,36 @@ C["info"] = {
 	["dps"] = 1,
 }
 
-C["clickset"] = {
-	["aadefault"] = true,
-	["type1"] = 0,
-	["shiftztype1"]	= 0,
-	["ctrlztype1"]	= 0,
-	["altztype1"]	= 0,
-	["altzctrlztype1"]	= 0,
-	["type2"]		= 0,
-	["shiftztype2"]	= 0,
-	["ctrlztype2"]	= 0,
-	["altztype2"]	= 0,
-	["altzctrlztype2"]	= 0,
-	["type3"]		= 0,
-	["shiftztype4"]	= 0,
-	["ctrlztype4"]	= 0,
-	["altztype4"]	= 0,
-	["altzctrlztype4"]	= 0,
-	["type4"] = 0,
-	["shiftztype5"]	= 0,
-	["ctrlztype5"]	= 0,
-	["altztype5"]	= 0,
-	["altzctrlztype5"]	= 0,
-	["type5"] = 0,
-	["aamouse"] = true,
+DB["clickset"] = {
+	["type1"] = "NONE",
+	["shiftztype1"]	= "NONE",
+	["ctrlztype1"]	= "NONE",
+	["altztype1"]	= "NONE",
+	["altzctrlztype1"]	= "NONE",
+	["type2"]		= "NONE",
+	["shiftztype2"]	= "NONE",
+	["ctrlztype2"]	= "NONE",
+	["altztype2"]	= "NONE",
+	["altzctrlztype2"]	= "NONE",
+	["type3"]		= "NONE",
+	["shiftztype3"]	= "NONE",
+	["ctrlztype3"]	= "NONE",
+	["altztype3"]	= "NONE",
+	["altzctrlztype3"]	= "NONE",	
+	["shiftztype4"]	= "NONE",
+	["ctrlztype4"]	= "NONE",
+	["altztype4"]	= "NONE",
+	["altzctrlztype4"]	= "NONE",
+	["type4"] = "NONE",
+	["shiftztype5"]	= "NONE",
+	["ctrlztype5"]	= "NONE",
+	["altztype5"]	= "NONE",
+	["altzctrlztype5"]	= "NONE",
+	["type5"] = "NONE",
+	["enable"] = true,
 }
 
-C["skins"] = {
+DB["skins"] = {
 	["askins"] = true,
 	["dbm"] = true,
 	["skada"] = true,
@@ -258,6 +261,102 @@ C["skins"] = {
 	["enable"] = true,
 }
 
-C["class"] = {
+DB["class"] = {
 	["dk"] = true,
 }
+
+E.ClickSets_Sets = {
+	PRIEST = { --牧师
+			["shift-type1"]	= 139,--"恢復",
+			["ctrl-type1"]	= 527,--"驅散魔法",
+			["alt-type1"]	= 2061,--"快速治療",
+			["alt-ctrl-type1"]	= 2006,--"復活術",
+			["type2"]		= 17,--"真言術:盾",
+			["shift-type2"]	= 33076,--"癒合禱言",
+			["ctrl-type2"]	= 528,--"驅除疾病", 
+			["alt-type2"]	= 2060,--"強效治療術",
+			["alt-ctrl-type2"]	= 32546,--"束縛治療",
+			["type3"]		= 34861,--"治療之環",
+			["shift-type3"] = 2050, --治疗术
+			["alt-type3"] = 1706, --漂浮术
+			["ctrl-type3"] = 21562,--耐
+	},
+	
+	DRUID = { --XD
+			["shift-type1"]	= 774,--"回春術",
+			["ctrl-type1"]	= 2782,--"净化腐蚀",
+			["alt-type1"]	= 8936,--"癒合",
+			["alt-ctrl-type1"]	= 50769,--"復活",
+			["type2"]		= 48438,--"野性成长",
+			["shift-type2"]	= 18562,--"迅捷治愈",
+			["ctrl-type2"]	= 88423, -- 自然治愈
+			["alt-type2"]	= 50464,--"滋補術",
+			["alt-ctrl-type2"] = 1126, -- 野性印记
+			["type3"]		= 33763,--"生命之花",
+	},
+	SHAMAN = { --SM
+			["alt-type1"]	= 8004,		--"治疗之拥",
+			["shift-type1"]	= 974,		--"大地之盾",
+			["ctrl-type1"]	= 1064,		--"治疗链",
+			["alt-ctrl-type1"]	= 2008,	--"先祖之魂",
+			["type2"]		= 61295,	--"激流",
+			["alt-type2"]	= 331,		--"治疗波",
+			["shift-type2"]	= 77472,	--"强效治疗波",
+			["ctrl-type2"]	= 51886,	--"净化灵魂",
+			["type3"]		= 1064,		--"治疗链",
+			["shift-type3"] = 546, --水上漂
+			["alt-type3"] = 131, --水下游
+	},
+
+	PALADIN = { --QS
+			["shift-type1"]	= 639,--"聖光術",
+			["alt-type1"]	= 19750,--"聖光閃現",
+			["ctrl-type1"]	= 53563,--"圣光信标",
+			["alt-ctrl-type1"]	= 7328,--"救贖",
+		["type2"]		= 20473,--"神聖震擊",
+			["shift-type2"]	= 82326,--"Divine Light",
+			["ctrl-type2"]	= 4987,--"淨化術",
+			["alt-type2"]	= 85673,--"Word of Glory",
+			["alt-ctrl-type2"]	= 633,--"聖療術",
+		["type3"]		= 31789,--正義防護
+			["alt-type3"]	= 20217,--王者
+			["shift-type3"]	= 20911,--庇護
+			["ctrl-type3"]	= 19740,--力量
+	},
+
+	WARRIOR = { --ZS
+			["ctrl-type1"]	= 50720,--"戒備守護",
+			["type2"]		= 3411,--"阻擾",
+	},
+
+	MAGE = { --FS
+			["alt-type1"]	= 1459,--"秘法智力",
+			["ctrl-type1"]	= 54646,--"专注",
+			["type2"]		= 475,--"解除詛咒",
+			["shift-type2"]	= 130,--"缓落",
+	},
+
+	WARLOCK = { --SS
+			["alt-type1"]	= 80398,--"黑暗意图",
+			["type2"]		= 5697,--"魔息",
+	},
+
+	HUNTER = { --LR
+			["type2"]		= 34477,--"誤導",
+	},
+	
+	ROGUE = { --DZ
+			["type2"]		= 57933,--"偷天換日",
+	},
+	
+	DEATHKNIGHT = {
+			["shift-type1"] = 61999, --战复
+			["type2"] = 47541, --死缠
+	},
+}
+
+local class = select(2, UnitClass("player"))
+
+for k, v in pairs(E.ClickSets_Sets[class]) do
+	if GetSpellInfo(v) then DB["clickset"][string.gsub(k,"-","z")] = GetSpellInfo(v) end
+end

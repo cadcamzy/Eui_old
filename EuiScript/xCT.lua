@@ -7,7 +7,7 @@ Thanks ALZA and Shestak for making this mod possible. Thanks Tukz for his wonder
 Maintained by Dandruff for 4.1 and 4.2 PTR
 
 ]]--
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["other"].xct ~= true then return end
 --some init
 local ct = {
@@ -36,7 +36,7 @@ local ct = {
         ["font"]           = E.font, -- "Fonts\\ARIALN.ttf" is default WoW font.
         ["fontsize"]       = 16,
         ["fontstyle"]      = "OUTLINE",                           -- valid options are "OUTLINE", "MONOCHROME", "THICKOUTLINE", "OUTLINE,MONOCHROME", "THICKOUTLINE,MONOCHROME"
-        ["damagefont"]     = E.dmgfont or E.font, -- "Fonts\\FRIZQT__.ttf" is default WoW damage font
+        ["damagefont"]     = E.font, -- "Fonts\\FRIZQT__.ttf" is default WoW damage font
         ["damagefontsize"] = "auto",                              -- size of xCT damage font. use "auto" to set it automatically depending on icon size, or use own value, 16 for example. if it's set to number value icons will change size.
         ["timevisible"]    = 3,                                   -- time (seconds) a single message will be visible. 3 is a good value.
         ["scrollable"]     = false,                               -- allows you to scroll frame lines with mousewheel.

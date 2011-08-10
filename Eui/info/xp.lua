@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["info"].xp == 0 or C["info"].enable == false then return end
 --if UnitLevel("player") == 80 then return end
 

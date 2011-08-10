@@ -1,5 +1,5 @@
 --定义整个界面的背景板
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 --透明背景
 local alpha
 if C["main"].alpha == true then

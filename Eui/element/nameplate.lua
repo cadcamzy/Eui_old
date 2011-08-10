@@ -2,7 +2,7 @@
 -- tekkub, cael, roth, and luzz 
 -- SPECIAL thanks to caelian, I relied heavly on his code
 -- modify by ljxx.net
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if C["other"].nameplate ~= true then return end
 local shNameplates = {}
 local cfg = {}

@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if not C["other"].bossnotes == true then return end
 
 --BOSS数据来源于大脚

@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 local oUF = EuiUF or oUF
 if not C["raid"].raid == true or C["unitframe"].aaaaunit == 1 then return end
 
@@ -77,17 +77,6 @@ DebuffTypeColor["Magic"] = { r = 0.20, g = 0.60, b = 1.00 };
 DebuffTypeColor["Curse"] = { r = 0.60, g = 0.00, b = 1.00 };
 DebuffTypeColor["Disease"] = { r = 0.60, g = 0.40, b = 0 };
 DebuffTypeColor["Poison"] = { r = 0.00, g = 0.60, b = 0 }; 	
-
-local ClickSets_Setsopt = {}
-local classopt
-if C["clickset"].aadefault == true then
-	ClickSets_Setsopt = E.ClickSets_Sets
-	classopt = class
-else
-	ClickSets_Setsopt = C
-	classopt = "clickset"
-end
-
 
 local function UpdateThreat(self, event, unit)
 	if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
@@ -323,21 +312,12 @@ local function Shared(self, unit)
 	
 	--ClickSets_Setsopt[class]
 	local key_tmp
-	if E.ClickSets_Sets then
-		if (ClickSets_Setsopt[classopt]) then
-			for key, value in pairs(ClickSets_Setsopt[classopt]) do
-				key_tmp = string.gsub(key,"z","-")
-				if value ~= 0 and key ~= "aadefault" and key ~= "aamouse" then
-					self:SetAttribute(key_tmp, 'spell')
-					if C["clickset"].aadefault == true then
-						self:SetAttribute(string.gsub(key_tmp,"type",'spell'), GetSpellInfo(value))
-					else
-						self:SetAttribute(string.gsub(key_tmp,"type",'spell'), value)
-					end
-				elseif value == 0 and key ~= "aadefault" and key ~= "aamouse" then
-					self:SetAttribute(string.gsub(key,"z","-"), nil)
-					self:SetAttribute(string.gsub(string.gsub(key,"z","-"),"type",'spell'), nil)
-				end
+	if C["clickset"].enable then
+		for key, value in pairs(C["clickset"]) do
+			key_tmp = string.gsub(key,"z","-")
+			if value ~= "NONE" and key ~= "enable" then
+				self:SetAttribute(key_tmp, 'spell')
+				self:SetAttribute(string.gsub(key_tmp,"type",'spell'), value)
 			end
 		end
 	end

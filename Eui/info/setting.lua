@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 if C["info"].setting == 0 or C["info"].enable == false then return end
 
 local setting = CreateFrame ("Button", nil, UIParent)
@@ -18,11 +18,10 @@ setting:SetScript("OnMouseUp", function(self, button)
 	if button == "LeftButton" and IsAddOnLoaded("EuiSet") then
 		HideUIPanel(GameMenuFrame)
 		PlaySound("igMainMenuOption")
-		if not EuiSetGui or not EuiSetGui:IsShown() then
-			CreateEuiSetGui()
-		else
-			EuiSetGui:Hide()
-		end 
+		if not IsAddOnLoaded("EuiSet") then return end
+		local EuiConfig = LibStub("AceAddon-3.0"):GetAddon("EuiConfig")
+		if not EuiConfig then return end
+		EuiConfig:ShowConfig()
 	elseif button == "RightButton" then
 		ToggleDropDownMenu(1, nil, settingMenuDrop, self, 0, -5)
 		GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");

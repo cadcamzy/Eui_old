@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+local E, C, L, DB = unpack(EUI) -- Import Functions/Constants, Config, Locales
 if C["unitframe"].swing ~= true then return end
 --[[
 	Project.: oUF_Swing

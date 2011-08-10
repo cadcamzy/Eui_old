@@ -1,4 +1,4 @@
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 if not C["chat"].enable == true then return end
 local event = CreateFrame"Frame"
 local dummy = function() end

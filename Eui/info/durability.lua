@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI)
+﻿local E, C, L, DB = unpack(EUI)
 if C["info"].durability == 0 or C["info"].enable == false then return end
 
 --状态报告

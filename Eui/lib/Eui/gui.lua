@@ -2,7 +2,7 @@
 --	This Module loads new user settings if !aSettings_GUI is loaded
 ----------------------------------------------------------------------------------------
 if not IsAddOnLoaded("EuiSet") or EuiSettings == nil then return end
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 
 for group, options in pairs(EuiSettings) do
 	if C[group] then

@@ -1,4 +1,4 @@
-﻿local E, C, L = unpack(EUI) -- Import Functions/Constants, Config, Locales
+﻿local E, C, L, DB = unpack(EUI) -- Import Functions/Constants, Config, Locales
 --Author: fgprodigal
 --Modify: ljxx.net
 E.imsg = CreateFrame("Frame", "ComatAlert")
