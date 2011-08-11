@@ -42,7 +42,21 @@ E.highlightTex = [[Interface\AddOns\Eui\media\highlightTex]]
 E.borderTex = [[Interface\AddOns\Eui\media\border]]
 E.blank = [[Interface\AddOns\Eui\media\blank]]
 E.gray = [[Interface\AddOns\Eui\media\gray]]
-E.statusbar = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+local LSM = LibStub("LibSharedMedia-3.0")
+if LSM ~= nil then
+	LSM:Register("statusbar","EUI Statusbar-0", [[Interface\AddOns\Eui\media\statusbar\0.tga]])
+	LSM:Register("statusbar","EUI Statusbar-1", [[Interface\AddOns\Eui\media\statusbar\1.tga]])
+	LSM:Register("statusbar","EUI Statusbar-2", [[Interface\AddOns\Eui\media\statusbar\2.tga]])
+	LSM:Register("statusbar","EUI Statusbar-3", [[Interface\AddOns\Eui\media\statusbar\3.tga]])
+	LSM:Register("statusbar","EUI Statusbar-4", [[Interface\AddOns\Eui\media\statusbar\4.tga]])
+	LSM:Register("statusbar","EUI Statusbar-5", [[Interface\AddOns\Eui\media\statusbar\5.tga]])
+	LSM:Register("statusbar","EUI Statusbar-6", [[Interface\AddOns\Eui\media\statusbar\6.tga]])
+	LSM:Register("statusbar","EUI Statusbar-7", [[Interface\AddOns\Eui\media\statusbar\7.tga]])
+	LSM:Register("statusbar","EUI Statusbar-8", [[Interface\AddOns\Eui\media\statusbar\8.tga]])
+	LSM:Register("statusbar","EUI Statusbar-9", [[Interface\AddOns\Eui\media\statusbar\9.tga]])
+end
+C["skins"].texture = LSM:Fetch("statusbar", C["skins"].texture)
+
 E.backdrop = {
 	bgFile = E.normTex,
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
@@ -138,10 +152,9 @@ E.EuiStyleInnerBorder = function(f)
 	})
 
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b	
 		f.iborder:SetBackdropBorderColor(r, g, b,1)
 	else	
 		f.iborder:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
@@ -169,10 +182,9 @@ E.EuiStyleOuterBorder = function(f)
 	})
 	
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		f.oborder:SetBackdropBorderColor(r, g, b,1)
 	else	
 		f.oborder:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
@@ -186,10 +198,9 @@ E.EuiSkinFadedPanel = function(f,alpha)
 	f:SetBackdropColor(0.1,0.1,0.1,alpha)
 		
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		f:SetBackdropBorderColor(r, g, b,alpha)
 	else	
 		f:SetBackdropBorderColor(0.31, 0.45, 0.63,alpha)
@@ -225,10 +236,9 @@ E.EuiSkinPanel = function(f)
 	f:SetBackdropColor(0.1,0.1,0.1,0.7)
 		
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		f:SetBackdropBorderColor(r, g, b,1)
 	else	
 		f:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
@@ -264,10 +274,9 @@ E.EuiSetTransparentTemplate = function(f)
     })
 	
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		f:SetBackdropColor(0.1,0.1,0.1,1)
 		f:SetBackdropBorderColor(r, g, b,1)
 	else
@@ -287,10 +296,9 @@ E.EuiSetTemplate = function(f,a)
 	})
 	
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		f:SetBackdropColor(0.1,0.1,0.1,alpha)
 		f:SetBackdropBorderColor(r, g, b,1)
 	else
@@ -333,10 +341,9 @@ E.EuiSetTemplateB = function(f,x1,y1,x2,y2)
 	})
 
 	if C["main"].classcolortheme == true then
-		E.RAID_CLASS_COLORS[E.MyClass].r = C["main"]["classcolorcustom"].r
-		E.RAID_CLASS_COLORS[E.MyClass].g = C["main"]["classcolorcustom"].g
-		E.RAID_CLASS_COLORS[E.MyClass].b = C["main"]["classcolorcustom"].b
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		skinFrame:SetBackdropColor(0.1,0.1,0.1,.7)
 		skinFrame:SetBackdropBorderColor(r, g, b,1)
 	else
@@ -923,26 +930,15 @@ RoleUpdater:RegisterEvent("UPDATE_BONUS_ACTIONBAR")
 RoleUpdater:SetScript("OnEvent", CheckRole)
 CheckRole()
 
+local eventcount = 0
+local EuiInGame = CreateFrame("Frame")
+EuiInGame:RegisterAllEvents()
+EuiInGame:SetScript("OnEvent", function(self, event)
+	eventcount = eventcount + 1
+	if InCombatLockdown() then return end
 
-function E.AltPowerBarPostUpdate(self, min, cur, max)
-	local perc = math.floor((cur/max)*100)
-		
-	if perc < 35 then
-		self:SetStatusBarColor(0, 1, 0)
-	elseif perc < 70 then
-		self:SetStatusBarColor(1, 1, 0)
-	else
-		self:SetStatusBarColor(1, 0, 0)
+	if eventcount > 6000 then
+		collectgarbage("collect")
+		eventcount = 0
 	end
-		
-	local unit = self:GetParent().unit or self:GetParent():GetParent().unit
-		
-	if unit and unit:find("boss%d") and self.text then
-		self.text:SetTextColor(self:GetStatusBarColor())
-		if perc > 0 then
-			self.text:SetText("|cffD7BEA5[|r"..format("%d%%", perc).."|cffD7BEA5]|r")
-		else
-			self.text:SetText(nil)
-		end
-	end
-end
+end)

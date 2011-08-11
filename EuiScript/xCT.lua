@@ -729,8 +729,9 @@ for i = 1, numf do
     f:SetPoint("CENTER", 0, 0)
     f:SetMovable(true)
     f:SetResizable(true)
-    f:SetMinResize(64, 64)
-    f:SetMaxResize(768, 768)
+ --   f:SetMinResize(64, 64)
+--    f:SetMaxResize(768, 768)
+	f:SetSize(200,300)
     f:SetClampedToScreen(true)
     f:SetClampRectInsets(0, 0, ct.fontsize, 0)
     if i == 1 then
@@ -805,7 +806,6 @@ if not ct.blizzheadnumbers then
     SetCVar("PetMeleeDamage", 0)
     SetCVar("CombatDamage", 0)
     SetCVar("CombatHealing", 0)
-	SetCVar("enableCombatText", 1)
 end
 
 -- hook blizz float mode selector. blizz sucks, because changing  cVar combatTextFloatMode doesn't fire CVAR_UPDATE

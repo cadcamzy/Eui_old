@@ -242,16 +242,6 @@ local function CheckRaidBuff()
 				--忽略潜行者、战士和死亡骑士的智力
 					HasMAGEBrilliance = true
 				end
-				if class == L.RaidCheckPALADIN then
-				--检查FQ坦的正义之怒
-				--	if UnitHealthMax(unit) > (UnitHealthMax("player") * 1.4) then
-					if GetActiveTalentGroup(unit) == 2 then
-						IsFQ = true
-						if find(BuffTEXT, L.RaidCheckBuffRighteousFury) then
-							HasFQBuff = true
-						end
-					end
-				end
 				j = j + 1
 			end
 			if HasPRIESTFortitude == false and HasPRIEST == true then
@@ -284,13 +274,6 @@ local function CheckRaidBuff()
 					Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["name"] = Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["name"]..name.."."
 					Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["count"] = Group_NoBuff_Name[L.RaidCheckBuffMight1][subgroup]["count"] + 1
 					NoBuffCount = NoBuffCount + 1
-				end
-			end
-			if IsFQ == true and HasFQBuff == false then
-				LostFQBuffNAME = LostFQBuffNAME..name.."."
-				NoBuffCount = NoBuffCount + 1
-				if IsRaidLeader() or IsRaidOfficer() then
-					SendChatMessage(L.RaidCheckMsgRighteousFury, "WHISPER", nil, name)
 				end
 			end
 		end
@@ -399,10 +382,6 @@ local function CheckRaidBuff()
 			end
 		end
 
-		if LostFQBuffNAME ~= "" then
-			SendChatMessage(L.RaidCheckMsgNoRighteousFury..": "..LostFQBuffNAME, "RAID")
-			--SendChatMessage(L.RaidCheckMsgNoRighteousFury..": "..LostFQBuffNAME, "GUILD")
-		end
 	end
 end
 

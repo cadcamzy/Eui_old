@@ -17,6 +17,7 @@ function EuiConfig:LoadDefaults()
 			main = DB["main"],
 			ui = DB["ui"],
 			other = DB["other"],
+			nameplate = DB["nameplate"],
 			chat = DB["chat"],
 			filter = DB["filter"],
 			unitframe = DB["unitframe"],
@@ -96,7 +97,7 @@ function EuiConfig.GenerateOptionsInternal()
 	
 	EuiConfig.Options = {
 		type = "group",
-		name = "Eui",
+		name = "Eui".." "..GetAddOnMetadata("Eui", "Version"),
 		args = {
 			Eui_Header = {
 				order = 1,
@@ -254,9 +255,10 @@ function EuiConfig.GenerateOptionsInternal()
 					},
 					classcolorcustom = {
 						type = "color",
-						order = 2,
+						order = 24,
 						name = L["main_classcolorcustom"],
 					--	desc = L["main_classcolorcustom"],
+						disabled = function() return db.unitframe.classcolortheme end,
 						hasAlpha = false,
 						get = function(info)
 							local t = db.main[ info[#info] ]
@@ -272,7 +274,7 @@ function EuiConfig.GenerateOptionsInternal()
 				},
 			},
 			ui = {
-				order = 2,
+				order = 1,
 				type = "group",
 				name = L["ui"],
 				desc = L["ui"],
@@ -293,37 +295,56 @@ function EuiConfig.GenerateOptionsInternal()
 					},					
 				},
 			},
-			other = {
+			nameplate = {
 				order = 3,
+				type = "group",
+				name = L["nameplate"],
+				desc = L["nameplate"],
+				get = function(info) return db.nameplate[ info[#info] ] end,
+				set = function(info, value) db.nameplate[ info[#info] ] = value; StaticPopup_Show("CFG_RELOAD") end,
+				args = {
+					enable = {
+						order = 1,
+						type = "toggle",
+						name = L["nameplate_enable"],
+					},
+					nameplate_group1 = {
+						order = 2,
+						type = "group",
+						name = L["nameplate"],
+						disabled = function() return not db.nameplate.enable end,
+						guiInline = true,
+						args = {	
+							nameplateauto = {
+								order = 2,
+								type = "toggle",
+								name = L["nameplate_nameplateauto"],
+								disabled = function() return not db.nameplate.enable end,
+							},
+							nameplatevalue = {
+								order = 3,
+								type = "toggle",
+								name = L["nameplate_nameplatevalue"],
+								disabled = function() return not db.nameplate.enable end,
+							},
+							nameplatetank = {
+								order = 4,
+								type = "toggle",
+								name = L["nameplate_nameplatetank"],
+								disabled = function() return not db.nameplate.enable end,
+							},
+						},
+					},
+				},
+			},
+			other = {
+				order = 15,
 				type = "group",
 				name = L["other"],
 				desc = L["other"],
 				get = function(info) return db.other[ info[#info] ] end,
 				set = function(info, value) db.other[ info[#info] ] = value; StaticPopup_Show("CFG_RELOAD") end,
 				args = {
-					nameplate = {
-						order = 1,
-						type = "toggle",
-						name = L["other_nameplate"],
-					},
-					nameplateauto = {
-						order = 2,
-						type = "toggle",
-						name = L["other_nameplateauto"],
-						disabled = function() return not db.other.nameplate end,
-					},
-					nameplatevalue = {
-						order = 3,
-						type = "toggle",
-						name = L["other_nameplatevalue"],
-						disabled = function() return not db.other.nameplate end,
-					},
-					nameplatetank = {
-						order = 4,
-						type = "toggle",
-						name = L["other_nameplatetank"],
-						disabled = function() return not db.other.nameplate end,
-					},
 					mail = {
 						order = 5,
 						type = "toggle",
@@ -424,51 +445,62 @@ function EuiConfig.GenerateOptionsInternal()
 						type = "toggle",
 						name = L["chat_enable"],
 					},
-					hidejunk = {
+					chat_group1 = {
 						order = 2,
-						name = L["chat_hidejunk"],
+						type = "group",
+						name = L["chat_group1"],
 						disabled = function() return not db.chat.enable end,
-						type = "toggle",
+						guiInline = true,
+						args = {
+							chatw = {
+								order =3,
+								name = L["chat_chatw"],
+								type = "range",
+								min = 100, max = 1000, step = 1,
+							},
+							chath = {
+								order = 4,
+								name = L["chat_chath"],
+								type = "range",
+								min = 100, max = 1000, step = 1,
+							},
+						},
 					},
-					chatw = {
-						order =3,
-						name = L["chat_chatw"],
+					chat_group2 = {
+						order = 3,
+						type = "group",
+						name = L["chat_group2"],
 						disabled = function() return not db.chat.enable end,
-						type = "range",
-						min = 100, max = 1000, step = 1,
+						guiInline = true,
+						args = {
+							hidejunk = {
+								order = 2,
+								name = L["chat_hidejunk"],
+								type = "toggle",
+							},
+							chatbar = {
+								order = 5,
+								name = L["chat_chatbar"],
+								type = "toggle",
+							},
+							chatguard = {
+								order = 6,
+								name = L["chat_chatguard"],
+								type = "toggle",
+							},
+							LFW = {
+								order = 7,
+								name = L["chat_LFW"],
+								type = "toggle",
+							},
+							bodylevel = {
+								order = 8,
+								name = L["chat_bodylevel"],
+								type = "range",
+								min = 1, max = 85, step = 1,
+							},
+						},
 					},
-					chath = {
-						order = 4,
-						name = L["chat_chath"],
-						disabled = function() return not db.chat.enable end,
-						type = "range",
-						min = 100, max = 1000, step = 1,
-					},
-					chatbar = {
-						order = 5,
-						name = L["chat_chatbar"],
-						disabled = function() return not db.chat.enable end,
-						type = "toggle",
-					},
-					chatguard = {
-						order = 6,
-						name = L["chat_chatguard"],
-						disabled = function() return not db.chat.enable end,
-						type = "toggle",
-					},
-					LFW = {
-						order = 7,
-						name = L["chat_LFW"],
-						disabled = function() return not db.chat.enable end,
-						type = "toggle",
-					},
-					bodylevel = {
-						order = 8,
-						name = L["chat_bodylevel"],
-						disabled = function() return not db.chat.enable end,
-						type = "range",
-						min = 1, max = 85, step = 1,
-					},					
 				},
 			},
 			filter = {
@@ -493,26 +525,25 @@ function EuiConfig.GenerateOptionsInternal()
 							classcolor = {
 								order = 2,
 								name = L["filter_classcolor"],
-								disabled = function(info) return db.ui.autoscale end,
+								disabled = function(info) return not db.filter.enable end,
 								type = "toggle",
 							},
 							float = {
 								order = 3,
 								name = L["filter_float"],
-								disabled = function(info) return db.filter.coolline end,
-								type = "range",
-								min = 1, max = 100, step = 1,
+								disabled = function(info) return not db.other.cooldown end,
+								type = "toggle",
 							},	
 							barheight = {
 								order = 2,
 								name = L["filter_classcolor"],
-								disabled = function(info) return db.ui.autoscale end,
+								disabled = function(info) return not db.filter.enable end,
 								type = "toggle",
 							},
 							cdsize = {
 								order = 2,
 								name = L["filter_cdsize"],
-								disabled = function(info) return db.filter.raid end,
+								disabled = function(info) return not db.filter.enable end,
 								type = "range",
 								min = 1, max = 100, step = 1,
 							},							
@@ -532,21 +563,21 @@ function EuiConfig.GenerateOptionsInternal()
 							raidwidth = {
 								order = 2,
 								name = L["filter_raidwidth"],
-								disabled = function(info) return db.filter.raid end,
+								disabled = function(info) return not db.filter.raid end,
 								type = "range",
 								min = 1, max = 100, step = 1,
 							},	
 							raidheight = {
 								order = 3,
 								name = L["filter_raidheight"],
-								disabled = function(info) return db.filter.raid end,
+								disabled = function(info) return not db.filter.raid end,
 								type = "range",
 								min = 1, max = 100, step = 1,
 							},
 							raidnumber = {
 								order = 4,
 								name = L["filter_raidnumber"],
-								disabled = function(info) return db.filter.raid end,
+								disabled = function(info) return not db.filter.raid end,
 								type = "range",
 								min = 1, max = 100, step = 1,
 							},
@@ -566,14 +597,14 @@ function EuiConfig.GenerateOptionsInternal()
 							coollinew = {
 								order = 2,
 								name = L["filter_classcolor"],
-								disabled = function(info) return db.filter.coolline end,
+								disabled = function(info) return not db.filter.coolline end,
 								type = "range",
 								min = 10, max = 1000, step = 1,
 							},
 							coollineh = {
 								order = 2,
 								name = L["filter_classcolor"],
-								disabled = function(info) return db.filter.coolline end,
+								disabled = function(info) return not db.filter.coolline end,
 								type = "range",
 								min = 1, max = 100, step = 1,
 							},						
@@ -583,7 +614,7 @@ function EuiConfig.GenerateOptionsInternal()
 						order = 4,
 						type = "group",
 						name = L["filter_group4"],
-						disabled = function() return db.filter.enable end,
+						disabled = function() return not db.filter.enable end,
 						guiInline = true,
 						args = {
 							pbuffbar = {
@@ -618,7 +649,7 @@ function EuiConfig.GenerateOptionsInternal()
 						order = 5,
 						type = "group",
 						name = L["filter_group5"],
-						disabled = function() return db.filter.enable end,
+						disabled = function() return not db.filter.enable end,
 						guiInline = true,
 						args = {
 							tdebuffbar = {
@@ -648,7 +679,7 @@ function EuiConfig.GenerateOptionsInternal()
 						order = 6,
 						type = "group",
 						name = L["filter_group6"],
-						disabled = function() return db.filter.enable end,
+						disabled = function() return not db.filter.enable end,
 						guiInline = true,
 						args = {
 							fbufficon = {
@@ -664,7 +695,7 @@ function EuiConfig.GenerateOptionsInternal()
 							ficonsize = {
 								order = 3,
 								name = L["filter_ficonsize"],
-								disabled = function(info) return db.filter.fbufficon end,
+								disabled = function(info) return not db.filter.fbufficon end,
 								type = "range",
 								min = 1, max = 100, step = 1,
 							},							
@@ -689,7 +720,7 @@ function EuiConfig.GenerateOptionsInternal()
 					unitframe_group1 = {
 						order = 2,
 						type = "group",
-						name = L["unitframe"],
+						name = L["unitframe_group1"],
 						guiInline = true,
 						disabled = function() return (db.unitframe.aaaaunit == 0) end,
 						args = {
@@ -699,152 +730,180 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["unitframe_castbar"],
 							},
 							swing = {
-								order = 1,
+								order = 2,
 								type = "toggle",
 								name = L["unitframe_swing"],
 							},
-							totdebuffs = {
-								order = 1,
-								type = "range",
-								name = L["unitframe_totdebuffs"],
-								min = 0, max = 42, step = 1,
-							},
+
 							colorClass = {
-								order = 1,
+								order = 4,
 								type = "toggle",
 								name = L["unitframe_colorClass"],
 							},
+		
+
+							portrait = {
+								order = 10,
+								type = "toggle",
+								name = L["unitframe_portrait"],
+							},
+							showPvP = {
+								order = 11,
+								type = "toggle",
+								name = L["unitframe_showPvP"],
+							},
+							onlyplayer = {
+								order = 12,
+								type = "toggle",
+								name = L["unitframe_onlyplayer"],
+							},
+							powerspark = {
+								order = 13,
+								type = "toggle",
+								name = L["unitframe_powerspark"],
+							},
+								
+							colorClassName = {
+								order = 22,
+								type = "toggle",
+								name = L["unitframe_colorClassName"],
+							},
+							totalhpmp = {
+								order = 23,
+								type = "toggle",
+								name = L["unitframe_totalhpmp"],
+							},
+							cpoint = {
+								order = 24,
+								type = "toggle",
+								name = L["unitframe_cpoint"],
+							},
+							bigcastbar = {
+								order = 25,
+								type = "toggle",
+								name = L["unitframe_bigcastbar"],
+							},
+							bigcastbarscale = {
+								order = 26,
+								type = "range",
+								name = L["unitframe_bigcastbarscale"],
+								disabled = function() return not db.unitframe.bigcastbar end,
+								min = 0.1, max = 10, step = 0.1,
+							},
+							showpprec = {
+								order = 27,
+								type = "toggle",
+								name = L["unitframe_showpprec"],
+							},
+							boss = {
+								order = 28,
+								type = "toggle",
+								name = L["unitframe_boss"],
+							},							
+						},
+					},
+					unitframe_group2 = {
+						order = 3,
+						type = "group",
+						name = L["unitframe_group2"],
+						guiInline = true,
+						disabled = function() return (db.unitframe.aaaaunit == 0) end,
+						args = {
+							totdebuffs = {
+								order = 3,
+								type = "range",
+								name = L["unitframe_totdebuffs"],
+								min = 0, max = 42, step = 1,
+							},						
 							Fbuffs = {
-								order = 1,
+								order = 5,
 								type = "range",
 								name = L["unitframe_Fbuffs"],
 								min = 0, max = 40, step = 1,
 							},
 							Fdebuffs = {
-								order = 1,
+								order = 6,
 								type = "range",
 								name = L["unitframe_Fdebuffs"],
 								min = 0, max = 40, step = 1,
 							},
 							targetbuffs = {
-								order = 1,
+								order = 7,
 								type = "range",
 								name = L["unitframe_targetbuffs"],
 								min = 0, max = 40, step = 1,
 							},
 							targetdebuffs = {
-								order = 1,
+								order = 8,
 								type = "range",
 								name = L["unitframe_targetdebuffs"],
 								min = 0, max = 40, step = 1,
-							},		
+							},
 							playerdebuffnum = {
-								order = 1,
+								order = 9,
 								type = "range",
 								name = L["unitframe_playerdebuffnum"],
 								min = 0, max = 40, step = 1,
-							},
-							portrait = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_portrait"],
-							},
-							showPvP = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_showPvP"],
-							},
-							onlyplayer = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_onlyplayer"],
-							},
-							powerspark = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_powerspark"],
-							},
+							},							
+						},
+					},
+					unitframe_group3 = {
+						order = 4,
+						type = "group",
+						name = L["unitframe_group3"],
+						guiInline = true,
+						disabled = function() return (db.unitframe.aaaaunit == 0) end,
+						args = {
 							playerwidth = {
-								order = 1,
+								order = 14,
 								type = "range",
 								name = L["unitframe_playerwidth"],
 								min = 50, max = 500, step = 2,
 							},
 							playerheight = {
-								order = 1,
+								order = 15,
 								type = "range",
 								name = L["unitframe_playerheight"],
 								min = 50, max = 500, step = 2,
 							},	
 							petwidth = {
-								order = 1,
+								order = 16,
 								type = "range",
 								name = L["unitframe_petwidth"],
 								min = 50, max = 500, step = 2,
 							},
 							petheight = {
-								order = 1,
+								order = 17,
 								type = "range",
 								name = L["unitframe_petheight"],
 								min = 50, max = 500, step = 2,
 							},	
 							totwidth = {
-								order = 1,
+								order = 18,
 								type = "range",
 								name = L["unitframe_totwidth"],
 								min = 50, max = 500, step = 2,
 							},
 							totheight = {
-								order = 1,
+								order = 19,
 								type = "range",
 								name = L["unitframe_totheight"],
 								min = 50, max = 500, step = 2,
 							},	
 							focuswidth = {
-								order = 1,
+								order = 20,
 								type = "range",
 								name = L["unitframe_focuswidth"],
 								min = 50, max = 500, step = 2,
 							},
 							focusheight = {
-								order = 1,
+								order = 21,
 								type = "range",
 								name = L["unitframe_focusheight"],
 								min = 50, max = 500, step = 2,
-							},								
-							colorClassName = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_colorClassName"],
-							},
-							totalhpmp = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_totalhpmp"],
-							},
-							cpoint = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_cpoint"],
-							},
-							bigcastbar = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_bigcastbar"],
-							},
-							bigcastbarscale = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_bigcastbarscale"],
-								disabled = function() return db.unitframe.bigcastbar end,
-							},
-							showpprec = {
-								order = 1,
-								type = "toggle",
-								name = L["unitframe_showpprec"],
 							},
 						},
-					},		
+					},
 				},
 			},
 			raid = {
@@ -970,13 +1029,8 @@ function EuiConfig.GenerateOptionsInternal()
 								order = 19,
 								name = L["raid_showPartyTarget"],
 								type = "toggle",
-								disabled = function() return db.raid.showParty end,
+								disabled = function() return not db.raid.showParty end,
 							},	
-							boss = {
-								order = 20,
-								name = L["raid_boss"],
-								type = "toggle",
-							},
 							mt = {
 								order = 21,
 								name = L["raid_mt"],
@@ -1376,16 +1430,20 @@ function EuiConfig.GenerateOptionsInternal()
 							},
 							texture = {
 								order = 5,
+							--	name = L["skins_texture"],
+							--	type = "range",
+							--	min = 0, max = 9, step = 1,
+								type = "select", dialogControl = 'LSM30_Statusbar',
+								order = 5,
 								name = L["skins_texture"],
-								type = "range",
-								min = 0, max = 9, step = 1,
+								values = AceGUIWidgetLSMlists.statusbar,								
 							},						
 						},
 					},		
 				},
 			},
 			class = {
-				order = 12,
+				order = 14,
 				type = "group",
 				name = L["class"],
 				desc = L["class"],
@@ -1396,11 +1454,12 @@ function EuiConfig.GenerateOptionsInternal()
 						order = 1,
 						type = "toggle",
 						name = L["class_dk"],
+						disabled = function() return not db.unitframe.portrait end,
 					},
 				},
 			},
 			clickset = {
-				order = 19,
+				order = 13,
 				type = "group",
 				name = L["Clickset"],
 				desc = L["CS_DESC"],
@@ -1416,6 +1475,11 @@ function EuiConfig.GenerateOptionsInternal()
 						order = 2,
 						type = "toggle",
 						name = ENABLE,
+					},
+					dispel = {
+						order = 3,
+						type = "toggle",
+						name = L["clickset_dispel"],
 					},
 					CSGroup1 = {
 						order = 4,

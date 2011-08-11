@@ -3,7 +3,9 @@ if C["skins"].askins ~= true then return end
 
 local function SetModifiedBackdrop(self)
 	if C["main"].classcolortheme == true then
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b
 		self:SetBackdropBorderColor(r, g, b,1)
 	else
 		self:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
@@ -13,7 +15,9 @@ end
 local function SetOriginalBackdrop(self)
 	self:SetBackdropColor(.1,.1,.1,1)
 	if C["main"].classcolortheme == true then
-		local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+		local r = C["main"]["classcolorcustom"].r
+		local g = C["main"]["classcolorcustom"].g
+		local b = C["main"]["classcolorcustom"].b	
 		self:SetBackdropBorderColor(r, g, b,1)
 	else
 		self:SetBackdropBorderColor(0.31, 0.45, 0.63,1)

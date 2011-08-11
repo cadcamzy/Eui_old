@@ -22,7 +22,7 @@
 	<Script file="OnlyMyBadges.lua"/>
 	<Script file="ncHoverBind.lua"/>
 	<Script file="SpellID.lua"/>
-
+	<Script file="Focuser.lua"/>
 	<Script file="AlreadyKnown.lua"/>
 	<Script file="LFGForwarder.lua"/>
 	<Script file="openall.lua"/>

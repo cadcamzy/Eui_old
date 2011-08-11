@@ -5,7 +5,7 @@ local SkadaSkin = CreateFrame("Frame")
 SkadaSkin:RegisterEvent("PLAYER_LOGIN")
 SkadaSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skada") then
-		local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+		local TEXTURE = C["skins"].texture
 		local function StripOptions(options)
 			options.baroptions.args.bartexture = options.windowoptions.args.height
 			options.baroptions.args.bartexture.order = 12

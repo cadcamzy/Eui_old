@@ -1104,6 +1104,7 @@ hooksecurefunc("WorldStateAlwaysUpFrame_Update", captureupdate)
 local Debuffmw = CreateFrame("Frame")
 Debuffmw:RegisterEvent("PLAYER_ENTERING_WORLD")
 Debuffmw:SetScript("OnEvent", function(self, event)
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	if C["raid"].raid == true then
 		--Hide Biz RaidFrame...
 		CompactRaidFrameManager:UnregisterAllEvents()
@@ -1111,11 +1112,15 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		CompactRaidFrameContainer:UnregisterAllEvents()
 		CompactRaidFrameContainer:Hide()	
 	end
-	if C["clickset"].aamouse ~= true then
---		if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
---		if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
-		return
-	end
+
+	if C["clickset"].dispel ~= true then return end
+	if select(2, GetNumMacros()) > 34 then
+		DEFAULT_CHAT_FRAME:AddMessage(L.CLICKSET_MOUSE_ERR,1,0,0)
+		return;
+	end	
+	if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
+	if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
+
 	local _, class = UnitClass("player")
 	local CanDispel = {
 		PRIEST = { 527, 528, },
@@ -1129,13 +1134,7 @@ Debuffmw:SetScript("OnEvent", function(self, event)
 		WARLOCK = {},
 		DEATHKNIGHT = {},
 	}
-	if select(2, GetNumMacros()) > 34 then
-		DEFAULT_CHAT_FRAME:AddMessage(L.CLICKSET_MOUSE_ERR,1,0,0)
-		return
-	end
---local index_a = CreateMacro("Debuff_1", _, "/cast [target=mouseover] 清洁术;",1)
---	if GetMacroInfo("EuiDebuffa") then DeleteMacro("EuiDebuffa") end
---	if GetMacroInfo("EuiDebuffb") then DeleteMacro("EuiDebuffb") end
+
 	local macroa, macrob
 	local indexa, indexb
 	if CanDispel[class][1] and IsSpellKnown(CanDispel[class][1]) then

@@ -465,20 +465,6 @@ local Shared = function(self, unit, isSingle)
 	self:SetFrameLevel(5)
 	self.colors.smooth = {1,0,0, .7,.41,.44, .3,.3,.3}
 	
-	if C["other"].focuser == true then
-		-- set/clear focus with shift + left click
-		local ModKey = 'Shift'
-		local MouseButton = 1
-		local key = ModKey .. '-type' .. (MouseButton or '')
-		if(self.unit == 'focus') then
-			self:SetAttribute(key, 'macro')
-			self:SetAttribute('macrotext', '/clearfocus')
-		else
-			self:SetAttribute(key, 'focus')
-		end
-	end	
-	
-	
 	local powerbg = CreateFrame("Frame", nil, self)
 	if unit == 'player' then
 		powerbg:SetPoint("TOPLEFT", self, "TOPLEFT", 8, -8)
@@ -1147,6 +1133,25 @@ oUF:Factory(function(self)
 	spawnHelper(self, 'focus', 'TOPRIGHT', UIParent, 'BOTTOM', -ptx-focuswidth-8, pty-34-playerheight-16)
 	spawnHelper(self, 'pet', 'TOPRIGHT', UIParent, 'BOTTOM', -ptx-playerwidth-16, pty)
 	spawnHelper(self, 'focustarget', 'TOPRIGHT', UIParent, 'BOTTOM', -ptx, pty-34-playerheight-16)	
+	if C["unitframe"].boss == true then
+		for i = 1,MAX_BOSS_FRAMES do
+			local t_boss = _G["Boss"..i.."TargetFrame"]
+			t_boss:UnregisterAllEvents()
+			t_boss.Show = function() return end
+			t_boss:Hide()
+			_G["Boss"..i.."TargetFrame".."HealthBar"]:UnregisterAllEvents()
+			_G["Boss"..i.."TargetFrame".."ManaBar"]:UnregisterAllEvents()
+		end
+		local boss = {}
+		for i = 1, MAX_BOSS_FRAMES do
+			boss[i] = self:Spawn("boss"..i, "oUF_Boss"..i)
+			if i == 1 then
+				boss[i]:SetPoint("BOTTOM", UIParent, "BOTTOM", 452, 560)
+			else
+				boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 10)             
+			end
+		end
+	end		
 end)
 
 if C["raid"].raid == true then

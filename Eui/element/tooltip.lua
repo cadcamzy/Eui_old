@@ -101,7 +101,14 @@ GameTooltip:HookScript("OnUpdate",function(self, ...)
 		-- or showing background sometime ~blue :x
 		NeedBackdropBorderRefresh = false
 		self:SetBackdropColor(.1,.1,.1,.6)
-		self:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
+		if C["main"].classcolortheme == true then
+			local r = C["main"]["classcolorcustom"].r
+			local g = C["main"]["classcolorcustom"].g
+			local b = C["main"]["classcolorcustom"].b
+			self:SetBackdropBorderColor(r, g, b,1)
+		else
+			self:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
+		end
 	elseif self:GetAnchorType() == "ANCHOR_NONE" then
 		SetRightTooltipPos(self)
 	end
@@ -400,9 +407,19 @@ local Colorize = function(self)
 			local r, g, b = GetItemQualityColor(quality)
 			self:SetBackdropBorderColor(r, g, b)
 		else
-			self:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
-			healthBarBG:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
-			healthBar:SetStatusBarColor(0.31, 0.45, 0.63,1)
+			if C["main"].classcolortheme == true then
+				local r = C["main"]["classcolorcustom"].r
+				local g = C["main"]["classcolorcustom"].g
+				local b = C["main"]["classcolorcustom"].b
+				self:SetBackdropBorderColor(r, g, b,1)
+				healthBarBG:SetBackdropBorderColor(r, g, b,1)
+				healthBar:SetStatusBarColor(r, g, b,1)
+			else
+				self:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
+				healthBarBG:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
+				healthBar:SetStatusBarColor(0.31, 0.45, 0.63,1)
+			end			
+
 		end
 	end	
 	-- need this
@@ -577,7 +594,9 @@ EuiTooltip:SetScript("OnUpdate", function(self, elapsed)
 	if(self.elapsed and self.elapsed > 0.1) then
 		if FrameStackTooltip then
 			local noscalemult = E.mult * C["ui"].uiscale
-			local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b
+			local r = C["main"]["classcolorcustom"].r
+			local g = C["main"]["classcolorcustom"].g
+			local b = C["main"]["classcolorcustom"].b
 			FrameStackTooltip:SetBackdrop({
 			  bgFile = E.blank, 
 			  edgeFile = E.blank, 

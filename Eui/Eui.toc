@@ -4,7 +4,7 @@
 ## Notes: |cffC495DDEui|r
 ## Author: Ljxx.net
 ## X-Category: EUI
-## Version: R3
+## Version: R3.1
 ## OptionalDeps: EuiSet
 ## URL: http://www.ljxx.net
 ## X-oUF: EuiUF

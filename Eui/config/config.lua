@@ -34,10 +34,6 @@ DB["ui"] = {
 }
 
 DB["other"] = {
-	["nameplate"] = true, --启用姓名版 
-	["nameplateauto"] = true, --姓名版自动隐藏
-	["nameplatevalue"] = true, --显示血量
-	["nameplatetank"] = false, -- Tank模式.
 	["mail"] = true,--邮件增强
 	["cooldown"] = true,--内置计时插件
 	["tab"] = true, --专业标签
@@ -55,6 +51,13 @@ DB["other"] = {
 	["raidcheck"] = true,
 	["raidbuffreminder"] = true,
 	["bossnotes"] = true,
+}
+
+DB["nameplate"] = {
+	["enable"] = true, --启用姓名版 
+	["nameplateauto"] = true, --姓名版自动隐藏
+	["nameplatevalue"] = true, --显示血量
+	["nameplatetank"] = false, -- Tank模式.	
 }
 
 DB["chat"] = {
@@ -108,15 +111,13 @@ DB["unitframe"] = {
 	["showPvP"] = false,
 	["onlyplayer"] = false,
 	["powerspark"] = true,
---	["playerx"] = 250,
---	["playery"] = 300,
 	["playerwidth"] = 230,
 	["playerheight"] = 36,
 	["petwidth"] = 130,
 	["petheight"] = 36,
 	["totwidth"] = 130,
 	["totheight"] = 22,
-	["focuswidth"] = 100,
+	["focuswidth"] = 112,
 	["focusheight"] = 22,
 	["colorClassName"] = true,
 	["totalhpmp"] = false,
@@ -124,10 +125,10 @@ DB["unitframe"] = {
 	["playerdebuffnum"] = 0,
 	["bigcastbar"] = false,
 	["bigcastbarscale"] = 1,
---	["bigcastbarpos"] = "0/500/0/168/0/120",
 	["showpprec"] = false,
 	["targetbuffs"] = 32,
 	["targetdebuffs"] = 20,
+	["boss"] = true,
 }
 
 DB["raid"] = {
@@ -152,7 +153,6 @@ DB["raid"] = {
 	["hottime"] = true,
 	["showParty"] = true,
 	["showPartyTarget"] = true,	
-	["boss"] = true,
 	["mt"] = true,	
 	["raidtarget"] = false,
 	["hotsize"] = 12,
@@ -249,6 +249,7 @@ DB["clickset"] = {
 	["altzctrlztype5"]	= "NONE",
 	["type5"] = "NONE",
 	["enable"] = true,
+	["dispel"] = true,
 }
 
 DB["skins"] = {
@@ -257,7 +258,7 @@ DB["skins"] = {
 	["skada"] = true,
 	["recount"] = true,
 --	["font"] = true,
-	["texture"] = 1,
+	["texture"] = "EUI Statusbar-1",
 	["enable"] = true,
 }
 
@@ -280,6 +281,9 @@ E.ClickSets_Sets = {
 			["shift-type3"] = 2050, --治疗术
 			["alt-type3"] = 1706, --漂浮术
 			["ctrl-type3"] = 21562,--耐
+			["type4"] = 596, --治疗祷言
+			["shift-type4"] = 47758, -- 苦修
+			["ctrl-type4"] = 73325, -- 信仰飞跃
 	},
 	
 	DRUID = { --XD

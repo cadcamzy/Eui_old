@@ -3,13 +3,13 @@
 -- SPECIAL thanks to caelian, I relied heavly on his code
 -- modify by ljxx.net
 local E, C, L, DB = unpack(EUI)
-if C["other"].nameplate ~= true then return end
+if C["nameplate"].enable ~= true then return end
 local shNameplates = {}
 local cfg = {}
 local mediapath = [=[Interface\AddOns\Eui\media\]=]
 
 --> TEXTURE options (add your own textures here)
-	cfg.bartex = 	E.statusbar
+	cfg.bartex = 	C["skins"].texture
 	cfg.icontex = 	mediapath.."iconborder"
 
 --> BEHAVIOR options
@@ -17,7 +17,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 --	cfg.autoshow = true		--> automatically show nameplates when IN COMBAT only
 	cfg.overlap = 0			--> 0: nameplates overlap and 1: nameplates do NOT overlap
 	cfg.threatbloat = 0		--> 0: keeps nameplates consistant size and 1: makes nameplates larger depending on threat percentage
-	cfg.tankmode = C["other"].nameplatetank 	--> true: will show custom color overlay/statusbar if you HAVE aggro and false: will show RED overlay if you HAVE aggro
+	cfg.tankmode = C["nameplate"].nameplatetank 	--> true: will show custom color overlay/statusbar if you HAVE aggro and false: will show RED overlay if you HAVE aggro
 	cfg.namecolor = true	--> true: will show unit names in color of their hostility/pvp or false: will show static color given below
 	
 --> COLOR options (any RGB percent color of your choosing)
@@ -61,7 +61,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 
 --> HEALTHBAR 	
 	cfg.healthbar = {
-		showhpvalue = 	C["other"].nameplatevalue , 		--> show hp value text in healthbar if not at 100% health (always shows hp value for bosses)
+		showhpvalue = 	C["nameplate"].nameplatevalue , 		--> show hp value text in healthbar if not at 100% health (always shows hp value for bosses)
 		hpallthetime = 	false,		--> shows the hp value of the mob at all times
 		width = 		140, 		--> healthbar bar width
 		height = 		14,			--> healthbar bar height
@@ -165,7 +165,7 @@ SetCVar("bloatnameplates", cfg.threatbloat) -- 1 makes nameplates larger dependi
 SetCVar("bloatthreat", 0) -- 1 makes nameplates resize depending on threat gain/loss. Only active when a mob has multiple units on its threat table.
 
 --> Frame behavior and autotoggle
-if C["other"].nameplateauto == true then
+if C["nameplate"].nameplateauto == true then
 	shNameplates.eventFrame:RegisterEvent("PLAYER_REGEN_ENABLED")
 	function shNameplates.eventFrame:PLAYER_REGEN_ENABLED()
 		SetCVar("nameplateShowEnemies", 0)

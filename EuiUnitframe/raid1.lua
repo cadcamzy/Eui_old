@@ -2,9 +2,9 @@ local E, C, L, DB = unpack(EUI)
 local oUF = EuiUF or oUF
 if C["raid"].raid ~= true or C["unitframe"].aaaaunit ~= 1 then return end
 
-if C["skins"].texture < 0 or C["skins"].texture > 9 then C["skins"].texture = 0 end
+--if C["skins"].texture < 0 or C["skins"].texture > 9 then C["skins"].texture = 0 end
 
-local BarTexture = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+local BarTexture = C["skins"].texture
 	
 updateAllElements = function(frame)
 	for _, v in ipairs(frame.__elements) do
@@ -315,7 +315,7 @@ local function Shared(self, unit)
 	if C["clickset"].enable then
 		for key, value in pairs(C["clickset"]) do
 			key_tmp = string.gsub(key,"z","-")
-			if value ~= "NONE" and key ~= "enable" then
+			if value ~= "NONE" and key ~= "enable" and key ~= "dispel" then
 				self:SetAttribute(key_tmp, 'spell')
 				self:SetAttribute(string.gsub(key_tmp,"type",'spell'), value)
 			end
@@ -412,27 +412,6 @@ local function Shared(self, unit)
 	power.colorReaction = true
 	power.frequentUpdates = true
 
-	if unit:find("boss%d") then
-		--Alternative Power Bar
-		local altpower = CreateFrame("StatusBar", nil, health)
-		altpower:SetStatusBarTexture(BarTexture)
-		altpower:GetStatusBarTexture():SetHorizTile(false)
-		altpower:EnableMouse(true)
-		altpower:SetFrameStrata("MEDIUM")
-		altpower.PostUpdate = E.AltPowerBarPostUpdate
-		altpower.bg = altpower:CreateTexture(nil, "BORDER")
-		altpower.bg:SetAllPoints(altpower)
-		altpower.bg:SetTexture(0.3,0.3,.3)
-		altpower.bg.multiplier = 0.4
-		altpower:SetPoint("TOPLEFT", power, "BOTTOMLEFT", 0, -2)
-		altpower:SetPoint("BOTTOMRIGHT", power, "BOTTOMRIGHT", 0, -6)
-		altpower.text = altpower:CreateFontString(nil, "OVERLAY")
-		altpower.text:SetFont(E.font, 11, "THINOUTLINE")
-		altpower.text:SetPoint("CENTER")
-		altpower.text:SetJustifyH("CENTER")		
-		self.AltPowerBar = altpower	
-	end
-	
 	local panel = CreateFrame("Frame", nil, self)
 	panel:SetPoint("TOPLEFT", self, "TOPLEFT", -1, 1)
 	panel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", 1, -1)
@@ -782,26 +761,6 @@ oUF:Factory(function(self)
 			)
 		tanktarget:SetPoint("TOPLEFT", tank, "TOPRIGHT", 5, 0)
 	end
-
-	if C["raid"].boss == true then
-		for i = 1,MAX_BOSS_FRAMES do
-			local t_boss = _G["Boss"..i.."TargetFrame"]
-			t_boss:UnregisterAllEvents()
-			t_boss.Show = function() return end
-			t_boss:Hide()
-			_G["Boss"..i.."TargetFrame".."HealthBar"]:UnregisterAllEvents()
-			_G["Boss"..i.."TargetFrame".."ManaBar"]:UnregisterAllEvents()
-		end
-		local boss = {}
-		for i = 1, MAX_BOSS_FRAMES do
-			boss[i] = self:Spawn("boss"..i, "oUF_Boss"..i)
-			if i == 1 then
-				boss[i]:SetPoint("BOTTOM", UIParent, "BOTTOM", 452, 560)
-			else
-				boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 10)             
-			end
-		end
-	end	
 
 	local raid = {}
 	if C["raid"].astyle == 0 then

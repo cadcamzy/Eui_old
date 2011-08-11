@@ -3,5 +3,6 @@
 	<Script file='skins\DBM.lua' />
 	<Script file='skins\Skada.lua' />
 	<Script file='skins\Recount.lua' />
+	<Script file='skins\ace3.lua' />
 	<Include file="Blz\load_skins.xml"/>
 </Ui>
