@@ -864,7 +864,7 @@ function EuiConfig.GenerateOptionsInternal()
 								order = 15,
 								type = "range",
 								name = L["unitframe_playerheight"],
-								min = 50, max = 500, step = 2,
+								min = 10, max = 500, step = 2,
 							},	
 							petwidth = {
 								order = 16,
@@ -876,7 +876,7 @@ function EuiConfig.GenerateOptionsInternal()
 								order = 17,
 								type = "range",
 								name = L["unitframe_petheight"],
-								min = 50, max = 500, step = 2,
+								min = 10, max = 500, step = 2,
 							},	
 							totwidth = {
 								order = 18,
@@ -888,7 +888,7 @@ function EuiConfig.GenerateOptionsInternal()
 								order = 19,
 								type = "range",
 								name = L["unitframe_totheight"],
-								min = 50, max = 500, step = 2,
+								min = 10, max = 500, step = 2,
 							},	
 							focuswidth = {
 								order = 20,
@@ -900,7 +900,7 @@ function EuiConfig.GenerateOptionsInternal()
 								order = 21,
 								type = "range",
 								name = L["unitframe_focusheight"],
-								min = 50, max = 500, step = 2,
+								min = 10, max = 500, step = 2,
 							},
 						},
 					},

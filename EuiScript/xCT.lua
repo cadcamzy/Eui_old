@@ -731,7 +731,7 @@ for i = 1, numf do
     f:SetResizable(true)
  --   f:SetMinResize(64, 64)
 --    f:SetMaxResize(768, 768)
-	f:SetSize(200,300)
+	f:SetSize(100,180)
     f:SetClampedToScreen(true)
     f:SetClampRectInsets(0, 0, ct.fontsize, 0)
     if i == 1 then

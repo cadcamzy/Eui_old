@@ -5,7 +5,7 @@ RecountSkin:RegisterEvent("PLAYER_LOGIN")
 RecountSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Recount") and C["skins"].recount == true then
 		local Recount = _G.Recount
-		local TEXTURE = string.format("Interface\\AddOns\\Eui\\media\\statusbar\\%d", C["skins"].texture)
+		local TEXTURE = C["skins"].texture
 		local function SkinFrame(frame)
 			frame.bgMain = CreateFrame("Frame", nil, frame)
 			E.EuiSetTemplate(frame.bgMain)
