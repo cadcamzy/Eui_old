@@ -326,6 +326,7 @@ E.ClickSets_Sets = {
 			["alt-type3"]	= 20217,--王者
 			["shift-type3"]	= 20911,--庇護
 			["ctrl-type3"]	= 19740,--力量
+			["alt-ctrl-type3"] = 31789, -- 正义防御
 	},
 
 	WARRIOR = { --ZS
@@ -347,6 +348,7 @@ E.ClickSets_Sets = {
 
 	HUNTER = { --LR
 			["type2"]		= 34477,--"誤導",
+			["shift-type2"] = 136, --治疗宠物
 	},
 	
 	ROGUE = { --DZ
@@ -356,6 +358,7 @@ E.ClickSets_Sets = {
 	DEATHKNIGHT = {
 			["shift-type1"] = 61999, --战复
 			["type2"] = 47541, --死缠
+			["type3"] = 49016, -- 邪恶狂乱（邪恶天赋)
 	},
 }
 

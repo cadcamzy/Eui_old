@@ -105,9 +105,8 @@ local function OnEvent(self, event)
 				
 				for i = 1, numWatched do
 					local name, count, extraCurrencyType, icon, itemID = GetBackpackCurrencyInfo(i)
-					local r, g, b, hex = GetItemQualityColor(select(3, GetItemInfo(itemID)))
-
-					GameTooltip:AddDoubleLine(name, count, r, g, b, 1, 1, 1)
+				--	local r, g, b, hex = GetItemQualityColor(select(3, GetItemInfo(itemID)))
+					GameTooltip:AddDoubleLine(name, count, .31, .45, .63, 1, 1, 1)
 				end					
 			end
 			GameTooltip:Show()

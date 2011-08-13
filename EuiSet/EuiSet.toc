@@ -3,9 +3,9 @@
 ## Title-zhCN: EUI界面设置模块|cffC495DDEuiSet|r
 ## Author: Ljxx.net
 ## RequiredDeps: Eui
-## Version: 20110812A
+## Version: 20110813A
 ## X-Category: EUI
-## SavedVariablesPerCharacter: EuiConfig, FoolsDay
+## SavedVariables: EuiConfig, FoolsDay
 
 libs\load_libs.xml
 locales\zhCN.lua
