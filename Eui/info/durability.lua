@@ -209,7 +209,7 @@ local durability = CreateFrame ("Frame", nil,UIParent)
 	durability:EnableMouse(true)
 	
 local name = durability:CreateFontString (nil,"OVERLAY")
-	name:SetFont(E.fontn,13)
+	name:SetFont(C["skins"].font,13)
 	name:SetJustifyH("RIGHT")
 	name:SetShadowOffset(2,-2)
 	name:SetPoint("CENTER",0,0)

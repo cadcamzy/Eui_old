@@ -250,7 +250,7 @@ local function createAuraWatch(self,unit)
 				if icon.spellID == 974 then icon.noOCC = true end
 			
 				local count = icon:CreateFontString(nil, "OVERLAY")
-				count:SetFont(E.fontn, 8, "OUTLINE")
+				count:SetFont(C["skins"].font, 8, "OUTLINE")
 				count:SetPoint("CENTER", unpack(countOffsets[spell[2]]))
 				icon.count = count
 
@@ -275,7 +275,7 @@ local function createAuraWatch(self,unit)
 			icon.noOCC = true
 			
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(E.fontn, 8, "THINOUTLINE")
+			count:SetFont(C["skins"].font, 8, "THINOUTLINE")
 			count:SetPoint("BOTTOMRIGHT", 2, 2)
 			count:SetTextColor(1,.9,0)
 			icon.count = count
@@ -379,7 +379,7 @@ local function Shared(self, unit)
 	else
 		health.value:SetPoint("RIGHT", health, -2, 0)
 	end
-	health.value:SetFont(E.fontn, 10, "THINOUTLINE")
+	health.value:SetFont(C["skins"].font, 10, "THINOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
@@ -432,7 +432,7 @@ local function Shared(self, unit)
 	else
 		name:SetPoint("LEFT", health, 6, 1)
 	end
-	name:SetFont(E.font, 11, "THINOUTLINE")
+	name:SetFont(C["skins"].font, 11, "THINOUTLINE")
 	name:SetShadowOffset(1, -1)
 	if C["raid"].astyle == 0 then
 		self:Tag(name, "[getnamecolor][nameshort]")
@@ -467,7 +467,7 @@ local function Shared(self, unit)
  	if self:GetParent():GetName():match"oUF_MainTank" or unit:find("boss%d") then
 		self:SetAttribute('initial-height', C["raid"].gridh-10)
 		self:SetAttribute('initial-width', C["raid"].gridw+20)
-		name:SetFont(E.font, 9, "OUTLINE")
+		name:SetFont(C["skins"].font, 9, "OUTLINE")
 		name:SetPoint("CENTER",health,-2,0)
 		self:Tag(name, "[getnamecolor][nameshort] - [hpprec]")
 		health.value:ClearAllPoints()

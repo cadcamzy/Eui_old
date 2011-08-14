@@ -139,7 +139,7 @@ local function LoadSkin()
 			object.BgMiddle:SetTexture(nil)
 
 			object.Check:SetTexture(nil)
-			object.text:SetFont(E.font,12)
+			object.text:SetFont(C["skins"].font,12)
 			object.text.SetFont = E.dummy
 		end
 	end)

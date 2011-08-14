@@ -101,14 +101,14 @@ local function LoadSkin()
 			WorldMapFrameSizeUpButton:Disable()
 		end	
 		
-		WorldMapFrameAreaLabel:SetFont(E.font, 50, "OUTLINE")
+		WorldMapFrameAreaLabel:SetFont(C["skins"].font, 50, "OUTLINE")
 		WorldMapFrameAreaLabel:SetShadowOffset(2, -2)
 		WorldMapFrameAreaLabel:SetTextColor(0.90, 0.8294, 0.6407)	
 		
-		WorldMapFrameAreaDescription:SetFont(E.font, 40, "OUTLINE")
+		WorldMapFrameAreaDescription:SetFont(C["skins"].font, 40, "OUTLINE")
 		WorldMapFrameAreaDescription:SetShadowOffset(2, -2)	
 		
-		WorldMapZoneInfo:SetFont(E.font, 27, "OUTLINE")
+		WorldMapZoneInfo:SetFont(C["skins"].font, 27, "OUTLINE")
 		WorldMapZoneInfo:SetShadowOffset(2, -2)		
 	end
 	
@@ -130,8 +130,8 @@ local function LoadSkin()
 	local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
 	local fontheight = select(2, WorldMapQuestShowObjectivesText:GetFont())*1.1
 	coords:SetFrameLevel(90)
-	coords.PlayerText = E.EuiSetFontn(coords, E.font, fontheight, "THINOUTLINE")
-	coords.MouseText = E.EuiSetFontn(coords, E.font, fontheight, "THINOUTLINE")
+	coords.PlayerText = E.EuiSetFontn(coords, C["skins"].font, fontheight, "THINOUTLINE")
+	coords.MouseText = E.EuiSetFontn(coords, C["skins"].font, fontheight, "THINOUTLINE")
 	coords.PlayerText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())
 	coords.MouseText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())
 	coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapDetailFrame, "BOTTOMLEFT", 5, 5)

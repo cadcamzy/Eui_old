@@ -33,10 +33,10 @@ local ct = {
         ["healtreshold"] = 1,     -- minimum healing to show in incoming/outgoing healing messages.
 
     -- appearence
-        ["font"]           = E.font, -- "Fonts\\ARIALN.ttf" is default WoW font.
+        ["font"]           = C["skins"].font, -- "Fonts\\ARIALN.ttf" is default WoW font.
         ["fontsize"]       = 16,
         ["fontstyle"]      = "OUTLINE",                           -- valid options are "OUTLINE", "MONOCHROME", "THICKOUTLINE", "OUTLINE,MONOCHROME", "THICKOUTLINE,MONOCHROME"
-        ["damagefont"]     = E.font, -- "Fonts\\FRIZQT__.ttf" is default WoW damage font
+        ["damagefont"]     = C["skins"].font, -- "Fonts\\FRIZQT__.ttf" is default WoW damage font
         ["damagefontsize"] = "auto",                              -- size of xCT damage font. use "auto" to set it automatically depending on icon size, or use own value, 16 for example. if it's set to number value icons will change size.
         ["timevisible"]    = 3,                                   -- time (seconds) a single message will be visible. 3 is a good value.
         ["scrollable"]     = false,                               -- allows you to scroll frame lines with mousewheel.

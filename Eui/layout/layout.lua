@@ -124,7 +124,7 @@ topinfol.left = false
 topinfol.r = false
 E.EuiSetTemplate(topinfol, 1)
 E.StyleButton(topinfol)
-topinfol.text = E.EuiSetFontn(topinfol, E.font, 14)
+topinfol.text = E.EuiSetFontn(topinfol, C["skins"].font, 14)
 topinfol.text:SetTextColor(23/255,132/255,209/255)
 topinfol.text:SetText("<")
 topinfol.text:SetPoint("CENTER")
@@ -165,7 +165,7 @@ topinfor.right = false
 topinfor.r = false
 E.EuiSetTemplate(topinfor, 1)
 E.StyleButton(topinfor)
-topinfor.text = E.EuiSetFontn(topinfor, E.font, 14)
+topinfor.text = E.EuiSetFontn(topinfor, C["skins"].font, 14)
 topinfor.text:SetTextColor(23/255,132/255,209/255)
 topinfor.text:SetText(">")
 topinfor.text:SetPoint("CENTER")
@@ -251,7 +251,7 @@ local infoleftRbutton = CreateFrame("Button", "EuiInfoLeftRButton", EuiBottomInf
 infoleftRbutton:SetHighlightTexture(E.highlightTex)
 infoleftRbutton:SetPoint("TOPRIGHT", EuiBottomInfobg, "TOPRIGHT", 0, -2)
 infoleftRbutton:SetPoint("BOTTOMLEFT", EuiBottomInfobg, "BOTTOMLEFT", (C["chat"].chatw - 80), 2)
-infoleftRbutton.text = E.EuiSetFontn(infoleftRbutton, E.font, 14)
+infoleftRbutton.text = E.EuiSetFontn(infoleftRbutton, C["skins"].font, 14)
 infoleftRbutton.text:SetTextColor(23/255,132/255,209/255)
 infoleftRbutton.text:SetText("UnLock")
 infoleftRbutton.text:SetPoint("CENTER")

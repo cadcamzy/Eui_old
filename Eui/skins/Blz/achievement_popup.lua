@@ -22,9 +22,9 @@ local function LoadSkin()
 				E.Kill(_G["AchievementAlertFrame"..i.."Shine"])
 				
 				-- Text
-				_G["AchievementAlertFrame"..i.."Unlocked"]:SetFont(E.font, 12)
+				_G["AchievementAlertFrame"..i.."Unlocked"]:SetFont(C["skins"].font, 12)
 				_G["AchievementAlertFrame"..i.."Unlocked"]:SetTextColor(1, 1, 1)
-				_G["AchievementAlertFrame"..i.."Name"]:SetFont(E.font, 14)
+				_G["AchievementAlertFrame"..i.."Name"]:SetFont(C["skins"].font, 14)
 
 				-- Icon
 				_G["AchievementAlertFrame"..i.."IconTexture"]:SetTexCoord(0.08, 0.92, 0.08, 0.92)

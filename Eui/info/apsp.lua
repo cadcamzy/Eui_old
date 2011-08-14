@@ -11,7 +11,7 @@ end
 
 local int = 1
 local stat = 0
-local TextAPSP = E.EuiSetFontn(StatAPSP, E.font, 14)
+local TextAPSP = E.EuiSetFontn(StatAPSP, C["skins"].font, 14)
 --TextAPSP:SetParent(StatAPSP)
 TextAPSP:SetPoint("CENTER", StatAPSP, 0, 0)
 

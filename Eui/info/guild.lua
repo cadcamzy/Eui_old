@@ -12,7 +12,7 @@ local tthead = {r=0.4,g=0.78,b=1}
 local ttsubh = {r=0.75,g=0.9,b=1}
 	
 local name = guild:CreateFontString(nil,"OVERLAY")
-name:SetFont(E.fontn,13)
+name:SetFont(C["skins"].font,13)
 name:SetJustifyH("RIGHT")
 name:SetShadowOffset(2,-2)
 name:SetPoint("CENTER")

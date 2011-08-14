@@ -9,7 +9,7 @@ bag:SetHeight(16)
 bag:EnableMouse(true)
 
 local name = bag:CreateFontString (nil,"OVERLAY")
-name:SetFont(E.fontn,13)
+name:SetFont(C["skins"].font,13)
 name:SetJustifyH("RIGHT")
 name:SetShadowOffset(2,-2)
 --name:SetPoint("BOTTOMRIGHT",1.3,-4)

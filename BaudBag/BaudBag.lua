@@ -5,7 +5,7 @@ Option for disabling fading
 Update offline bank even when it's disabled
 Vertex color for backgrounds
 ]]
-local E, C, L = unpack(EUI)
+local E, C, L, DB = unpack(EUI)
 --[[ defining variables for the events ]]--
 local Localized = BaudBagLocalized;
 
@@ -895,7 +895,9 @@ function BaudBagUpdateBackground(Container)
 			});
 			Backdrop:SetBackdropColor(0.1,0.1,0.1,.7)
 			if C["main"].classcolortheme == true then
-				local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+				local r = C["main"]["classcolorcustom"].r
+				local g = C["main"]["classcolorcustom"].g
+				local b = C["main"]["classcolorcustom"].b
 				Backdrop:SetBackdropBorderColor(r, g, b,1)
 			else
 				Backdrop:SetBackdropBorderColor(0.31, 0.45, 0.63,1)
@@ -1854,7 +1856,9 @@ function BaudBagSearchButton_Click(self, event, ...)
 			});
 			Backdrop:SetBackdropColor(0.1,0.1,0.1,.7)
 			if C["main"].classcolortheme == true then
-				local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+				local r = C["main"]["classcolorcustom"].r
+				local g = C["main"]["classcolorcustom"].g
+				local b = C["main"]["classcolorcustom"].b
 				Backdrop:SetBackdropBorderColor(r, g, b,1)
 			else
 				Backdrop:SetBackdropBorderColor(0.31, 0.45, 0.63,1)

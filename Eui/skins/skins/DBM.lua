@@ -109,7 +109,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 							name:SetPoint("BOTTOMLEFT", frame, "TOPLEFT", 4, 2)
 							name:SetWidth(165)
 							name:SetHeight(11)
-							name:SetFont(E.font, 11, "OUTLINE")
+							name:SetFont(C["skins"].font, 11, "OUTLINE")
 						--	name:SetShadowOffset(false and 1 or 0, false and -1 or 0)
 							name:SetShadowOffset(1, -1)
 							name:SetJustifyH("LEFT")
@@ -121,7 +121,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 						if not timer.styled then	
 							timer:ClearAllPoints()
 							timer:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2)
-							timer:SetFont(E.font, 11, "OUTLINE")
+							timer:SetFont(C["skins"].font, 11, "OUTLINE")
 						--	timer:SetShadowOffset(false and 1 or 0, false and -1 or 0)
 							timer:SetShadowOffset(1, -1)
 							timer:SetJustifyH("RIGHT")
@@ -148,7 +148,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 			if not anchor.styled then
 				local header = {anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
-					header[1]:SetFont(E.font, 11, "OUTLINE")
+					header[1]:SetFont(C["skins"].font, 11, "OUTLINE")
 					header[1]:SetShadowOffset(false and 1 or 0, false and -1 or 0)
 					header[1]:SetTextColor(1, 1, 1, 1)
 					anchor.styled = true	
@@ -217,7 +217,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 				if not name.styled then
 					name:ClearAllPoints()
 					name:SetPoint("LEFT", bar, "LEFT", 4, 0)
-					name:SetFont(E.font, 11, "OUTLINEMONOCHROME")
+					name:SetFont(C["skins"].font, 11, "OUTLINEMONOCHROME")
 					name:SetShadowOffset(false and 1 or 0, false and -1 or 0)
 					name:SetJustifyH("LEFT")
 					name.styled = true
@@ -226,7 +226,7 @@ DBMSkin:SetScript("OnEvent", function(self, event, addon)
 				if not timer.styled then
 					timer:ClearAllPoints()
 					timer:SetPoint("RIGHT", bar, "RIGHT", -1, 0)
-					timer:SetFont(E.font, 11, "OUTLINEMONOCHROME")
+					timer:SetFont(C["skins"].font, 11, "OUTLINEMONOCHROME")
 					timer:SetShadowOffset(false and 1 or 0, false and -1 or 0)
 					timer:SetJustifyH("RIGHT")
 					timer.styled = true
@@ -281,7 +281,7 @@ local function EuiUploadDBM()
 	DBM_SavedOptions.RangeFrameX = 244
 	DBM_SavedOptions.RangeFramePoint = "LEFT"
 	DBM_SavedOptions.ShowSpecialWarnings = true
-	DBM_SavedOptions.SpecialWarningFont = E.fontn
+	DBM_SavedOptions.SpecialWarningFont = C["skins"].font
 	DBM_SavedOptions.SpecialWarningFontSize = 50
 	DBM_SavedOptions.SpecialWarningX = 0
 	DBM_SavedOptions.SpecialWarningY = 75
@@ -298,7 +298,7 @@ local function EuiUploadDBM()
 	DBT_SavedOptions["DBM"].HugeScale = 1
 	DBT_SavedOptions["DBM"].BarXOffset = 0
 	DBT_SavedOptions["DBM"].BarYOffset = 7
-	DBT_SavedOptions["DBM"].Font = E.fontn
+	DBT_SavedOptions["DBM"].Font = C["skins"].font
 	DBT_SavedOptions["DBM"].FontSize = 11
 	DBT_SavedOptions["DBM"].Width = 189
 	DBT_SavedOptions["DBM"].TimerX = 143

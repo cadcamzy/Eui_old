@@ -72,7 +72,7 @@ do
 		E.EuiCreateShadow(panel)
 
 		local text = frame:CreateFontString(nil, 'OVERLAY')
-		text:SetFont(E.font, 12, "OUTLINE")
+		text:SetFont(C["skins"].font, 12, "OUTLINE")
 		text:SetShadowOffset(0,0)
 		text:SetShadowColor(0, 0, 0, 1)
 

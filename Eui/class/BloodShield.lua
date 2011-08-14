@@ -3,7 +3,7 @@ if E.MyClass ~= "DEATHKNIGHT" or C["class"].dk ~= true then return end
 
 local BS_SPELL = (GetSpellInfo(77535))
 local bs = CreateFrame("Frame", nil, UIParent)
-bs.text = E.EuiSetFontn(bs, E.font, 14)
+bs.text = E.EuiSetFontn(bs, C["skins"].font, 14)
 bs.text:SetPoint("BOTTOMLEFT",bs,"TOPLEFT",0, 2)
 bs.text:SetText("")
 

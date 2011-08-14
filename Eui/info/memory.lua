@@ -7,7 +7,7 @@ memory:SetHeight(16)
 memory:EnableMouse(true)
 
 local name = memory:CreateFontString (nil,"OVERLAY")
-name:SetFont(E.fontn,13)
+name:SetFont(C["skins"].font,13)
 name:SetJustifyH("RIGHT")
 name:SetShadowOffset(2,-2)
 name:SetPoint("CENTER")

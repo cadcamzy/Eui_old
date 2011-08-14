@@ -51,7 +51,7 @@ local function CreateButton(name, parent, template, width, height, point, relati
 	E.EuiSetTemplate(b)
 	if text then
 		local t = b:CreateFontString(nil,"OVERLAY",b)
-		t:SetFont(E.font,12)
+		t:SetFont(C["skins"].font,12)
 		t:SetPoint("CENTER")
 		t:SetJustifyH("CENTER")
 		t:SetText(text)

@@ -165,7 +165,7 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 	if not self.text then
 		self.text = self:CreateFontString(nil, "OVERLAY")
 		self.text:SetPoint("CENTER", GameTooltipStatusBar, 0, E.Scale(-3))
-		self.text:SetFont(E.font, 11, "THINOUTLINE")
+		self.text:SetFont(C["skins"].font, 11, "THINOUTLINE")
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)

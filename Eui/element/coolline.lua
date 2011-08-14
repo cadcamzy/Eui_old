@@ -105,7 +105,7 @@ function CoolLine:ADDON_LOADED(a1)
 	
 	createfs = function(f, text, offset, just)
 		local fs = f or self.overlay:CreateFontString(nil, "OVERLAY")
-		fs:SetFont(E.fontc, db.fontsize)
+		fs:SetFont(C["skins"].font, db.fontsize)
 		fs:SetTextColor(db.fontcolor.r, db.fontcolor.g, db.fontcolor.b, db.fontcolor.a)
 		fs:SetText(text)
 		fs:SetWidth(db.fontsize * 3)

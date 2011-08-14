@@ -16,7 +16,7 @@ euithreatframetop:SetWidth(C["threat"].width+ E.Scale(4))
 euithreatframetop:SetHeight(C["threat"].height+ E.Scale(4))
 E.EuiSetTemplate(euithreatframetop,1)
 euithreatframetop.text = euithreatframetop:CreateFontString(nil,"OVERLAY")
-euithreatframetop.text:SetFont(E.fontn,12,"OUTLINE")
+euithreatframetop.text:SetFont(C["skins"].font,12,"OUTLINE")
 euithreatframetop.text:SetPoint("LEFT", euithreatframetop, "LEFT", 2, 0)
 euithreatframetop.text:SetText(L.THREAT_TIP1)
 euithreatframetop.text:SetShadowOffset(1,-1)
@@ -165,7 +165,7 @@ local function UpdateThreatBars()
 			E.EuiSetTemplate(panel)
 
 			bar.textright = bar:CreateFontString("$parentTextRight", "ARTWORK");
-			bar.textright:SetFont(E.fontn, 10, "OUTLINE");
+			bar.textright:SetFont(C["skins"].font, 10, "OUTLINE");
 			bar.textright:SetShadowOffset(0, 0);
 			bar.textright:SetShadowColor(0, 0, 0, 0.8);
 			bar.textright:SetJustifyH("RIGHT");
@@ -173,7 +173,7 @@ local function UpdateThreatBars()
 			bar.textright:SetTextColor(1, 1, 1, 1);
 			
 			bar.textleft = bar:CreateFontString("$parentTextLeft", "ARTWORK");
-			bar.textleft:SetFont(E.font, 11);
+			bar.textleft:SetFont(C["skins"].font, 11);
 			bar.textleft:SetShadowOffset(1, -1);
 			bar.textleft:SetShadowColor(0, 0, 0, 0.8);
 			bar.textleft:SetJustifyH("LEFT");

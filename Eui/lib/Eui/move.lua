@@ -83,7 +83,7 @@ local function CreateMover(parent, name, text, overlay, postdrag)
 	end
 	
 	local fs = f2:CreateFontString(nil, "OVERLAY")
-	fs:SetFont(E.font, 11, "THINOUTLINE")
+	fs:SetFont(C["skins"].font, 11, "THINOUTLINE")
 	fs:SetShadowOffset(E.mult*1.2, -E.mult*1.2)
 	fs:SetJustifyH("CENTER")
 	fs:SetPoint("CENTER")

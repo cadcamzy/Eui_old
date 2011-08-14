@@ -260,7 +260,7 @@ local PostCreateIcon = function(Auras, button)
 	
 	button.count:SetPoint("BOTTOMRIGHT", 1, 0)
 	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(E.font, 10, "THICKOUTLINE")
+	button.count:SetFont(C["skins"].font, 10, "THICKOUTLINE")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 			
 	button.overlayFrame = CreateFrame("frame", nil, button, nil)
@@ -273,7 +273,7 @@ local PostCreateIcon = function(Auras, button)
 	button.count:SetParent(button.overlayFrame)
 	
 	button.remaining = button:CreateFontString(nil, "ARTWORK");
-	button.remaining:SetFont(E.fontn, 13, "OUTLINE");	
+	button.remaining:SetFont(C["skins"].font, 13, "OUTLINE");	
 	button.remaining:SetPoint("CENTER", 0 , 2)
 	
 	button.Glow = CreateFrame("Frame", nil, button)
@@ -555,32 +555,32 @@ local Shared = function(self, unit, isSingle)
 		self.RaidIcon = RaidIcon
 	end
 	local info = self.Health:CreateFontString(nil, 'OVERLAY')
-	info:SetFont(E.font, fontsize, "OUTLINE")
+	info:SetFont(C["skins"].font, fontsize, "OUTLINE")
 	info:SetHeight(18)
 	info:SetJustifyH('CENTER')
 	info.frequentUpdates = 0.1
 	
 	local infoL = self.Health:CreateFontString(nil, 'OVERLAY')
-	infoL:SetFont(E.font, 16, "OUTLINE")
+	infoL:SetFont(C["skins"].font, 16, "OUTLINE")
 	infoL:SetHeight(24)
 	infoL:SetJustifyH('LEFT')
 	infoL.frequentUpdates = 0.1
 	
 	local infoR = self.Health:CreateFontString(nil, 'OVERLAY')
-	infoR:SetFont(E.font, 16, "OUTLINE")
+	infoR:SetFont(C["skins"].font, 16, "OUTLINE")
 	infoR:SetHeight(24)
 	infoR:SetJustifyH('RIGHT')
 	infoR.frequentUpdates = 0.1
 	
 		
 	local value = self.Health:CreateFontString(nil, 'OVERLAY')
-	value:SetFont(E.font, 14, "OUTLINE")
+	value:SetFont(C["skins"].font, 14, "OUTLINE")
 	value:SetHeight(18)
 	value:SetJustifyH('LEFT')
 	value.frequentUpdates = 0.1
 
 	local valuepp = self.Health:CreateFontString(nil, 'OVERLAY')
-	valuepp:SetFont(E.font, 14, "OUTLINE")
+	valuepp:SetFont(C["skins"].font, 14, "OUTLINE")
 	valuepp:SetHeight(18)
 	valuepp:SetJustifyH('RIGHT')
 	valuepp.frequentUpdates = 0.1	
@@ -758,12 +758,12 @@ local Shared = function(self, unit, isSingle)
 
 			self.Castbar.Text = self.Castbar:CreateFontString(nil, 'OVERLAY')
 			if unit == 'focus' and C["unitframe"].bigcastbar ~= true then
-				self.Castbar.Text:SetFont(E.font, fontsizesmall, "OUTLINE")
+				self.Castbar.Text:SetFont(C["skins"].font, fontsizesmall, "OUTLINE")
 				self.Castbar.Text:SetHeight(18)
 				self.Castbar.Text:SetJustifyH('LEFT')
 				self.Castbar.Text:SetPoint('LEFT', self.Castbar, 4, 0)
 			else
-				self.Castbar.Text:SetFont(E.font, fontsize, "OUTLINE")
+				self.Castbar.Text:SetFont(C["skins"].font, fontsize, "OUTLINE")
 				self.Castbar.Text:SetHeight(18)				
 			end
 			
@@ -785,7 +785,7 @@ local Shared = function(self, unit, isSingle)
 			end
 		
 			self.Castbar.Time = self.Castbar:CreateFontString(nil, 'OVERLAY')
-			self.Castbar.Time:SetFont(E.font, fontsizesmall, "OUTLINE")
+			self.Castbar.Time:SetFont(C["skins"].font, fontsizesmall, "OUTLINE")
 			self.Castbar.Time:SetHeight(18)
 			self.Castbar.Time:SetJustifyH('RIGHT')		
 			self.Castbar.Time:SetPoint("RIGHT", self.Castbar, -4, 0)

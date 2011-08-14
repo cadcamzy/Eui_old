@@ -5,7 +5,7 @@ if not C["other"].map == true then return end
 WORLDMAP_WINDOWED_SIZE = C["other"].mapscale --Slightly increase the size of blizzard small map
 local mapscale = WORLDMAP_WINDOWED_SIZE
 
-local ft = E.font -- Map font
+local ft = C["skins"].font -- Map font
 local fontsize = 22 -- Map Font Size
 
 local mapbg = CreateFrame("Frame", nil, WorldMapDetailFrame)
@@ -247,8 +247,8 @@ local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
 local fontheight = select(2, WorldMapQuestShowObjectivesText:GetFont())*1.1
 coords.PlayerText = coords:CreateFontString(nil, "OVERYLAY")
 coords.MouseText = coords:CreateFontString(nil, "OVERLAY")
-coords.PlayerText:SetFont(E.font, fontheight, "THINOUTLINE")
-coords.MouseText:SetFont(E.font, fontheight, "THINOUTLINE")
+coords.PlayerText:SetFont(C["skins"].font, fontheight, "THINOUTLINE")
+coords.MouseText:SetFont(C["skins"].font, fontheight, "THINOUTLINE")
 coords.PlayerText:SetShadowOffset(E.mult, -E.mult)
 coords.MouseText:SetShadowOffset(E.mult, -E.mult)
 coords.PlayerText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())

@@ -12,9 +12,6 @@ local FONT_SIZE = 20 --the base font size to use at a scale of 1
 local MIN_SCALE = 0.2 --the minimum scale we want to show cooldown counts at, anything below this will be hidden
 local MIN_DURATION = 3 --the minimum duration to show cooldown text for
 local DAY, HOUR, MINUTE = 86400, 3600, 60
-if C["filter"].float == true then
-	E.fontc = [[Interface\AddOns\Eui\media\fontc.ttf]]
-end
 --omg speed
 local format = string.format
 local floor = math.floor
@@ -79,9 +76,9 @@ local function Timer_Create(self)
 		text:SetPoint('CENTER', 0, 1)
 
 		if FONT_SIZE * scale < 9 then 
-			text:SetFont(E.fontp, 9, 'OUTLINE')
+			text:SetFont(C["skins"].cdfont, 9, 'OUTLINE')
 		else
-			text:SetFont(E.fontp, FONT_SIZE * scale, 'OUTLINE')
+			text:SetFont(C["skins"].cdfont, FONT_SIZE * scale, 'OUTLINE')
 		end
 		
 		text:SetTextColor(1,.9,0)

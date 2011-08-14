@@ -81,7 +81,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 --> CASTTIME
 	cfg.casttime = {
 		--> Cast time options
-		font = 		E.font, 		--> cast time font
+		font = 		C["skins"].font, 		--> cast time font
 		fontSize = 	9, 							--> cast time font size
 		fontFlag =  "THINOUTLINE",					--> cast time font flag
 		alpha = 	0.85,							--> alpha of cast time	
@@ -93,7 +93,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 	
 --> SPELL NAME text attributes
 	cfg.spellname = {
-		font =		E.font,		--> spell name font
+		font =		C["skins"].font,		--> spell name font
 		fontSize =	9,								--> spell name font size
 		fontFlag = 	"THINOUTLINE",					--> spell name font flag
 		color = 	{ 1, 1, 1 },					--> spell name color
@@ -105,7 +105,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 	
 --> NAME text attributes
 	cfg.name = {
-		font = 		E.font, 
+		font = 		C["skins"].font, 
 		fontSize = 	11,	
 		fontFlag =  "THINOUTLINE",
 		color = 	{ 0.9, 0.8, 0.7 },	
@@ -119,7 +119,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 	
 --> LEVEL text attributes
 	cfg.level = {
-		font = 		E.font, 
+		font = 		C["skins"].font, 
 		fontSize = 	11,
 		fontFlag = 	"OUTLINE",
 		alpha = 	0.9,
@@ -131,7 +131,7 @@ local mediapath = [=[Interface\AddOns\Eui\media\]=]
 		
 --> HEALTH text attributes
 	cfg.health = {
-		font = 		E.font, 
+		font = 		C["skins"].font, 
 		fontSize = 	11,
 		fontFlag = 	"THINOUTLINE", 
 		color = 	{ 1, 1, 1 }, 

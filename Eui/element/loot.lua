@@ -87,7 +87,7 @@ local createSlot = function(id)
 	count:ClearAllPoints()
 	count:SetJustifyH"RIGHT"
 	count:SetPoint("BOTTOMRIGHT", iconFrame, -E.Scale(1), E.Scale(2))
-	count:SetFont(E.fontn, 10, "OUTLINE")
+	count:SetFont(C["skins"].font, 10, "OUTLINE")
 	count:SetShadowOffset(.8, -.8)
 	count:SetShadowColor(0, 0, 0, 1)
 	count:SetText(1)

@@ -43,15 +43,15 @@ end
 local f = CreateFrame("Frame")
 f:RegisterEvent("ADDON_LOADED")
 f:SetScript("OnEvent", function()
-	local Normal = STANDARD_TEXT_FONT
---	local fontn = [[Interface\AddOns\Eui\media\fontn.ttf]]
-	local fontn = STANDARD_TEXT_FONT
+	local E, C, L, DB = unpack(EUI)
+	
+	local Normal = C["skins"].font or STANDARD_TEXT_FONT
 	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
 	
 	-- Game engine fonts
 	UNIT_NAME_FONT     = Normal
 	NAMEPLATE_FONT     = Normal
---	DAMAGE_TEXT_FONT   = Normal
+	DAMAGE_TEXT_FONT   = C["skins"].dmgfont or Normal
 	STANDARD_TEXT_FONT = Normal
 
 	-- Base fonts
@@ -62,7 +62,7 @@ f:SetScript("OnEvent", function()
 	SetFont(NumberFont_OutlineThick_Mono_Small, Normal, 13, "OUTLINE")
 	SetFont(NumberFont_Outline_Huge,            Normal, 30, "THICKOUTLINE", 30)
 	SetFont(NumberFont_Outline_Large,           Normal, 15, "OUTLINE")		--任务奖励部分数字
-	SetFont(NumberFont_Outline_Med,             fontn, 	11, "OUTLINE")		--背包堆叠数字
+	SetFont(NumberFont_Outline_Med,             Normal,	11, "OUTLINE")		--背包堆叠数字
 	SetFont(NumberFont_Shadow_Med,              Normal, 14)
 	SetFont(NumberFont_Shadow_Small,            Normal, 12)
 	SetFont(QuestFont_Large,                    Normal, 16)

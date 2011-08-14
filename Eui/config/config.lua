@@ -260,6 +260,9 @@ DB["skins"] = {
 --	["font"] = true,
 	["texture"] = "EUI Statusbar-1",
 	["enable"] = true,
+	["font"] = "EUI font",
+	["dmgfont"] = "EUI dmgfont",
+	["cdfont"] = "EUI cdfont",
 }
 
 DB["class"] = {

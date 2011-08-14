@@ -7,7 +7,7 @@ setting:SetHeight(16)
 --setting:SetBackdropColor(.7,.7,.9,.2)
 
 local name = setting:CreateFontString (nil,"OVERLAY")
-name:SetFont(E.fontn,13)
+name:SetFont(C["skins"].font,13)
 name:SetJustifyH("RIGHT")
 name:SetShadowOffset(2,-2)
 name:SetPoint("CENTER")

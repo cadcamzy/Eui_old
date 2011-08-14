@@ -57,7 +57,7 @@ do
 		_G["EuiVehicleHotkey"..i] = _G["VehicleMenuBarActionButton"..i]:CreateFontString("EuiVehicleHotkey"..i, "OVERLAY", nil)
 		_G["EuiVehicleHotkey"..i]:ClearAllPoints()
 		_G["EuiVehicleHotkey"..i]:SetPoint("TOPRIGHT", 0, E.Scale(-3))
-		_G["EuiVehicleHotkey"..i]:SetFont(E.font, 14, "OUTLINE")
+		_G["EuiVehicleHotkey"..i]:SetFont(C["skins"].font, 14, "OUTLINE")
 		_G["EuiVehicleHotkey"..i].ClearAllPoints = E.dummy
 		_G["EuiVehicleHotkey"..i].SetPoint = E.dummy
 		

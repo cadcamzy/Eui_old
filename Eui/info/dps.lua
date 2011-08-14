@@ -16,7 +16,7 @@ if C["info"].dps == 1 then
 
     local pet_id = UnitGUID("pet")
      
-	local Text = E.EuiSetFontn(StatDPS, E.font, 14)
+	local Text = E.EuiSetFontn(StatDPS, C["skins"].font, 14)
     Text:SetText("0.0")
 	
 	Text:SetPoint("CENTER", StatDPS, 0, 0)
@@ -109,7 +109,7 @@ if C["info"].dps == 2 then
 	local player_id = UnitGUID("player")
 	local actual_heals_total, cmbt_time = 0
  
-	local hText = E.EuiSetFontn(StatDPS, E.font, 14)
+	local hText = E.EuiSetFontn(StatDPS, C["skins"].font, 14)
 	hText:SetText("0.0")
 	hText:SetPoint("CENTER", StatDPS, 0, 0)
  

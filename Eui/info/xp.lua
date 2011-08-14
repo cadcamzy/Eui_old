@@ -8,7 +8,7 @@ xp:SetHeight(16)
 xp:EnableMouse(true)
 
 local name = xp:CreateFontString (nil,"OVERLAY")
-name:SetFont(E.fontn,13)
+name:SetFont(C["skins"].font,13)
 name:SetJustifyH("RIGHT")
 name:SetPoint("CENTER")
 --name:SetTextColor(23/255,132/255,209/255)

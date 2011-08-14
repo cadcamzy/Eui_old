@@ -22,3 +22,21 @@ if IsAddOnLoaded("EuiSet") then
 	end
 	
 end
+
+local LSM = LibStub("LibSharedMedia-3.0")
+if LSM ~= nil then
+	LSM:Register("statusbar","EUI Statusbar-0", [[Interface\AddOns\Eui\media\statusbar\0.tga]])
+	LSM:Register("statusbar","EUI Statusbar-1", [[Interface\AddOns\Eui\media\statusbar\1.tga]])
+	LSM:Register("statusbar","EUI Statusbar-2", [[Interface\AddOns\Eui\media\statusbar\2.tga]])
+	LSM:Register("statusbar","EUI Statusbar-3", [[Interface\AddOns\Eui\media\statusbar\3.tga]])
+	LSM:Register("statusbar","EUI Statusbar-4", [[Interface\AddOns\Eui\media\statusbar\4.tga]])
+	LSM:Register("statusbar","EUI Statusbar-5", [[Interface\AddOns\Eui\media\statusbar\5.tga]])
+	LSM:Register("statusbar","EUI Statusbar-6", [[Interface\AddOns\Eui\media\statusbar\6.tga]])
+	LSM:Register("statusbar","EUI Statusbar-7", [[Interface\AddOns\Eui\media\statusbar\7.tga]])
+	LSM:Register("statusbar","EUI Statusbar-8", [[Interface\AddOns\Eui\media\statusbar\8.tga]])
+	LSM:Register("statusbar","EUI Statusbar-9", [[Interface\AddOns\Eui\media\statusbar\9.tga]])
+	
+	LSM:Register("font","EUI cdfont", [[Interface\Addons\Eui\media\ROADWAY.ttf]],255)
+	LSM:Register("font","EUI dmgfont", [[Fonts\FRIZQT__.ttf]],255)
+	LSM:Register("font","EUI font", [[Fonts\ARIALN.ttf]],255)
+end

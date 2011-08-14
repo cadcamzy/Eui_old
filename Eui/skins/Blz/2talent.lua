@@ -109,7 +109,7 @@ local function LoadSkin()
 		end
 		
 		if button.Rank then
-			button.Rank:SetFont(E.font, 12, "THINOUTLINE")
+			button.Rank:SetFont(C["skins"].font, 12, "THINOUTLINE")
 			button.Rank:ClearAllPoints()
 			button.Rank:SetPoint("BOTTOMRIGHT")
 		end
@@ -203,14 +203,14 @@ local function LoadSkin()
 			E.StripTextures(button)
 		end
 		
-		_G["PlayerTalentFramePanel"..i.."HeaderIconPointsSpent"]:SetFont(E.font, 12, "THINOUTLINE")
+		_G["PlayerTalentFramePanel"..i.."HeaderIconPointsSpent"]:SetFont(C["skins"].font, 12, "THINOUTLINE")
 
 		if icon then
 			icon:SetTexCoord(.08, .92, .08, .92)
 			button:SetFrameLevel(button:GetFrameLevel() +1)
 			button:ClearAllPoints()
 			button:SetPoint("TOPLEFT",panel,"TOPLEFT", 4, -4)
-			text:SetFont(E.font, 12, "THINOUTLINE")
+			text:SetFont(C["skins"].font, 12, "THINOUTLINE")
 			text:SetPoint("BOTTOMRIGHT",button, "BOTTOMRIGHT", -1, 2)
 			local frame = CreateFrame("Frame",nil, button)
 			E.EuiCreateBackdrop(frame)
@@ -269,7 +269,7 @@ local function LoadSkin()
 			button:SetFrameLevel(button:GetFrameLevel() +1)
 			button:ClearAllPoints()
 			button:SetPoint("TOPLEFT",panel,"TOPLEFT", 5, -5)
-			local text = E.EuiSetFontn(button, E.font, 12, "THINOUTLINE")
+			local text = E.EuiSetFontn(button, C["skins"].font, 12, "THINOUTLINE")
 			text:SetPoint("BOTTOMRIGHT",button, "BOTTOMRIGHT", -1, 2)
 			text:SetText(pointsSpent)
 			local frame = CreateFrame("Frame",nil, button)
@@ -304,7 +304,7 @@ local function LoadSkin()
 			button:SetFrameLevel(button:GetFrameLevel() +1)
 			button:ClearAllPoints()
 			button:SetPoint("BOTTOMLEFT",panel,"TOPLEFT", 0, 10)
-			local text = E.EuiSetFontn(button, E.font, 12, "THINOUTLINE")
+			local text = E.EuiSetFontn(button, C["skins"].font, 12, "THINOUTLINE")
 			text:SetPoint("TOPRIGHT",button, "TOPRIGHT", 0, -10)
 			text:SetText(diet)
 			local frame = CreateFrame("Frame",nil, button)
@@ -325,7 +325,7 @@ local function LoadSkin()
 		end
 		
 		if button.Rank then
-			button.Rank:SetFont(E.font, 12, "THINOUTLINE")
+			button.Rank:SetFont(C["skins"].font, 12, "THINOUTLINE")
 			button.Rank:ClearAllPoints()
 			button.Rank:SetPoint("BOTTOMRIGHT")
 		end

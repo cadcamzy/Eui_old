@@ -42,26 +42,19 @@ E.highlightTex = [[Interface\AddOns\Eui\media\highlightTex]]
 E.borderTex = [[Interface\AddOns\Eui\media\border]]
 E.blank = [[Interface\AddOns\Eui\media\blank]]
 E.gray = [[Interface\AddOns\Eui\media\gray]]
-local LSM = LibStub("LibSharedMedia-3.0")
-if LSM ~= nil then
-	LSM:Register("statusbar","EUI Statusbar-0", [[Interface\AddOns\Eui\media\statusbar\0.tga]])
-	LSM:Register("statusbar","EUI Statusbar-1", [[Interface\AddOns\Eui\media\statusbar\1.tga]])
-	LSM:Register("statusbar","EUI Statusbar-2", [[Interface\AddOns\Eui\media\statusbar\2.tga]])
-	LSM:Register("statusbar","EUI Statusbar-3", [[Interface\AddOns\Eui\media\statusbar\3.tga]])
-	LSM:Register("statusbar","EUI Statusbar-4", [[Interface\AddOns\Eui\media\statusbar\4.tga]])
-	LSM:Register("statusbar","EUI Statusbar-5", [[Interface\AddOns\Eui\media\statusbar\5.tga]])
-	LSM:Register("statusbar","EUI Statusbar-6", [[Interface\AddOns\Eui\media\statusbar\6.tga]])
-	LSM:Register("statusbar","EUI Statusbar-7", [[Interface\AddOns\Eui\media\statusbar\7.tga]])
-	LSM:Register("statusbar","EUI Statusbar-8", [[Interface\AddOns\Eui\media\statusbar\8.tga]])
-	LSM:Register("statusbar","EUI Statusbar-9", [[Interface\AddOns\Eui\media\statusbar\9.tga]])
-end
-C["skins"].texture = LSM:Fetch("statusbar", C["skins"].texture)
-
 E.backdrop = {
 	bgFile = E.normTex,
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
+local LSM = LibStub("LibSharedMedia-3.0")
+if LSM ~= nil then
+	C["skins"].texture = LSM:Fetch("statusbar", C["skins"].texture)
 
+	---------------------------------------------------- Fonts
+	C["skins"].font = LSM:Fetch("font", C["skins"].font)
+	C["skins"].dmgfont = LSM:Fetch("font", C["skins"].dmgfont)
+	C["skins"].cdfont = LSM:Fetch("font", C["skins"].cdfont)
+end
 E.utf8sub = function(string, i, dots)
 	if not string then return end
 	local bytes = string:len()
@@ -96,18 +89,10 @@ end
 
 E.EuiGradient = {.26,.26,.26,.14,.21,.21,.21,.5}
 
----------------------------------------------------- Fonts
-
-E.font = STANDARD_TEXT_FONT
---fontc = [[Interface\AddOns\Eui\media\fontc.ttf]]
---fontn = [[Interface\AddOns\Eui\media\fontn.ttf]]
-E.fontc = STANDARD_TEXT_FONT
-E.fontn = STANDARD_TEXT_FONT
-E.fontp = "Interface\\Addons\\Eui\\media\\ROADWAY.ttf"
 ---------------------------------------------------- EuiSetFontn
 
 E.EuiSetFontn = function(parent, fontName, fontHeight, fontStyle)		-- 信息及Coolline数字字体
-	fontName = fontName or E.fontn
+	fontName = fontName or C["skins"].font
 	fontHeight = fontHeight or 10
 	fontStyle = fontStyle or "OUTLINE"
 	local fs = parent:CreateFontString(nil, "OVERLAY")
@@ -470,13 +455,13 @@ local flowingframe = CreateFrame("Frame",nil,UIParent)
 	
 local flowingtext = flowingframe:CreateFontString(nil,"OVERLAY")
 	flowingtext:SetPoint("Left")
-	flowingtext:SetFont(E.font,20,"OUTLINE")
+	flowingtext:SetFont(C["skins"].font,20,"OUTLINE")
 	flowingtext:SetShadowOffset(0,0)
 	flowingtext:SetJustifyH("LEFT")
 	
 local rightchar = flowingframe:CreateFontString(nil,"OVERLAY")
 	rightchar:SetPoint("LEFT",flowingtext,"RIGHT")
-	rightchar:SetFont(E.font,50,"OUTLINE")
+	rightchar:SetFont(C["skins"].font,50,"OUTLINE")
 	rightchar:SetShadowOffset(0,0)
 	rightchar:SetJustifyH("LEFT")
 

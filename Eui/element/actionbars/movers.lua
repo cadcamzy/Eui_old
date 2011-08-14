@@ -33,7 +33,7 @@ local function CreateMoverButton(name, text)
 	tinsert(btnnames, tostring(name))
 	
 	local t = b:CreateFontString(nil, "OVERLAY", b)
-	t:SetFont(E.font,14,"THINOUTLINE")
+	t:SetFont(C["skins"].font,14,"THINOUTLINE")
 	t:SetShadowOffset(E.mult, -E.mult)
 	t:SetShadowColor(0, 0, 0)
 	t:SetPoint("CENTER")

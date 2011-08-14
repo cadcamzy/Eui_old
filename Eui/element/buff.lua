@@ -41,7 +41,7 @@ for i = 1, 3 do
 	_G["TempEnchant"..i]:SetWidth(E.Scale(30))	
 	_G["TempEnchant"..i.."Duration"]:ClearAllPoints()
 	_G["TempEnchant"..i.."Duration"]:SetPoint("BOTTOM", 0, E.Scale(-13))
-	_G["TempEnchant"..i.."Duration"]:SetFont(E.font, 12, "THINOUTLINE")
+	_G["TempEnchant"..i.."Duration"]:SetFont(C["skins"].cdfont, 12, "THINOUTLINE")
 end
 
 local function StyleBuffs(buttonName, index, debuff)
@@ -60,12 +60,12 @@ local function StyleBuffs(buttonName, index, debuff)
 				
 		duration:ClearAllPoints()
 		duration:SetPoint("BOTTOM", 0, E.Scale(-13))
-		duration:SetFont(E.font, 12, "THINOUTLINE")
+		duration:SetFont(C["skins"].cdfont, 12, "THINOUTLINE")
 		duration:SetShadowColor(0,0,0,0)
 		
 		count:ClearAllPoints()
 		count:SetPoint("TOPLEFT", E.Scale(1), E.Scale(-2))
-		count:SetFont(E.font, 12, "OUTLINE")
+		count:SetFont(C["skins"].cdfont, 12, "OUTLINE")
 		
 		local panel = CreateFrame("Frame", buttonName..index.."Panel", buff)
 		E.EuiCreatePanel(panel, 30, 30, "CENTER", buff, "CENTER", 0, 0)

@@ -98,7 +98,7 @@ function Update(self)
 			end
 			if ( self.Mode == "ICON" ) then
 				bar.count = bar:CreateFontString(nil, "ARTWORK");
-				bar.count:SetFont(E.fontp, 12, "OUTLINE");
+				bar.count:SetFont(C["skins"].cdfont, 12, "OUTLINE");
 				bar.count:SetPoint("BOTTOMRIGHT",0,1);
 				bar.count:SetJustifyH("RIGHT");
 
@@ -136,17 +136,17 @@ function Update(self)
 				E.EuiCreateShadow(panel)
 				
 				bar.time = bar.statusbar:CreateFontString(nil, "ARTWORK");
-				bar.time:SetFont(E.fontn, 10, "OUTLINE");
+				bar.time:SetFont(C["skins"].font, 10, "OUTLINE");
 				bar.time:SetPoint("RIGHT", bar.statusbar, -2, 1);
 				
 				bar.spellname = bar.statusbar:CreateFontString(nil, "ARTWORK");
-				bar.spellname:SetFont(E.font, 11, "OUTLINE");
+				bar.spellname:SetFont(C["skins"].font, 11, "OUTLINE");
 				bar.spellname:SetPoint("LEFT", bar.statusbar, 5, 0);
 				bar.spellname:SetPoint("RIGHT", bar.time, "LEFT");
 				bar.spellname:SetJustifyH("LEFT");
 				
 				bar.count = bar.statusbar:CreateFontString(nil, "ARTWORK");
-				bar.count:SetFont(E.fontn, 10, "OUTLINE");
+				bar.count:SetFont(C["skins"].font, 10, "OUTLINE");
 				bar.count:SetPoint("RIGHT", bar.statusbar, -40, 1);
 				bar.count:SetJustifyH("RIGHT");
 			end

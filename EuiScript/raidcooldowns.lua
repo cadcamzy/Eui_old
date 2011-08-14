@@ -109,11 +109,11 @@ local function CreateBar(index)
 	bar:SetHeight(height)
 	bar:SetWidth(width)
 
-	bar.dur = E.EuiSetFontn(bar, E.font, 12, "LEFT")
+	bar.dur = E.EuiSetFontn(bar, C["skins"].font, 12, "LEFT")
 	bar.dur:SetPoint("LEFT", bar, "LEFT", 1, 0)
 	bar.dur:SetShadowOffset(1, -1)
 	
-	bar.text = E.EuiSetFontn(bar, E.font, 12, "RIGHT")
+	bar.text = E.EuiSetFontn(bar, C["skins"].font, 12, "RIGHT")
 	bar.text:SetPoint("RIGHT", bar, "TOPRIGHT", -1, 0)
 	bar.text:SetShadowOffset(1, -1)
 	bar:EnableMouse(true)
