@@ -28,7 +28,7 @@
 	<Script file="openall.lua"/>
 	<Include file="oGlow\oGlow.xml"/>
 	<Script file="yclasscolors.lua"/>
-	<Script file="xCT.lua"/>
+	
 	<Script file="raidtool.lua"/>
 	<Script file="RaidCheck.lua"/>
 	<Script file="raid_reminder.lua"/>

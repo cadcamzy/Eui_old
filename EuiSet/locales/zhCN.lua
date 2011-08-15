@@ -28,6 +28,7 @@ if not L then return end
 	--UI设置
 	L["ui_autoscale"] = "UI自动缩放"
 	L["ui_uiscale"] = "手动调整UI缩放"
+	L["ui_multisampleprotect"] = "多重采样锁定x1"
 	
 	-- 一般设置
 	L["main_movechat"] = "锁定聊天位置"

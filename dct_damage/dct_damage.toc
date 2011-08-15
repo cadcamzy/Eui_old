@@ -1,0 +1,18 @@
+## Interface: 40100
+## Title: DCT [|cffff8080Damage mod|r]
+## Title-zhCN: |cffff8080DCT 伤害输出模块(v2.46 Continue)|r
+## Notes: 为DCT (Dennis's Combat Text) 提供你对怪物攻击伤害的显示功能
+## Author: Dennie
+## Dependencies: dct
+## SavedVariables: DCTD_CONFIG
+## SavedVariablesPerCharacter: DCTD_PERCONFIG
+## LoadOnDemand: 1
+dctd_default.lua
+loc_dctd.lua
+locals\cn_loc_dctd.lua
+locals\tw_loc_dctd.lua
+locals\en_loc_dctd.lua
+dctd.lua
+dctd_options.lua
+dctd_options.xml
+dctd_patch.lua

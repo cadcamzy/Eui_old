@@ -283,7 +283,7 @@ local function CheckRaidBuff()
 		SendChatMessage(L.RaidCheckMsgFullBuff, "RAID")
 		--SendChatMessage(L.RaidCheckMsgFullBuff, "GUILD")
 	else
-	--	SendChatMessage(format(L.RaidCheckMsgNoBuff, NoBuffCount), "RAID")
+		SendChatMessage(format(L.RaidCheckMsgNoBuff, NoBuffCount), "RAID")
 		--SendChatMessage(format(L.RaidCheckMsgNoBuff, NoBuffCount), "GUILD")
 
 		local msg = ""

@@ -292,7 +292,12 @@ function EuiConfig.GenerateOptionsInternal()
 						disabled = function(info) return db.ui.autoscale end,
 						type = "range",
 						min = 0.64, max = 1, step = 0.01,
-					},					
+					},
+					multisampleprotect = {
+						order = 3,
+						name = L["ui_multisampleprotect"],
+						type = "toggle",
+					},
 				},
 			},
 			nameplate = {
@@ -410,11 +415,11 @@ function EuiConfig.GenerateOptionsInternal()
 						type = "toggle",
 						name = L["other_buff"],
 					},
-					xct = {
+--[[ 					xct = {
 						order = 18,
 						type = "toggle",
 						name = L["other_xct"],
-					},
+					}, ]]
 					raidcheck = {
 						order = 19,
 						type = "toggle",

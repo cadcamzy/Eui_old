@@ -18,7 +18,7 @@ scalefix:SetScript("OnEvent", function(self, event)
 		SetCVar("useUiScale", 0)
 	else
 		SetCVar("useUiScale", 1)
-		SetMultisampleFormat(1)	-- 多重采样率，可以设置为1，2，4，8
+		if C["ui"].multisampleprotect then SetMultisampleFormat(1) end
 		if C["ui"].uiscale > 1 then C["ui"].uiscale = 1 end
 		if C["ui"].uiscale < 0.64 then C["ui"].uiscale = 0.64 end
 		SetCVar("uiScale", C["ui"].uiscale)

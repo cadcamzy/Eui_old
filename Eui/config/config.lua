@@ -31,6 +31,7 @@ DB["main"] = {
 DB["ui"] = {
 	["autoscale"] = true,
 	["uiscale"] = 0.71,	
+	["multisampleprotect"] = true,
 }
 
 DB["other"] = {
@@ -47,7 +48,7 @@ DB["other"] = {
 	["mbb"] = true,
 	["minimap"] = true,
 	["buff"] = true,
-	["xct"] = true,
+--	["xct"] = true,
 	["raidcheck"] = true,
 	["raidbuffreminder"] = true,
 	["bossnotes"] = true,
