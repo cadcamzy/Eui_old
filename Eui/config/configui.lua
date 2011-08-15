@@ -37,6 +37,6 @@ if LSM ~= nil then
 	LSM:Register("statusbar","EUI Statusbar-9", [[Interface\AddOns\Eui\media\statusbar\9.tga]])
 	
 	LSM:Register("font","EUI cdfont", [[Interface\Addons\Eui\media\ROADWAY.ttf]],255)
-	LSM:Register("font","EUI dmgfont", [[Fonts\FRIZQT__.ttf]],255)
+	LSM:Register("font","EUI dmgfont", [[Fonts\ZYKai_C.TTF]],255)
 	LSM:Register("font","EUI font", [[Fonts\ARIALN.ttf]],255)
 end

@@ -257,12 +257,11 @@ DB["skins"] = {
 	["dbm"] = true,
 	["skada"] = true,
 	["recount"] = true,
---	["font"] = true,
 	["texture"] = "EUI Statusbar-1",
 	["enable"] = true,
-	["font"] = "EUI font",
-	["dmgfont"] = "EUI dmgfont",
-	["cdfont"] = "EUI cdfont",
+	["font"] = "默认",
+	["dmgfont"] = "默认",
+	["cdfont"] = "默认",
 }
 
 DB["class"] = {
