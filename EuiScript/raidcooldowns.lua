@@ -50,7 +50,7 @@ local function UpdateBars()
         if(v:IsShown()) then
             v:ClearAllPoints()
            	if(i==1 or firsthidden) then
-               	v:SetPoint("BOTTOM", holder, "BOTTOM")
+               	v:SetPoint("BOTTOM", holder, "TOP")
            	else
                	v:SetPoint("BOTTOM", bars[lastvisible], "TOP", 0, 8)
            	end
@@ -153,7 +153,7 @@ local function StartBar(unit, spellname, duration)
 	local bar = bars[index]
 	bar.spellname = spellname
 	bar.name = UnitName(unit)
-	bar.text:SetText(E.utf8sub(bar.name,4,false)..spellname)
+	bar.text:SetText(E.utf8sub(bar.name,3,false)..'-'..spellname)
 	bar.text:SetTextColor(c.r, c.g, c.b)
 	bar.duration = duration
 	bar.start = GetTime()

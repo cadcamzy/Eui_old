@@ -59,7 +59,9 @@ function Update(self)
 			E.EuiCreatePanel(panel, value.data.size, value.data.size, "CENTER", bar, "CENTER", 0, 0)
 			panel:SetBackdropColor(0, 0, 0,1)
 			if C["main"].classcolortheme == true then
-				local r, g, b = E.RAID_CLASS_COLORS[E.MyClass].r, E.RAID_CLASS_COLORS[E.MyClass].g, E.RAID_CLASS_COLORS[E.MyClass].b	
+				local r = C["main"]["classcolorcustom"].r
+				local g = C["main"]["classcolorcustom"].g
+				local b = C["main"]["classcolorcustom"].b	
 				panel:SetBackdropBorderColor(r, g, b,1)
 			else
 				panel:SetBackdropBorderColor(0.31, 0.45, 0.63,1)

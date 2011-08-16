@@ -24,7 +24,7 @@ RecountSkin:SetScript("OnEvent", function(self, event, addon)
 				v.StatusBar:GetStatusBarTexture():SetHorizTile(false)
 				v.StatusBar:GetStatusBarTexture():SetVertTile(false)
 			end
-			Recount:SetFont(C["skins"].font)
+		--	Recount:SetFont(C["skins"].font)
 		end
 		Recount.SetBarTextures = Recount.UpdateBarTextures
 

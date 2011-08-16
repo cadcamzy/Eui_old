@@ -29,6 +29,7 @@ function EuiConfig:LoadDefaults()
 			clickset = DB["clickset"], 
 			skins = DB["skins"],
 			class = DB["class"],
+			nameplate = DB["nameplate"],
 		},
 	}
 end	
@@ -258,7 +259,7 @@ function EuiConfig.GenerateOptionsInternal()
 						order = 24,
 						name = L["main_classcolorcustom"],
 					--	desc = L["main_classcolorcustom"],
-						disabled = function() return db.unitframe.classcolortheme end,
+						disabled = function() return not db.main.classcolortheme end,
 						hasAlpha = false,
 						get = function(info)
 							local t = db.main[ info[#info] ]
@@ -304,39 +305,111 @@ function EuiConfig.GenerateOptionsInternal()
 				order = 3,
 				type = "group",
 				name = L["nameplate"],
-				desc = L["nameplate"],
 				get = function(info) return db.nameplate[ info[#info] ] end,
 				set = function(info, value) db.nameplate[ info[#info] ] = value; StaticPopup_Show("CFG_RELOAD") end,
 				args = {
-					enable = {
+					intro = {
 						order = 1,
-						type = "toggle",
-						name = L["nameplate_enable"],
-					},
-					nameplate_group1 = {
-						order = 2,
-						type = "group",
+						type = "description",
 						name = L["nameplate"],
+					},				
+					enable = {
+						type = "toggle",
+						order = 2,
+						name = ENABLE,
+						desc = L["nameplate_enable"],
+						set = function(info, value)
+							db.nameplate[ info[#info] ] = value; 
+							StaticPopup_Show("CFG_RELOAD")
+						end,
+					},
+					group1 = {
+						type = "group",
+						order = 3,
+						name = L["nameplate_group1"],
+						guiInline = true,		
 						disabled = function() return not db.nameplate.enable end,
-						guiInline = true,
-						args = {	
-							nameplateauto = {
+						args = {
+							showhealth = {
+								type = "toggle",
+								order = 1,
+								name = L["nameplate_showhealth"],
+							},
+							enhancethreat = {
+								type = "toggle",
 								order = 2,
-								type = "toggle",
-								name = L["nameplate_nameplateauto"],
-								disabled = function() return not db.nameplate.enable end,
+								name = L["nameplate_enhancethreat"],
 							},
-							nameplatevalue = {
+							combat = {
+								type = "toggle",
 								order = 3,
-								type = "toggle",
-								name = L["nameplate_nameplatevalue"],
-								disabled = function() return not db.nameplate.enable end,
+								name = L["nameplate_combat"],
 							},
-							nameplatetank = {
-								order = 4,
+							trackauras = {
 								type = "toggle",
-								name = L["nameplate_nameplatetank"],
-								disabled = function() return not db.nameplate.enable end,
+								order = 4,
+								name = L["nameplate_trackauras"],
+							},
+							trackccauras = {
+								type = "toggle",
+								order = 5,
+								name = L["nameplate_trackccauras"],				
+							},
+							width = {
+								type = "range",
+								order = 6,
+								name = L["nameplate_width"],
+								type = "range",
+								min = 50, max = 150, step = 1,		
+								set = function(info, value) db.nameplate[ info[#info] ] = value; C.nameplate[ info[#info] ] = value end,
+							},
+							showlevel = {
+								type = "toggle",
+								order = 7,
+								name = L["nameplate_showlevel"],
+							},
+							Colors = {
+								type = "group",
+								order = 8,
+								name = L["nameplate_Colors"],
+								guiInline = true,	
+								get = function(info)
+									local t = db.nameplate[ info[#info] ]
+									return t.r, t.g, t.b, t.a
+								end,
+								set = function(info, r, g, b)
+									db.nameplate[ info[#info] ] = {}
+									local t = db.nameplate[ info[#info] ]
+									t.r, t.g, t.b = r, g, b
+									StaticPopup_Show("CFG_RELOAD")
+								end,	
+								disabled = function() return (not db.nameplate.enhancethreat or not db.nameplate.enable) end,								
+								args = {
+									goodcolor = {
+										type = "color",
+										order = 1,
+										name = L["nameplate_goodcolor"],
+										hasAlpha = false,
+									},		
+									badcolor = {
+										type = "color",
+										order = 2,
+										name = L["nameplate_badcolor"],
+										hasAlpha = false,
+									},
+									goodtransitioncolor = {
+										type = "color",
+										order = 3,
+										name = L["nameplate_goodtransitioncolor"],
+										hasAlpha = false,									
+									},
+									badtransitioncolor = {
+										type = "color",
+										order = 4,
+										name = L["nameplate_badtransitioncolor"],
+										hasAlpha = false,									
+									},									
+								},
 							},
 						},
 					},
@@ -1428,6 +1501,12 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["skins_recount"],
 								type = "toggle",
 							},
+							mbb = {
+								order = 3,
+								name = L["skins_mbb"],
+								disabled = true,
+								type = "toggle",
+							},							
 							enable = {
 								order = 4,
 								name = L["skins_enable"],

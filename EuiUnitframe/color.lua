@@ -52,3 +52,4 @@ oUF.colors.runes = {
 	{35/255, 127/255, 255/255};
 	{178/255, 53/255, 240/255};
 }
+E.oUF_colors = oUF.colors

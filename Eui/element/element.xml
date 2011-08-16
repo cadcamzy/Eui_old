@@ -14,7 +14,7 @@
 	<Script file="minimap.lua"/>
 	<Script file="mirror.lua"/>
 
-	<Script file="nameplate.lua"/>
+	<Script file="nameplates.lua"/>
 	<Script file="omnicc.lua"/>
 	<Script file="threat.lua"/>
 	<Script file="tooltip.lua"/>
