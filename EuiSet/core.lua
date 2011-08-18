@@ -922,6 +922,18 @@ function EuiConfig.GenerateOptionsInternal()
 								type = "range",
 								name = L["unitframe_playerdebuffnum"],
 								min = 0, max = 40, step = 1,
+							},
+							bigaurassize = {
+								order = 10,
+								type = "range",
+								name = L["unitframe_bigaurassize"],
+								min = 10, max = 60, step = 1,
+							},
+							smallaurassize = {
+								order = 11,
+								type = "range",
+								name = L["unitframe_smallaurassize"],
+								min = 5, max = 40, step = 1,
 							},							
 						},
 					},

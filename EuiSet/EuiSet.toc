@@ -3,7 +3,7 @@
 ## Title-zhCN: EUI界面设置模块|cffC495DDEuiSet|r
 ## Author: Ljxx.net
 ## RequiredDeps: Eui
-## Version: 20110816A
+## Version: 20110818A
 ## X-Category: EUI
 ## SavedVariables: EuiConfig, FoolsDay
 

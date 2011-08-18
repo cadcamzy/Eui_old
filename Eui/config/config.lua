@@ -58,7 +58,7 @@ DB["nameplate"] = {
 	["enable"] = true,                     -- enable nice skinned nameplates that fit into Elvui
 	["showlevel"] = true,
 	["width"] = 105,
-	["showhealth"] = false,					-- show health text on nameplate
+	["showhealth"] = true,					-- show health text on nameplate
 	["enhancethreat"] = true,				-- threat features based on if your a tank or not
 	["combat"] = false,					--only show enemy nameplates in-combat.
 	["goodcolor"] = {r = 75/255,  g = 175/255, b = 76/255},			--good threat color (tank shows this with threat, everyone else without)
@@ -138,6 +138,8 @@ DB["unitframe"] = {
 	["targetbuffs"] = 32,
 	["targetdebuffs"] = 20,
 	["boss"] = true,
+	["bigaurassize"] = 32,
+	["smallaurassize"] = 21,
 }
 
 DB["raid"] = {

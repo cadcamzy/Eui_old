@@ -339,6 +339,41 @@ local CreateAuraTimer = function(self,elapsed)
 	end
 end
 
+local AuraFilter = function(icons, unit, icon, name, rank, texture, count, dtype, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID)	
+	local header = icon:GetParent():GetParent():GetParent():GetName()
+	local inInstance, instanceType = IsInInstance()
+	icon.owner = caster
+	icon.isStealable = isStealable
+	if UnitDebuff(unit, name)  then
+		if unit == "target" or (unit and unit:find("boss%d")) then --Target/Boss Only
+			if C["unitframe"].onlyplayer == true then
+				-- Show all debuffs on friendly targets
+				if UnitIsFriend("player", "target") then return true end
+				
+				local isPlayer
+					
+				if(caster == 'player' or caster == 'vehicle') then
+					isPlayer = true
+				else
+					isPlayer = false
+				end
+
+				if isPlayer then
+					return true
+				else
+					return false
+				end
+			else
+				return true
+			end
+		else --Everything else
+			return true
+		end
+	else
+		return true
+	end
+end
+
 local PostUpdateIcon
 do
 	local playerUnits = {
@@ -352,7 +387,6 @@ do
 			texture:SetDesaturated(false)
 		else
 			if icon.debuff then texture:SetDesaturated(true) end
-			if C["unitframe"].onlyplayer == true then icon:Hide() end --只显示玩家施放的DEBUFF			
 		end
 		local _, _, _, _, _, duration, expirationTime, unitCaster, _ = UnitAura(unit, index, icon.filter)
 		-- Creating aura timers
@@ -384,6 +418,8 @@ local channelingTicks = {
 	-- warlock
 	[GetSpellInfo(689)] = 3, -- "Drain Life"
 	[GetSpellInfo(5740)] = 4, -- "Rain of Fire"
+	[GetSpellInfo(1120)] = 5, -- "吸取灵魂"
+	[GetSpellInfo(755)] = 3, -- "生命通道"		
 	-- druid
 	[GetSpellInfo(44203)] = 4, -- "Tranquility"
 	[GetSpellInfo(16914)] = 10, -- "Hurricane"
@@ -819,7 +855,7 @@ local Shared = function(self, unit, isSingle)
 	if unit == 'player' and class == "DRUID" and C["unitframe"].cpoint == true then
 		local eclipseBar = CreateFrame('Frame', nil, self)
 		eclipseBar:SetWidth(playerwidth*.6)
-		eclipseBar:SetHeight(5)
+		eclipseBar:SetHeight(9)
 		eclipseBar:SetBackdropColor(0, 0, 0)
 		eclipseBar:SetPoint("TOPLEFT", self.Health, 10, 4)		
 		
@@ -827,7 +863,7 @@ local Shared = function(self, unit, isSingle)
 		
 		local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
 		lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
-		lunarBar:SetSize(playerwidth*.7, 5)
+		lunarBar:SetSize(playerwidth*.7, 9)
 		lunarBar:SetStatusBarTexture(TEXTURE)
 		lunarBar:SetStatusBarColor(.30, .52, .90)
 		lunarBar:SetFrameLevel(self.Health:GetFrameLevel()+2)
@@ -835,13 +871,19 @@ local Shared = function(self, unit, isSingle)
 
 		local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
 		solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
-		solarBar:SetSize(playerwidth*.7, 5)
+		solarBar:SetSize(playerwidth*.7, 9)
 		solarBar:SetStatusBarTexture(TEXTURE)
 		solarBar:SetStatusBarColor(.90, .92,  .30)
 		solarBar:SetFrameLevel(self.Health:GetFrameLevel()+2)
 		eclipseBar.SolarBar = solarBar
-		
+
+		eclipseBar.value = eclipseBar.LunarBar:CreateFontString(nil, "OVERLAY")
+		eclipseBar.value:SetFont(STANDARD_TEXT_FONT, 10, "OUTLINE")
+		eclipseBar.value:SetJustifyH("CENTER")
+		eclipseBar.value:SetPoint("CENTER", lunarBar:GetStatusBarTexture(), "RIGHT",0, 0)
+
 		self.EclipseBar = eclipseBar
+		self.EclipseBar.PostUpdatePower = EclipseDirection
 	end
 
 	--warlock or PALADIN bar
@@ -977,7 +1019,7 @@ local Shared = function(self, unit, isSingle)
 		Debuffs:SetHeight(75)
 		Debuffs:SetWidth(C["unitframe"].playerwidth-4)
 		Debuffs.num = C["unitframe"].playerdebuffnum
-		Debuffs.size = 25
+		Debuffs.size = C["unitframe"].bigaurassize
 		Debuffs.spacing = 4
 		Debuffs['growth-x'] = 'RIGHT'
 		Debuffs['growth-y'] = 'UP'
@@ -993,23 +1035,24 @@ local Shared = function(self, unit, isSingle)
 		Auras.showDebuffType = true
 		Auras:SetWidth(C["unitframe"].playerwidth-4)
 		Auras:SetHeight(C["unitframe"].playerheight * 2)
-		Auras.size = 25
+		Auras.size = C["unitframe"].bigaurassize
 		Auras.spacing = 4
 		Auras.gap = true
 		Auras.numBuffs = C["unitframe"].targetbuffs
 		Auras.numDebuffs = C["unitframe"].targetdebuffs
 		Auras.PostCreateIcon = PostCreateIcon
 		Auras.PostUpdateIcon = PostUpdateIcon
-		self.Auras = Auras		
+		self.Auras = Auras	
+		Auras.CustomFilter = AuraFilter
 	end
 
 	if unit == 'targettarget' then
 		local Auras = CreateFrame("Frame", nil, self)
 		Auras:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 1, 2)
 		Auras.showDebuffType = true
-		Auras:SetWidth(132)
+		Auras:SetWidth(C["unitframe"].totwidth)
 		Auras:SetHeight(26)
-		Auras.size = 21
+		Auras.size = C["unitframe"].smallaurassize
 		Auras.spacing = 6
 		Auras.gap = false
 		Auras.numBuffs = 0
@@ -1022,11 +1065,11 @@ local Shared = function(self, unit, isSingle)
 
 	if unit == 'focus' then
 		local Auras = CreateFrame("Frame", nil, self)
-		Auras:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 1, 2)
+		Auras:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 0, 2)
 		Auras.showDebuffType = true
-		Auras:SetWidth(132)
+		Auras:SetWidth(C["unitframe"].focuswidth)
 		Auras:SetHeight(26)
-		Auras.size = 21
+		Auras.size = C["unitframe"].smallaurassize
 		Auras.spacing = 6
 		Auras.gap = false
 		Auras.numBuffs = C["unitframe"].Fbuffs
@@ -1039,11 +1082,11 @@ local Shared = function(self, unit, isSingle)
 	
 	if unit == 'focustarget' then
 		local Auras = CreateFrame("Frame", nil, self)
-		Auras:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 1, 2)
+		Auras:SetPoint('TOPLEFT', self, 'BOTTOMLEFT', 0, 2)
 		Auras.showDebuffType = true
-		Auras:SetWidth(132)
+		Auras:SetWidth(C["unitframe"].focuswidth)
 		Auras:SetHeight(26)
-		Auras.size = 21
+		Auras.size = C["unitframe"].smallaurassize
 		Auras.spacing = 6
 		Auras.gap = false
 		Auras.numBuffs = 0
@@ -1055,11 +1098,11 @@ local Shared = function(self, unit, isSingle)
 	
 	if unit == 'pet' then
 		local Auras = CreateFrame("Frame", nil, self)
-		Auras:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 1, 4)
+		Auras:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 0, 4)
 		Auras.showDebuffType = true
-		Auras:SetWidth(130)
+		Auras:SetWidth(C["unitframe"].petwidth)
 		Auras:SetHeight(18)
-		Auras.size = 16
+		Auras.size = C["unitframe"].bigaurassize
 		Auras.spacing = 4
 		Auras.gap = true
 		Auras.numBuffs = 4
