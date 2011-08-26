@@ -58,6 +58,7 @@ DB["nameplate"] = {
 	["enable"] = true,                     -- enable nice skinned nameplates that fit into Elvui
 	["showlevel"] = true,
 	["width"] = 105,
+	["height"] = 12,
 	["showhealth"] = true,					-- show health text on nameplate
 	["enhancethreat"] = true,				-- threat features based on if your a tank or not
 	["combat"] = false,					--only show enemy nameplates in-combat.
@@ -137,6 +138,8 @@ DB["unitframe"] = {
 	["showpprec"] = false,
 	["targetbuffs"] = 32,
 	["targetdebuffs"] = 20,
+	["petbuffs"] = 4,
+	["petdebuffs"] = 3,
 	["boss"] = true,
 	["bigaurassize"] = 32,
 	["smallaurassize"] = 21,
@@ -298,7 +301,7 @@ E.ClickSets_Sets = {
 			["type4"] = 596, --治疗祷言
 			["shift-type4"] = 47758, -- 苦修
 			["ctrl-type4"] = 73325, -- 信仰飞跃
-			["type5"] = 48153， -- 守护之魂
+			["type5"] = 48153, -- 守护之魂
 	},
 	
 	DRUID = { --XD

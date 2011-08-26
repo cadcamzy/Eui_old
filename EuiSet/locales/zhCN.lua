@@ -91,6 +91,7 @@ L["nameplate"] = "姓名板"
 	L["nameplate_trackccauras"] = "控场监视"
 	L["nameplate_showlevel"] = "显示等级"
 	L["nameplate_width"] = "宽度"
+	L["nameplate_height"] = "高度"
 	L["nameplate_Colors"] = "姓名版颜色设置"
 	L["nameplate_goodcolor"] = "安全仇恨值颜色"
 	L["nameplate_badcolor"] = "危险仇恨值颜色"
@@ -181,6 +182,8 @@ L["nameplate"] = "姓名板"
 	L["unitframe_group1"] = "头像组件"
 	L["unitframe_group2"] = "光环相关"
 	L["unitframe_group3"] = "尺寸调整"
+	L["unitframe_petbuffs"] = "宠物BUFF数量"
+	L["unitframe_petdebuffs"] = "宠物DEBUFF数量"
 	
 
 	--团队

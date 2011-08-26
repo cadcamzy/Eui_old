@@ -7,11 +7,11 @@ local TEXTURE = C["skins"].texture
 local FONT = C["skins"].font
 local FONTSIZE = 10
 local FONTFLAG = "THINOUTLINE"
-local hpHeight = 12
-local hpWidth = C["nameplate"].width
+local hpHeight = C.nameplate.height
+local hpWidth = C.nameplate.width
 local iconSize = 25		--Size of all Icons, RaidIcon/ClassIcon/Castbar Icon
-local cbHeight = 5
-local cbWidth = C["nameplate"].width
+local cbHeight = C.nameplate.height / 2
+local cbWidth = C.nameplate.width
 local blankTex = E.blackTex
 local OVERLAY = [=[Interface\TargetingFrame\UI-TargetingFrame-Flash]=]
 local numChildren = -1
@@ -124,10 +124,10 @@ E.PlateBlacklist = {
 }
 
 --Change defaults if we are showing health text or not
-if C["nameplate"].showhealth ~= true then
+--[[ if C["nameplate"].showhealth ~= true then
 	hpHeight = 7
 	iconSize = 20
-end
+end ]]
 
 local NamePlates = CreateFrame("Frame", nil, UIParent)
 NamePlates:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
@@ -567,7 +567,7 @@ local function SkinObjects(frame)
 	raidicon:ClearAllPoints()
 	raidicon:SetPoint("BOTTOM", hp, "TOP", 0, 16)
 	raidicon:SetSize(iconSize*1.4, iconSize*1.4)
-	raidicon:SetTexture([[Interface/AddOns/Eui/media/raidicons.blp]])	
+	raidicon:SetTexture("Interface\\AddOns\\Eui\\media\\raidicons.blp")	
 	frame.raidicon = raidicon
 	
 	--Hide Old Stuff
@@ -747,6 +747,7 @@ local function CheckSettings(frame, ...)
 	if frame.hp:GetWidth() ~= C["nameplate"].width then
 		frame.hp:SetWidth(C["nameplate"].width)
 		hpWidth = C["nameplate"].width
+		hpHeight = C["nameplate"].height
 	end
 end
 

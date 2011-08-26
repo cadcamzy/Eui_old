@@ -1159,8 +1159,8 @@ local Shared = function(self, unit, isSingle)
 		Auras.size = C["unitframe"].bigaurassize
 		Auras.spacing = 4
 		Auras.gap = true
-		Auras.numBuffs = 4
-		Auras.numDebuffs = 3
+		Auras.numBuffs = C["unitframe"].petbuffs
+		Auras.numDebuffs = C["unitframe"].petdebuffs
 		Auras.PostCreateIcon = PostCreateIcon
 		self.Auras = Auras
 	end

@@ -29,7 +29,6 @@ function EuiConfig:LoadDefaults()
 			clickset = DB["clickset"], 
 			skins = DB["skins"],
 			class = DB["class"],
-			nameplate = DB["nameplate"],
 		},
 	}
 end	
@@ -356,16 +355,22 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["nameplate_trackccauras"],				
 							},
 							width = {
-								type = "range",
 								order = 6,
 								name = L["nameplate_width"],
 								type = "range",
 								min = 50, max = 150, step = 1,		
-								set = function(info, value) db.nameplate[ info[#info] ] = value; C.nameplate[ info[#info] ] = value end,
+								set = function(info, value) db.nameplate[ info[#info] ] = value; print(db.nameplate[ info[#info] ]);print(value); C.nameplate[ info[#info] ] = value end,
 							},
+							height = {
+								order = 7,
+								name = L["nameplate_height"],
+								type = "range",
+								min = 5, max = 100, step = 1,		
+								set = function(info, value) db.nameplate[ info[#info] ] = value; C.nameplate[ info[#info] ] = value end,
+							},							
 							showlevel = {
 								type = "toggle",
-								order = 7,
+								order = 8,
 								name = L["nameplate_showlevel"],
 							},
 							Colors = {
@@ -575,7 +580,7 @@ function EuiConfig.GenerateOptionsInternal()
 								order = 8,
 								name = L["chat_bodylevel"],
 								type = "range",
-								min = 1, max = 85, step = 1,
+								min = 0, max = 85, step = 1,
 							},
 						},
 					},
@@ -923,6 +928,18 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["unitframe_playerdebuffnum"],
 								min = 0, max = 40, step = 1,
 							},
+							petbuffs = {
+								order = 10,
+								type = "range",
+								name = L["unitframe_petbuffs"],
+								min = 0, max = 40, step = 1,
+							},
+							petdebuffs = {
+								order = 10,
+								type = "range",
+								name = L["unitframe_petdebuffs"],
+								min = 0, max = 40, step = 1,
+							},							
 							bigaurassize = {
 								order = 10,
 								type = "range",
