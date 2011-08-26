@@ -94,5 +94,5 @@ end
 memory:SetScript("OnMouseDown", function() collectgarbage("collect") Update(memory, 10) end)
 memory:SetScript("OnUpdate", Update) 
 Update(memory, 10)
-
+EuiTopInfobg.memory = memory
 E.EuiInfo(C["info"].memory,memory)

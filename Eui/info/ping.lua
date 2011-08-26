@@ -53,5 +53,5 @@ end)
 
 
 
-
+EuiTopInfobg.latency = latency
 E.EuiInfo(C["info"].latency,latency)

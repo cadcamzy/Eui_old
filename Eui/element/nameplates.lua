@@ -851,8 +851,5 @@ function NamePlates:PLAYER_ENTERING_WORLD()
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 1)
 	SetCVar("bloatnameplates", 0)
---[[ 	if E.eyefinity then
-		SetCVar("nameplateMotion", "0")
-		InterfaceOptionsNamesPanelUnitNameplatesMotionDropDown:Kill()
-	end ]]
+
 end

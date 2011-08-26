@@ -706,7 +706,9 @@ E.EuiInfo = function(p, f)
 		f:SetPoint("LEFT", EuiTopInfobg, "LEFT", 70*(p-1)+ 4*p, 0)
 	end
 	f:SetParent(EuiTopInfobg)
-	f:SetAlpha(0)
+	if p == 0 then f:SetAlpha(0) else f:SetAlpha(1) end
+
+--[[ 	f:SetAlpha(0)
 	local r = abs(y)*.5 + 3
 	CreateFrame("Frame"):SetScript("OnUpdate",function(self,t) 
 		r = r - t 
@@ -715,7 +717,7 @@ E.EuiInfo = function(p, f)
 			self = nil
 			UIFrameFadeIn(f,.5,0,1)
 		end
-	end)
+	end) ]]
 end
 
 E.EuiSetTooltip = function(f,title,L1,R1,L2,R2,L3,R3,L4,R4)
@@ -922,7 +924,7 @@ EuiInGame:SetScript("OnEvent", function(self, event)
 	eventcount = eventcount + 1
 	if InCombatLockdown() then return end
 
-	if eventcount > 6000 then
+	if eventcount > 12000 then
 		collectgarbage("collect")
 		eventcount = 0
 	end

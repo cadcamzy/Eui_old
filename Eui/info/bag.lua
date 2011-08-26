@@ -129,4 +129,5 @@ bag:RegisterEvent("PLAYER_ENTERING_WORLD")
 bag:SetScript("OnEvent", OnEvent)
 bag:SetScript("OnMouseDown", function() OpenAllBags() end)
 
+EuiTopInfobg.bag = bag
 E.EuiInfo(C["info"].bag,bag)

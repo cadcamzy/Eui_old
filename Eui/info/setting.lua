@@ -149,5 +149,5 @@ settingMenuDrop = addDrop({
 	})
 
 E.EuiSetTooltip(setting,L.INFO_SETTING_TIP_TITLE, L.INFO_SETTING_TIP_L1, L.INFO_SETTING_TIP_R1, L.INFO_SETTING_TIP_L2, L.INFO_SETTING_TIP_R2)
-
+EuiTopInfobg.setting = setting
 E.EuiInfo(C["info"].setting,setting)

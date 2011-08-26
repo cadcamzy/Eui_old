@@ -12,8 +12,8 @@ E.EuiCreateShadow(euithreatframe)
 EuiThreatFrame:Hide()
 local euithreatframetop = CreateFrame("Frame",nil, EuiThreatFrame)
 E.EuiCreatePanel(euithreatframetop, 1, 1, "BOTTOM", EuiThreatFrame, "TOP", 0, C["threat"].spacing)
-euithreatframetop:SetWidth(C["threat"].width+ E.Scale(4))
-euithreatframetop:SetHeight(C["threat"].height+ E.Scale(4))
+euithreatframetop:SetWidth(C["threat"].width+ 4)
+euithreatframetop:SetHeight(C["threat"].height+ 4)
 E.EuiSetTemplate(euithreatframetop,1)
 euithreatframetop.text = euithreatframetop:CreateFontString(nil,"OVERLAY")
 euithreatframetop.text:SetFont(C["skins"].font,12,"OUTLINE")
@@ -249,6 +249,7 @@ local function OnEvent(self, event, ...)
 				EuiThreatFrame:Show();
 			else
 				AddThreat("player", "pet");
+				EuiThreatFrame:Show();
 			end
 			UpdateThreatBars();
 		end
@@ -262,6 +263,7 @@ local function OnEvent(self, event, ...)
 		end
 		wipe(threatlist);
 		UpdateThreatBars();
+		if not InCombatLockdown() then EuiThreatFrame:Hide() end
 	elseif ( event == "PLAYER_REGEN_ENABLED" ) then
 		EuiThreatFrame:Hide();
 		wipe(threatlist);
@@ -303,4 +305,5 @@ function E.ThreatTest()
 end
 if C["threat"].test == true then
 	E.ThreatTest()
+	EuiThreatFrame:Show()
 end

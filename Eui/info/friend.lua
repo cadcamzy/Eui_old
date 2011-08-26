@@ -76,4 +76,5 @@ frame:SetScript("OnEvent", function()
 	friend:ShowBar()
 end)
 
+EuiTopInfobg.friend = friend
 E.EuiInfo(C["info"].friend,friend)

@@ -393,5 +393,6 @@ durability:SetScript("OnMouseDown", function(self,arg1)
 		end
 	end
 end)
-	
+
+EuiTopInfobg.durability = durability
 E.EuiInfo(C["info"].durability,durability)

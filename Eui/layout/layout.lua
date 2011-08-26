@@ -26,7 +26,7 @@ if C["info"].apsp ~= 0 then
 	if C["info"].dps == 0 then
 		leftstat:SetWidth(EuiMinimap:GetWidth())
 	else
-		leftstat:SetWidth(EuiMinimap:GetWidth() / 2 - E.Scale(4))
+		leftstat:SetWidth(EuiMinimap:GetWidth() / 2 - 2)
 	end
 	function E.InfoapspPostion(frame)
 		if E.Movers["Infoapsp"]["moved"] ~= true then
@@ -46,7 +46,7 @@ if C["info"].dps ~= 0 then
 	if C["info"].apsp == 0 then
 		rightstat:SetWidth(EuiMinimap:GetWidth())
 	else
-		rightstat:SetWidth(EuiMinimap:GetWidth() / 2 - E.Scale(4))
+		rightstat:SetWidth(EuiMinimap:GetWidth() / 2 - 2)
 	end
 	function E.InfodpsPostion(frame)
 		if E.Movers["Infodps"]["moved"] ~= true then
@@ -209,7 +209,8 @@ local bottominfobg = CreateFrame("Frame", "EuiBottomInfobg", UIParent)
 --bottominfobg:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 2, 4)
 --bottominfobg:SetPoint("TOPRIGHT", UIParent, "BOTTOMLEFT", C["chat"].chatw+2, 20)
 bottominfobg:SetPoint("BOTTOMLEFT", EuiBottomInfoButtonL, "BOTTOMRIGHT", 2, 0)
-bottominfobg:SetPoint("TOPRIGHT", EuiBottomInfoButtonL, "BOTTOMRIGHT", C["chat"].chatw+2-24, 16)
+bottominfobg:SetSize(C["chat"].chatw - 24, 16)
+--bottominfobg:SetPoint("TOPRIGHT", EuiBottomInfoButtonL, "BOTTOMRIGHT", C["chat"].chatw+2-24, 16)
 bottominfobg:RegisterEvent('ADDON_LOADED')
 bottominfobg:SetScript('OnEvent', function(self, event, addon)
 	if EuiInfobar == nil then EuiInfobar = {} end

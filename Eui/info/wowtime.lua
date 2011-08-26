@@ -146,5 +146,5 @@ clocks:SetScript("OnMouseDown", function(self,button)
 		switch_wgtime_a()
 	end
 end)
-
+EuiTopInfobg.wowtime = clocks
 E.EuiInfo(C["info"].wowtime,clocks)

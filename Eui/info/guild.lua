@@ -104,5 +104,5 @@ frame:RegisterEvent("CHAT_MSG_SYSTEM")
 frame:SetScript("OnEvent", function()
 	guild:ShowBar()
 end)
-
+EuiTopInfobg.guild = guild
 E.EuiInfo(C["info"].guild,guild)

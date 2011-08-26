@@ -292,6 +292,11 @@ function EuiConfig.GenerateOptionsInternal()
 						disabled = function(info) return db.ui.autoscale end,
 						type = "range",
 						min = 0.64, max = 1, step = 0.01,
+						set = function(info, value)
+							db.ui[ info[#info] ] = value
+							C["ui"].uiscale = value
+							SetCVar("uiScale", value)
+						end,
 					},
 					multisampleprotect = {
 						order = 3,
@@ -540,12 +545,24 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["chat_chatw"],
 								type = "range",
 								min = 100, max = 1000, step = 1,
+								set = function(info, value)
+									EuiLeftChatBackground:SetWidth(value)
+									EuiBottomInfobg:SetWidth(value - 24)
+									EuiTopChatBackground:SetWidth(value)
+									db.chat[ info[#info] ] = value
+									C["chat"].chatw = value
+								end,
 							},
 							chath = {
 								order = 4,
 								name = L["chat_chath"],
 								type = "range",
-								min = 100, max = 1000, step = 1,
+								min = 20, max = 1000, step = 1,
+								set = function(info, value)
+									EuiLeftChatBackground:SetHeight(value)
+									db.chat[ info[#info] ] = value
+									C["chat"].chath = value
+								end,								
 							},
 						},
 					},
@@ -966,48 +983,106 @@ function EuiConfig.GenerateOptionsInternal()
 								type = "range",
 								name = L["unitframe_playerwidth"],
 								min = 50, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_playerFrame:SetWidth(value)
+									Ljxx_targetFrame:SetWidth(value)
+								end,
 							},
 							playerheight = {
 								order = 15,
 								type = "range",
 								name = L["unitframe_playerheight"],
 								min = 10, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_playerFrame:SetHeight(value)
+									Ljxx_targetFrame:SetHeight(value)
+									if Ljxx_playerFrame.Portrait then
+										Ljxx_playerFrame.Portrait:SetHeight(value+18)
+										Ljxx_playerFrame.Portrait:SetWidth(value+18)
+										Ljxx_targetFrame.Portrait:SetHeight(value+18)
+										Ljxx_targetFrame.Portrait:SetWidth(value+18)
+									end
+								end,								
 							},	
 							petwidth = {
 								order = 16,
 								type = "range",
 								name = L["unitframe_petwidth"],
 								min = 50, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_petFrame:SetWidth(value)
+								end,									
 							},
 							petheight = {
 								order = 17,
 								type = "range",
 								name = L["unitframe_petheight"],
 								min = 10, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_petFrame:SetHeight(value)
+								end,									
 							},	
 							totwidth = {
 								order = 18,
 								type = "range",
 								name = L["unitframe_totwidth"],
 								min = 50, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_targettargetFrame:SetWidth(value)
+								end,									
 							},
 							totheight = {
 								order = 19,
 								type = "range",
 								name = L["unitframe_totheight"],
 								min = 10, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_targettargetFrame:SetHeight(value)
+								end,									
 							},	
 							focuswidth = {
 								order = 20,
 								type = "range",
 								name = L["unitframe_focuswidth"],
 								min = 50, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_focusFrame:SetWidth(value)
+									Ljxx_focustargetFrame:SetWidth(value)
+								end,									
 							},
 							focusheight = {
 								order = 21,
 								type = "range",
 								name = L["unitframe_focusheight"],
 								min = 10, max = 500, step = 2,
+								set = function(info, value)
+									if InCombatLockdown() then return end
+									db.unitframe[ info[#info] ] = value
+									C.unitframe[ info[#info] ] = value
+									Ljxx_focusFrame:SetHeight(value)
+									Ljxx_focustargetFrame:SetHeight(value)
+								end,									
 							},
 						},
 					},
@@ -1425,54 +1500,117 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["info_wowtime"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									db.info[ inf[#inf] ] = value
+									C["info"].wowtime = value
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.wowtime)
+									end
+								end,
 							},	
 							latency = {
 								order = 1,
 								name = L["info_latency"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.latency)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							bag = {
 								order = 1,
 								name = L["info_bag"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.bag)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							durability = {
 								order = 1,
 								name = L["info_durability"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.durability)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							memory = {
 								order = 1,
 								name = L["info_memory"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.memory)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							xp = {
 								order = 1,
 								name = L["info_xp"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.xp)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							setting = {
 								order = 1,
 								name = L["info_setting"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.setting)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							guild = {
 								order = 1,
 								name = L["info_guild"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.guild)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							friend = {
 								order = 1,
 								name = L["info_friend"],
 								type = "range",
 								min = 0, max = 9, step = 1,
+								set = function(inf, value)
+									if not InCombatLockdown() then
+										E.EuiInfo(value, EuiTopInfobg.friend)
+									end
+									db.info[ inf[#inf] ] = value
+									C.info[ inf[#inf] ] = value
+								end,								
 							},
 							wgtimenoti = {
 								order = 1,

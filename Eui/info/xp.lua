@@ -141,5 +141,5 @@ frame:RegisterEvent("UPDATE_EXHAUSTION");
 frame:SetScript("OnEvent", function()
 	xp.ShowBar()
 end)
-
+EuiTopInfobg.xp = xp
 E.EuiInfo(C["info"].xp,xp)

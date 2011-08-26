@@ -62,6 +62,83 @@ function E.SkinScrollBar(frame)
 		_G[frame:GetName().."Bottom"]:SetTexture(nil)
 		_G[frame:GetName().."Middle"]:SetTexture(nil)
 	end
+	
+	if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
+		E.StripTextures(_G[frame:GetName().."ScrollUpButton"])
+		E.EuiSetTemplate(_G[frame:GetName().."ScrollUpButton"])
+		if not _G[frame:GetName().."ScrollUpButton"].texture then
+			_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, 'OVERLAY')
+			_G[frame:GetName().."ScrollUpButton"].texture:SetPoint("TOPLEFT", 2, -2)
+			_G[frame:GetName().."ScrollUpButton"].texture:SetPoint("BOTTOMRIGHT", -2, 2)
+			_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\Eui\media\arrowup.tga]])
+			_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(.31,.45,.63)
+		end
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', function(self)
+			SetModifiedBackdrop(self)
+			if C["main"].classcolortheme == true then
+				local r = C["main"]["classcolorcustom"].r
+				local g = C["main"]["classcolorcustom"].g
+				local b = C["main"]["classcolorcustom"].b
+				self.texture:SetVertexColor(r, g, b)
+			else
+				self.texture:SetVertexColor(23/255, 132/255, 209/255)	
+			end			
+		end)	
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', function(self)
+			SetOriginalBackdrop(self)
+			self.texture:SetVertexColor(.31,.45,.63)	
+		end)		
+		
+		E.StripTextures(_G[frame:GetName().."ScrollDownButton"])
+		E.EuiSetTemplate(_G[frame:GetName().."ScrollDownButton"])
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', SetModifiedBackdrop)
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', SetOriginalBackdrop)		
+		if not _G[frame:GetName().."ScrollDownButton"].texture then
+			_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, 'OVERLAY')
+			_G[frame:GetName().."ScrollDownButton"].texture:SetPoint("TOPLEFT", 2, -2)
+			_G[frame:GetName().."ScrollDownButton"].texture:SetPoint("BOTTOMRIGHT", -2, 2)
+			_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\Eui\media\arrowdown.tga]])
+			_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(.31,.45,.63)
+		end
+		
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', function(self)
+			SetModifiedBackdrop(self)
+			if C["main"].classcolortheme == true then
+				local r = C["main"]["classcolorcustom"].r
+				local g = C["main"]["classcolorcustom"].g
+				local b = C["main"]["classcolorcustom"].b
+				self.texture:SetVertexColor(r, g, b)
+			else
+				self.texture:SetVertexColor(23/255, 132/255, 209/255)	
+			end				
+		end)	
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', function(self)
+			SetOriginalBackdrop(self)
+			self.texture:SetVertexColor(.31,.45,.63)	
+		end)				
+		
+		if not frame.trackbg then
+			frame.trackbg = CreateFrame("Frame", nil, frame)
+			frame.trackbg:SetPoint("TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
+			frame.trackbg:SetPoint("BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
+			E.EuiSetTemplate(frame.trackbg,1)
+		end
+		
+		if frame:GetThumbTexture() then
+			if not thumbTrim then thumbTrim = 3 end
+			frame:GetThumbTexture():SetTexture(nil)
+			if not frame.thumbbg then
+				frame.thumbbg = CreateFrame("Frame", nil, frame)
+				frame.thumbbg:SetPoint("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
+				frame.thumbbg:SetPoint("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
+				E.EuiSetTemplate(frame.thumbbg)
+				if frame.trackbg then
+					frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel())
+				end
+			end
+		end	
+	end
+	
 end
 
 --Tab Regions
