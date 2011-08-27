@@ -665,7 +665,7 @@ function EuiConfig.GenerateOptionsInternal()
 								name = L["filter_raidwidth"],
 								disabled = function(info) return not db.filter.raid end,
 								type = "range",
-								min = 1, max = 100, step = 1,
+								min = 1, max = 300, step = 1,
 							},	
 							raidheight = {
 								order = 3,
@@ -690,23 +690,37 @@ function EuiConfig.GenerateOptionsInternal()
 						guiInline = true,
 						args = {
 							coolline = {
-								order = 2,
+								order = 1,
 								name = L["filter_coolline"],
 								type = "toggle",
 							},
 							coollinew = {
 								order = 2,
-								name = L["filter_classcolor"],
+								name = L["filter_coollinew"],
 								disabled = function(info) return not db.filter.coolline end,
 								type = "range",
 								min = 10, max = 1000, step = 1,
+								set = function(info, value)
+									if not InCombatLockdown() then
+										EuiCoolLine:SetWidth(value)
+									end
+									db.filter[ info[#info] ] = value
+									C.filter[ info[#info] ] = value
+								end,
 							},
 							coollineh = {
-								order = 2,
-								name = L["filter_classcolor"],
+								order = 3,
+								name = L["filter_coollineh"],
 								disabled = function(info) return not db.filter.coolline end,
 								type = "range",
 								min = 1, max = 100, step = 1,
+								set = function(info, value)
+									if not InCombatLockdown() then
+										EuiCoolLine:SetHeight(value)
+									end
+									db.filter[ info[#info] ] = value
+									C.filter[ info[#info] ] = value
+								end,								
 							},						
 						},
 					},
@@ -1002,11 +1016,17 @@ function EuiConfig.GenerateOptionsInternal()
 									C.unitframe[ info[#info] ] = value
 									Ljxx_playerFrame:SetHeight(value)
 									Ljxx_targetFrame:SetHeight(value)
-									if Ljxx_playerFrame.Portrait then
+									if Ljxx_playerFrame.Portrait and C["unitframe"].aaaaunit == 1 then
 										Ljxx_playerFrame.Portrait:SetHeight(value+18)
 										Ljxx_playerFrame.Portrait:SetWidth(value+18)
 										Ljxx_targetFrame.Portrait:SetHeight(value+18)
 										Ljxx_targetFrame.Portrait:SetWidth(value+18)
+									end
+									if Ljxx_playerFrame.Portrait and C["unitframe"].aaaaunit == 3 then
+										Ljxx_playerFrame.Portrait:SetHeight(value)
+										Ljxx_playerFrame.Portrait:SetWidth(value)
+										Ljxx_targetFrame.Portrait:SetHeight(value)
+										Ljxx_targetFrame.Portrait:SetWidth(value)
 									end
 								end,								
 							},	
@@ -1101,19 +1121,20 @@ function EuiConfig.GenerateOptionsInternal()
 						type = "toggle",
 						name = L["raid"],
 					},
-					raid_group1 = {
+					astyle = {
 						order = 2,
+						name = L["raid_astyle"],
+						desc = L["raid_astyle_desc"],
+						type = "range",
+						min = 0, max = 2, step = 1,
+					},					
+					raid_group1 = {
+						order = 3,
 						type = "group",
 						name = L["raid_group1"],
 						guiInline = true,
 						disabled = function() return not db.raid.raid end,
 						args = {
-							astyle = {
-								order = 1,
-								name = L["raid_astyle"],
-								type = "range",
-								min = 0, max = 2, step = 1,
-							},
 							raidthreat = {
 								order = 2,
 								name = L["raid_raidthreat"],
@@ -1232,7 +1253,7 @@ function EuiConfig.GenerateOptionsInternal()
 						},
 					},
 					raid_group2 = {
-						order = 3,
+						order = 4,
 						type = "group",
 						name = L["raid_group2"],
 						guiInline = true,
