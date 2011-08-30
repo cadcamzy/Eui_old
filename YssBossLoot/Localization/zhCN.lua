@@ -67,3 +67,7 @@ zhCN["|cffffff00Left Click|r to select Instance"] = "|cffffff00左键点击|r后
 zhCN["|cffffff00Right Click|r to open Options"] = "|cffffff00右键点击|r后开启选项"
 zhCN["Show Boss Frames"] = "显示BOSS框体"
 zhCN["Instance:"] = "副本:"
+zhCN["Classic"] = "经典"
+zhCN["The Burning Crusade"] = "燃烧的远征"
+zhCN["Wrath of the Lich King"] = "巫妖王之怒"
+zhCN["Cataclysm"] = "大地的裂变"

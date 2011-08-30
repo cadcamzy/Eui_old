@@ -183,17 +183,17 @@ hooksecurefunc("WorldMapFrame_LoadContinents", function(...)
 		info.checked = rConts[sortedLConts[i]] == currCont
 		if rConts[sortedLConts[i]] ~= "Battlegrounds" then
 			info.notClickable = 1
-		--	UIDropDownMenu_AddButton(info)
+			UIDropDownMenu_AddButton(info) --如果使用Mapster，删此处要注释掉
 			wipe(info)
 			for j, ext in ipairs(YssBossLoot.Ext) do
 				info.notClickable = nil
-				info.text = "   "..ext
+				info.text = "   "..L[ext]
 				info.arg1 = rConts[sortedLConts[i]]
 				info.arg2 = ext
 				info.func = WorldMapContinentButton_OnClick
 				info.padding = 32
 				info.checked = rConts[sortedLConts[i]] == currCont and ext == currExt
-			--	UIDropDownMenu_AddButton(info)
+				UIDropDownMenu_AddButton(info) --如果使用Mapster，删此处要注释掉
 			end
 		elseif rConts[sortedLConts[i]] ~= "Battlegrounds" then
 			UIDropDownMenu_AddButton(info)

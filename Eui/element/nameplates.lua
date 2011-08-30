@@ -847,7 +847,7 @@ function NamePlates:PLAYER_ENTERING_WORLD()
 	if C["nameplate"].enable == true and C["nameplate"].enhancethreat == true then
 		SetCVar("threatWarning", 3)
 	end
-	
+	SetCVar('threatWarning', '3')
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 1)
 	SetCVar("bloatnameplates", 0)

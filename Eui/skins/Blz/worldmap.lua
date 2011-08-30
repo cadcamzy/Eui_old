@@ -2,6 +2,10 @@ local E, C, L, DB = unpack(EUI)
 if C["skins"].enable22 ~= true then return end
 -- Base code by Elv22, rewritten by ljxx.net
 local function LoadSkin()
+	E.SkinScrollBar(WorldMapQuestScrollFrameScrollBar)	
+	E.SkinScrollBar(WorldMapQuestDetailScrollFrameScrollBar, 4)	
+	E.SkinScrollBar(WorldMapQuestRewardScrollFrameScrollBar, 4)
+	
 	E.EuiCreateBackdrop(WorldMapFrame,.7)
 	WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)
 	E.EuiSetTemplate(WorldMapDetailFrame.backdrop)
@@ -78,7 +82,7 @@ local function LoadSkin()
 		if not WorldMapQuestScrollFrame.backdrop then
 			E.EuiCreateBackdrop(WorldMapQuestScrollFrame)
 			WorldMapQuestScrollFrame.backdrop:SetPoint("TOPLEFT", 0, 2)
-			WorldMapQuestScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 24, -3)				
+			WorldMapQuestScrollFrame.backdrop:SetPoint("BOTTOMRIGHT", 25, -3)				
 		end
 	end			
 	
