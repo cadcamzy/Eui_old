@@ -332,7 +332,7 @@ E.ClickSets_Sets = {
 	},
 
 	PALADIN = { --QS
-			["shift-type1"]	= 639,--"聖光術",
+			["shift-type1"]	= 635,--"聖光術",
 			["alt-type1"]	= 19750,--"聖光閃現",
 			["ctrl-type1"]	= 53563,--"圣光信标",
 			["alt-ctrl-type1"]	= 7328,--"救贖",
