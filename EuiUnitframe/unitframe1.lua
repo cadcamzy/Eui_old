@@ -192,6 +192,15 @@ oUF.Tags['ppprec'] = function(unit)
 		return ""
 	end
 end
+
+oUF.Tags["AltPower"] = function(unit)
+	local cur = UnitPower(unit, ALTERNATE_POWER_INDEX)
+	local max = UnitPowerMax(unit, ALTERNATE_POWER_INDEX)
+	if max > 0 and not UnitIsDeadOrGhost(unit) then
+		return ("%s%%"):format(math.floor(cur / max * 100 + 0.5))
+	end
+end
+oUF.TagEvents["AltPower"] = "UNIT_POWER"
 	
 --[[
  	functions
@@ -1011,6 +1020,16 @@ local Shared = function(self, unit, isSingle)
 		swing:SetPoint("TOP", self.Health, "BOTTOM", 0, -1)
 		self.Swing = swing
 	end
+	
+--	if C["unitframe"].boss == true and (unit and unit:find('boss%d')) then
+--		self.AltPowerBar = CreateFrame("Frame", nil, self.Power)
+--		self.AltPowerBar:SetFrameLevel(self.Power:GetFrameLevel() + 1)
+--		self.AltPowerBar:SetAllPoints(self.Power)
+
+--		self.AltPowerBar.text = E.EuiSetFontn(self.AltPowerBar, font, fontsize)
+--		self.AltPowerBar.text:SetPoint("LEFT", self.AltPowerBar, "LEFT", 2, 0)
+--		self:Tag(self.AltPowerBar.text, "[AltPower]")
+--	end
 	
 --aura
 	if unit == 'player' then

@@ -316,6 +316,7 @@ E.ClickSets_Sets = {
 			["alt-ctrl-type2"] = 1126, -- 野性印记
 			["type3"]		= 33763,--"生命之花",
 			["shift-type3"] = 5185,--治疗之触
+			["ctrl-type3"] = 20484,--复生
 	},
 	SHAMAN = { --SM
 			["alt-type1"]	= 8004,		--"治疗之拥",
