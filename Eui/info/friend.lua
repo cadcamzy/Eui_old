@@ -18,13 +18,10 @@ name:SetPoint("CENTER")
 --name:SetTextColor(23/255,132/255,209/255)
 
 function friend:ShowBar()
-	local online, total = 0, GetNumFriends()
-	for i = 0, total do
-		if select(5, GetFriendInfo(i)) then
-			online = online + 1
-		end
-	end
-	name:SetText("好友"..":"..online)
+	local total, online = GetNumFriends()
+	local totalBNet, numBNetOnline = BNGetNumFriends()
+	
+	name:SetText("好友"..":"..online+numBNetOnline)
 --	friend:SetStatusBarColor(170/255, 70/255,  70/255)
 --	friend:SetMinMaxValues(min(0, online), total)
 --	friend:SetValue(online)
@@ -33,16 +30,12 @@ function friend:ShowBar()
 		if not InCombatLockdown() then
 			ShowFriends()
 			self.hovered = true
-			local online, total = 0, GetNumFriends()
+			local total, online = GetNumFriends()
 			local name, level, class, zone, connected, status, note, classc, levelc, zone_r, zone_g, zone_b, grouped
-			for i = 0, total do if select(5, GetFriendInfo(i)) then online = online + 1 end end
-		--	friend:SetStatusBarColor(170/255, 70/255,  70/255)
-		--	friend:SetMinMaxValues(min(0, online), total)
-		--	friend:SetValue(online)
+			GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
+			GameTooltip:ClearLines()
 			if online > 0 then
-				GameTooltip:SetOwner(self, "ANCHOR_BOTTOMRIGHT");
-				GameTooltip:ClearLines()
-				GameTooltip:AddDoubleLine(L.INFO_FRIEND_TIP1, format(L.INFO_FRIEND_TIP2 .. "%s/%s",online,total),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
+				GameTooltip:AddDoubleLine(L.INFO_FRIEND_TIP1, format(L.INFO_FRIEND_TIP2 .. "%s/%s",online+numBNetOnline,total+totalBNet),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 				GameTooltip:AddLine' '
 				-- name, level, class, area, connected, status, note
 				for i = 1, total do
@@ -59,8 +52,32 @@ function friend:ShowBar()
 					if self.altdown and note then GameTooltip:AddLine("  "..note,ttsubh.r,ttsubh.g,ttsubh.b,1) end
 				end
 				GameTooltip:Show()
-			else GameTooltip:Hide() end
-		end	
+			end
+			
+			local totalBNet, numBNetOnline = BNGetNumFriends()
+			if numBNetOnline > 0 then
+				GameTooltip:AddLine' '
+				local presenceID, givenName, surname, toonName, toonID, client, isOnline, isAFK, isDND, noteText, realmName, faction, race, class, zoneName, level
+				local groupedTable = { "|cffaaaaaa*|r", "" } 
+				for i = 1, totalBNet do
+					presenceID, givenName, surname, toonName, toonID, client, isOnline, _, isAFK, isDND, _, noteText = BNGetFriendInfo(i)
+					if isOnline then
+						_, _, _, realmName, _, faction, race, class, _, zoneName, level = BNGetToonInfo(presenceID)
+						if client == "WoW" then
+							if (isAFK == true) then status = "AFK" elseif (isDND == true) then status = "DND" else status = "" end
+							classc, levelc = (RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(zoneName)
+							if classc == nil then classc = GetQuestDifficultyColor(zoneName) end
+							if UnitInParty(toonName) or UnitInRaid(toonName) then grouped = 1 else grouped = 2 end
+							GameTooltip:AddDoubleLine(format("%s |cff%02x%02x%02x(%d|r |cff%02x%02x%02x%s|r%s) |cff%02x%02x%02x%s|r", client,levelc.r*255,levelc.g*255,levelc.b*255,zoneName,classc.r*255,classc.g*255,classc.b*255,toonName,groupedTable[grouped], 255, 0, 0, status),surname.." "..givenName,238,238,238,238,238,238)
+						else
+							GameTooltip:AddDoubleLine(format("%s (%s)", client, toonName), format("%s %s", surname,givenName), .9, .9, .9, .9, .9, .9)
+						end
+					end
+				end
+				GameTooltip:Show()
+			end
+			if online == 0 and numBNetOnline == 0 then GameTooltip:Hide() end
+		end		
 	end)
 	friend:SetScript("OnMouseDown", function() ToggleFriendsFrame(1) end)
 	friend:SetScript("OnLeave", function() GameTooltip:Hide() end)

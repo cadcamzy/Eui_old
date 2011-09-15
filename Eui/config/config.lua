@@ -302,6 +302,7 @@ E.ClickSets_Sets = {
 			["shift-type4"] = 47758, -- 苦修
 			["ctrl-type4"] = 73325, -- 信仰飞跃
 			["type5"] = 48153, -- 守护之魂
+			["shift-type5"] = 88625, -- 圣言术
 	},
 	
 	DRUID = { --XD
