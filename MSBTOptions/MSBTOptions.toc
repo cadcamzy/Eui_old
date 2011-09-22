@@ -1,6 +1,5 @@
-﻿## Interface: 40100
+## Interface: 40200
 ## Title: MSBT [|cffffff80Options|r]
-## Title-zhCN: |cffC495DDMSBT|r战斗信息显示设置模块
 ## Author: Mikord
 ## Notes: Load on demand options for Mik's Scrolling Battle Text
 ## Dependencies: MikScrollingBattleText

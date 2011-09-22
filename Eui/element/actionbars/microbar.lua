@@ -14,8 +14,8 @@ local microbuttons = {
 	"LFDMicroButton",
 	"MainMenuMicroButton",
 	"HelpMicroButton",
---	"EJMicroButton",
---	"RaidMicroButton",
+	"EJMicroButton",
+	"RaidMicroButton",
 }
 
 local f = CreateFrame("Frame", "MicroParent", UIParent)

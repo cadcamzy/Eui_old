@@ -11,10 +11,6 @@ local function LoadSkin()
 		"PVPBannerFrameAcceptButton",
 	}
 	
---	if not E.IsPTRVersion() then
-		tinsert(buttons, "PVPHonorFrameWarGameButton")
---	end
-	
 	for i = 1, #buttons do
 		E.StripTextures(_G[buttons[i]])
 		E.SkinButton(_G[buttons[i]])
@@ -92,21 +88,16 @@ local function LoadSkin()
 	PVPTeamManagementFrameInvalidTeamFrame.backdrop:SetPoint( "BOTTOMRIGHT", PVPTeamManagementFrameInvalidTeamFrame, "BOTTOMRIGHT")
 	PVPTeamManagementFrameInvalidTeamFrame.backdrop:SetFrameLevel(PVPTeamManagementFrameInvalidTeamFrame:GetFrameLevel())
 
---	if not E.IsPTRVersion() then
-		E.StripTextures(PVPFrameConquestBar)
-		PVPFrameConquestBar:SetStatusBarTexture(E.normTex)
-		E.EuiCreateBackdrop(PVPFrameConquestBar)
---	else
---		E.Kill(PVPFrameConquestBarLeft)
---		E.Kill(PVPFrameConquestBarRight)
---		E.Kill(PVPFrameConquestBarMiddle)
---		E.Kill(PVPFrameConquestBarBG)
---		E.Kill(PVPFrameConquestBarShadow)
---		PVPFrameConquestBar.progress:SetTexture(E.normTex)
---		E.EuiCreateBackdrop(PVPFrameConquestBar)
---		PVPFrameConquestBar.backdrop:SetPoint("TOPLEFT", PVPFrameConquestBar.progress, "TOPLEFT", -2, 2)
---		PVPFrameConquestBar.backdrop:SetPoint("BOTTOMRIGHT", PVPFrameConquestBar, "BOTTOMRIGHT", -2, 2)			
---	end
+	E.Kill(PVPFrameConquestBarLeft)
+	E.Kill(PVPFrameConquestBarRight)
+	E.Kill(PVPFrameConquestBarMiddle)
+	E.Kill(PVPFrameConquestBarBG)
+	E.Kill(PVPFrameConquestBarShadow)
+	PVPFrameConquestBar.progress:SetTexture(E.normTex)
+	E.EuiCreateBackdrop(PVPFrameConquestBar)
+	PVPFrameConquestBar.backdrop:SetPoint("TOPLEFT", PVPFrameConquestBar.progress, "TOPLEFT", -2, 2)
+	PVPFrameConquestBar.backdrop:SetPoint("BOTTOMRIGHT", PVPFrameConquestBar, "BOTTOMRIGHT", -2, 2)			
+
 	
 	E.EuiCreateBackdrop(PVPBannerFrame,.7)
 	PVPBannerFrame.backdrop:SetPoint( "TOPLEFT", PVPBannerFrame, "TOPLEFT")
@@ -137,15 +128,15 @@ local function LoadSkin()
 	PVPColorPickerButton3:SetHeight(PVPColorPickerButton1:GetHeight())
 	
 	--War Games
---	if E.IsPTRVersion() then
---		E.SkinButton(WarGameStartButton, true)
---		E.StripTextures(WarGamesFrame)
---		E.SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
+
+	E.SkinButton(WarGameStartButton, true)
+	E.StripTextures(WarGamesFrame)
+	E.SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
 		
---		WarGameStartButton:ClearAllPoints()
---		WarGameStartButton:SetPoint("LEFT", PVPFrameLeftButton, "RIGHT", 2, 0)
---		WarGamesFrameDescription:SetTextColor(1, 1, 1)
---	end
+	WarGameStartButton:ClearAllPoints()
+	WarGameStartButton:SetPoint("LEFT", PVPFrameLeftButton, "RIGHT", 2, 0)
+	WarGamesFrameDescription:SetTextColor(1, 1, 1)
+
 	
 	--Freaking gay Cancel Button FFSlocal
 	local f = PVPBannerFrameCancelButton
@@ -162,15 +153,9 @@ local function LoadSkin()
 	f.backdrop:SetFrameLevel(f:GetFrameLevel()-1)
 	
 	--Bottom Tabs
---	if not E.IsPTRVersion() then
-		for i=1,3 do
-			E.SkinTab(_G["PVPFrameTab"..i])
-		end
---	else
---		for i=1,4 do
---			E.SkinTab(_G["PVPFrameTab"..i])
---		end			
---	end
+	for i=1,4 do
+		E.SkinTab(_G["PVPFrameTab"..i])
+	end			
 end
 
 tinsert(E.SkinFuncs["Eui"], LoadSkin)

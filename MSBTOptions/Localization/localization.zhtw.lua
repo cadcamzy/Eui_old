@@ -25,6 +25,7 @@ L.MSG_CUSTOM_FONTS					= "自定義字體"
 L.MSG_INVALID_CUSTOM_FONT_NAME		= "無效字體名."
 L.MSG_FONT_NAME_ALREADY_EXISTS		= "字體名字已經存在."
 L.MSG_INVALID_CUSTOM_FONT_PATH		= "字體路徑必須指向.ttf文件"
+--L.MSG_UNABLE_TO_SET_FONT			= "Unable to set specified font." 
 L.MSG_CUSTOM_SOUNDS					= "自定義聲音"
 L.MSG_INVALID_CUSTOM_SOUND_NAME		= "無效聲音名"
 L.MSG_SOUND_NAME_ALREADY_EXISTS		= "聲音名已經存在"
@@ -118,15 +119,16 @@ obj["stickyEvent"]				= { label="套用爆擊", tooltip="使用爆擊效果來�
 obj["enableTrigger"]			= { tooltip="啟用觸發"}
 obj["allPowerGains"]			= { label="所有能量獲取", tooltip="顯示所有獲取的能量包括那些戰鬥日誌中不顯示的。警告：這個選項將會大量洗頻同時無視能量門檻和抑制顯示設定\n不推薦"}
 obj["abbreviateSkills"]			= { label="技能縮寫", tooltip="縮減技能名稱（僅適用於英文版）。若事件描述中加入「%sl」代碼，此選項即失效"}
---obj["mergeSwings"]				= { label="Merge Swings", tooltip="Merge regular melee swings that hit within a short time span."}
+obj["mergeSwings"]				= { label="合併普通攻擊", tooltip="合併極短時間內的普通攻擊傷害"}
 obj["hideSkills"]				= { label="隱藏技能", tooltip="在承受傷害和輸出傷害中不顯示技能名稱。開啟此選項將使你失去某些事件自定義功能，因為它會忽略「%s」代碼"}
 obj["hideNames"]				= { label="隱藏名稱", tooltip="在承受傷害和輸出傷害中不顯示單位名稱。開啟此選項將使你失去某些事件自定義功能，因為它會忽略「%n」代碼"}
 obj["hideFullOverheals"]		= { label="隱藏全部過量的治療", tooltip="不顯示全部過量的治療."}
 obj["hideFullHoTOverheals"]		= { label="隱藏全部溢出的持續治療", tooltip="不顯示全部溢出的儲蓄治療"}
---obj["hideMergeTrailer"]			= { label="Hide Merge Trailer", tooltip="Don't display the trailer that specifies the number of hits and crits at the end of merged events."}
+obj["hideMergeTrailer"]			= { label="隱藏合併攻擊細節", tooltip="不在合併攻擊後顯示被合併的攻擊次數及暴擊詳情"}
 obj["allClasses"]				= { label="所有職業"}
---obj["enablePlayerCooldowns"]	= { label="Player Cooldowns", tooltip="Display notifications when your cooldowns complete."}
---obj["enablePetCooldowns"]		= { label="Pet Cooldowns", tooltip="Display notifications when your pet's cooldowns complete."}
+obj["enablePlayerCooldowns"]	= { label="技能冷卻", tooltip="在技能冷卻完成之後顯示提示信息"}
+obj["enablePetCooldowns"]		= { label="寵物技能冷卻", tooltip="在寵物技能冷卻完成之後顯示提示信息"}
+--obj["enableItemCooldowns"]		= { label="Item Cooldowns", tooltip="Display notifications when item cooldowns complete."}
 obj["lootedItems"]				= { label="拾取物品", tooltip="顯示物品拾取."}
 obj["moneyGains"]				= { label="獲得金錢", tooltip="顯示獲得的金錢"}
 obj["alwaysShowQuestItems"]		= { label="總是顯示任務物品", tooltip="總是顯示任務物品, 無論其是何品質."}
@@ -314,6 +316,7 @@ obj["FACTION_NAME"]			= "%e - 聲望陣營名.\n"
 obj["EMOTE_TEXT"]			= "%e - 表情文字.\n"
 obj["MONEY_TEXT"]			= "%e - 獲取金錢文字.\n"
 obj["COOLDOWN_NAME"]		= "%e - 就緒的法術名字.\n"
+--obj["ITEM_COOLDOWN_NAME"]	= "%e - The name of item that is ready.\n"
 obj["ITEM_NAME"]			= "%e - 拾取物品的名稱.\n"
 obj["POWER_TYPE"]			= "%p - 能力類別 (能量, 怒氣, 法力).\n"
 obj["TOTAL_ITEMS"]			= "%t - 拾取物品的總數."
@@ -449,10 +452,10 @@ obj["PET_OUTGOING_SPELL_RESIST"]				= { label="法術抵抗", tooltip="顯示寵
 obj["PET_OUTGOING_SPELL_ABSORB"]				= { label="技能吸收", tooltip="顯示寵物的技能傷害被吸收"}
 obj["PET_OUTGOING_SPELL_IMMUNE"]				= { label="技能免疫", tooltip="顯示寵物的技能傷害被免疫"}
 obj["PET_OUTGOING_SPELL_EVADE"]					= { label="技能閃避", tooltip="顯示寵物的技能攻擊被閃避"}
---obj["PET_OUTGOING_HEAL"]						= { label="Heals", tooltip="Enable your pet's outgoing heals."}
---obj["PET_OUTGOING_HEAL_CRIT"]					= { label="Crit Heals", tooltip="Enable your pet's outgoing crit heals."}
---obj["PET_OUTGOING_HOT"]							= { label="Heals Over Time", tooltip="Enable your pet's outgoing heals over time."}
---obj["PET_OUTGOING_HOT_CRIT"]					= { label="Crit Heals Over Time", tooltip="Enable your pet's outgoing crit heals over time."}
+obj["PET_OUTGOING_HEAL"]						= { label="治療", tooltip="顯示寵物治療"}
+obj["PET_OUTGOING_HEAL_CRIT"]					= { label="治療暴擊", tooltip="顯示寵物治療暴擊"}
+obj["PET_OUTGOING_HOT"]							= { label="持續治療", tooltip="顯示寵物持續治療"}
+obj["PET_OUTGOING_HOT_CRIT"]					= { label="持續治療暴擊", tooltip="顯示寵物持續治療暴擊"}
 obj["PET_OUTGOING_DISPEL"]						= { label="淨化法術", tooltip="顯示寵物的淨化法術"}
 
 
@@ -537,9 +540,10 @@ obj["UNIT_DIED"]				= "單位死亡"
 obj["UNIT_DESTROYED"]			= "單位被摧毀"
 obj["SPELL_EXTRA_ATTACKS"]		= "額外攻擊"
 obj["UNIT_HEALTH"]				= "生命值改變"
---obj["UNIT_POWER"]				= "Power Change"
---obj["SKILL_COOLDOWN"]			= "Player Cooldown Complete"
---obj["PET_COOLDOWN"]				= "Pet Cooldown Complete"
+obj["UNIT_POWER"]				= "法力值改變"
+obj["SKILL_COOLDOWN"]			= "技能冷卻完成"
+obj["PET_COOLDOWN"]				= "寵物技能冷卻完成"
+--obj["ITEM_COOLDOWN"]			= "Item Cooldown Complete"
  
 -- Main event conditions.
 obj["sourceName"]				= "來源玩家名字"
@@ -575,14 +579,16 @@ obj["auraType"]					= "光環類型"
 obj["threshold"]				= "起點閥值"
 obj["unitID"]					= "玩家 ID"
 obj["unitReaction"]				= "玩家反應"
+--obj["itemID"]					= "Item ID"
+--obj["itemName"]					= "Item Name"
 
 -- Exception conditions.
 obj["activeTalents"]			= "啟用天賦"
-obj["buffActive"]				= "BUFF生效"
+obj["buffActive"]				= "Buff生效"
 obj["buffInactive"]				= "Buff失效"
 obj["currentCP"]				= "當前連擊點"
 obj["currentPower"]				= "當前能量"
-obj["inCombat"]				= "戰斗中"
+obj["inCombat"]					= "戰斗中"
 obj["recentlyFired"]			= "觸發器最近被觸發"
 obj["trivialTarget"]			= "無效目標"
 obj["unavailableSkill"]			= "不可用技能"
@@ -617,7 +623,7 @@ obj["controlServer"]			= "服務器"
 obj["controlHuman"]				= "玩家"
 
 -- Unit types.
-obj["unitTypePlayer"]			= PLAYER
+obj["unitTypePlayer"]			= PLAYER 
 obj["unitTypeNPC"]				= "NPC"
 obj["unitTypePet"]				= PET
 obj["unitTypeGuardian"]			= "護衛"
@@ -647,6 +653,9 @@ obj = L.OUTLINES
 obj[1] = "無"
 obj[2] = "細"
 obj[3] = "粗"
+--obj[4] = "Monochrome"
+--obj[5] = "Monochrome + Thin"
+--obj[6] = "Monochrome + Thick"
 
 -- Text aligns.
 obj = L.TEXT_ALIGNS

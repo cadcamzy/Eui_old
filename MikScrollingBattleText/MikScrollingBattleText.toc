@@ -1,7 +1,6 @@
-## Interface: 40100
-## Version: 5.5.100
+## Interface: 40200
+## Version: 5.6.108
 ## Title: Mik's Scrolling Battle Text
-## Title-zhCN: |cffC495DDMSBT|r战斗信息显示
 ## Author: Mikord
 ## Notes: Scrolls battle information around the character model.
 ## SavedVariables: MSBTProfiles_SavedVars, MSBT_SavedMedia

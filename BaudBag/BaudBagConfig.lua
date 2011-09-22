@@ -76,10 +76,10 @@ function BaudBagRestoreCfg()
 					BaudBag_DebugMsg(1, "- BagSet["..BagSet.."], Bag["..Bag.."], Container["..Container.."] container background damaged or missing, creating now");
 					if (BagSet == 2) then
 						-- bank containers have "blizz bank" default
-						BBConfig[BagSet][Container].Background = 4
+						BBConfig[BagSet][Container].Background = 4 --EUI
 					else
 						-- default containers only separate for default bag and keyring (-2 == keyring)
-						BBConfig[BagSet][Container].Background = 4; --默认背包类型为4
+						BBConfig[BagSet][Container].Background = 4; --EUI
 					end
         end
         

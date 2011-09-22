@@ -63,9 +63,9 @@ if C["info"].dps == 1 then
 		   
 		if id == player_id or id == pet_id then
 			if select(2, ...) == "SWING_DAMAGE" then
-				last_dmg_amount = select(10, ...)
+				last_dmg_amount = select(12, ...)
 			else
-				last_dmg_amount = select(13, ...)
+				last_dmg_amount = select(15, ...)
 			end
 			
 		--	if select(10, ...) == 77535 then print("77535") end
@@ -148,8 +148,8 @@ if C["info"].dps == 2 then
      -- only use events from the player
 		local id = select(4, ...)
 		if id == player_id then
-			amount_healed = select(14, ...)
-			amount_over_healed = select(15, ...)
+			amount_healed = select(15, ...)
+			amount_over_healed = select(16, ...)
        -- add to the total the healed amount subtracting the overhealed amount
 			actual_heals_total = actual_heals_total + math.max(0, amount_healed - amount_over_healed)
 		end

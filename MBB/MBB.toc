@@ -1,4 +1,4 @@
-﻿## Interface: 40100
+﻿## Interface: 40200
 ## Title: MinimapButtonBag
 ## Title-zhCN: 小地图按钮整合|cffC495DDMBB|r
 ## Author: Tunhadil, Fixed by Pericles for WotLK, fixed by yossa for patch 4.0.1

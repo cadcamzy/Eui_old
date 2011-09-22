@@ -1,6 +1,7 @@
-﻿## Interface: 40100
+﻿## Interface: 40200
 ## Title: |cffC495DDEui|r Unitframe
 ## Title-zhCN: EUI头像团队模块|cffC495DDEuiUnitframe|r
+## Title-zhTW: EUI頭像團隊模組|cffC495DDEuiUnitframe|r
 ## Author: Ljxx.net
 ## X-Category: EUI
 ## RequiredDeps: Eui

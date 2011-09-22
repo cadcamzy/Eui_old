@@ -1,24 +1,17 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: Skada
-## Title-zhCN: 伤害统计|cffC495DDSkada|r
 ## Notes: Modular damage meter.
 ## Notes-koKR: 데미지 미터 모듈입니다.
 ## Notes-zhTW: 模組化的傷害統計。
 ## Notes-deDE: Ein Damage-Meter.
 ## Notes-frFR: Un damage meter.
 ## Notes-zhCN: 伤害统计
-## Author: Zarnivoop
-## Version: r320
+## Author: Zarnivoop/Kryptik
+## Version: 1.3-7.2
 ## SavedVariables: SkadaDB
-## X-Curse-Packaged-Version: r320
-## X-Curse-Project-Name: Skada Damage Meter
-## X-Curse-Project-ID: skada
-## X-Curse-Repository-ID: wow/skada/mainline
+## SavedVariablesPerCharacter: SkadaPerCharDB
 
-## OptionalDeps: Ace3, LibSharedMedia-3.0, LibWindow-1.1, LibDBIcon-1.0, AceGUI-3.0-SharedMediaWidgets, LibBossIDs-1.0
-
-## X-License: MIT/X
-## X-Category: Combat
+## OptionalDeps: Ace3, LibSharedMedia-3.0, LibWindow-1.1, LibDBIcon-1.0, AceGUI-3.0-SharedMediaWidgets, LibBossIDs-1.0, LibFail-1.0
 
 #@no-lib-strip@
 embeds.xml
@@ -27,27 +20,32 @@ embeds.xml
 lib\SpecializedLibBars-1.0\SpecializedLibBars-1.0.lua
 
 locale\enUS.lua
+locale\ruRU.lua
+locale\koKR.lua
 locale\zhCN.lua
 locale\zhTW.lua
+locale\frFR.lua
+locale\deDE.lua
 
 Skada.lua
 Options.lua
 BarDisplay.lua
+Menus.lua
 
 modules.xml
 
-model\Absorbs.lua
-model\CC.lua
-model\Damage.lua
-model\DamageTaken.lua
-model\Deaths.lua
-model\Debuffs.lua
-model\Dispels.lua
-model\Enemies.lua
-model\Healing.lua
-model\Interrupts.lua
-model\Overhealing.lua
-model\Power.lua
-model\Threat.lua
-model\TotalHealing.lua
-model\SkadaWindowButtons.lua
+modules\SkadaThreat\Threat.lua
+modules\SkadaDamage\Damage.lua
+modules\SkadaHealing\Healing.lua
+modules\SkadaHealing\Overhealing.lua
+modules\SkadaHealing\TotalHealing.lua
+modules\SkadaDamageTaken\DamageTaken.lua
+modules\SkadaDeaths\Deaths.lua
+modules\SkadaFailbot\Failbot.lua
+modules\SkadaDebuffs\Debuffs.lua
+modules\SkadaDispels\Dispels.lua
+modules\SkadaDispels\Interrupts.lua
+modules\SkadaEnemies\Enemies.lua
+modules\SkadaPower\Power.lua
+modules\SkadaAbsorbs\Absorbs.lua
+modules\SkadaCC\CC.lua

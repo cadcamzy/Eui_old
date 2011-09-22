@@ -1,10 +1,11 @@
-﻿## Interface: 40100
+﻿## Interface: 40200
 ## Title: |cffC495DDEui|r
 ## Title-zhCN: EUI界面核心包|cffC495DDEui|r
+## Title-zhTW: EUI介面核心包|cffC495DDEui|r
 ## Notes: |cffC495DDEui|r
 ## Author: Ljxx.net
 ## X-Category: EUI
-## Version: R3.1
+## Version: R3.2
 ## OptionalDeps: EuiSet
 ## URL: http://www.ljxx.net
 ## X-oUF: EuiUF

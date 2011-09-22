@@ -148,6 +148,40 @@ E.debuffids = {
 		87856,	-- Squall Line
 		88427,	-- Electrocute
 		93295,	-- Lightning Rod
+		
+--Firelands	
+	--Beth'tilac
+	99506, -- Widows Kiss
+	
+	--Alysrazor
+	101296, -- Fiero Blast
+	100723, -- Gushing Wound
+	
+	--Shannox
+	99837, -- Crystal Prison
+	99937, -- Jagged Tear
+	
+	--Baleroc
+	99403, -- Tormented
+	99256, -- Torment
+	
+	--Lord Rhyolith
+		--<< NONE KNOWN YET >>
+	
+	--Majordomo Staghelm
+	98450, -- Searing Seeds
+	98565, -- Burning Orb
+
+	--Ragnaros
+	99399, -- Burning Wound
+		
+	--Trash
+	99532, -- Melt Armor	
+	
+--Baradin Hold
+	--Occu'thar
+	96913, -- Searing Shadows		
+		
 	-- Other
 	67479,	-- Impale
 	5782,	-- Fear

@@ -34,7 +34,8 @@ local SearchItem;
 local Text;
 local Columns = {
   {Name = NAME, Width = 160, Align = "LEFT", Display = function()
-    Text = select(4,GetItemQualityColor(SearchItem[4]))..(SearchItem[1]or "Unknown");
+ --   Text = select(4,GetItemQualityColor(SearchItem[4]))..(SearchItem[1]or "Unknown");
+	Text = "|c" .. select(4,GetItemQualityColor(SearchItem[4]))..(SearchItem[1]or "Unknown");
     if(SearchItem[3] > 1)then
       Text = SearchItem[3].." "..Text;
     end
@@ -419,14 +420,14 @@ end
 
 
 function BaudAuctionBrowseEntry_OnClick(self)
-  if IsControlKeyDown() then
+  if IsControlKeyDown()then
     DressUpItemLink(SearchResults[self.Index][14]);
   elseif ( IsShiftKeyDown() ) then
     ChatEdit_InsertLink(SearchResults[self.Index][14]);
   else
     SelectedItem = self.Index;
     ScanFrame:Show();
-    if(ShowOnPlayerCheckButton:GetChecked() == 1)then
+    if(AUCTION_DISPLAY_ON_CHARACTER == "1")then
       DressUpItemLink(SearchResults[SelectedItem][14]);
     end
     MoneyInputFrame_SetCopper(BrowseBidPrice, SearchResults[SelectedItem][15]);

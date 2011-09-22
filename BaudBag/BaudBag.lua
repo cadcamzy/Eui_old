@@ -5,8 +5,9 @@ Option for disabling fading
 Update offline bank even when it's disabled
 Vertex color for backgrounds
 ]]
-local E, C, L, DB = unpack(EUI)
+
 --[[ defining variables for the events ]]--
+local E, C, L = unpack(EUI);
 local Localized = BaudBagLocalized;
 
 local Prefix = "BaudBag";
@@ -139,7 +140,7 @@ local EventFuncs =
     
 		-- the rest of the bank slots are cleared in the next event
 		BaudBagBankSlotPurchaseButton:Disable();
-    
+		E.SkinButton(BaudBagBankSlotPurchaseButton);
 	end,
 
   PLAYER_LOGIN = function(self, event, ...)
@@ -204,6 +205,7 @@ local EventFuncs =
 	BaudBag_DebugMsg(5, "Event BANKFRAME_CLOSED fired");
     BankOpen = false;
     BaudBagBankSlotPurchaseButton:Disable();
+	E.SkinButton(BaudBagBankSlotPurchaseButton);
     if _G[Prefix.."Container2_1"].AutoOpened then
       _G[Prefix.."Container2_1"]:Hide();
     else
@@ -245,7 +247,7 @@ local Func = function(self, event, ...)
   
   -- make sure the player can buy new bankslots
   BaudBagBankSlotPurchaseButton:Enable();
-  E.SkinButton(BaudBagBankSlotPurchaseButton)
+  E.SkinButton(BaudBagBankSlotPurchaseButton);
   for Index = 1, NUM_BANKGENERIC_SLOTS do
     BankFrameItemButton_Update(_G[Prefix.."SubBag-1Item"..Index]);
   end
@@ -352,7 +354,7 @@ function BaudBag_OnLoad(self, event, ...)
 
   --The first bag from the bank is unique and is created in the XML
   BaudBag_DebugMsg(4, "Creating sub bags.");
-  for Bag = -2, LastBagID do
+  for Bag = -1, LastBagID do
     if(Bag == -1)then
       SubBag = _G[Prefix.."SubBag"..Bag];
     else
@@ -545,7 +547,7 @@ function BaudBagContainerDropDown_Initialize()
   info.func = ToggleContainerLock;
   UIDropDownMenu_AddButton(info);
 
-  --The bank box won't exist yet when this is initialized atfirst
+  --The bank box won't exist yet when this is initialized at first
   if (DropDownBagSet ~= 2) and _G[Prefix.."Container2_1"] and not _G[Prefix.."Container2_1"]:IsShown()then
     info.text = Localized.ShowBank;
     info.func = BaudBagToggleBank;
@@ -600,7 +602,7 @@ local function GetTexturePiece(Name, MinX, MaxX, MinY, MaxY, Layer)
   return Texture;
 end
 
-
+-- [[ maybe TODO: remove artwork for keyring container (check if artwork still exists uppon launch) ]] --
 function BaudBagUpdateBackground(Container)
 	local Background = BBConfig[Container.BagSet][Container:GetID()].Background;
 	local Backdrop = _G[Container:GetName().."Backdrop"];
@@ -917,7 +919,7 @@ end
 function BaudUpdateJoinedBags()
 	BaudBag_DebugMsg(4, "Updating joined bags...");
 	local OpenBags = {};
-	for Bag = -2, LastBagID do
+	for Bag = -1, LastBagID do
 		OpenBags[Bag] = _G[Prefix.."SubBag"..Bag]:GetParent():IsShown();
 		if OpenBags[Bag] then
 			BaudBag_DebugMsg(4, "Bag open: "..Bag);
@@ -977,18 +979,20 @@ function BaudBagUpdateOpenBags()
     BaudBag_DebugMsg(4, "[BaudBagUpdateOpenBags]");
 	local Open, Frame, Highlight, Highlight2;
 	--The bank bag(-1) has no open indicator
-	for Bag = -2, LastBagID do
+	for Bag = -1, LastBagID do
 		Frame = _G[Prefix.."SubBag"..Bag];
 		Open	= Frame:IsShown()and Frame:GetParent():IsShown()and not Frame:GetParent().Closing;
-		if (Bag == -2) then
-			if Open then
-				BaudBagKeyRingButton:SetButtonState("PUSHED", 1);
-				KeyRingButton:SetButtonState("PUSHED", 1);
-			else
-				BaudBagKeyRingButton:SetButtonState("NORMAL");
-				KeyRingButton:SetButtonState("NORMAL");
-			end
-		elseif (Bag == 0) then
+        -- Keyring was REMOVED as of WoW 4.2
+		-- if (Bag == -2) then
+			-- if Open then
+				-- BaudBagKeyRingButton:SetButtonState("PUSHED", 1);
+				-- KeyRingButton:SetButtonState("PUSHED", 1);
+			-- else
+				-- BaudBagKeyRingButton:SetButtonState("NORMAL");
+				-- KeyRingButton:SetButtonState("NORMAL");
+			-- end
+		-- else
+        if (Bag == 0) then
 			MainMenuBarBackpackButton:SetChecked(Open);
 		elseif(Bag > 4)then
 			Highlight  = _G["BaudBBankBag"..(Bag-4).."HighlightFrameTexture"];
@@ -1222,18 +1226,18 @@ BagSlotButton_OnClick = function(self, event, ...)
 end
 
 
-
-local pre_ToggleKeyRing = ToggleKeyRing;
-ToggleKeyRing = function(self)
-  if BBConfig and (BBConfig[1].Enabled == false) then
-    return pre_ToggleKeyRing();
-  end
-  if not BagsReady then
-    return;
-  end
-  ToggleBag(-2);
-end
-
+-- Keyring was REMOVED as of WoW 4.2
+-- local pre_ToggleKeyRing = ToggleKeyRing;
+-- ToggleKeyRing = function(self)
+  -- if BBConfig and (BBConfig[1].Enabled == false) then
+    -- return pre_ToggleKeyRing();
+  -- end
+  -- if not BagsReady then
+    -- return;
+  -- end
+  -- ToggleBag(-2);
+-- end
+ 
 local function IsBagShown(BagID)
   local SubBag = _G[Prefix.."SubBag"..BagID];
   return SubBag:IsShown()and SubBag:GetParent():IsShown()and not SubBag:GetParent().Closing;
@@ -1285,16 +1289,16 @@ hooksecurefunc("BackpackButton_OnClick",function(self)
   self:SetChecked(IsBagShown(0));
 end);
 
-hooksecurefunc("UpdateMicroButtons",function()
-  if BBConfig and (BBConfig[1].Enabled == false) then
-    return;
-  end
-	if IsBagShown(KEYRING_CONTAINER)then
-		KeyRingButton:SetButtonState("PUSHED", 1);
-	else
-		KeyRingButton:SetButtonState("NORMAL");
-	end
-end);
+-- hooksecurefunc("UpdateMicroButtons",function()
+  -- if BBConfig and (BBConfig[1].Enabled == false) then
+    -- return;
+  -- end
+	-- if IsBagShown(KEYRING_CONTAINER)then
+		-- KeyRingButton:SetButtonState("PUSHED", 1);
+	-- else
+		-- KeyRingButton:SetButtonState("NORMAL");
+	-- end
+-- end);
 
 
 --self is hooked to be able to replace the original bank box with this one
@@ -1440,7 +1444,7 @@ end
 local TotalFree, TotalSlots;
 
 local function AddFreeSlots(Bag)
-  if (Bag<=-2) then
+  if (Bag<=-1) then
     return;
   end
   local Cache = UseCache(Bag);
@@ -1549,7 +1553,6 @@ function BaudBagUpdateBagFrames()
   for BagSet = 1, 2 do
     Shown = (BBConfig[BagSet].ShowBags ~= false);
     _G[Prefix.."Container"..BagSet.."_1BagsButton"]:SetChecked(Shown);
-	
     BagFrame = _G[Prefix.."Container"..BagSet.."_1BagsFrame"];
 	E.EuiSetTemplateB(BagFrame,0,0,-1.5,0)
     if Shown then
@@ -1589,26 +1592,27 @@ function BaudBagUpdateContainer(Container)
     if (Container.BagSet ~= 2) or BankOpen then
       Size = GetContainerNumSlots(SubBag:GetID());
       
-      -- process keyring
-      if (SubBag:GetID() == -2) then
-        local LastUsed = 0;
-        local FirstEmpty;
-        
-        for Slot = 1, Size do
-          if GetContainerItemLink(-2, Slot) then
-            LastUsed = Slot;
-          elseif not FirstEmpty then
-            FirstEmpty = Slot;
-          end
-        end
-        
-        if FirstEmpty and (LastUsed < Size) then
-          KeyRing = SubBag;
-          local Max = Size;
-          Size = max(FirstEmpty, LastUsed);
-          KeyRing.Expandable = Max - Size;
-        end
-      end
+        -- Keyring was REMOVED as of WoW 4.2
+      -- -- process keyring
+      -- if (SubBag:GetID() == -2) then
+        -- local LastUsed = 0;
+        -- local FirstEmpty;
+        -- 
+        -- for Slot = 1, Size do
+          -- if GetContainerItemLink(-2, Slot) then
+            -- LastUsed = Slot;
+          -- elseif not FirstEmpty then
+            -- FirstEmpty = Slot;
+          -- end
+        -- end
+        -- 
+        -- if FirstEmpty and (LastUsed < Size) then
+          -- KeyRing = SubBag;
+          -- local Max = Size;
+          -- Size = max(FirstEmpty, LastUsed);
+          -- KeyRing.Expandable = Max - Size;
+        -- end
+      -- end
       
       -- process bank
       if (Container.BagSet == 2) then
@@ -1641,10 +1645,10 @@ function BaudBagUpdateContainer(Container)
   
   if (Container.Slots < MaxCols) then
     MaxCols = Container.Slots;
-  elseif KeyRing and (Container.Slots % MaxCols ~= 0) then
-    local Increase = min(KeyRing.Expandable, MaxCols - Container.Slots % MaxCols);
-    KeyRing.size = KeyRing.size + Increase;
-    Container.Slots = Container.Slots + Increase;
+  -- elseif KeyRing and (Container.Slots % MaxCols ~= 0) then
+    -- local Increase = min(KeyRing.Expandable, MaxCols - Container.Slots % MaxCols);
+    -- KeyRing.size = KeyRing.size + Increase;
+    -- Container.Slots = Container.Slots + Increase;
   end
 
   local Col, Row = 0, 1;
@@ -1736,18 +1740,18 @@ end
 hooksecurefunc("ContainerFrameItemButton_OnModifiedClick", BaudBag_OnModifiedClick);
 hooksecurefunc("BankFrameItemButtonGeneric_OnModifiedClick", BaudBag_OnModifiedClick);
 
-
-function BaudBagKeyRing_OnLoad(self, event, ...)
-  local Clone = KeyRingButton;
-  Clone:GetScript("OnLoad")(self);
-  self:SetScript("OnClick", Clone:GetScript("OnClick"));
-  self:SetScript("OnReceiveDrag", Clone:GetScript("OnReceiveDrag"));
-  self:SetScript("OnEnter", Clone:GetScript("OnEnter"));
-  self:SetScript("OnLeave", Clone:GetScript("OnLeave"));
-  self:GetNormalTexture():SetTexCoord(0.5625,0,0,0,0.5625,0.60937,0,0.60937);
-  self:GetHighlightTexture():SetTexCoord(0.5625,0,0,0,0.5625,0.60937,0,0.60937);
-  self:GetPushedTexture():SetTexCoord(0.5625,0,0,0,0.5625,0.60937,0,0.60937);
-end
+-- Keyring was REMOVED as of WoW 4.2
+-- function BaudBagKeyRing_OnLoad(self, event, ...)
+  -- local Clone = KeyRingButton;
+  -- Clone:GetScript("OnLoad")(self);
+  -- self:SetScript("OnClick", Clone:GetScript("OnClick"));
+  -- self:SetScript("OnReceiveDrag", Clone:GetScript("OnReceiveDrag"));
+  -- self:SetScript("OnEnter", Clone:GetScript("OnEnter"));
+  -- self:SetScript("OnLeave", Clone:GetScript("OnLeave"));
+  -- self:GetNormalTexture():SetTexCoord(0.5625,0,0,0,0.5625,0.60937,0,0.60937);
+  -- self:GetHighlightTexture():SetTexCoord(0.5625,0,0,0,0.5625,0.60937,0,0.60937);
+  -- self:GetPushedTexture():SetTexCoord(0.5625,0,0,0,0.5625,0.60937,0,0.60937);
+-- end
 
 function BaudBagUpdateFromBBConfig()
 	BaudUpdateJoinedBags();
@@ -1832,7 +1836,7 @@ function BaudBagSearchButton_Click(self, event, ...)
 		TextureParent:Show();
 	else
 		Left, Right, Top, Bottom = 8, 8, 8, 8;
-		BagSearchHeightOffset = 38;
+		BagSearchHeightOffset = 32;
 		BagSearchHeight	= 12;
 		_G[Backdrop:GetName().."Textures"]:Hide();
 		_G[SearchFrame:GetName().."CloseButton"]:SetPoint("TOPRIGHT", 9, 10);
@@ -1931,7 +1935,7 @@ function BaudBagSearchFrameEditBox_OnTextChanged(self, isUserInput)
 	-- go through all bags to find the open ones
 	local SubBag, Frame, Open, ItemButton, Link, Name, Texture;
 	local Status, Result;
-	for Bag = -2, LastBagID do
+	for Bag = -1, LastBagID do
 		SubBag = _G[Prefix.."SubBag"..Bag];
 		Open	= SubBag:IsShown()and SubBag:GetParent():IsShown() and not SubBag:GetParent().Closing;
 		
@@ -1988,7 +1992,7 @@ end
 
 function BaudBagSearchFrameEditBox_RemoveHighlights()
 	local SubBag, Frame, Open, ItemButton, Link, Name, Texture;
-	for Bag = -2, LastBagID do
+	for Bag = -1, LastBagID do
 		if (BagsSearched[Bag]) then
 			SubBag = _G[Prefix.."SubBag"..Bag];
 			for Slot = 1, SubBag.size do

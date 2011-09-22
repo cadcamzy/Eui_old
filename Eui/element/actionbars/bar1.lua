@@ -42,7 +42,7 @@ local function GetBar()
 end
 
 function E.PositionMainBar()
-	MainMenuBar_UpdateKeyRing()
+--	MainMenuBar_UpdateKeyRing()
 	local button
 	for i = 1, 12 do
 		button = _G["ActionButton"..i]
@@ -74,6 +74,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 		for i = 1, NUM_ACTIONBAR_BUTTONS do
 			button = _G["ActionButton"..i]
 			self:SetFrameRef("ActionButton"..i, button)
+			button.SetAlpha = E.dummy
 		end	
 
 		self:Execute([[
@@ -81,7 +82,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			for i = 1, 12 do
 				table.insert(buttons, self:GetFrameRef("ActionButton"..i))
 			end
-			firedonce = false
+		--	firedonce = false
 		]])
 
 		self:SetAttribute("_onstate-page", [[ 

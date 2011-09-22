@@ -7,9 +7,7 @@ SkadaSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skada") then
 		local TEXTURE = C["skins"].texture
 		local function StripOptions(options)
-			options.baroptions.args.bartexture = options.windowoptions.args.height
-			options.baroptions.args.bartexture.order = 12
-			options.baroptions.args.bartexture.max = 1
+			options.baroptions.args.bartexture = nil
 			options.baroptions.args.barspacing = nil
 			options.titleoptions.args.texture = nil
 			options.titleoptions.args.bordertexture = nil
@@ -36,13 +34,34 @@ SkadaSkin:SetScript("OnEvent", function(self, event, addon)
 		end
 
 		-- Override settings from in-game GUI
+		local titleBG = {
+			bgFile = E.blank,
+			tile = false,
+			tileSize = 1
+		}		
+		
+		-- Override settings from in-game GUI
 		barmod.ApplySettings_ = barmod.ApplySettings
 		barmod.ApplySettings = function(self, win)
+		   win.db.enablebackground = true
+			win.db.background.borderthickness = 12
 			barmod:ApplySettings_(win)
+		--	layout:PositionSkadaWindow(win)
+			if win.db.enabletitle then
+				win.bargroup.button:SetBackdrop(titleBG)
+			end
 			win.bargroup:SetTexture(TEXTURE)
-			-- SettingsDB.CreateTemplate_Broder(win.bargroup)
-			E.EuiSetTemplate(win.bargroup)
+			win.bargroup:SetSpacing(2)
+		--	win.bargroup:SetFont(config.font,config.fontSize, config.fontFlags)
+			local titlefont = CreateFont("TitleFont"..win.db.name)
+		--	titlefont:SetFont(config.font,config.fontSize, config.fontFlags)
+			win.bargroup.button:SetNormalFontObject(titlefont)
+			local color = win.db.title.color
+			win.bargroup.button:SetBackdropColor(color.r, color.g, color.b, color.a or 1)
+		--	skin:SkinBackgroundFrame(win.bargroup)
 			win.bargroup:SortBars()
+			win.bargroup:SetBackdrop(titleBG)
+			
 		end
 
 		-- Override bar style

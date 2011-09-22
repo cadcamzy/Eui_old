@@ -1,6 +1,7 @@
-﻿## Interface: 40100
+﻿## Interface: 40200
 ## Title: |cffC495DDEui|r Script
 ## Title-zhCN: EUI附加功能模块|cffC495DDEuiScript|r
+## Title-zhTW: EUI附加功能模組|cffC495DDEuiScript|r
 ## Author: Ljxx.net
 ## X-Category: EUI
 ## RequiredDeps: Eui

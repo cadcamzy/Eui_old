@@ -1,9 +1,8 @@
-## Interface: 40100
+## Interface: 40200
 ## Title: |cFFFFFFFF[A]|rBaudAuction
-## Title-zhCN: 拍卖行排序助手|cffC495DDBaudAuction|r
 ## Notes: Modifies Blizzard's auction house display so it can display and sort multiple pages of items at once.
-## Author: Baudzilla
-## Version: 1.111
+## Author: Baudzilla, vivianalive
+## Version: 1.111v
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_AuctionUI
 ## RequiredDeps: Blizzard_AuctionUI
